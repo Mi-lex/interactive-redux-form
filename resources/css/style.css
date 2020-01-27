@@ -1,0 +1,56 @@
+@import "./globals/normalize.css";
+
+:root {
+    --page-font-color: black;
+    --page-font: Arial, 'Sans Serif';
+    --page-font-size: 14px;
+    --page-line-height: normal;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: var(--page-font-size);
+}
+
+body {
+  position: relative;
+  margin: 0;
+  color: var(--page-font-color);
+
+  font-family: var(--page-font);
+  font-size: var(--page-font-size);
+  font-weight: normal;
+  line-height: var(--page-line-height);
+  background-color:#E5E5E5;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.visually-hidden:not(:focus):not(:active) {
+  position: absolute;
+  overflow: hidden;
+
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  margin: -1px;
+  clip: rect(0 0 0 0);
+
+  clip-path: inset(100%);
+
+  white-space: nowrap;
+}
