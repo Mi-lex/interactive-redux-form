@@ -1,13 +1,19 @@
 .btn {
     background-color: transparent;
     border: none;
+    padding: 0;
 }
 
 .btn--md {
     --size: 48px;
     width: var(--size);
     height: var(--size);
-    padding: 0;
+}
+
+.btn--sm {
+    --size: 24px;
+    width: var(--size);
+    height: var(--size);
 }
 
 .icon {
