@@ -18,3 +18,5 @@ export const getDateString = (date: Date): string => {
 
     return `${day}.${month}.${year}`;
 };
+
+export const generateUniqueId = (): string => (Date.now() + Math.random()).toString(36);
