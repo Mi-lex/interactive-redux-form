@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import { Field } from 'redux-form';
 import AutocompleteInput from './AutocompleteInput';
+import PassportBtn from './PassportBtn';
 
 type OrderElementsFieldPropType = {
     name: string;
@@ -21,4 +22,16 @@ const OrderElementsField: React.FC = ({ name = 'orderElement' }: OrderElementsFi
     </div>
 );
 
-export default OrderElementsField;
+const OrderElementsTable = ({ fields }) => (
+    <>
+        {fields.map((order, index) => (
+            <OrderElementsField key={index} name={`${order}Element`} />
+        ))}
+
+        <div className="row orderElementsController">
+            <PassportBtn size="sm" iconName={'newRow'} onClick={() => fields.push()} />
+            <PassportBtn size="sm" iconName={'deleteRow'} onClick={() => fields.pop()} />
+        </div>
+    </>
+);
+export default OrderElementsTable;
