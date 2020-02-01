@@ -1,29 +1,38 @@
 import React from 'react';
 import { reduxForm, formValueSelector } from 'redux-form';
-import { connect } from 'react-redux';
+import { connect, ConnectedProps } from 'react-redux';
 import { FixingPapersTypeString } from '../store/types';
+import { RootState } from '../store/rootReducer';
 
-type FixingpapeTypeBlockProp = {
-    name: FixingPapersTypeString;
-    fixingpapeTypeState?: FixingPapersTypeString;
-    children: React.ReactNode;
-};
-
-let FixingpapeTypeBlock = ({ name, children, fixingpapeTypeState }: FixingpapeTypeBlockProp): JSX.Element => {
-    return <div hidden={fixingpapeTypeState !== name}>{children}</div>;
-};
-// { fixingpapeTypeState }: FixingpaperSubFormProp
 const selector: Function = formValueSelector('passport');
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: RootState, ownProps) => {
     const fixingpapeTypeState: FixingPapersTypeString = selector(state, 'fixingPaperType');
-
+    const hidden = ownProps.blockName !== fixingpapeTypeState;
     return {
-        fixingpapeTypeState,
+        hidden,
     };
 };
 
-const ConnectedFixingpapeTypeBlock = connect(mapStateToProps, null)(FixingpapeTypeBlock);
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type FixingpapeTypeBlockProp = PropsFromRedux & {
+    blockName: FixingPapersTypeString;
+    children: React.ReactNode;
+    className?: string;
+};
+
+let FixingpapeTypeBlock = ({ children, hidden, className = '' }: FixingpapeTypeBlockProp): JSX.Element => {
+    return (
+        <div className={className} hidden={hidden}>
+            {children}
+        </div>
+    );
+};
+
+const ConnectedFixingpapeTypeBlock = connector(FixingpapeTypeBlock);
 
 FixingpapeTypeBlock = reduxForm({
     form: 'passport',

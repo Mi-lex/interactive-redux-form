@@ -1,30 +1,48 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Field, FieldArray, reduxForm, formValueSelector } from 'redux-form';
+import { connect, ConnectedProps } from 'react-redux';
+import { Field, FieldArray, reduxForm, formValueSelector, InjectedFormProps } from 'redux-form';
 import { RootState } from '../store/rootReducer';
 import PassportBtn from './PassportBtn';
 import { getDateString } from '../utils';
 import FormDatePicker from './DatePicker';
 import OrderElementsTable from './OrderElementsTable';
-import AutocompleteInput from './AutocompleteInput';
 import FixingpaperSubForm from './FixingpaperSubForm';
 import classes from '../../css/modules/PassportForm.module.css';
+import ReduxCreatableSelect from './ReduxCreatableSelect';
+import { inputOptions } from '../store/data';
 
-type PassportFormProps = {
-    repeat: boolean;
+const selector: Function = formValueSelector('passport');
+
+const mapStateToProps = (state: RootState) => {
+    const repeat: boolean = selector(state, 'repeat');
+    return {
+        repeat,
+    };
 };
 
-let PassportForm = ({ repeat }: PassportFormProps): JSX.Element => {
+const connector = connect(mapStateToProps, null);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type PassportFormProps = PropsFromRedux & InjectedFormProps;
+
+const PassportForm = ({ repeat }: PassportFormProps): JSX.Element => {
     const currentDate: string = getDateString(new Date());
+
     return (
         <div className={classes.wrapper}>
             <form action="POST" className="passportForm container-fluid">
                 <div className={classes.header}>
                     <div className={classes.header__leftBlock}>
                         <PassportBtn size="md" iconName="createNewPassport" />
-                        <AutocompleteInput name="manager" className="!later" placeholder="менеджер">
-                            {['Oleg', 'Ekaterina', 'Alexey']}
-                        </AutocompleteInput>
+                        <Field
+                            name="manager"
+                            className="!later"
+                            placeholder="менеджер"
+                            component={ReduxCreatableSelect}
+                            isClearable={true}
+                            options={inputOptions.managers}
+                        />
                         <Field
                             name="search"
                             type="text"
@@ -47,10 +65,9 @@ let PassportForm = ({ repeat }: PassportFormProps): JSX.Element => {
                             <Field
                                 name="id"
                                 component="input"
-                                type="text"
+                                type="number"
                                 className="field"
-                                defaultvaule={34567}
-                                placeholder={34567}
+                                placeholder={'34567'}
                                 disabled
                             />
                             <label>от</label>
@@ -133,9 +150,16 @@ let PassportForm = ({ repeat }: PassportFormProps): JSX.Element => {
                         </div>
                     </div>
                     <div className="col">
-                        <Field name="organization" placeholder="организация" component="input" type="text" />
+                        <Field
+                            name="organization"
+                            className="!later"
+                            placeholder="организация"
+                            component={ReduxCreatableSelect}
+                            isClearable={true}
+                            options={inputOptions.organizations}
+                        />
                         <div className="field">
-                            Счет <Field name="organization" component="input" type="text" />
+                            Счет <Field name="bill_account_number" component="input" type="text" />
                         </div>
                         <div className="field">
                             от <Field component={FormDatePicker} name="payment_date" />
@@ -149,7 +173,7 @@ let PassportForm = ({ repeat }: PassportFormProps): JSX.Element => {
                 <div className="row">
                     <FixingpaperSubForm />
                     <div className="col row">
-                        <div className="col"></div>
+                        <div className="col">jk</div>
                         <div className="col"></div>
                         <div className="col"></div>
                     </div>
@@ -159,25 +183,13 @@ let PassportForm = ({ repeat }: PassportFormProps): JSX.Element => {
     );
 };
 
-const selector: Function = formValueSelector('passport');
+const ConnectedPassportForm = connector(PassportForm);
 
-const mapStateToProps = (state: RootState) => {
-    const repeat: boolean = selector(state, 'repeat');
-
-    return {
-        repeat,
-    };
-};
-
-const Connector = connect(mapStateToProps, null);
-
-const ConnectedPassportForm = Connector(PassportForm);
-
-PassportForm = reduxForm({
+const DecoratedPassportForm = reduxForm({
     form: 'passport',
     initialValues: {
         orders: Array(3).fill({}),
     },
 })(ConnectedPassportForm);
 
-export default PassportForm;
+export default DecoratedPassportForm;
