@@ -10,27 +10,32 @@ import FixingpaperSubForm from './FixingpaperSubForm';
 import classes from '../../css/modules/PassportForm.module.css';
 import ReduxCreatableSelect from './ReduxCreatableSelect';
 import { inputOptions } from '../store/data';
+import FieldWithComment from './FieldWithComment';
 
 const selector: Function = formValueSelector('passport');
 
-const mapStateToProps = (state: RootState) => {
+type MapState = {
+    repeat: boolean;
+};
+
+const mapStateToProps = (state: RootState): MapState => {
     const repeat: boolean = selector(state, 'repeat');
     return {
         repeat,
     };
 };
 
-const connector = connect(mapStateToProps, null);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
+type PropsFromRedux = ConnectedProps<typeof mapStateToProps>;
 
 type PassportFormProps = PropsFromRedux & InjectedFormProps;
+
+const connector = connect(mapStateToProps);
 
 const PassportForm = ({ repeat }: PassportFormProps): JSX.Element => {
     const currentDate: string = getDateString(new Date());
 
     return (
-        <div className={classes.wrapper}>
+        <div className="container-fluid">
             <form action="POST" className="passportForm container-fluid">
                 <div className={classes.header}>
                     <div className={classes.header__leftBlock}>
@@ -172,10 +177,68 @@ const PassportForm = ({ repeat }: PassportFormProps): JSX.Element => {
                 </section>
                 <div className="row">
                     <FixingpaperSubForm />
-                    <div className="col row">
-                        <div className="col">jk</div>
-                        <div className="col"></div>
-                        <div className="col"></div>
+                    <div className="col">
+                        <div className="row">
+                            <div className="col">
+                                <FieldWithComment name="toRevanishInfo" expandable={true} className="!later">
+                                    Лакировать
+                                    <Field
+                                        component={ReduxCreatableSelect}
+                                        name="toRevanishWith"
+                                        options={inputOptions.varnishMaterial}
+                                    />
+                                </FieldWithComment>
+                                <FieldWithComment name="toHotStamp" expandable={true} className="!later">
+                                    Конгрев
+                                    <Field
+                                        component={ReduxCreatableSelect}
+                                        name="toHotStampWith"
+                                        options={inputOptions.hotStampMaterial}
+                                    />
+                                </FieldWithComment>
+                            </div>
+                            <div className="col">
+                                <FieldWithComment name="toLaminateInfo" expandable={true} className="!later">
+                                    Ламинировать
+                                    <Field
+                                        component={ReduxCreatableSelect}
+                                        name="toLaminateWith"
+                                        options={inputOptions.laminateMaterial}
+                                    />
+                                </FieldWithComment>
+                                <FieldWithComment name="toEmbossInfo" expandable={true} className="!later">
+                                    Тиснить фольгой
+                                    <Field
+                                        component={ReduxCreatableSelect}
+                                        name="toEmbossWith"
+                                        options={inputOptions.embossMaterial}
+                                    />
+                                </FieldWithComment>
+                            </div>
+                            <div className="col">
+                                <label>
+                                    Биговать
+                                    <Field name="creasing" component="input" type="checkbox" />
+                                </label>
+                                <label>
+                                    Фальцевать
+                                    <Field name="bookFolding" component="input" type="checkbox" />
+                                </label>
+                                <label>
+                                    Перфорация
+                                    <Field name="perforation" component="input" type="checkbox" />
+                                </label>
+                                <Field component="textarea" name="afterPrintInfo" />
+                                <FieldWithComment name="toStampCutInfo" expandable={true} className="!later">
+                                    Вырубить штампом
+                                    <Field component="input" type="text" name="toStampCutWhat" />
+                                </FieldWithComment>
+                            </div>
+                            <div className="col">
+                                <label htmlFor="importantInfo">Важно</label>
+                                <Field component="textarea" name="importantInfo" id="importantInfo" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -183,13 +246,20 @@ const PassportForm = ({ repeat }: PassportFormProps): JSX.Element => {
     );
 };
 
-const ConnectedPassportForm = connector(PassportForm);
-
 const DecoratedPassportForm = reduxForm({
     form: 'passport',
     initialValues: {
         orders: Array(3).fill({}),
+        toRevanishWith: inputOptions.varnishMaterial[0],
+        toRevanishInfo: [{}],
+        toHotStampWith: inputOptions.hotStampMaterial[0],
+        toHotStampInfo: [{}],
+        toLaminateWith: inputOptions.laminateMaterial[0],
+        toLaminateInfo: [{}],
+        toEmbossWith: inputOptions.embossMaterial[0],
+        toEmbossInfo: [{}],
+        toStampCutInfo: [{}],
     },
-})(ConnectedPassportForm);
+})(PassportForm);
 
-export default DecoratedPassportForm;
+export default connector(DecoratedPassportForm);
