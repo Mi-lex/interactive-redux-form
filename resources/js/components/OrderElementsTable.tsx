@@ -1,5 +1,5 @@
-import React, { ReactNode, FC } from 'react';
-import { Field, InjectedArrayProps } from 'redux-form';
+import React, { ReactNode } from 'react';
+import { Field, WrappedFieldArrayProps } from 'redux-form';
 import PassportBtn from './PassportBtn';
 import ReduxCreatableSelect from './ReduxCreatableSelect';
 import { inputOptions } from '../store/data';
@@ -9,7 +9,7 @@ type OrderElementsFieldPropType = {
     children?: ReactNode;
 };
 
-const OrderElementsField: React.FC = ({ name = 'orderElement' }: OrderElementsFieldPropType) => (
+const OrderElementsField = ({ name = 'orderElement' }: OrderElementsFieldPropType): JSX.Element => (
     <div className="row orderElement">
         <Field name={`${name}.name`} component="input" type="text" />
         <Field name={`${name}.paperCount`} component="input" type="number" />
@@ -21,18 +21,21 @@ const OrderElementsField: React.FC = ({ name = 'orderElement' }: OrderElementsFi
             isClearable={true}
             options={inputOptions.orderWrapMaterials}
         />
-        <Field name={`${name}.printType`} component="input" type="text" />
+        <Field
+            name={`${name}.printType`}
+            className="!later"
+            placeholder="уф-принтер"
+            component={ReduxCreatableSelect}
+            isClearable={true}
+            options={inputOptions.printTypes}
+        />
         <Field name={`${name}.colorFormula`} component="input" type="text" />
         <Field name={`${name}.colorInterpretation`} component="input" type="text" />
         <Field name={`${name}.additionalInfo`} component="input" type="text" />
     </div>
 );
 
-type OrderElementsTableProps = {
-    fields: InjectedArrayProps & Array<string>;
-};
-
-const OrderElementsTable = ({ fields }: OrderElementsTableProps) => (
+const OrderElementsTable = ({ fields }: WrappedFieldArrayProps<string>): JSX.Element => (
     <>
         {fields.map((order, index) => (
             <OrderElementsField key={index} name={`${order}Element`} />
@@ -43,7 +46,7 @@ const OrderElementsTable = ({ fields }: OrderElementsTableProps) => (
                 size="sm"
                 iconName={'newRow'}
                 onClick={(): void => {
-                    fields.push();
+                    fields.push('');
                 }}
             />
             <PassportBtn

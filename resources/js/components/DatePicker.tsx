@@ -18,17 +18,20 @@ type DatePickerProps = {
     children?: ReactNode;
 };
 
-const FormDatePicker: React.FC = ({ input = null, placeholder, minDate, maxDate }: DatePickerProps) => (
-    <DatePicker
-        locale="ru"
-        dateFormat="dd.MM.yyyy"
-        selected={input.value}
-        onChange={input.onChange}
-        minDate={minDate}
-        maxDate={maxDate}
-        disabledKeyboardNavigation
-        placeholderText={placeholder}
-    />
-);
+const FormDatePicker = (props: DatePickerProps): JSX.Element => {
+    const { input = null, placeholder, minDate, maxDate } = props;
+    return (
+        <DatePicker
+            locale="ru"
+            dateFormat="dd.MM.yyyy"
+            selected={input.value}
+            onChange={input.onChange}
+            minDate={minDate}
+            maxDate={maxDate}
+            disabledKeyboardNavigation
+            placeholderText={placeholder}
+        />
+    );
+};
 
 export default FormDatePicker;

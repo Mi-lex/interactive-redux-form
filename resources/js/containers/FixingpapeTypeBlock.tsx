@@ -1,12 +1,16 @@
 import React from 'react';
-import { reduxForm, formValueSelector } from 'redux-form';
-import { connect, ConnectedProps } from 'react-redux';
+import { formValueSelector } from 'redux-form';
+import { connect } from 'react-redux';
 import { FixingPapersTypeString } from '../store/types';
 import { RootState } from '../store/rootReducer';
 
 const selector: Function = formValueSelector('passport');
 
-const mapStateToProps = (state: RootState, ownProps) => {
+type MapStateProps = {
+    hidden: boolean;
+};
+
+const mapStateToProps = (state: RootState, ownProps: OwnProps): MapStateProps => {
     const fixingpapeTypeState: FixingPapersTypeString = selector(state, 'fixingPaperType');
     const hidden = ownProps.blockName !== fixingpapeTypeState;
     return {
@@ -14,17 +18,18 @@ const mapStateToProps = (state: RootState, ownProps) => {
     };
 };
 
-const connector = connect(mapStateToProps);
+type PropsFromRedux = MapStateProps;
 
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-type FixingpapeTypeBlockProp = PropsFromRedux & {
+type OwnProps = {
     blockName: FixingPapersTypeString;
-    children: React.ReactNode;
     className?: string;
+    children: React.ReactNode;
 };
 
-let FixingpapeTypeBlock = ({ children, hidden, className = '' }: FixingpapeTypeBlockProp): JSX.Element => {
+type Props = PropsFromRedux & OwnProps;
+
+const FixingpapeTypeBlock = (props: Props): JSX.Element => {
+    const { children, hidden, className = '' } = props;
     return (
         <div className={className} hidden={hidden}>
             {children}
@@ -32,10 +37,6 @@ let FixingpapeTypeBlock = ({ children, hidden, className = '' }: FixingpapeTypeB
     );
 };
 
-const ConnectedFixingpapeTypeBlock = connector(FixingpapeTypeBlock);
+const ConnectedComponent = connect(mapStateToProps)(FixingpapeTypeBlock);
 
-FixingpapeTypeBlock = reduxForm({
-    form: 'passport',
-})(ConnectedFixingpapeTypeBlock);
-
-export default FixingpapeTypeBlock;
+export default ConnectedComponent;

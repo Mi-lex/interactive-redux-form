@@ -1,13 +1,14 @@
 import React from 'react';
 import { Field } from 'redux-form';
 
-type PassportRadioBtnPropType = {
+type Props = {
     name: string;
     groupName: string;
     label: string;
 };
 
-const PassportRadioBtn = ({ name, groupName, label }: PassportRadioBtnPropType): JSX.Element => {
+const PassportRadioBtn = (props: Props): JSX.Element => {
+    const { name, groupName, label } = props;
     return (
         <div className="radioBtn">
             <label htmlFor={name}>{label}</label>

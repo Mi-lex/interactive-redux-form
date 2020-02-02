@@ -97,3 +97,46 @@ inputOptions.orderWrapMaterials = [
         label: 'глянцевый',
     },
 ];
+
+inputOptions.printTypes = [
+    {
+        value: 'ultraviolet',
+        label: 'уф-принтер',
+    },
+    {
+        value: 'rainbowlike',
+        label: 'радужная',
+    },
+    {
+        value: 'litography',
+        label: 'литография',
+    },
+];
+
+inputOptions.varnishMaterial = [
+    {
+        value: 'chosenUltraviolet',
+        label: 'выборочный уф',
+    },
+];
+
+inputOptions.hotStampMaterial = [
+    {
+        value: 'questionMark',
+        label: '???',
+    },
+];
+
+inputOptions.laminateMaterial = [
+    {
+        value: 'glossy-28',
+        label: 'глянцевым 28',
+    },
+];
+
+inputOptions.embossMaterial = [
+    {
+        value: 'holographic',
+        label: 'голографической',
+    },
+];
