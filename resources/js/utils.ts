@@ -14,7 +14,10 @@ export const getDateString = (date: Date): string => {
 
     const month: string = (date.getMonth() + 1).toString().padStart(2, '0');
 
-    const year: number = date.getFullYear();
+    const year: string = date
+        .getUTCFullYear()
+        .toString()
+        .slice(0, -2);
 
     return `${day}.${month}.${year}`;
 };

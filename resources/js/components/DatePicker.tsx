@@ -19,17 +19,18 @@ type DatePickerProps = {
 };
 
 const FormDatePicker = (props: DatePickerProps): JSX.Element => {
-    const { input = null, placeholder, minDate, maxDate } = props;
+    const { input = null, placeholder, minDate, maxDate, ...restProps } = props;
     return (
         <DatePicker
             locale="ru"
-            dateFormat="dd.MM.yyyy"
+            dateFormat="dd.MM.yy"
             selected={input.value}
             onChange={input.onChange}
             minDate={minDate}
             maxDate={maxDate}
             disabledKeyboardNavigation
             placeholderText={placeholder}
+            {...restProps}
         />
     );
 };
