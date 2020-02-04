@@ -2,15 +2,17 @@ import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { Field, FieldArray, reduxForm, formValueSelector, InjectedFormProps } from 'redux-form';
 import { RootState } from '../store/rootReducer';
-import PassportBtn from './PassportBtn';
 import { getDateString } from '../utils';
-import FormDatePicker from './DatePicker';
 import OrderElementsTable from './OrderElementsTable';
-import FixingpaperSubForm from './FixingpaperSubForm';
-import classes from '../../css/modules/PassportForm.module.css';
+import FixingpaperSubForm from './FixingpapeSubForm';
 import ReduxCreatableSelect from './ReduxCreatableSelect';
 import { inputOptions } from '../store/data';
-import FieldWithComment from './FieldWithComment';
+
+import DatePickerField from './DatePickerField';
+import AfterPrintSubform from './AfterPrintSubform';
+import CheckBox from './CheckBox';
+import FormControl from './FormControl';
+import FieldLabel from './FieldLabel';
 
 const selector: Function = formValueSelector('passport');
 
@@ -36,139 +38,165 @@ const PassportForm = ({ repeat }: PassportFormProps): JSX.Element => {
 
     return (
         <div className="container-fluid">
-            <form action="POST" className="passportForm container-fluid">
-                <div className={classes.header}>
-                    <div className={classes.header__leftBlock}>
-                        <PassportBtn size="md" iconName="createNewPassport" />
-                        <Field
-                            name="manager"
-                            className="!later"
-                            placeholder="менеджер"
-                            component={ReduxCreatableSelect}
-                            isClearable={true}
-                            options={inputOptions.managers}
-                        />
-                        <Field
-                            name="search"
-                            type="text"
-                            className="search"
-                            placeholder="по слову или по полю"
-                            component="input"
-                        />
-                        <PassportBtn size="md" iconName="search" />
-                    </div>
-                    <div className="headerRightBlock">
-                        <PassportBtn size="md" iconName="addPassport" />
-                        <PassportBtn size="md" iconName="approveForm" />
-                        <PassportBtn size="md" iconName="print" />
-                    </div>
-                </div>
+            <form action="POST" className="passportForm">
+                <FormControl />
                 <div className="row">
-                    <div className="col">
-                        <div className="initialInfo">
-                            <label htmlFor="orderNumber">Заказ</label>
+                    <div className="col-3">
+                        <div className="d-flex">
+                            <FieldLabel labelText="Заказ" labelClassName="mr-3">
+                                <Field
+                                    name="id"
+                                    component="input"
+                                    type="number"
+                                    className="passInputBorder passInputSize"
+                                    placeholder={'34567'}
+                                    disabled
+                                    style={{
+                                        width: '84px',
+                                    }}
+                                />
+                            </FieldLabel>
+                            <FieldLabel labelText="от">
+                                <Field
+                                    name="date"
+                                    component="input"
+                                    type="text"
+                                    className="passInputBorder passInputSize"
+                                    disabled
+                                    placeholder={currentDate}
+                                    style={{
+                                        width: '84px',
+                                    }}
+                                />
+                            </FieldLabel>
+                        </div>
+                        <Field
+                            className="w-100 passInputBorder passInputmb passInputSize"
+                            name="client"
+                            component="input"
+                            type="text"
+                            placeholder="клиент"
+                        />
+                        <Field
+                            className="w-100 passInputBorder passInputmb passInputSize"
+                            name="type"
+                            component="input"
+                            type="text"
+                            placeholder="тип"
+                        />
+                        <Field
+                            className="w-100 passInputBorder"
+                            name="name"
+                            component="textarea"
+                            placeholder="название"
+                        />
+                    </div>
+                    <div className="col-3">
+                        <DatePickerField
+                            label="Изготовить до"
+                            name="make_till"
+                            className="passInputBorder passInputSize"
+                            placeholder={currentDate}
+                            minDate={new Date()}
+                        />
+                        <FieldLabel labelText="обрезной">
                             <Field
-                                name="id"
+                                className="passInputBorder passInputSize"
+                                name="is_cut"
+                                component="input"
+                                type="text"
+                                placeholder="000 x 000"
+                            />
+                        </FieldLabel>
+                        <FieldLabel labelText="тираж">
+                            <Field
+                                className="passInputBorder passInputSize"
+                                name="circulation"
                                 component="input"
                                 type="number"
-                                className="field"
-                                placeholder={'34567'}
-                                disabled
+                                min="0"
+                                placeholder="000"
                             />
-                            <label>от</label>
-                            <Field name="date" component="input" type="text" disabled placeholder={currentDate} />
-                        </div>
-                        <Field name="client" component="input" type="text" placeholder="клиент" />
-                        <Field name="type" component="input" type="text" placeholder="тип" />
-                        <Field name="name" component="textarea" placeholder="имя" />
-                    </div>
-                    <div className="col">
-                        <div className="field">
-                            <label htmlFor="make_till_date">Изготовить до</label>
+                        </FieldLabel>
+                        <div className="d-flex justify-content-between align-items-center">
+                            <CheckBox name="repeat" className="w-50 mr-3" label="Повтор" />
                             <Field
-                                component={FormDatePicker}
-                                name="make_till_date"
-                                placeholder={currentDate}
-                                minDate={new Date()}
+                                className="passInputBorder passInputSize w-50"
+                                name="repeat_times"
+                                component="input"
+                                disabled={!repeat}
+                                type="number"
                             />
-                            <label htmlFor="make_till_date">
-                                <PassportBtn size="md" iconName="calendar" />
-                            </label>
-                        </div>
-                        <div className="field">
-                            <label htmlFor="is_cut">обрезной</label>
-                            <Field name="is_cut" component="input" type="text" placeholder="000 x 000" />
-                        </div>
-                        <div className="field">
-                            <label htmlFor="circulation">тираж</label>
-                            <Field name="circulation" component="input" type="number" min="0" placeholder="000" />
-                        </div>
-                        <div className="field">
-                            <label htmlFor="repeat">повтор</label>
-                            <Field name="repeat" component="input" type="checkbox" />
-                            <Field name="repeat_times" component="input" disabled={!repeat} type="number" />
                         </div>
                     </div>
-                    <div className="col">
-                        <div className="field">
-                            {`изготовить к `}
-                            <Field name="make_till_time" component="input" type="time" />
-                        </div>
-                        <div className="field">
-                            {`упаковать по `}
-                            <Field name="amount_in_package" component="input" type="number" placeholder="0000" />
+                    <div className="col-2">
+                        <FieldLabel labelText="к">
+                            <Field
+                                className="passInputBorder passInputSize"
+                                name="make_till_time"
+                                component="input"
+                                type="time"
+                                required="required"
+                            />
+                            <span>часам</span>
+                        </FieldLabel>
+                        <FieldLabel labelText="упаковать по">
+                            <Field
+                                className="passInputBorder passInputSize w-25"
+                                name="amount_in_package"
+                                component="input"
+                                type="number"
+                                min={0}
+                                placeholder="0000"
+                            />
                             {` шт.`}
-                        </div>
-                        <div className="field">
-                            <Field name="packaging" component="select" placeholder="0000">
-                                <option value="in_box">в коробку</option>
-                            </Field>
-                        </div>
-                        <div className="field">
-                            образец на упаковку
-                            <Field name="sample_on_package" component="input" type="checkbox" />
-                        </div>
-                        <div className="field">
-                            по видам
-                            <Field name="sort_by_types" component="input" type="checkbox" />
-                        </div>
+                        </FieldLabel>
+                        <Field
+                            className="passInputBorder passInputSize passInputmb w-100"
+                            name="packaging"
+                            component="select"
+                            placeholder="0000"
+                        >
+                            <option value="in_box">в коробку</option>
+                        </Field>
+                        <CheckBox name="sample_on_package" className="passInputmb" label="образец на упаковку" />
+                        <CheckBox name="sort_by_types" className="passInputmb" label="по видам" />
                     </div>
-                    <div className="col">
-                        <div className="field">
-                            Доставить
-                            <Field name="delivery" checked component="input" type="checkbox" />
-                        </div>
-                        <div className="field">
-                            <Field name="address" component="textarea" placeholder="куда" />
-                        </div>
-                        <div className="field">
-                            ярлк
-                            <Field name="label" component="input" type="checkbox" />
-                        </div>
-                        <div className="field">
-                            стрейч-пленка
-                            <Field name="stretch-wrap" component="input" type="checkbox" />
-                        </div>
-                        <div className="field">
-                            паллетирование
-                            <Field name="palleting" component="input" type="checkbox" />
-                        </div>
+                    <div className="col-2">
+                        <CheckBox name="delivery" className="passInputmb" label="Доставить" />
+                        <Field
+                            name="address"
+                            className="passInputmb passInputBorder"
+                            component="textarea"
+                            placeholder="куда"
+                        />
+                        <CheckBox className="passInputmb" name="label" label="ярклык" />
+                        <CheckBox className="passInputmb" name="stretch-wrap" label="стрейч-пленка" />
+                        <CheckBox className="passInputmb" name="palleting" label="паллетирование" />
                     </div>
-                    <div className="col">
+                    <div className="col-2">
                         <Field
                             name="organization"
-                            className="!later"
+                            className="passInputSize passInputmb"
                             placeholder="организация"
                             component={ReduxCreatableSelect}
                             isClearable={true}
                             options={inputOptions.organizations}
                         />
-                        <div className="field">
-                            Счет <Field name="bill_account_number" component="input" type="text" />
-                        </div>
-                        <div className="field">
-                            от <Field component={FormDatePicker} name="payment_date" />
-                        </div>
+                        <FieldLabel labelText="Счет">
+                            <Field
+                                name="bill_account_number"
+                                className="passInputBorder passInputSize w-75"
+                                component="input"
+                                type="text"
+                            />
+                        </FieldLabel>
+                        <DatePickerField
+                            label="от"
+                            name="payment_date"
+                            className="passInputBorder passInputSize"
+                            placeholder={currentDate}
+                        />
                     </div>
                 </div>
 
@@ -176,69 +204,11 @@ const PassportForm = ({ repeat }: PassportFormProps): JSX.Element => {
                     <FieldArray name="orders" component={OrderElementsTable} />
                 </section>
                 <div className="row">
-                    <FixingpaperSubForm />
                     <div className="col">
-                        <div className="row">
-                            <div className="col">
-                                <FieldWithComment name="toRevanishInfo" expandable={true} className="!later">
-                                    Лакировать
-                                    <Field
-                                        component={ReduxCreatableSelect}
-                                        name="toRevanishWith"
-                                        options={inputOptions.varnishMaterial}
-                                    />
-                                </FieldWithComment>
-                                <FieldWithComment name="toHotStamp" expandable={true} className="!later">
-                                    Конгрев
-                                    <Field
-                                        component={ReduxCreatableSelect}
-                                        name="toHotStampWith"
-                                        options={inputOptions.hotStampMaterial}
-                                    />
-                                </FieldWithComment>
-                            </div>
-                            <div className="col">
-                                <FieldWithComment name="toLaminateInfo" expandable={true} className="!later">
-                                    Ламинировать
-                                    <Field
-                                        component={ReduxCreatableSelect}
-                                        name="toLaminateWith"
-                                        options={inputOptions.laminateMaterial}
-                                    />
-                                </FieldWithComment>
-                                <FieldWithComment name="toEmbossInfo" expandable={true} className="!later">
-                                    Тиснить фольгой
-                                    <Field
-                                        component={ReduxCreatableSelect}
-                                        name="toEmbossWith"
-                                        options={inputOptions.embossMaterial}
-                                    />
-                                </FieldWithComment>
-                            </div>
-                            <div className="col">
-                                <label>
-                                    Биговать
-                                    <Field name="creasing" component="input" type="checkbox" />
-                                </label>
-                                <label>
-                                    Фальцевать
-                                    <Field name="bookFolding" component="input" type="checkbox" />
-                                </label>
-                                <label>
-                                    Перфорация
-                                    <Field name="perforation" component="input" type="checkbox" />
-                                </label>
-                                <Field component="textarea" name="afterPrintInfo" />
-                                <FieldWithComment name="toStampCutInfo" expandable={true} className="!later">
-                                    Вырубить штампом
-                                    <Field component="input" type="text" name="toStampCutWhat" />
-                                </FieldWithComment>
-                            </div>
-                            <div className="col">
-                                <label htmlFor="importantInfo">Важно</label>
-                                <Field component="textarea" name="importantInfo" id="importantInfo" />
-                            </div>
-                        </div>
+                        <FixingpaperSubForm />
+                    </div>
+                    <div className="col-8">
+                        <AfterPrintSubform />
                     </div>
                 </div>
             </form>

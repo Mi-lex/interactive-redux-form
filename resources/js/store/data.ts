@@ -27,7 +27,7 @@ inputOptions.organizations = [
 inputOptions.termoPositions = [
     {
         value: 'equal',
-        label: 'Вровень с блоком',
+        label: 'вровень с блоком',
     },
     {
         value: 'right',
@@ -138,5 +138,16 @@ inputOptions.embossMaterial = [
     {
         value: 'holographic',
         label: 'голографической',
+    },
+];
+
+inputOptions.springPositions = [
+    {
+        value: 'left',
+        label: 'слева',
+    },
+    {
+        value: 'right',
+        label: 'справа',
     },
 ];

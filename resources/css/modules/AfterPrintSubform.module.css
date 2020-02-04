@@ -1,0 +1,9 @@
+.col {
+    width: 22%;
+    margin-right: 11px;
+}
+
+.col:last-child {
+    width: calc(100% - 22% * 3);
+    margin-right: 0;
+}

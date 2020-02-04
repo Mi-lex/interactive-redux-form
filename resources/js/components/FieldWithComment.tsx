@@ -9,10 +9,15 @@ type ExtraInfoFieldProps = WrappedFieldArrayProps<string> & {
 const ExtraInfoField = ({ fields, expandable = true }: ExtraInfoFieldProps): JSX.Element => (
     <>
         {fields.map((extraActionName, index) => (
-            <Field component="textarea" key={index} name={`${extraActionName}Info`} />
+            <Field
+                component="textarea"
+                className="passInputBorder passInputmb"
+                key={index}
+                name={`${extraActionName}Info`}
+            />
         ))}
         {expandable && (
-            <div className="orderElementsController">
+            <div className="orderElementsController d-flex justify-content-end">
                 <PassportBtn
                     size="sm"
                     iconName={'newRow'}

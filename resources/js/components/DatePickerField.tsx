@@ -21,16 +21,18 @@ const DatePickerField = (props: Props): JSX.Element => {
     };
 
     return (
-        <label ref={calendar} className="d-flex">
+        <label ref={calendar} className="d-flex align-items-center justify-content-between">
             <span>{label}</span>
-            <Field
-                className={`${classes.input} ${className}`}
-                component={DatePicker}
-                name={name}
-                placeholder={placeholder}
-                {...restProps}
-            />
-            <PassportBtn onClick={handleIconClick} iconName="calendar" size="sm" />
+            <div>
+                <Field
+                    className={`${classes.input} ${className}`}
+                    component={DatePicker}
+                    name={name}
+                    placeholder={placeholder}
+                    {...restProps}
+                />
+                <PassportBtn onClick={handleIconClick} iconName="calendar" size="sm" />
+            </div>
         </label>
     );
 };

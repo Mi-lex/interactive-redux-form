@@ -4,13 +4,3 @@
     padding: 20px 22px;
 } */
 
-.header {
-    display: 'flex';
-    justify-content: 'space-between';
-    align-items: center;
-}
-
-.header__leftBlock {
-    display: 'flex';
-    align-items: center;
-}
