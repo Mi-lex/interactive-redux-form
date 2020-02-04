@@ -4,7 +4,7 @@
 :root {
     --page-font-color: black;
     --page-font: Arial, 'Sans Serif';
-    --page-font-size: 14px;
+    --page-font-size: 16px;
     --page-line-height: normal;
 }
 
@@ -54,4 +54,36 @@ img {
   clip-path: inset(100%);
 
   white-space: nowrap;
+}
+
+input[type="time"]::-ms-clear {
+    display: none;
+}
+
+input[type="time"]::-webkit-clear-button {
+    display: none;
+}
+
+::-webkit-search-cancel-button { 
+    -webkit-appearance: none; 
+}
+
+/* Hide the magnifying glass */
+::-webkit-search-results-button {
+     -webkit-appearance: none; 
+}
+
+/* Remove the rounded corners */
+input[type=search] { 
+    -webkit-appearance: none; 
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.container-fluid {
+  max-width: 1350px;
 }
