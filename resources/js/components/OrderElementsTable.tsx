@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Field, WrappedFieldArrayProps } from 'redux-form';
+import { Field, WrappedFieldArrayProps, FieldArray } from 'redux-form';
 import PassportBtn from './PassportBtn';
 import ReduxCreatableSelect from './ReduxCreatableSelect';
 import { inputOptions } from '../store/data';
@@ -64,7 +64,7 @@ const OrderElementsTable = ({ fields }: WrappedFieldArrayProps<string>): JSX.Ele
             <OrderElementsRow key={index} name={`${order}Element`} />
         ))}
 
-        <div className="d-flex justify-content-end orderElementsController">
+        <div className="d-flex justify-content-end">
             <PassportBtn
                 size="sm"
                 iconName={'newRow'}
@@ -82,4 +82,11 @@ const OrderElementsTable = ({ fields }: WrappedFieldArrayProps<string>): JSX.Ele
         </div>
     </>
 );
-export default OrderElementsTable;
+
+const OrderElementsForm: React.FC = () => (
+    <section className="orderElemmentsInfo">
+        <FieldArray name="orders" component={OrderElementsTable} />
+    </section>
+);
+
+export default OrderElementsForm;

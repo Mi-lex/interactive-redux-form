@@ -17,7 +17,7 @@ const ExtraInfoField = ({ fields, expandable = true }: ExtraInfoFieldProps): JSX
             />
         ))}
         {expandable && (
-            <div className="orderElementsController d-flex justify-content-end">
+            <div className="d-flex justify-content-end">
                 <PassportBtn
                     size="sm"
                     iconName={'newRow'}

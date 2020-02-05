@@ -1,11 +1,11 @@
 import React from 'react';
-import { FieldArray, reduxForm } from 'redux-form';
-import OrderElementsTable from './OrderElementsTable';
+import { reduxForm } from 'redux-form';
 import FixingpaperSubForm from './FixingpapeSubForm';
 import { inputOptions } from '../store/data';
 import AfterPrintSubform from './AfterPrintSubform';
 import FormControl from './FormControl';
 import InitialForm from './InitialForm';
+import OrderElementsForm from './OrderElementsTable';
 
 const PassportForm = (): JSX.Element => {
     return (
@@ -13,9 +13,7 @@ const PassportForm = (): JSX.Element => {
             <form action="POST" className="passportForm">
                 <FormControl />
                 <InitialForm />
-                <section className="orderElemmentsInfo">
-                    <FieldArray name="orders" component={OrderElementsTable} />
-                </section>
+                <OrderElementsForm />
                 <div className="row">
                     <div className="col">
                         <FixingpaperSubForm />
