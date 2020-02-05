@@ -10,7 +10,7 @@ type OrderElementsFieldPropType = {
     children?: ReactNode;
 };
 
-const OrderElementsField = ({ name = 'orderElement' }: OrderElementsFieldPropType): JSX.Element => (
+const OrderElementsRow = ({ name = 'orderElement' }: OrderElementsFieldPropType): JSX.Element => (
     <div className="d-flex justify-content-around">
         <Field
             className={`passInputBorder passInputSize passInputmb ${classes.name}`}
@@ -27,7 +27,6 @@ const OrderElementsField = ({ name = 'orderElement' }: OrderElementsFieldPropTyp
         <Field
             className={`passInputmb  ${classes.wrapMaterial}`}
             name={`${name}.wrapMaterial`}
-            placeholder=""
             component={ReduxCreatableSelect}
             options={inputOptions.orderWrapMaterials}
         />
@@ -62,7 +61,7 @@ const OrderElementsField = ({ name = 'orderElement' }: OrderElementsFieldPropTyp
 const OrderElementsTable = ({ fields }: WrappedFieldArrayProps<string>): JSX.Element => (
     <>
         {fields.map((order, index) => (
-            <OrderElementsField key={index} name={`${order}Element`} />
+            <OrderElementsRow key={index} name={`${order}Element`} />
         ))}
 
         <div className="d-flex justify-content-end orderElementsController">
