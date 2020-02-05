@@ -4,7 +4,7 @@ export type IconName = keyof typeof icons;
 
 export type ElementSize = 'sm' | 'md' | 'big';
 
-export enum FixingPapersType {
+export enum PaperJoiners {
     paperClip = 'Скрепка',
     termo = 'Термо',
     spring = 'Пружина',
@@ -14,7 +14,7 @@ export enum FixingPapersType {
     file = 'Папка',
 }
 
-export type FixingPapersTypeString = keyof typeof FixingPapersType;
+export type PaperJoinerName = keyof typeof PaperJoiners;
 
 interface Option {
     value: string;

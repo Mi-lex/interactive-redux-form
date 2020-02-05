@@ -1,6 +1,6 @@
-import { FixingPapersTypeString } from './types';
+import { PaperJoinerName } from './types';
 
-export const fixingPapersTypeList: FixingPapersTypeString[] = [
+export const paperJoinersNames: PaperJoinerName[] = [
     'paperClip',
     'termo',
     'spring',

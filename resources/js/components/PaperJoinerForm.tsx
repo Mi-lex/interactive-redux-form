@@ -1,53 +1,49 @@
 import React from 'react';
 import { Field } from 'redux-form';
-import FixingpapeTypeBlock from '../containers/FixingpapeTypeBlock';
+import PaperJoinerBlock from './PaperJoinerBlock';
 import RadioBtn from './RadioBtn';
-import { FixingPapersType, FixingPapersTypeString } from '../store/types';
-import { fixingPapersTypeList } from '../store/consts';
+import { PaperJoiners, PaperJoinerName } from '../store/types';
+import { paperJoinersNames } from '../store/consts';
 import ReduxCreatableSelect from './ReduxCreatableSelect';
 import { inputOptions } from '../store/data';
 import CheckBox from './CheckBox';
 import FieldLabel from './FieldLabel';
 
-const FixingpaperSubForm = (): JSX.Element => {
+const PaperJoinerForm = (): JSX.Element => {
     return (
         <div className="row">
             <div className="col-4">
                 {/* Радио баттоны: скрепка, пакет и т.д.  */}
-                {fixingPapersTypeList.map((type: FixingPapersTypeString) => (
+                {paperJoinersNames.map((joinerName: PaperJoinerName) => (
                     <RadioBtn
-                        key={type}
+                        key={joinerName}
                         className="passInputmb"
-                        groupName="fixingPaperType"
-                        label={FixingPapersType[type]}
-                        name={type}
+                        groupName="paperJoiner"
+                        label={PaperJoiners[joinerName]}
+                        name={joinerName}
                     />
                 ))}
             </div>
             {/* Блоки, появляющиеся в зависимости от радио баттона */}
             <div className="col-6">
-                <FixingpapeTypeBlock blockName="paperClip">
-                    <CheckBox name="paperClip.auto" label="автомат" className="passInputmb" />
-                    <CheckBox name="paperClip.manual" label="ручная" className="passInputmb" />
+                <PaperJoinerBlock blockName="paperClip">
+                    <CheckBox name="auto" label="автомат" className="passInputmb" />
+                    <CheckBox name="manual" label="ручная" className="passInputmb" />
                     <FieldLabel labelText="количество">
                         <Field
-                            name="paperClip.quantity"
+                            name="quantity"
                             className="passInputBorder passInputSize w-50"
                             component="input"
                             type="number"
                             placeholder="000"
                         />
                     </FieldLabel>
-                    <Field
-                        className="passInputBorder passInputSize passInputmb w-100"
-                        name="papaerClip.type"
-                        component="select"
-                    >
+                    <Field className="passInputBorder passInputSize passInputmb w-100" name="type" component="select">
                         <option value="file">Файловая</option>
                     </Field>
                     <FieldLabel labelText="толщина">
                         <Field
-                            name="paperClip.width"
+                            name="width"
                             className="passInputBorder passInputSize w-50"
                             component="input"
                             type="number"
@@ -55,93 +51,93 @@ const FixingpaperSubForm = (): JSX.Element => {
                     </FieldLabel>
                     <FieldLabel labelText="сползание">
                         <Field
-                            name="paperClip.driftSize"
+                            name="driftSize"
                             className="passInputBorder passInputSize w-50"
                             component="input"
                             type="number"
                         />
                     </FieldLabel>
-                </FixingpapeTypeBlock>
-                <FixingpapeTypeBlock blockName="termo">
+                </PaperJoinerBlock>
+                <PaperJoinerBlock blockName="termo">
                     <FieldLabel labelText="корешок">
                         <Field
-                            name="termo.spine"
+                            name="spine"
                             className="passInputBorder passInputSize w-50"
                             component="input"
                             type="text"
                         />
                     </FieldLabel>
-                    <CheckBox name="paperClip.klapanCover" className="passInputmb" label="обложка с клапаном" />
+                    <CheckBox name="klapanCover" className="passInputmb" label="обложка с клапаном" />
                     <Field
-                        name="termo.position"
+                        name="position"
                         placeholder="вровень с блоком"
                         component={ReduxCreatableSelect}
-                        options={inputOptions.termoPositions}
+                        options={inputOptions.ositions}
                     />
-                </FixingpapeTypeBlock>
-                <FixingpapeTypeBlock blockName="spring">
+                </PaperJoinerBlock>
+                <PaperJoinerBlock blockName="spring">
                     <Field
-                        name="spring.color"
+                        name="color"
                         className="passInputmb"
                         placeholder="цвет"
                         component={ReduxCreatableSelect}
                         options={{}}
                     />
                     <Field
-                        name="spring.position"
+                        name="position"
                         className="passInputmb"
                         component={ReduxCreatableSelect}
                         placeholder="слева"
-                        options={inputOptions.springPositions}
+                        options={inputOptions.ositions}
                     />
                     <FieldLabel labelText="обложка &gt; блока">
                         <Field
-                            name="spring.coverBiggerThanBlock"
+                            name="coverBlockRatio"
                             className="passInputBorder passInputSize w-25"
                             component="input"
                             type="number"
                         />
                     </FieldLabel>
-                </FixingpapeTypeBlock>
-                <FixingpapeTypeBlock blockName="packet">
+                </PaperJoinerBlock>
+                <PaperJoinerBlock blockName="packet">
                     <Field
-                        name="packet.type"
+                        name="type"
                         className="passInputmb"
                         placeholder="люверсы"
                         component={ReduxCreatableSelect}
                         isClearable={true}
-                        options={inputOptions.packetTypes}
+                        options={inputOptions.ypes}
                     />
                     <Field
-                        name="packet.handles"
+                        name="handles"
                         className="passInputmb"
                         placeholder="ручки"
                         component={ReduxCreatableSelect}
                         isClearable={true}
-                        options={inputOptions.packetHandles}
+                        options={inputOptions.andles}
                     />
-                </FixingpapeTypeBlock>
-                <FixingpapeTypeBlock blockName="splice">
+                </PaperJoinerBlock>
+                <PaperJoinerBlock blockName="splice">
                     <Field
-                        name="splice.material"
+                        name="material"
                         className="passInputmb"
                         placeholder="клей"
                         component={ReduxCreatableSelect}
                         isClearable={true}
-                        options={inputOptions.spliceMaterials}
+                        options={inputOptions.aterials}
                     />
                     <Field
-                        name="splice.position"
+                        name="position"
                         className="passInputmb"
                         placeholder="сверху"
                         component={ReduxCreatableSelect}
                         isClearable={true}
-                        options={inputOptions.splicePositions}
+                        options={inputOptions.ositions}
                     />
-                </FixingpapeTypeBlock>
+                </PaperJoinerBlock>
             </div>
         </div>
     );
 };
 
-export default FixingpaperSubForm;
+export default PaperJoinerForm;

@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Field, WrappedFieldArrayProps, FieldArray } from 'redux-form';
+import { Field, FieldArray, WrappedFieldArrayProps } from 'redux-form';
 import PassportBtn from './PassportBtn';
 import ReduxCreatableSelect from './ReduxCreatableSelect';
 import { inputOptions } from '../store/data';
