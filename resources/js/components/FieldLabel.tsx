@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from '../../css/modules/FieldLabel.module.css';
+import Box from '@material-ui/core/Box';
 
 type Props = {
     labelText: string;
@@ -11,10 +11,20 @@ type Props = {
 const FieldLabel = (props: Props): JSX.Element => {
     const { labelText, labelClassName = '', textClassName = '', children, ...restProps } = props;
     return (
-        <label className={`${labelClassName} d-flex justify-content-between align-items-center`} {...restProps}>
-            <span className={`${textClassName} mr-2`}>{labelText}</span>
+        <Box
+            component="label"
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+            mb={2}
+            className={labelClassName}
+            {...restProps}
+        >
+            <Box mr={1} className={`${textClassName}`}>
+                {labelText}
+            </Box>
             {children}
-        </label>
+        </Box>
     );
 };
 
