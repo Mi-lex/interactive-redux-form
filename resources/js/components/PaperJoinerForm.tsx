@@ -8,11 +8,12 @@ import ReduxCreatableSelect from './ReduxCreatableSelect';
 import { inputOptions } from '../store/data';
 import CheckBox from './CheckBox';
 import FieldLabel from './FieldLabel';
+import Grid from '@material-ui/core/Grid';
 
 const PaperJoinerForm = (): JSX.Element => {
     return (
-        <div className="row">
-            <div className="col-4">
+        <Grid container spacing={5}>
+            <Grid item xs={6} md={4}>
                 {/* Радио баттоны: скрепка, пакет и т.д.  */}
                 {paperJoinersNames.map((joinerName: PaperJoinerName) => (
                     <RadioBtn
@@ -23,9 +24,9 @@ const PaperJoinerForm = (): JSX.Element => {
                         name={joinerName}
                     />
                 ))}
-            </div>
+            </Grid>
             {/* Блоки, появляющиеся в зависимости от радио баттона */}
-            <div className="col-6">
+            <Grid item xs={6}>
                 <PaperJoinerBlock blockName="paperClip">
                     <CheckBox name="auto" label="автомат" className="passInputmb" />
                     <CheckBox name="manual" label="ручная" className="passInputmb" />
@@ -135,8 +136,8 @@ const PaperJoinerForm = (): JSX.Element => {
                         options={inputOptions.ositions}
                     />
                 </PaperJoinerBlock>
-            </div>
-        </div>
+            </Grid>
+        </Grid>
     );
 };
 

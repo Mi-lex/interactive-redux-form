@@ -3,6 +3,7 @@ import { Field } from 'redux-form';
 import PassportBtn from './PassportBtn';
 import DatePicker from './DatePicker';
 import classes from '../../css/modules/DatePickerField.module.css';
+import { Box } from '@material-ui/core';
 
 type Props = {
     label: string;
@@ -21,9 +22,9 @@ const DatePickerField = (props: Props): JSX.Element => {
     };
 
     return (
-        <label ref={calendar} className="d-flex align-items-center justify-content-between">
+        <Box component="label" ref={calendar} mb={2} display="flex" justifyContent="space-between" alignItems="center">
             <span>{label}</span>
-            <div>
+            <Box display="flex" justifyContent="space-between" alignItems="center">
                 <Field
                     className={`${classes.input} ${className}`}
                     component={DatePicker}
@@ -32,8 +33,8 @@ const DatePickerField = (props: Props): JSX.Element => {
                     {...restProps}
                 />
                 <PassportBtn onClick={handleIconClick} iconName="calendar" size="sm" />
-            </div>
-        </label>
+            </Box>
+        </Box>
     );
 };
 

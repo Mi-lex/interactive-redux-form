@@ -7,18 +7,19 @@ import DatePickerField from './DatePickerField';
 import CheckBox from './CheckBox';
 import ReduxCreatableSelect from './ReduxCreatableSelect';
 import { inputOptions } from '../store/data';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 
 const selector: Function = formValueSelector('passport');
 
 const InitialForm: React.FC = () => {
     const repeat: boolean = useSelector(state => selector(state, 'repeat'));
-
     const currentDate: string = getDateString(new Date());
     return (
-        <div className="row">
-            <div className="col-3">
-                <div className="d-flex">
-                    <FieldLabel labelText="Заказ" labelClassName="mr-3">
+        <Grid container spacing={3}>
+            <Grid item xs={6} md={3}>
+                <Box display="flex">
+                    <FieldLabel labelText="Заказ" mr={2}>
                         <Field
                             name="id"
                             component="input"
@@ -44,7 +45,7 @@ const InitialForm: React.FC = () => {
                             }}
                         />
                     </FieldLabel>
-                </div>
+                </Box>
                 <Field
                     className="w-100 passInputBorder passInputmb passInputSize"
                     name="client"
@@ -60,8 +61,8 @@ const InitialForm: React.FC = () => {
                     placeholder="тип"
                 />
                 <Field className="w-100 passInputBorder" name="name" component="textarea" placeholder="название" />
-            </div>
-            <div className="col-3">
+            </Grid>
+            <Grid item sm={6} md={3}>
                 <DatePickerField
                     label="Изготовить до"
                     name="make_till"
@@ -69,7 +70,7 @@ const InitialForm: React.FC = () => {
                     placeholder={currentDate}
                     minDate={new Date()}
                 />
-                <FieldLabel labelText="обрезной">
+                <FieldLabel mb={2} labelText="обрезной">
                     <Field
                         className="passInputBorder passInputSize"
                         name="is_cut"
@@ -78,7 +79,7 @@ const InitialForm: React.FC = () => {
                         placeholder="000 x 000"
                     />
                 </FieldLabel>
-                <FieldLabel labelText="тираж">
+                <FieldLabel mb={2} labelText="тираж">
                     <Field
                         className="passInputBorder passInputSize"
                         name="circulation"
@@ -88,8 +89,8 @@ const InitialForm: React.FC = () => {
                         placeholder="000"
                     />
                 </FieldLabel>
-                <div className="d-flex justify-content-between align-items-center">
-                    <CheckBox name="repeat" className="w-50 mr-3" label="Повтор" />
+                <Box display="flex" mb={2} justifyContent="space-between" alignItems="center">
+                    <CheckBox mr={2} width="50%" name="repeat" label="Повтор" />
                     <Field
                         className="passInputBorder passInputSize w-50"
                         name="repeat_times"
@@ -97,9 +98,9 @@ const InitialForm: React.FC = () => {
                         disabled={!repeat}
                         type="number"
                     />
-                </div>
-            </div>
-            <div className="col-2">
+                </Box>
+            </Grid>
+            <Grid item xs={6} md={2}>
                 <FieldLabel labelText="к">
                     <Field
                         className="passInputBorder passInputSize"
@@ -131,15 +132,15 @@ const InitialForm: React.FC = () => {
                 </Field>
                 <CheckBox name="sample_on_package" className="passInputmb" label="образец на упаковку" />
                 <CheckBox name="sort_by_types" className="passInputmb" label="по видам" />
-            </div>
-            <div className="col-2">
+            </Grid>
+            <Grid item xs={6} md={2}>
                 <CheckBox name="delivery" className="passInputmb" label="Доставить" />
                 <Field name="address" className="passInputmb passInputBorder" component="textarea" placeholder="куда" />
                 <CheckBox className="passInputmb" name="label" label="ярклык" />
                 <CheckBox className="passInputmb" name="stretch-wrap" label="стрейч-пленка" />
                 <CheckBox className="passInputmb" name="palleting" label="паллетирование" />
-            </div>
-            <div className="col-2">
+            </Grid>
+            <Grid item xs={6} md={2}>
                 <Field
                     name="organization"
                     className="passInputSize passInputmb"
@@ -162,8 +163,8 @@ const InitialForm: React.FC = () => {
                     className="passInputBorder passInputSize"
                     placeholder={currentDate}
                 />
-            </div>
-        </div>
+            </Grid>
+        </Grid>
     );
 };
 

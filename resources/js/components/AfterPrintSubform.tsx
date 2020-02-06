@@ -5,13 +5,14 @@ import { inputOptions } from '../store/data';
 import ReduxCreatableSelect from './ReduxCreatableSelect';
 import classes from '../../css/modules/AfterPrintSubform.module.css';
 import CheckBox from './CheckBox';
+import Box from '@material-ui/core/Box';
 
 const AfterPrintSubform: FC = () => {
     return (
-        <div className={`d-flex ${classes.container}`}>
+        <Box display="flex">
             <div className={classes.col}>
                 <FieldWithComment name="revanish" expandable={true} className="passInputmb">
-                    <span className="mb-1 d-block">Лакировать</span>
+                    <Box mb={2}>Лакировать</Box>
                     <Field
                         component={ReduxCreatableSelect}
                         className="passInputmb"
@@ -20,7 +21,7 @@ const AfterPrintSubform: FC = () => {
                     />
                 </FieldWithComment>
                 <FieldWithComment name="hotStamp" expandable={true} className="passInputmb">
-                    <span className="mb-1 d-block">Конгрев</span>
+                    <Box mb={2}>Конгрев</Box>
                     <Field
                         component={ReduxCreatableSelect}
                         className="passInputmb"
@@ -31,7 +32,7 @@ const AfterPrintSubform: FC = () => {
             </div>
             <div className={classes.col}>
                 <FieldWithComment name="laminate" expandable={true} className="passInputmb">
-                    <span className="mb-1 d-block">Ламинировать</span>
+                    <Box mb={2}>Ламинировать</Box>
                     <Field
                         component={ReduxCreatableSelect}
                         className="passInputmb"
@@ -40,7 +41,7 @@ const AfterPrintSubform: FC = () => {
                     />
                 </FieldWithComment>
                 <FieldWithComment name="embossing" expandable={true} className="passInputmb">
-                    <span className="mb-1 d-block">Тиснить фольгой</span>
+                    <Box mb={2}>Тиснить фольгой</Box>
                     <Field
                         component={ReduxCreatableSelect}
                         className="passInputmb"
@@ -53,9 +54,9 @@ const AfterPrintSubform: FC = () => {
                 <CheckBox name="creasing" className="passInputmb" label="Биговать" />
                 <CheckBox name="bookFolding" className="passInputmb" label="Фальцевать" />
                 <CheckBox name="perforation" className="passInputmb" label="Перфорация" />
-                <Field component="textarea" className="passInputBorder passInputmb" name="afterPrintInfo" />
+                <Field component="textarea" rows={3} className="passInputBorder passInputmb" name="afterPrintInfo" />
                 <FieldWithComment name="stampCut" expandable={true} className="passInputmb">
-                    <span className="mb-1 d-block">Вырубить штампом</span>
+                    <Box mb={2}>Вырубить штампом</Box>
                     <Field
                         component="input"
                         type="text"
@@ -65,7 +66,9 @@ const AfterPrintSubform: FC = () => {
                 </FieldWithComment>
             </div>
             <div className={classes.col}>
-                <label htmlFor="importantInfo">Важно</label>
+                <Box component="label" display="block" mb={2} htmlFor="importantInfo">
+                    Важно
+                </Box>
                 <Field
                     className="passInputBorder w-100 h-75"
                     component="textarea"
@@ -73,7 +76,7 @@ const AfterPrintSubform: FC = () => {
                     id="importantInfo"
                 />
             </div>
-        </div>
+        </Box>
     );
 };
 

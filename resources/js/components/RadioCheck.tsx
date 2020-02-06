@@ -1,5 +1,6 @@
 import React from 'react';
 import { Field } from 'redux-form';
+import Box from '@material-ui/core/Box';
 
 type InputType = 'radio' | 'checkbox';
 
@@ -12,13 +13,13 @@ type Props = {
 };
 
 const RadioCheck = (props: Props): JSX.Element => {
-    const { name = '', groupName, label, classes, className = '', type } = props;
+    const { name = '', groupName, label, classes, className = '', type, ...restProps } = props;
     return (
-        <label className={`${classes.container} ${className}`}>
+        <Box component="label" className={`${classes.container} ${className}`} {...restProps}>
             <span>{label}</span>
             <Field name={groupName} component="input" type={type} value={name} />
             <span className={classes.checkmark}></span>
-        </label>
+        </Box>
     );
 };
 export default RadioCheck;

@@ -1,17 +1,18 @@
 import React from 'react';
 import AfterPrintSubform from './AfterPrintSubform';
 import PaperJoinerForm from './PaperJoinerForm';
+import Grid from '@material-ui/core/Grid';
 
 const FinalForm: React.FC = () => {
     return (
-        <div className="row">
-            <div className="col">
+        <Grid container className="row" spacing={6}>
+            <Grid item xs={12} md={4}>
                 <PaperJoinerForm />
-            </div>
-            <div className="col-8">
+            </Grid>
+            <Grid item xs={12} md={8}>
                 <AfterPrintSubform />
-            </div>
-        </div>
+            </Grid>
+        </Grid>
     );
 };
 
