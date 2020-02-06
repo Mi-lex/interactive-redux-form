@@ -4,11 +4,12 @@ import { Field } from 'redux-form';
 import ReduxCreatableSelect from './ReduxCreatableSelect';
 import { inputOptions } from '../store/data';
 import classes from '../../css/modules/FormControl.module.css';
+import Box from '@material-ui/core/Box';
 
 const FormControl: React.FC = () => {
     return (
-        <div className={`align-items-center d-flex justify-content-between mb-3 mt-4`}>
-            <div className={`${''} d-flex`}>
+        <Box display="flex" justifyContent="space-between" alignItems="center" mb={2} mt={2}>
+            <Box display="flex">
                 <PassportBtn size="md" iconName="createNewPassport" />
                 <Field
                     name="manager"
@@ -20,18 +21,18 @@ const FormControl: React.FC = () => {
                 <Field
                     name="search"
                     type="text"
-                    className="passInputBorder pl-2 mr-1"
+                    className="passInputBorder"
                     placeholder="по слову или по полю"
                     component="input"
                 />
                 <PassportBtn size="md" iconName="search" />
-            </div>
+            </Box>
             <div className="headerRightBlock">
                 <PassportBtn size="md" iconName="addPassport" />
                 <PassportBtn size="md" iconName="approveForm" />
                 <PassportBtn size="md" iconName="print" />
             </div>
-        </div>
+        </Box>
     );
 };
 
