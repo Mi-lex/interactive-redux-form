@@ -1,9 +1,18 @@
 import 'svgxuse';
 import React from 'react';
-import PassportForm from '../components/PassportForm';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import PassportForm from '../pages/PassportForm';
 
 const App: React.FC = () => {
-    return <PassportForm />;
+    return (
+        <Router>
+            <Switch>
+                <Route path="/" exact>
+                    <PassportForm />
+                </Route>
+            </Switch>
+        </Router>
+    );
 };
 
 export default App;

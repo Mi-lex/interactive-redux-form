@@ -5,6 +5,7 @@ import classes from '../../css/modules/CheckBox.module.css';
 type Props = {
     name: string;
     label: string;
+    className?: string;
 };
 
 const CheckBox = ({ name, label, ...restProps }: Props): JSX.Element => (

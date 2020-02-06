@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Field, FieldArray, WrappedFieldArrayProps } from 'redux-form';
+import { Field, FieldArray, WrappedFieldArrayProps, FormSection } from 'redux-form';
 import PassportBtn from './PassportBtn';
 
 type ExtraInfoFieldProps = WrappedFieldArrayProps<string> & {
@@ -13,7 +13,7 @@ const ExtraInfoField = ({ fields, expandable = true }: ExtraInfoFieldProps): JSX
                 component="textarea"
                 className="passInputBorder passInputmb"
                 key={index}
-                name={`${extraActionName}Info`}
+                name={`${extraActionName}`}
             />
         ))}
         {expandable && (
@@ -48,10 +48,10 @@ const FieldWithComment = (props: FieldWithCommentProps): JSX.Element => {
     const { name, children, expandable, className = '', ...restProps } = props;
 
     return (
-        <div className={className} {...restProps}>
+        <FormSection name={name} className={className} {...restProps}>
             <div>{children}</div>
-            <FieldArray name={name} component={ExtraInfoField} expandable={expandable} />
-        </div>
+            <FieldArray name="info" component={ExtraInfoField} expandable={expandable} />
+        </FormSection>
     );
 };
 

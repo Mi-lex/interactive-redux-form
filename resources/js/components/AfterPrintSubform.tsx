@@ -10,41 +10,41 @@ const AfterPrintSubform: FC = () => {
     return (
         <div className={`d-flex ${classes.container}`}>
             <div className={classes.col}>
-                <FieldWithComment name="toRevanishInfo" expandable={true} className="passInputmb">
+                <FieldWithComment name="revanish" expandable={true} className="passInputmb">
                     <span className="mb-1 d-block">Лакировать</span>
                     <Field
                         component={ReduxCreatableSelect}
                         className="passInputmb"
-                        name="toRevanishWith"
+                        name="type"
                         options={inputOptions.varnishMaterial}
                     />
                 </FieldWithComment>
-                <FieldWithComment name="toHotStampInfo" expandable={true} className="passInputmb">
+                <FieldWithComment name="hotStamp" expandable={true} className="passInputmb">
                     <span className="mb-1 d-block">Конгрев</span>
                     <Field
                         component={ReduxCreatableSelect}
                         className="passInputmb"
-                        name="toHotStampWith"
+                        name="label"
                         options={inputOptions.hotStampMaterial}
                     />
                 </FieldWithComment>
             </div>
             <div className={classes.col}>
-                <FieldWithComment name="toLaminateInfo" expandable={true} className="passInputmb">
+                <FieldWithComment name="laminate" expandable={true} className="passInputmb">
                     <span className="mb-1 d-block">Ламинировать</span>
                     <Field
                         component={ReduxCreatableSelect}
                         className="passInputmb"
-                        name="toLaminateWith"
+                        name="type"
                         options={inputOptions.laminateMaterial}
                     />
                 </FieldWithComment>
-                <FieldWithComment name="toEmbossInfo" expandable={true} className="passInputmb">
+                <FieldWithComment name="embossing" expandable={true} className="passInputmb">
                     <span className="mb-1 d-block">Тиснить фольгой</span>
                     <Field
                         component={ReduxCreatableSelect}
                         className="passInputmb"
-                        name="toEmbossWith"
+                        name="type"
                         options={inputOptions.embossMaterial}
                     />
                 </FieldWithComment>
@@ -54,12 +54,12 @@ const AfterPrintSubform: FC = () => {
                 <CheckBox name="bookFolding" className="passInputmb" label="Фальцевать" />
                 <CheckBox name="perforation" className="passInputmb" label="Перфорация" />
                 <Field component="textarea" className="passInputBorder passInputmb" name="afterPrintInfo" />
-                <FieldWithComment name="toStampCutInfo" expandable={true} className="passInputmb">
+                <FieldWithComment name="stampCut" expandable={true} className="passInputmb">
                     <span className="mb-1 d-block">Вырубить штампом</span>
                     <Field
                         component="input"
                         type="text"
-                        name="toStampCutWhat"
+                        name="label"
                         className="passInputBorder passInputmb passInputSize"
                     />
                 </FieldWithComment>

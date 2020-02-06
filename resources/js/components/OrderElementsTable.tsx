@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Field, FieldArray, WrappedFieldArrayProps } from 'redux-form';
+import { Field, FieldArray, WrappedFieldArrayProps, FormSection } from 'redux-form';
 import PassportBtn from './PassportBtn';
 import ReduxCreatableSelect from './ReduxCreatableSelect';
 import { inputOptions } from '../store/data';
@@ -11,51 +11,51 @@ type OrderElementsFieldPropType = {
 };
 
 const OrderElementsRow = ({ name = 'orderElement' }: OrderElementsFieldPropType): JSX.Element => (
-    <div className="d-flex justify-content-around">
+    <FormSection name={name} className="d-flex justify-content-around">
         <Field
             className={`passInputBorder passInputSize passInputmb ${classes.name}`}
-            name={`${name}.name`}
+            name="name"
             component="input"
             type="text"
         />
         <Field
             className={`passInputBorder passInputSize passInputmb  ${classes.pages}`}
-            name={`${name}.paperCount`}
+            name="paperCount"
             component="input"
             type="number"
         />
         <Field
             className={`passInputmb  ${classes.wrapMaterial}`}
-            name={`${name}.wrapMaterial`}
+            name="wrapMaterial"
             component={ReduxCreatableSelect}
             options={inputOptions.orderWrapMaterials}
         />
         <Field
             className={`passInputSize passInputmb  ${classes.printType}`}
-            name={`${name}.printType`}
+            name="printType"
             placeholder="уф-принтер"
             component={ReduxCreatableSelect}
             options={inputOptions.printTypes}
         />
         <Field
             className={`passInputBorder passInputSize passInputmb  ${classes.colorFormula}`}
-            name={`${name}.colorFormula`}
+            name="colorFormula"
             component="input"
             type="text"
         />
         <Field
             className={`passInputBorder passInputSize passInputmb  ${classes.colorInterpretation}`}
-            name={`${name}.colorInterpretation`}
+            name="colorInterpretation"
             component="input"
             type="text"
         />
         <Field
             className={`passInputBorder passInputSize passInputmb  ${classes.addInfo}`}
-            name={`${name}.additionalInfo`}
+            name="additionalInfo"
             component="input"
             type="text"
         />
-    </div>
+    </FormSection>
 );
 
 const OrderElementsTable = ({ fields }: WrappedFieldArrayProps<string>): JSX.Element => (

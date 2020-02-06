@@ -120,7 +120,7 @@ inputOptions.varnishMaterial = [
     },
 ];
 
-inputOptions.hotStampMaterial = [
+inputOptions.hotStampLabels = [
     {
         value: 'questionMark',
         label: '???',
@@ -134,7 +134,7 @@ inputOptions.laminateMaterial = [
     },
 ];
 
-inputOptions.embossMaterial = [
+inputOptions.embossingTypes = [
     {
         value: 'holographic',
         label: 'голографической',
