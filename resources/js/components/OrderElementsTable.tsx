@@ -4,6 +4,7 @@ import PassportBtn from './PassportBtn';
 import ReduxCreatableSelect from './ReduxCreatableSelect';
 import { inputOptions } from '../store/data';
 import classes from '../../css/modules/OrderElementsTable.module.css';
+import { Box } from '@material-ui/core';
 
 type OrderElementsFieldPropType = {
     name: string;
@@ -11,7 +12,7 @@ type OrderElementsFieldPropType = {
 };
 
 const OrderElementsRow = ({ name = 'orderElement' }: OrderElementsFieldPropType): JSX.Element => (
-    <FormSection name={name} className="d-flex justify-content-around">
+    <FormSection name={name} className={classes.container}>
         <Field
             className={`passInputBorder passInputSize passInputmb ${classes.name}`}
             name="name"
@@ -64,7 +65,7 @@ const OrderElementsTable = ({ fields }: WrappedFieldArrayProps<string>): JSX.Ele
             <OrderElementsRow key={index} name={`${order}Element`} />
         ))}
 
-        <div className="d-flex justify-content-end">
+        <Box display="flex" justifyContent="flex-end">
             <PassportBtn
                 size="sm"
                 iconName={'newRow'}
@@ -79,7 +80,7 @@ const OrderElementsTable = ({ fields }: WrappedFieldArrayProps<string>): JSX.Ele
                     fields.pop();
                 }}
             />
-        </div>
+        </Box>
     </>
 );
 
