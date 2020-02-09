@@ -1,7 +1,7 @@
-import 'svgxuse';
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import PassportForm from '../pages/PassportForm';
+import Orders from '../pages/Orders';
 
 const App: React.FC = () => {
     return (
@@ -9,6 +9,9 @@ const App: React.FC = () => {
             <Switch>
                 <Route path="/" exact>
                     <PassportForm />
+                </Route>
+                <Route path="/orders" exact>
+                    <Orders />
                 </Route>
             </Switch>
         </Router>
