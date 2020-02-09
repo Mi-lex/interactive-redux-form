@@ -1,7 +1,7 @@
 import React from 'react';
 import { formValueSelector, FormSection } from 'redux-form';
 import { useSelector } from 'react-redux';
-import { PaperJoinerName } from '../store/types';
+import { PaperJoinerName } from '../../../store/types';
 
 const selector: Function = formValueSelector('passport');
 

@@ -1,13 +1,13 @@
 import React from 'react';
 import { Field } from 'redux-form';
 import PaperJoinerBlock from './PaperJoinerBlock';
-import RadioBtn from './RadioBtn';
-import { PaperJoiners, PaperJoinerName } from '../store/types';
-import { paperJoinersNames } from '../store/consts';
-import ReduxCreatableSelect from './ReduxCreatableSelect';
-import { inputOptions } from '../store/data';
-import CheckBox from './CheckBox';
-import FieldLabel from './FieldLabel';
+import RadioBtn from '../../RadioBtn';
+import { PaperJoiners, PaperJoinerName } from '../../../store/types';
+import { paperJoinersNames } from '../../../store/consts';
+import ReduxCreatableSelect from '../../ReduxCreatableSelect';
+import { inputOptions } from '../../../store/data';
+import CheckBox from '../../CheckBox';
+import FieldLabel from '../../FieldLabel';
 import Grid from '@material-ui/core/Grid';
 
 const PaperJoinerForm = (): JSX.Element => {

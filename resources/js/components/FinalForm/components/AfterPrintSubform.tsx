@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
-import FieldWithComment from './FieldWithComment';
+import FieldWithComment from '../../FieldWithComment';
 import { Field } from 'redux-form';
-import { inputOptions } from '../store/data';
-import ReduxCreatableSelect from './ReduxCreatableSelect';
-import classes from '../../css/modules/AfterPrintSubform.module.css';
-import CheckBox from './CheckBox';
+import { inputOptions } from '../../../store/data';
+import ReduxCreatableSelect from '../../ReduxCreatableSelect';
+import classes from '../../../../css/modules/AfterPrintSubform.module.css';
+import CheckBox from '../../CheckBox';
 import Box from '@material-ui/core/Box';
 
 const AfterPrintSubform: FC = () => {

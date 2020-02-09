@@ -1,6 +1,6 @@
 import React from 'react';
-import AfterPrintSubform from './AfterPrintSubform';
-import PaperJoinerForm from './PaperJoinerForm';
+import AfterPrintSubform from './components/AfterPrintSubform';
+import PaperJoinerForm from './components/PaperJoinerForm';
 import Grid from '@material-ui/core/Grid';
 
 const FinalForm: React.FC = () => {

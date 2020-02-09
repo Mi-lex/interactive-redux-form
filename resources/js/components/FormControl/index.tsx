@@ -1,9 +1,9 @@
 import React from 'react';
-import PassportBtn from './PassportBtn';
+import PassportBtn from '../PassportBtn';
 import { Field } from 'redux-form';
-import ReduxCreatableSelect from './ReduxCreatableSelect';
-import { inputOptions } from '../store/data';
-import classes from '../../css/modules/FormControl.module.css';
+import ReduxCreatableSelect from '../ReduxCreatableSelect';
+import { inputOptions } from '../../store/data';
+import classes from '../../../css/modules/FormControl.module.css';
 import Box from '@material-ui/core/Box';
 
 const FormControl: React.FC = () => {
