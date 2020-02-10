@@ -82,7 +82,7 @@ const PaperJoinerForm = (): JSX.Element => {
                         className="passInputmb"
                         placeholder="цвет"
                         component={ReduxCreatableSelect}
-                        options={{}}
+                        options={[]}
                     />
                     <Field
                         name="position"
