@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react';
 import MaterialTable from 'material-table';
 
 import { data } from './data';
+import ruLocale from 'date-fns/locale/ru';
 
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
@@ -63,6 +64,7 @@ class OrderTable extends React.Component {
                 }}
                 localization={{
                     body: {
+                        dateTimePickerLocalization: ruLocale,
                         emptyDataSourceMessage: 'Нет записей для отображения',
                         addTooltip: '',
                         deleteTooltip: '',
