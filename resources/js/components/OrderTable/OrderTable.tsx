@@ -47,7 +47,19 @@ class OrderTable extends React.Component {
                 icons={tableIcons}
                 title="Таблица заказов"
                 columns={[
-                    { title: 'Номер', field: 'id', type: 'numeric' },
+                    {
+                        title: 'Номер',
+                        field: 'id',
+                        type: 'numeric',
+                        cellStyle: {
+                            width: 20,
+                            maxWidth: 20,
+                        },
+                        headerStyle: {
+                            width: 20,
+                            maxWidth: 20,
+                        },
+                    },
                     { title: 'Название', field: 'name' },
                     { title: 'Тип', field: 'type' },
                     { title: 'Менеджер', field: 'manager' },

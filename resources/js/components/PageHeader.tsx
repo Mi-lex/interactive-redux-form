@@ -42,7 +42,8 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-export default function PageHeader() {
+export default function PageHeader(props) {
+    const { toggleDrawer } = props;
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -100,7 +101,7 @@ export default function PageHeader() {
                         <MailIcon />
                     </Badge>
                 </IconButton>
-                <p>Messages</p>
+                <p>Сообщения</p>
             </MenuItem>
             <MenuItem>
                 <IconButton aria-label="show 11 new notifications" color="inherit">
@@ -108,7 +109,7 @@ export default function PageHeader() {
                         <NotificationsIcon />
                     </Badge>
                 </IconButton>
-                <p>Notifications</p>
+                <p>Оповещения</p>
             </MenuItem>
             <MenuItem onClick={handleProfileMenuOpen}>
                 <IconButton
@@ -119,7 +120,7 @@ export default function PageHeader() {
                 >
                     <AccountCircle />
                 </IconButton>
-                <p>Profile</p>
+                <p>Профиль</p>
             </MenuItem>
         </Menu>
     );
@@ -128,12 +129,18 @@ export default function PageHeader() {
         <div className={classes.grow}>
             <AppBar position="static">
                 <Toolbar>
-                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="open drawer">
+                    <IconButton
+                        onClick={toggleDrawer}
+                        edge="start"
+                        className={classes.menuButton}
+                        color="inherit"
+                        aria-label="open drawer"
+                    >
                         <MenuIcon />
                     </IconButton>
-                    <Typography className={classes.title} variant="h6" noWrap>
+                    {/* <Typography className={classes.title} variant="h6" noWrap>
                         Заказы
-                    </Typography>
+                    </Typography> */}
                     <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>
                         <IconButton aria-label="show 4 new mails" color="inherit">
