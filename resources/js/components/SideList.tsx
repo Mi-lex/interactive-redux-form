@@ -20,7 +20,11 @@ const useStyles = makeStyles({
     },
 });
 
-const SideList = props => {
+type Props = {
+    closeDrawer: () => void;
+};
+
+const SideList = (props: Props): JSX.Element => {
     const classes = useStyles();
     const { closeDrawer } = props;
 
@@ -31,7 +35,7 @@ const SideList = props => {
                     <ListItemIcon>
                         <DescriptionIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Пасспорт" />
+                    <ListItemText primary="Паспорт" />
                 </ListItem>
                 <ListItem button component={Link} to="/orders">
                     <ListItemIcon>
