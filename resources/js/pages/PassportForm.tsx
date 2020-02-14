@@ -1,4 +1,5 @@
 import React from 'react';
+import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import { reduxForm } from 'redux-form';
 import { inputOptions } from '../store/data';
@@ -17,38 +18,53 @@ theme.spacing(2);
 const PassportForm = (): JSX.Element => {
     return (
         <ThemeProvider theme={theme}>
-            <Container>
-                <form action="POST" className="passportForm">
-                    <FormControl />
-                    <InitialForm />
-                    <OrderElementsForm />
-                    <FinalForm />
-                </form>
-            </Container>
+            <Paper>
+                <Container>
+                    <form action="POST" className="passportForm">
+                        <FormControl />
+
+                        <InitialForm />
+
+                        <OrderElementsForm />
+
+                        <FinalForm />
+                    </form>
+                </Container>
+            </Paper>
         </ThemeProvider>
     );
 };
 
 const DecoratedPassportForm = reduxForm({
     form: 'passport',
+
     initialValues: {
         orders: Array(3).fill({}),
+
         revanish: {
             type: inputOptions.varnishMaterial[0],
+
             info: [''],
         },
+
         hotStamp: {
             label: inputOptions.hotStampLabels[0],
+
             info: [''],
         },
+
         laminate: {
             type: inputOptions.laminateMaterial[0],
+
             info: [''],
         },
+
         embossing: {
             type: inputOptions.embossingTypes[0],
+
             info: [''],
         },
+
         stampCut: {
             info: [''],
         },

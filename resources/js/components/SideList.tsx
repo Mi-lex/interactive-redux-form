@@ -27,22 +27,18 @@ const SideList = props => {
     return (
         <div className={classes.list} role="presentation" onClick={closeDrawer} onKeyDown={closeDrawer}>
             <List>
-                <Link to="/">
-                    <ListItem button>
-                        <ListItemIcon>
-                            <DescriptionIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Пасспорт" />
-                    </ListItem>
-                </Link>
-                <Link to="/orders">
-                    <ListItem button>
-                        <ListItemIcon>
-                            <TocIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Заказы" />
-                    </ListItem>
-                </Link>
+                <ListItem button component={Link} to="/">
+                    <ListItemIcon>
+                        <DescriptionIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Пасспорт" />
+                </ListItem>
+                <ListItem button component={Link} to="/orders">
+                    <ListItemIcon>
+                        <TocIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Заказы" />
+                </ListItem>
                 <Divider />
                 {['Список заказов', 'Канбан доска', 'Другая ссылка', 'Последняя ссылка'].map((text, index) => (
                     <ListItem button key={text}>

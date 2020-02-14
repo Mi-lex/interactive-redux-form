@@ -10,11 +10,11 @@ import SideList from '../components/SideList';
 const App: React.FC = () => {
     const [isOpen, setDrawerState] = React.useState(false);
 
-    const closeDrawer = () => {
+    const closeDrawer = (): void => {
         setDrawerState(false);
     };
 
-    const toggleDrawer = () => {
+    const toggleDrawer = (): void => {
         setDrawerState(!isOpen);
     };
 

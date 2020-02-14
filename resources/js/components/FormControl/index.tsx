@@ -8,7 +8,7 @@ import Box from '@material-ui/core/Box';
 
 const FormControl: React.FC = () => {
     return (
-        <Box display="flex" justifyContent="space-between" alignItems="center" mb={2} mt={2}>
+        <Box display="flex" justifyContent="space-between" alignItems="center" mb={2} pt={2}>
             <Box display="flex">
                 <PassportBtn size="md" iconName="createNewPassport" />
                 <Field
