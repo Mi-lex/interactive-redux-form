@@ -64,16 +64,21 @@ const config = {
         path: path.resolve(__dirname, OUTPUT_FOLDER),
         filename: '[name].js',
     },
-    devtool: 'inline-source-map',
+    devtool: 'source-map',
     module: {
         rules: [
             {
                 test: /\.(ts|js)x?$/,
                 exclude: [path.resolve(__dirname, './node_modules')],
-                use: 'babel-loader',
+                use: 'ts-loader',
                 resolve: {
                     extensions: ['.ts', '.tsx', '.js'],
                 },
+            },
+            {
+                enforce: 'pre',
+                test: /\.js$/,
+                loader: 'source-map-loader',
             },
             {
                 test: /\.css$/,
@@ -143,6 +148,7 @@ const config = {
             host: 'localhost',
             port: 8000,
         }),
+        new webpack.HotModuleReplacementPlugin(),
     ],
 
     optimization: {
