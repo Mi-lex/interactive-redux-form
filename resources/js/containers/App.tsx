@@ -1,10 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import PassportForm from '../pages/PassportForm';
 import Orders from '../pages/Orders';
-import PageHeader from '../components/PageHeader';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import ruLocale from 'date-fns/locale/ru';
+import DateFnsUtils from '@date-io/date-fns';
+import Passport from '../pages/Passport';
 import Container from '@material-ui/core/Container';
-import { Drawer } from '@material-ui/core';
+import PageHeader from '../components/PageHeader';
+import Drawer from '@material-ui/core/Drawer';
 import SideList from '../components/SideList';
 
 const App: React.FC = () => {
@@ -26,12 +29,17 @@ const App: React.FC = () => {
             <Container maxWidth="xl">
                 <PageHeader toggleDrawer={toggleDrawer} />
                 <Switch>
-                    <Route path="/" exact>
-                        <PassportForm />
-                    </Route>
-                    <Route path="/orders" exact>
-                        <Orders />
-                    </Route>
+                    {/* <Route path="/" exact>
+                            <PassportForm />
+                        </Route> */}
+                    <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ruLocale}>
+                        <Route path="/orders" exact>
+                            <Orders />
+                        </Route>
+                        <Route path="/passport" exact>
+                            <Passport />
+                        </Route>
+                    </MuiPickersUtilsProvider>
                 </Switch>
             </Container>
         </Router>
