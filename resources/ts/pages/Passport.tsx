@@ -1,10 +1,10 @@
-import React from 'react';
-import Paper from '@material-ui/core/Paper';
-import Container from '@material-ui/core/Container';
-import { reduxForm } from 'redux-form';
-import { inputOptions } from '../store/data';
-import PassportControl from '../components/PassportControl';
-import PassportForm from '../components/PassportForm';
+import React from 'react'
+import Paper from '@material-ui/core/Paper'
+import Container from '@material-ui/core/Container'
+import { reduxForm } from 'redux-form'
+import { inputOptions } from '../store/data'
+import PassportControl from '../components/PassportControl'
+import PassportForm from '../components/PassportForm'
 
 const Passport = (): JSX.Element => {
     return (
@@ -16,14 +16,16 @@ const Passport = (): JSX.Element => {
                 </form>
             </Container>
         </Paper>
-    );
-};
+    )
+}
 
 const DecoratedPassportForm = reduxForm({
     form: 'passport',
 
     initialValues: {
+        orderId: '63590',
         orders: Array(3).fill({}),
+        orderDate: new Date().getTime(),
 
         revanish: {
             type: inputOptions.varnishMaterial[0],
@@ -49,6 +51,6 @@ const DecoratedPassportForm = reduxForm({
             info: [''],
         },
     },
-})(Passport);
+})(Passport)
 
-export default DecoratedPassportForm;
+export default DecoratedPassportForm

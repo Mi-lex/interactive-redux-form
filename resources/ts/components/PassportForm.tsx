@@ -1,64 +1,26 @@
-import React from 'react';
-import { reduxForm } from 'redux-form';
-import { inputOptions } from '../store/data';
-import { Grid } from '@material-ui/core';
-import PassportSidebar from './PassportSidebar';
+import React from 'react'
+import { Grid, TextField } from '@material-ui/core'
+import PassportSidebar from './PassportSidebar'
+import InitialInfo from './InitialInfo'
 
 const PassportForm = (): JSX.Element => {
     return (
-        <Grid container>
+        <Grid container spacing={3}>
             {/* Sidebar */}
             <PassportSidebar />
             {/* Initial */}
-            <Grid item container xs={12} sm={6} md={10}>
+            <Grid item container xs={12} sm={6} md={10} spacing={3} justify="space-between">
                 {/* Initial info packaging */}
-                <Grid item container xs={12} sm={6}>
-                    <Grid item xs={12} sm={6}></Grid>
-                    <Grid item xs={12} sm={6}></Grid>
-                </Grid>
+                <InitialInfo />
                 {/* Important info */}
-                <Grid item xs={12} sm={6}></Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField fullWidth label="Важно" multiline rows="8" variant="outlined" />
+                </Grid>
                 {/* Making Details */}
                 <Grid item container xs={12} sm={6} md={10}></Grid>
             </Grid>
         </Grid>
-    );
-};
+    )
+}
 
-const DecoratedPassportForm = reduxForm({
-    form: 'passport',
-
-    initialValues: {
-        orders: Array(3).fill({}),
-
-        revanish: {
-            type: inputOptions.varnishMaterial[0],
-
-            info: [''],
-        },
-
-        hotStamp: {
-            label: inputOptions.hotStampLabels[0],
-
-            info: [''],
-        },
-
-        laminate: {
-            type: inputOptions.laminateMaterial[0],
-
-            info: [''],
-        },
-
-        embossing: {
-            type: inputOptions.embossingTypes[0],
-
-            info: [''],
-        },
-
-        stampCut: {
-            info: [''],
-        },
-    },
-})(PassportForm);
-
-export default DecoratedPassportForm;
+export default PassportForm

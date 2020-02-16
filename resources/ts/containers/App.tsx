@@ -29,14 +29,11 @@ const App: React.FC = () => {
             <Container maxWidth="xl">
                 <PageHeader toggleDrawer={toggleDrawer} />
                 <Switch>
-                    {/* <Route path="/" exact>
-                            <PassportForm />
-                        </Route> */}
                     <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ruLocale}>
                         <Route path="/orders" exact>
                             <Orders />
                         </Route>
-                        <Route path="/passport" exact>
+                        <Route path="/" exact>
                             <Passport />
                         </Route>
                     </MuiPickersUtilsProvider>
