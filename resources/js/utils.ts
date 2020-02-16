@@ -2,7 +2,7 @@
  * Function for concatinating several class names from classes obj
  */
 
-export const classesExtractor = (classes, classNames: string[]): string => {
+export const classesExtractor = (classes: any, classNames: string[]): string => {
     return classNames.map(name => classes[name]).join(' ');
 };
 
@@ -29,30 +29,30 @@ export const generateUniqueId = (): string => (Date.now() + Math.random()).toStr
  * @param args
  */
 
-export const classNames = (...args) => {
-    const classes: Array<number | string> = [];
+// export const classNames = (...args) => {
+//     const classes: Array<number | string> = [];
 
-    for (let i = 0; i < args.length; i++) {
-        const arg = args[i];
-        if (!arg) continue;
+//     for (let i = 0; i < args.length; i++) {
+//         const arg = args[i];
+//         if (!arg) continue;
 
-        const argType = typeof arg;
+//         const argType = typeof arg;
 
-        if (argType === 'string' || argType === 'number') {
-            classes.push(arg);
-        } else if (Array.isArray(arg) && arg.length) {
-            const inner = classNames(...arg);
-            if (inner) {
-                classes.push(inner);
-            }
-        } else if (argType === 'object') {
-            for (const key in arg) {
-                if (Object.prototype.hasOwnProperty.call(arg, key) && arg[key]) {
-                    classes.push(key);
-                }
-            }
-        }
-    }
+//         if (argType === 'string' || argType === 'number') {
+//             classes.push(arg);
+//         } else if (Array.isArray(arg) && arg.length) {
+//             const inner = classNames(...arg);
+//             if (inner) {
+//                 classes.push(inner);
+//             }
+//         } else if (argType === 'object') {
+//             for (const key in arg) {
+//                 if (Object.prototype.hasOwnProperty.call(arg, key) && arg[key]) {
+//                     classes.push(key);
+//                 }
+//             }
+//         }
+//     }
 
-    return classes.join(' ');
-};
+//     return classes.join(' ');
+// };

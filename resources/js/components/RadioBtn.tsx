@@ -6,6 +6,7 @@ type Props = {
     name: string;
     groupName: string;
     label: string;
+    classes: any;
 };
 
 const RadioBtn = ({ groupName, label, name, ...restProps }: Props): JSX.Element => (

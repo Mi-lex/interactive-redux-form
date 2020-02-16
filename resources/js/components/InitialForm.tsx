@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import FieldLabel from './FieldLabel';
 import { Field, formValueSelector } from 'redux-form';
 import { getDateString } from '../utils';
-import DatePickerField from './DatePickerField';
+// import DatePickerField from './DatePickerField';
 import CheckBox from './CheckBox';
 import ReduxCreatableSelect from './ReduxCreatableSelect';
 import { inputOptions } from '../store/data';
@@ -63,13 +63,13 @@ const InitialForm: React.FC = () => {
                 <Field className="w-100 passInputBorder" name="name" component="textarea" placeholder="название" />
             </Grid>
             <Grid item sm={6} md={3}>
-                <DatePickerField
+                {/* <DatePickerField
                     label="Изготовить до"
                     name="make_till"
                     className="passInputBorder passInputSize"
                     placeholder={currentDate}
                     minDate={new Date()}
-                />
+                /> */}
                 <FieldLabel mb={2} labelText="обрезной">
                     <Field
                         className="passInputBorder passInputSize"
@@ -157,12 +157,12 @@ const InitialForm: React.FC = () => {
                         type="text"
                     />
                 </FieldLabel>
-                <DatePickerField
+                {/* <DatePickerField
                     label="от"
                     name="payment_date"
                     className="passInputBorder passInputSize"
                     placeholder={currentDate}
-                />
+                /> */}
             </Grid>
         </Grid>
     );

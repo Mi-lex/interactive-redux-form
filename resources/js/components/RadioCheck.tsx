@@ -4,15 +4,16 @@ import Box from '@material-ui/core/Box';
 
 type InputType = 'radio' | 'checkbox';
 
-type Props = {
+interface Props {
     name?: string;
     groupName: string;
     label: string;
     type: InputType;
     className?: string;
-};
+    classes: any;
+}
 
-const RadioCheck = (props: Props): JSX.Element => {
+const RadioCheck: React.FC<Props> = (props: Props) => {
     const { name = '', groupName, label, classes, className = '', type, ...restProps } = props;
     return (
         <Box component="label" className={`${classes.container} ${className}`} {...restProps}>

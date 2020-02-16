@@ -9,11 +9,11 @@ type Props = InputOptions &
     };
 
 const customStyles = {
-    option: provided => ({
+    option: (provided: object) => ({
         ...provided,
         borderColor: '#FFE082',
     }),
-    control: provided => ({
+    control: (provided: object) => ({
         ...provided,
         borderRadius: '8px',
         height: '100%',
@@ -23,7 +23,7 @@ const customStyles = {
     indicatorSeparator: () => ({
         display: 'none',
     }),
-    dropdownIndicator: provided => ({
+    dropdownIndicator: (provided: object) => ({
         ...provided,
         color: '#FFE082',
     }),
@@ -36,7 +36,7 @@ const ReduxCreatableSelect = (props: Props): JSX.Element => {
             {...input}
             {...restProps}
             className={className}
-            onChange={(value): void => {
+            onChange={(value: any): void => {
                 input.onChange(value);
             }}
             styles={customStyles}
@@ -44,7 +44,7 @@ const ReduxCreatableSelect = (props: Props): JSX.Element => {
                 input.onBlur(input.value);
             }}
             options={options}
-            formatCreateLabel={(inputText): string => `${inputText}`}
+            formatCreateLabel={(inputText: any): string => `${inputText}`}
         />
     );
 };

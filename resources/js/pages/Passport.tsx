@@ -4,34 +4,18 @@ import Container from '@material-ui/core/Container';
 import { reduxForm } from 'redux-form';
 import { inputOptions } from '../store/data';
 import PassportControl from '../components/PassportControl';
-import InitialForm from '../components/InitialForm';
-import OrderElementsForm from '../components/OrderElementsTable';
-import FinalForm from '../components/FinalForm';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import PassportForm from '../components/PassportForm';
 
-const theme = createMuiTheme({
-    spacing: 6,
-});
-
-theme.spacing(2);
-
-const PassportForm = (): JSX.Element => {
+const Passport = (): JSX.Element => {
     return (
-        <ThemeProvider theme={theme}>
-            <Paper>
-                <Container>
-                    <form action="POST" className="passportForm">
-                        <PassportControl />
-
-                        <InitialForm />
-
-                        <OrderElementsForm />
-
-                        <FinalForm />
-                    </form>
-                </Container>
-            </Paper>
-        </ThemeProvider>
+        <Paper>
+            <Container>
+                <form action="POST" className="passportForm">
+                    <PassportControl />
+                    <PassportForm />
+                </form>
+            </Container>
+        </Paper>
     );
 };
 
@@ -43,25 +27,21 @@ const DecoratedPassportForm = reduxForm({
 
         revanish: {
             type: inputOptions.varnishMaterial[0],
-
             info: [''],
         },
 
         hotStamp: {
             label: inputOptions.hotStampLabels[0],
-
             info: [''],
         },
 
         laminate: {
             type: inputOptions.laminateMaterial[0],
-
             info: [''],
         },
 
         embossing: {
             type: inputOptions.embossingTypes[0],
-
             info: [''],
         },
 
@@ -69,6 +49,6 @@ const DecoratedPassportForm = reduxForm({
             info: [''],
         },
     },
-})(PassportForm);
+})(Passport);
 
 export default DecoratedPassportForm;

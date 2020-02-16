@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { Field, FieldArray, WrappedFieldArrayProps, FormSection } from 'redux-form';
 import PassportBtn from './PassportBtn';
 
@@ -40,7 +40,7 @@ const ExtraInfoField = ({ fields, expandable = true }: ExtraInfoFieldProps): JSX
 type FieldWithCommentProps = {
     name: string;
     className: string;
-    children: ReactNode;
+    children: React.ReactNode;
     expandable: boolean;
 };
 

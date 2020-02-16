@@ -6,6 +6,7 @@ type Props = {
     name: string;
     label: string;
     className?: string;
+    classes: any;
 };
 
 const CheckBox = ({ name, label, ...restProps }: Props): JSX.Element => (

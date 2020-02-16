@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import MaterialTable from 'material-table';
 import tableIcons from './tableIcons';
 import { data } from './data';

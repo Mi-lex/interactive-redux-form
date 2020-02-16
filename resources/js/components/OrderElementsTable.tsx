@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { Field, FieldArray, WrappedFieldArrayProps, FormSection } from 'redux-form';
 import PassportBtn from './PassportBtn';
 import ReduxCreatableSelect from './ReduxCreatableSelect';
@@ -8,7 +8,7 @@ import { Box } from '@material-ui/core';
 
 type OrderElementsFieldPropType = {
     name: string;
-    children?: ReactNode;
+    children?: React.ReactNode;
 };
 
 const OrderElementsRow = ({ name = 'orderElement' }: OrderElementsFieldPropType): JSX.Element => (

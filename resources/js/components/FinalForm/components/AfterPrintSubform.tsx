@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import FieldWithComment from '../../FieldWithComment';
 import { Field } from 'redux-form';
 import { inputOptions } from '../../../store/data';
@@ -7,7 +7,7 @@ import classes from '../../../../css/modules/AfterPrintSubform.module.css';
 import CheckBox from '../../CheckBox';
 import Box from '@material-ui/core/Box';
 
-const AfterPrintSubform: FC = () => {
+const AfterPrintSubform: React.FC = () => {
     return (
         <Box display="flex">
             <div className={classes.col}>
