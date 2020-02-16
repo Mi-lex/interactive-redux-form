@@ -55,7 +55,7 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
 
 const config = {
     entry: {
-        app: [`./${ENTRY_FOLDER}/js/index.tsx`],
+        app: [`./${ENTRY_FOLDER}/ts/index.tsx`],
     },
     node: {
         fs: 'empty',
