@@ -1,14 +1,10 @@
-/**
- * Component represents combine version of Redux Form Field
- * and material date picker
- */
 import React, { useState, useEffect } from 'react'
-import { KeyboardDatePicker, KeyboardDatePickerProps } from '@material-ui/pickers'
 import { WrappedFieldProps } from 'redux-form'
+import { KeyboardDateTimePicker, KeyboardDateTimePickerProps } from '@material-ui/pickers'
 
-interface WrappedPickerProps extends WrappedFieldProps, KeyboardDatePickerProps {}
+interface Props extends WrappedFieldProps, KeyboardDateTimePickerProps {}
 
-const DatePicker: React.FC<WrappedPickerProps> = (props: WrappedPickerProps): JSX.Element => {
+const InlineDateTimePickerDemo: React.FC<Props> = (props: Props) => {
     const {
         input,
         label,
@@ -16,6 +12,7 @@ const DatePicker: React.FC<WrappedPickerProps> = (props: WrappedPickerProps): JS
         meta: { touched, error },
         ...rest
     } = props
+
     const [selectedDate, setValue] = useState(() => {
         return input.value ? new Date(input.value) : null
     })
@@ -33,22 +30,24 @@ const DatePicker: React.FC<WrappedPickerProps> = (props: WrappedPickerProps): JS
 
     return (
         <>
-            <KeyboardDatePicker
+            <KeyboardDateTimePicker
                 autoOk
-                {...input}
                 name={name}
-                label={label}
-                invalidDateMessage="Неверная дата"
-                fullWidth
                 variant="inline"
+                minDate="2020-01-16"
+                maxDate="2025-01-16"
+                ampm={false}
+                label={label}
+                fullWidth
+                invalidDateMessage="Неверный формат данных"
+                minDateMessage="Дата выполнение не может предшествовать сегодняшней"
                 value={selectedDate}
                 onChange={setValue}
-                format={'dd.MM.yyyy'}
-                {...rest}
+                format={'dd.MM.yyyy hh:mm'}
             />
             {touched && error && <span className="error_msg">{error}</span>}
         </>
     )
 }
 
-export default DatePicker
+export default InlineDateTimePickerDemo
