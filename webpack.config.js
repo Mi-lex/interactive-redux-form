@@ -1,18 +1,18 @@
-webpack = require('webpack');
-path = require('path');
-postcssFlexbugsFixer = require('postcss-flexbugs-fixes');
-postcssPresetEnv = require('postcss-preset-env');
-MiniCssExtractPlugin = require('mini-css-extract-plugin');
-CleanWebpackPlugin = require('clean-webpack-plugin');
-UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
-postcssImport = require('postcss-import');
-cssvariables = require('postcss-css-variables');
-SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
-BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+webpack = require('webpack')
+path = require('path')
+postcssFlexbugsFixer = require('postcss-flexbugs-fixes')
+postcssPresetEnv = require('postcss-preset-env')
+MiniCssExtractPlugin = require('mini-css-extract-plugin')
+CleanWebpackPlugin = require('clean-webpack-plugin')
+getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent')
+postcssImport = require('postcss-import')
+cssvariables = require('postcss-css-variables')
+SpriteLoaderPlugin = require('svg-sprite-loader/plugin')
+BrowserSyncPlugin = require('browser-sync-webpack-plugin')
+TerserPlugin = require('terser-webpack-plugin');
 
-const OUTPUT_FOLDER = 'public';
-const ENTRY_FOLDER = 'resources';
+const OUTPUT_FOLDER = 'public'
+const ENTRY_FOLDER = 'resources'
 
 const getStyleLoaders = (cssOptions, preProcessor) => {
     const loaders = [
@@ -30,28 +30,28 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
                 plugins: () => [postcssFlexbugsFixer, cssvariables, postcssImport, postcssPresetEnv()],
             },
         },
-    ];
+    ]
     if (preProcessor) {
         if (Array.isArray(preProcessor)) {
             for (let i = 0; i < preProcessor.length; i++) {
-                const element = preProcessor[i];
+                const element = preProcessor[i]
 
                 if (typeof element === 'string') {
-                    loaders.push(require.resolve(element));
+                    loaders.push(require.resolve(element))
                 } else {
                     loaders.push(
                         Object.assign(element, {
                             loader: require.resolve(element.loader),
                         }),
-                    );
+                    )
                 }
             }
         } else {
-            loaders.push(require.resolve(preProcessor));
+            loaders.push(require.resolve(preProcessor))
         }
     }
-    return loaders;
-};
+    return loaders
+}
 
 const config = {
     entry: {
@@ -148,13 +148,13 @@ const config = {
             host: 'localhost',
             port: 8000,
         }),
-        new webpack.HotModuleReplacementPlugin(),
+        // new webpack.HotModuleReplacementPlugin(),
     ],
 
     optimization: {
         minimizer: [],
     },
-};
+}
 module.exports = (env, argv) => {
     if (argv.mode === 'production') {
         // Plagins
@@ -164,18 +164,19 @@ module.exports = (env, argv) => {
                 verbose: true,
                 dry: false,
             }),
-        );
-        config.plugins.push(
-            new webpack.LoaderOptionsPlugin({
-                minimize: true,
-            }),
-        );
+        )
+        // config.plugins.push(
+        //     new webpack.LoaderOptionsPlugin({
+        //         minimize: true,
+        //     }),
+        // )
 
         // Minimizing
         config.optimization = {
-            minimizer: [new UglifyJsPlugin()],
-        };
+            minimize: true,
+            minimizer: [new TerserPlugin()],
+        }
     }
 
-    return config;
-};
+    return config
+}

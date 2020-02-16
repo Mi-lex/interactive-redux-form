@@ -54,9 +54,9 @@
         "svg-sprite-loader": "^4.1.6",
         "svgo": "^1.1.1",
         "svgo-loader": "^2.2.0",
+        "terser-webpack-plugin": "^2.3.5",
         "ts-loader": "^6.2.1",
         "typescript": "^3.7.5",
-        "uglifyjs-webpack-plugin": "^2.0.1",
         "webpack": "^4.25.1",
         "webpack-cli": "^3.1.2"
     }

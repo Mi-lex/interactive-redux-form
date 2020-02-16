@@ -38,7 +38,7 @@ const InitialInfo = () => {
     return (
         <Grid item container xs={12} md={6} spacing={3}>
             {/* Заказ */}
-            <Grid item container xs={12} spacing={1} style={{ paddingBottom: 0 }}>
+            <Grid item container xs={12} spacing={1} style={{ paddingBottom: '8px' }}>
                 <Grid item xs={12} md={6}>
                     <Field
                         component={renderTextField}
