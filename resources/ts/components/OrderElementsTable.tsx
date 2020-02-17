@@ -1,63 +1,48 @@
-import React from 'react';
-import { Field, FieldArray, WrappedFieldArrayProps, FormSection } from 'redux-form';
-import PassportBtn from './PassportBtn';
-import ReduxCreatableSelect from './ReduxCreatableSelect';
-import { inputOptions } from '../store/data';
-import classes from '../../css/modules/OrderElementsTable.module.css';
-import { Box } from '@material-ui/core';
+import React from 'react'
+import { Field, FieldArray, WrappedFieldArrayProps, FormSection } from 'redux-form'
+import renderTextField from './MaterialReduxForm/TextField'
+import renderSelect from './MaterialReduxForm/Select'
+import PassportBtn from './PassportBtn'
+import { Grid, FormControl, InputLabel, MenuItem, Box } from '@material-ui/core'
 
 type OrderElementsFieldPropType = {
-    name: string;
-    children?: React.ReactNode;
-};
+    name: string
+}
 
-const OrderElementsRow = ({ name = 'orderElement' }: OrderElementsFieldPropType): JSX.Element => (
-    <FormSection name={name} className={classes.container}>
-        <Field
-            className={`passInputBorder passInputSize passInputmb ${classes.name}`}
-            name="name"
-            component="input"
-            type="text"
-        />
-        <Field
-            className={`passInputBorder passInputSize passInputmb  ${classes.pages}`}
-            name="paperCount"
-            component="input"
-            type="number"
-        />
-        <Field
-            className={`passInputmb  ${classes.wrapMaterial}`}
-            name="wrapMaterial"
-            component={ReduxCreatableSelect}
-            options={inputOptions.orderWrapMaterials}
-        />
-        <Field
-            className={`passInputSize passInputmb  ${classes.printType}`}
-            name="printType"
-            placeholder="уф-принтер"
-            component={ReduxCreatableSelect}
-            options={inputOptions.printTypes}
-        />
-        <Field
-            className={`passInputBorder passInputSize passInputmb  ${classes.colorFormula}`}
-            name="colorFormula"
-            component="input"
-            type="text"
-        />
-        <Field
-            className={`passInputBorder passInputSize passInputmb  ${classes.colorInterpretation}`}
-            name="colorInterpretation"
-            component="input"
-            type="text"
-        />
-        <Field
-            className={`passInputBorder passInputSize passInputmb  ${classes.addInfo}`}
-            name="additionalInfo"
-            component="input"
-            type="text"
-        />
-    </FormSection>
-);
+const OrderElementsRow: React.FC<OrderElementsFieldPropType> = ({ name = 'orderElement' }) => (
+    <>
+        <FormSection name={name} container item component={Grid} xs={12} spacing={2}>
+            <Grid item xs={6} md={2}>
+                <Field name="name" label="Часть" fullWidth component={renderTextField} type="text" />
+            </Grid>
+            <Grid item xs={6} md={2}>
+                <Field name="stripes" label="Полос" fullWidth component={renderTextField} type="number" />
+            </Grid>
+            <Grid item xs={12} sm={6} md={2}>
+                <Field name="wrapMaterial" label="Материал" fullWidth component={renderTextField} type="text" />
+            </Grid>
+            <Grid item xs={12} sm={6} md={2}>
+                <FormControl fullWidth>
+                    {/* офсет, цифра, уф-принтер, плоттер, без печати */}
+                    <InputLabel>Печать</InputLabel>
+                    <Field name="packageType" component={renderSelect}>
+                        <MenuItem value="noPrinting">Без печати</MenuItem>
+                        <MenuItem value="offset">Оффсет</MenuItem>
+                        <MenuItem value="digital">Цифровая</MenuItem>
+                        <MenuItem value="ultraviolet">Уф-принтер</MenuItem>
+                        <MenuItem value="plotter">Плоттер</MenuItem>
+                    </Field>
+                </FormControl>
+            </Grid>
+            <Grid item xs={12} sm={6} md={2}>
+                <Field name="brighness" label="Красочность" component={renderTextField} type="number" />
+            </Grid>
+            <Grid item xs={12} sm={6} md={2}>
+                <Field name="colorInterpretation" label="Расшифровка цвета" component={renderTextField} type="text" />
+            </Grid>
+        </FormSection>
+    </>
+)
 
 const OrderElementsTable = ({ fields }: WrappedFieldArrayProps<string>): JSX.Element => (
     <>
@@ -65,29 +50,25 @@ const OrderElementsTable = ({ fields }: WrappedFieldArrayProps<string>): JSX.Ele
             <OrderElementsRow key={index} name={`${order}Element`} />
         ))}
 
-        <Box display="flex" justifyContent="flex-end">
+        <Box display="flex" width="100%" justifyContent="flex-end" mr={1}>
             <PassportBtn
                 size="sm"
                 iconName={'newRow'}
                 onClick={(): void => {
-                    fields.push('');
+                    fields.push('')
                 }}
             />
             <PassportBtn
                 size="sm"
                 iconName={'deleteRow'}
                 onClick={(): void => {
-                    fields.pop();
+                    fields.pop()
                 }}
             />
         </Box>
     </>
-);
+)
 
-const OrderElementsForm: React.FC = () => (
-    <section className="orderElemmentsInfo">
-        <FieldArray name="orders" component={OrderElementsTable} />
-    </section>
-);
+const OrderElementsForm: React.FC = () => <FieldArray name="orders" component={OrderElementsTable} />
 
-export default OrderElementsForm;
+export default OrderElementsForm
