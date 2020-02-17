@@ -11,7 +11,15 @@ type OrderElementsFieldPropType = {
 
 const OrderElementsRow: React.FC<OrderElementsFieldPropType> = ({ name = 'orderElement' }) => (
     <>
-        <FormSection name={name} container item component={Grid} xs={12} spacing={2}>
+        <FormSection
+            name={name}
+            container
+            item
+            component={Grid}
+            xs={12}
+            style={{ marginLeft: 0, marginRight: 0 }}
+            spacing={2}
+        >
             <Grid item xs={6} md={2}>
                 <Field name="name" label="Часть" fullWidth component={renderTextField} type="text" />
             </Grid>
@@ -50,7 +58,7 @@ const OrderElementsTable = ({ fields }: WrappedFieldArrayProps<string>): JSX.Ele
             <OrderElementsRow key={index} name={`${order}Element`} />
         ))}
 
-        <Box display="flex" width="100%" justifyContent="flex-end" mr={1}>
+        <Box display="flex" width="100%" justifyContent="flex-end" pt={1} pr={2}>
             <PassportBtn
                 size="sm"
                 iconName={'newRow'}
@@ -69,6 +77,16 @@ const OrderElementsTable = ({ fields }: WrappedFieldArrayProps<string>): JSX.Ele
     </>
 )
 
-const OrderElementsForm: React.FC = () => <FieldArray name="orders" component={OrderElementsTable} />
+const OrderElementsForm: React.FC = () => (
+    <Box
+        borderTop="1px solid rgba(0, 0, 0, 0.12)"
+        py={1}
+        width="100%"
+        borderBottom="1px solid rgba(0, 0, 0, 0.12)"
+        borderRadius={4}
+    >
+        <FieldArray name="orders" component={OrderElementsTable} />
+    </Box>
+)
 
 export default OrderElementsForm

@@ -31,19 +31,17 @@ const InlineDateTimePickerDemo: React.FC<Props> = (props: Props) => {
     return (
         <>
             <KeyboardDateTimePicker
+                ampm={false}
                 autoOk
                 name={name}
                 variant="inline"
-                minDate="2020-01-16"
-                maxDate="2025-01-16"
-                ampm={false}
                 label={label}
                 fullWidth
                 invalidDateMessage="Неверный формат данных"
                 minDateMessage="Дата выполнение не может предшествовать сегодняшней"
                 value={selectedDate}
                 onChange={setValue}
-                format={'dd.MM.yyyy hh:mm'}
+                format={'dd.MM.yyyy HH:mm'}
             />
             {touched && error && <span className="error_msg">{error}</span>}
         </>

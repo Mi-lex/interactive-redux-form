@@ -44,7 +44,7 @@ const SideList = (props: Props): JSX.Element => {
                     <ListItemText primary="Заказы" />
                 </ListItem>
                 <Divider />
-                {['Список заказов', 'Канбан доска', 'Другая ссылка', 'Последняя ссылка'].map((text, index) => (
+                {['Статистика', 'Канбан доска', 'Активность', 'Последняя ссылка'].map((text, index) => (
                     <ListItem button key={text}>
                         <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                         <ListItemText primary={text} />

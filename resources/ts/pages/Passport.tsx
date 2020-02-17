@@ -24,7 +24,7 @@ const DecoratedPassportForm = reduxForm({
 
     initialValues: {
         orderId: '63590',
-        orders: Array(3).fill({}),
+        orders: Array(2).fill({}),
         orderDate: new Date().getTime(),
 
         revanish: {

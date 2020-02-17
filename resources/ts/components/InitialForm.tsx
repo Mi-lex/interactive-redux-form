@@ -1,20 +1,20 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import FieldLabel from './FieldLabel';
-import { Field, formValueSelector } from 'redux-form';
-import { getDateString } from '../utils';
+import React from 'react'
+import { useSelector } from 'react-redux'
+import FieldLabel from './FieldLabel'
+import { Field, formValueSelector } from 'redux-form'
+import { getDateString } from '../utils'
 // import DatePickerField from './DatePickerField';
-import CheckBox from './CheckBox';
-import ReduxCreatableSelect from './ReduxCreatableSelect';
-import { inputOptions } from '../store/data';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
+import CheckBox from './CheckBox'
+import ReduxCreatableSelect from './ReduxCreatableSelect'
+import { inputOptions } from '../store/data'
+import Grid from '@material-ui/core/Grid'
+import Box from '@material-ui/core/Box'
 
-const selector: Function = formValueSelector('passport');
+const selector: Function = formValueSelector('passport')
 
 const InitialForm: React.FC = () => {
-    const repeat: boolean = useSelector(state => selector(state, 'repeat'));
-    const currentDate: string = getDateString(new Date());
+    const repeat: boolean = useSelector(state => selector(state, 'repeat'))
+    const currentDate: string = getDateString(new Date())
     return (
         <Grid container spacing={3}>
             <Grid item xs={6} md={3}>
@@ -165,7 +165,7 @@ const InitialForm: React.FC = () => {
                 /> */}
             </Grid>
         </Grid>
-    );
-};
+    )
+}
 
-export default InitialForm;
+export default InitialForm

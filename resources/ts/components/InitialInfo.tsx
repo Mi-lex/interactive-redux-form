@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid'
 import renderDatePicker from './MaterialReduxForm/DatePicker'
 import renderTextField from './MaterialReduxForm/TextField'
 import renderSelect from './MaterialReduxForm/Select'
-import Checkbox from './MaterialReduxForm/Checkbox'
+import renderCheckbox from './MaterialReduxForm/Checkbox'
 import renderDateTimePicker from './MaterialReduxForm/DateTimePicker'
 import { Field } from 'redux-form'
 import InputLabel from '@material-ui/core/InputLabel'
@@ -99,17 +99,17 @@ const InitialInfo = () => {
                 </FormControl>
                 <FormGroup>
                     <FormControlLabel
-                        control={<Field component={Checkbox} name="sampleOnPackage" />}
+                        control={<Field component={renderCheckbox} name="sampleOnPackage" />}
                         label="Образец на упаковку"
                     />
-                    <FormControlLabel control={<Field component={Checkbox} name="sortByTypes" />} label="По видам" />
-                    <FormControlLabel control={<Field component={Checkbox} name="label" />} label="Ярлык" />
+                    <FormControlLabel control={<Field component={renderCheckbox} name="sortByTypes" />} label="По видам" />
+                    <FormControlLabel control={<Field component={renderCheckbox} name="label" />} label="Ярлык" />
                     <FormControlLabel
-                        control={<Field component={Checkbox} name="palleting" />}
+                        control={<Field component={renderCheckbox} name="palleting" />}
                         label="Паллетирование"
                     />
                     <FormControlLabel
-                        control={<Field component={Checkbox} name="stretchWrap" />}
+                        control={<Field component={renderCheckbox} name="stretchWrap" />}
                         label="Стреч-пленка"
                     />
                 </FormGroup>
