@@ -51,9 +51,9 @@ const AfterPrintSubform: React.FC = () => {
                 </FieldWithComment>
             </div>
             <div className={classes.col}>
-                <CheckBox name="creasing" className="passInputmb" label="Биговать" />
+                {/* <CheckBox name="creasing" className="passInputmb" label="Биговать" />
                 <CheckBox name="bookFolding" className="passInputmb" label="Фальцевать" />
-                <CheckBox name="perforation" className="passInputmb" label="Перфорация" />
+                <CheckBox name="perforation" className="passInputmb" label="Перфорация" /> */}
                 <Field component="textarea" rows={3} className="passInputBorder passInputmb" name="afterPrintInfo" />
                 <FieldWithComment name="stampCut" expandable={true} className="passInputmb">
                     <Box mb={2}>Вырубить штампом</Box>

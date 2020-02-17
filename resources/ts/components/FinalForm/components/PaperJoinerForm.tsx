@@ -18,15 +18,17 @@ const PaperJoinerForm = (): JSX.Element => {
     return (
         <Grid container spacing={1}>
             <Grid item xs={6} md={5}>
-                <FormSection name="paperJoiners" component={FormGroup}>
-                    {/* Радио баттоны: скрепка, пакет и т.д.  */}
-                    {paperJoinersNames.map((joinerName: PaperJoinerName) => (
-                        <FormControlLabel
-                            key={joinerName}
-                            control={<Field component={renderCheckbox} name={joinerName} />}
-                            label={PaperJoiners[joinerName]}
-                        />
-                    ))}
+                <FormSection name="paperJoiners">
+                    <FormGroup>
+                        {/* Радио баттоны: скрепка, пакет и т.д.  */}
+                        {paperJoinersNames.map((joinerName: PaperJoinerName) => (
+                            <FormControlLabel
+                                key={joinerName}
+                                control={<Field component={renderCheckbox} name={joinerName} />}
+                                label={PaperJoiners[joinerName]}
+                            />
+                        ))}
+                    </FormGroup>
                 </FormSection>
             </Grid>
             {/* Блоки, появляющиеся в зависимости от выделенного чекбокса */}

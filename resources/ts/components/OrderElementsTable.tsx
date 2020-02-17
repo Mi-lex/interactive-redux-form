@@ -9,17 +9,9 @@ type OrderElementsFieldPropType = {
     name: string
 }
 
-const OrderElementsRow: React.FC<OrderElementsFieldPropType> = ({ name = 'orderElement' }) => (
-    <>
-        <FormSection
-            name={name}
-            container
-            item
-            component={Grid}
-            xs={12}
-            style={{ marginLeft: 0, marginRight: 0 }}
-            spacing={2}
-        >
+const OrderElementsRow: React.FC<OrderElementsFieldPropType> = () => (
+    <FormSection name="OrderElement">
+        <Grid container item xs={12} style={{ marginLeft: 0, marginRight: 0 }} spacing={2}>
             <Grid item xs={6} md={2}>
                 <Field name="name" label="Часть" fullWidth component={renderTextField} type="text" />
             </Grid>
@@ -48,8 +40,8 @@ const OrderElementsRow: React.FC<OrderElementsFieldPropType> = ({ name = 'orderE
             <Grid item xs={12} sm={6} md={2}>
                 <Field name="colorInterpretation" label="Расшифровка цвета" component={renderTextField} type="text" />
             </Grid>
-        </FormSection>
-    </>
+        </Grid>
+    </FormSection>
 )
 
 const OrderElementsTable = ({ fields }: WrappedFieldArrayProps<string>): JSX.Element => (

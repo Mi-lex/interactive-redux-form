@@ -1,15 +1,14 @@
-import React from 'react';
-import Box from '@material-ui/core/Box';
+import React from 'react'
+import Box, { BoxProps } from '@material-ui/core/Box'
 
-type Props = {
-    labelText: string;
-    labelClassName?: string;
-    textClassName?: string;
-    children: React.ReactNode;
-};
+type Props = BoxProps & {
+    labelText: string
+    labelClassName?: string
+    textClassName?: string
+}
 
-const FieldLabel = (props: Props): JSX.Element => {
-    const { labelText, labelClassName = '', textClassName = '', children, ...restProps } = props;
+const FieldLabel: React.FC<Props> = (props): JSX.Element => {
+    const { labelText, labelClassName = '', textClassName = '', children, ...restProps } = props
     return (
         <Box
             component="label"
@@ -25,7 +24,7 @@ const FieldLabel = (props: Props): JSX.Element => {
             </Box>
             {children}
         </Box>
-    );
-};
+    )
+}
 
-export default FieldLabel;
+export default FieldLabel

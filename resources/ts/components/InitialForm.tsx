@@ -107,7 +107,6 @@ const InitialForm: React.FC = () => {
                         name="make_till_time"
                         component="input"
                         type="time"
-                        required="required"
                     />
                     <span>часам</span>
                 </FieldLabel>
