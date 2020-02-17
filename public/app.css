@@ -1,3 +1,77 @@
+.AfterPrintSubform_col__2NBKO {
+    width: 22%;
+    margin-right: 12px;
+}
+
+.AfterPrintSubform_col__2NBKO:last-child {
+    width: calc(100% - 22% * 3);
+    margin-right: 0;
+}
+.CheckBox_container__3Dz0B {
+    display: flex;
+    cursor: pointer;
+    -webkit-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0;
+}
+
+/* Hide the browser's default checkbox */
+
+.CheckBox_container__3Dz0B input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+
+.CheckBox_checkmark__2hxr1 {
+    position: relative;
+    height: 24px;
+    width: 24px;
+    background-color: #fff;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #e6e6e6;
+}
+
+/* When the checkbox is checked, add a blue background */
+
+.CheckBox_container__3Dz0B input:checked ~ .CheckBox_checkmark__2hxr1 {
+    border-color: #ffe082;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+
+.CheckBox_checkmark__2hxr1:after {
+    content: '';
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+
+.CheckBox_container__3Dz0B input:checked ~ .CheckBox_checkmark__2hxr1:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+
+.CheckBox_container__3Dz0B .CheckBox_checkmark__2hxr1:after {
+    left: 7px;
+    top: 1px;
+    width: 8px;
+    height: 17px;
+    border: solid #ffe082;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
 /*! normalize.css v2.0.1 | MIT License | git.io/normalize */
 /*! modified by Josh Vermaire to remove support IE8-9     */
 /* ==========================================================================
