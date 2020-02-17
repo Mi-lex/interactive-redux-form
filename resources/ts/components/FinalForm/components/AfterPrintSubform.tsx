@@ -1,11 +1,11 @@
-import React from 'react';
-import FieldWithComment from '../../FieldWithComment';
-import { Field } from 'redux-form';
-import { inputOptions } from '../../../store/data';
-import ReduxCreatableSelect from '../../ReduxCreatableSelect';
-import classes from '../../../../css/modules/AfterPrintSubform.module.css';
-import CheckBox from '../../CheckBox';
-import Box from '@material-ui/core/Box';
+import React from 'react'
+import FieldWithComment from '../../FieldWithComment'
+import { Field } from 'redux-form'
+import { inputOptions } from '../../../store/data'
+import ReduxCreatableSelect from '../../ReduxCreatableSelect'
+import classes from '../../../../css/modules/AfterPrintSubform.module.css'
+import CheckBox from '../../CheckBox'
+import Box from '@material-ui/core/Box'
 
 const AfterPrintSubform: React.FC = () => {
     return (
@@ -65,19 +65,8 @@ const AfterPrintSubform: React.FC = () => {
                     />
                 </FieldWithComment>
             </div>
-            <div className={classes.col}>
-                <Box component="label" display="block" mb={2} htmlFor="importantInfo">
-                    Важно
-                </Box>
-                <Field
-                    className="passInputBorder w-100 h-75"
-                    component="textarea"
-                    name="importantInfo"
-                    id="importantInfo"
-                />
-            </div>
         </Box>
-    );
-};
+    )
+}
 
-export default AfterPrintSubform;
+export default AfterPrintSubform

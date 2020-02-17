@@ -1,4 +1,4 @@
-import { PaperJoinerName } from './types';
+import { PaperJoinerName } from './types'
 
 export const paperJoinersNames: PaperJoinerName[] = [
     'paperClip',
@@ -8,4 +8,5 @@ export const paperJoinersNames: PaperJoinerName[] = [
     'splice',
     'binding',
     'file',
-];
+    'special',
+]

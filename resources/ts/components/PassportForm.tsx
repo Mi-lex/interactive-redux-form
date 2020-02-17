@@ -6,6 +6,7 @@ import InitialInfo from './InitialInfo'
 import renderTextField from './MaterialReduxForm/TextField'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import OrderElementsTable from './OrderElementsTable'
+import FinalForm from './FinalForm'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -60,12 +61,11 @@ const PassportForm = (): JSX.Element => {
                         label="Повтор"
                     />
                 </Grid>
-                <Grid item xs={12} md={6} className={classes.root}></Grid>
                 {/* Elements */}
                 <OrderElementsTable />
-
-                <Grid item container xs={12} sm={6} md={10}></Grid>
             </Grid>
+            {/* FinalForm */}
+            <FinalForm />
         </Grid>
     )
 }

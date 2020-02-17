@@ -12,6 +12,7 @@ export enum PaperJoiners {
     splice = 'Склейка',
     binding = 'Переплет',
     file = 'Папка',
+    special = 'Спец. обр.'
 }
 
 export type PaperJoinerName = keyof typeof PaperJoiners;

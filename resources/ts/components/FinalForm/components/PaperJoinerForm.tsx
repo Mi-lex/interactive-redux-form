@@ -1,63 +1,58 @@
-import React from 'react';
-import { Field } from 'redux-form';
-import PaperJoinerBlock from './PaperJoinerBlock';
-import RadioBtn from '../../RadioBtn';
-import { PaperJoiners, PaperJoinerName } from '../../../store/types';
-import { paperJoinersNames } from '../../../store/consts';
-import ReduxCreatableSelect from '../../ReduxCreatableSelect';
-import { inputOptions } from '../../../store/data';
-import CheckBox from '../../CheckBox';
-import FieldLabel from '../../FieldLabel';
-import Grid from '@material-ui/core/Grid';
+import React from 'react'
+import { Field, FormSection } from 'redux-form'
+import PaperJoinerBlock from './PaperJoinerBlock'
+import RadioBtn from '../../RadioBtn'
+import { PaperJoiners, PaperJoinerName } from '../../../store/types'
+import { paperJoinersNames } from '../../../store/consts'
+import ReduxCreatableSelect from '../../ReduxCreatableSelect'
+import { inputOptions } from '../../../store/data'
+import CheckBox from '../../CheckBox'
+import FieldLabel from '../../FieldLabel'
+import { Typography, Grid, FormGroup, FormControlLabel, FormControl, InputLabel, MenuItem } from '@material-ui/core'
+
+import renderSelect from '../../MaterialReduxForm/Select'
+import renderCheckbox from '../../MaterialReduxForm/Checkbox'
+import renderTextField from '../../MaterialReduxForm/TextField'
 
 const PaperJoinerForm = (): JSX.Element => {
     return (
-        <Grid container spacing={5}>
-            <Grid item xs={6} md={4}>
-                {/* Радио баттоны: скрепка, пакет и т.д.  */}
-                {paperJoinersNames.map((joinerName: PaperJoinerName) => (
-                    <RadioBtn
-                        key={joinerName}
-                        className="passInputmb"
-                        groupName="paperJoiner"
-                        label={PaperJoiners[joinerName]}
-                        name={joinerName}
-                    />
-                ))}
+        <Grid container spacing={1}>
+            <Grid item xs={6} md={5}>
+                <FormSection name="paperJoiners" component={FormGroup}>
+                    {/* Радио баттоны: скрепка, пакет и т.д.  */}
+                    {paperJoinersNames.map((joinerName: PaperJoinerName) => (
+                        <FormControlLabel
+                            key={joinerName}
+                            control={<Field component={renderCheckbox} name={joinerName} />}
+                            label={PaperJoiners[joinerName]}
+                        />
+                    ))}
+                </FormSection>
             </Grid>
-            {/* Блоки, появляющиеся в зависимости от радио баттона */}
+            {/* Блоки, появляющиеся в зависимости от выделенного чекбокса */}
             <Grid item xs={6}>
                 <PaperJoinerBlock blockName="paperClip">
-                    <CheckBox name="auto" label="автомат" className="passInputmb" />
-                    <CheckBox name="manual" label="ручная" className="passInputmb" />
-                    <FieldLabel labelText="количество">
-                        <Field
-                            name="quantity"
-                            className="passInputBorder passInputSize w-50"
-                            component="input"
-                            type="number"
-                            placeholder="000"
-                        />
-                    </FieldLabel>
-                    <Field className="passInputBorder passInputSize passInputmb w-100" name="type" component="select">
-                        <option value="file">Файловая</option>
-                    </Field>
-                    <FieldLabel labelText="толщина">
-                        <Field
-                            name="width"
-                            className="passInputBorder passInputSize w-50"
-                            component="input"
-                            type="number"
-                        />
-                    </FieldLabel>
-                    <FieldLabel labelText="сползание">
-                        <Field
-                            name="driftSize"
-                            className="passInputBorder passInputSize w-50"
-                            component="input"
-                            type="number"
-                        />
-                    </FieldLabel>
+                    <FormControlLabel
+                        style={{ marginRight: 8, marginBottom: 0 }}
+                        control={<Field component={renderCheckbox} name="auto" />}
+                        label="Автомат"
+                    />
+                    <FormControlLabel
+                        style={{ marginRight: 8, marginBottom: 0 }}
+                        control={<Field component={renderCheckbox} name="manual" />}
+                        label="Ручная"
+                    />
+                    <Field fullWidth component={renderTextField} label="Количество" type="number" name="quantity" />
+
+                    <FormControl fullWidth>
+                        <InputLabel>Тип</InputLabel>
+                        <Field name="packageType" component={renderSelect}>
+                            <MenuItem value="file">Файловая</MenuItem>
+                        </Field>
+                    </FormControl>
+
+                    <Field fullWidth component={renderTextField} label="Толщина" type="number" name="width" />
+                    <Field fullWidth component={renderTextField} label="Сползание" type="number" name="driftWidth" />
                 </PaperJoinerBlock>
                 <PaperJoinerBlock blockName="termo">
                     <FieldLabel labelText="корешок">
@@ -138,7 +133,7 @@ const PaperJoinerForm = (): JSX.Element => {
                 </PaperJoinerBlock>
             </Grid>
         </Grid>
-    );
-};
+    )
+}
 
-export default PaperJoinerForm;
+export default PaperJoinerForm
