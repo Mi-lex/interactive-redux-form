@@ -9,7 +9,8 @@ postcssImport = require('postcss-import')
 cssvariables = require('postcss-css-variables')
 SpriteLoaderPlugin = require('svg-sprite-loader/plugin')
 BrowserSyncPlugin = require('browser-sync-webpack-plugin')
-TerserPlugin = require('terser-webpack-plugin');
+TerserPlugin = require('terser-webpack-plugin')
+HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const OUTPUT_FOLDER = 'public'
 const ENTRY_FOLDER = 'resources'
@@ -64,18 +65,27 @@ const config = {
         path: path.resolve(__dirname, OUTPUT_FOLDER),
         filename: '[name].js',
     },
-    devtool: 'source-map',
+    devtool: 'inline-source-map',
     module: {
         rules: [
             {
                 test: /\.(ts|js)x?$/,
                 exclude: [path.resolve(__dirname, './node_modules')],
-                use: 'ts-loader',
+                use: [
+                    {
+                        loader: 'ts-loader',
+                        options: {
+                            transpileOnly: true,
+                            experimentalWatchApi: true,
+                        },
+                    },
+                ],
                 resolve: {
                     extensions: ['.ts', '.tsx', '.js'],
                 },
             },
             {
+                exclude: [path.resolve(__dirname, './node_modules')],
                 enforce: 'pre',
                 test: /\.js$/,
                 loader: 'source-map-loader',
@@ -129,7 +139,14 @@ const config = {
             },
         ],
     },
+    devServer: {
+        historyApiFallback: true,
+        contentBase: path.resolve(__dirname, OUTPUT_FOLDER),
+    },
     plugins: [
+        new HtmlWebpackPlugin({
+            template: `${ENTRY_FOLDER}/index.html`,
+        }),
         // put styles in one css file
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
@@ -140,15 +157,7 @@ const config = {
         // corresponding plugin for svg-sprite-loader
         new SpriteLoaderPlugin(),
         // for reloading laravel server
-        new BrowserSyncPlugin({
-            // browse to http://localhost:8000/ during development,
-            // ./public directory is being served
-            // server: { baseDir: ['public'] },
-            proxy: 'http://127.0.0.1:8000',
-            host: 'localhost',
-            port: 8000,
-        }),
-        // new webpack.HotModuleReplacementPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
     ],
 
     optimization: {
@@ -176,6 +185,11 @@ module.exports = (env, argv) => {
             minimize: true,
             minimizer: [new TerserPlugin()],
         }
+    } else {
+        config.optimization.removeAvailableModules = false
+        config.optimization.removeEmptyChunks = false
+        config.optimization.splitChunks = false
+        config.output.pathinfo = false;
     }
 
     return config
