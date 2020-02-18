@@ -8,7 +8,7 @@ class OrderTable extends React.Component {
     render() {
         return (
             <MaterialTable
-                icons={tableIcons}
+                icons={{ ...tableIcons, Filter: () => <div /> }}
                 title="Таблица заказов"
                 columns={[
                     {
@@ -16,11 +16,11 @@ class OrderTable extends React.Component {
                         field: 'id',
                         type: 'numeric',
                         cellStyle: {
-                            width: 20,
+                            width: '20px !important',
                             maxWidth: 20,
                         },
                         headerStyle: {
-                            width: 20,
+                            width: '20px !important',
                             maxWidth: 20,
                         },
                     },
@@ -35,8 +35,32 @@ class OrderTable extends React.Component {
                     { title: 'Менеджер', field: 'manager' },
                     { title: 'Клиент', field: 'client' },
                     { title: 'Организация', field: 'organization' },
-                    { title: 'Оформлен', field: 'createdAt', type: 'date' },
-                    { title: 'Завершен', field: 'finishedAt', type: 'date' },
+                    {
+                        title: 'Оформлен',
+                        field: 'createdAt',
+                        type: 'date',
+                        cellStyle: {
+                            width: '30px !important',
+                            maxWidth: 30,
+                        },
+                        headerStyle: {
+                            width: '30px !important',
+                            maxWidth: 30,
+                        },
+                    },
+                    {
+                        title: 'Завершен',
+                        field: 'finishedAt',
+                        type: 'date',
+                        cellStyle: {
+                            width: '30px !important',
+                            maxWidth: 30,
+                        },
+                        headerStyle: {
+                            width: '30px !important',
+                            maxWidth: 30,
+                        },
+                    },
                 ]}
                 data={data}
                 options={{
