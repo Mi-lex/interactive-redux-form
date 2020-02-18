@@ -1,16 +1,16 @@
-webpack = require('webpack')
-path = require('path')
-postcssFlexbugsFixer = require('postcss-flexbugs-fixes')
-postcssPresetEnv = require('postcss-preset-env')
-MiniCssExtractPlugin = require('mini-css-extract-plugin')
-CleanWebpackPlugin = require('clean-webpack-plugin')
-getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent')
-postcssImport = require('postcss-import')
-cssvariables = require('postcss-css-variables')
-SpriteLoaderPlugin = require('svg-sprite-loader/plugin')
-BrowserSyncPlugin = require('browser-sync-webpack-plugin')
-TerserPlugin = require('terser-webpack-plugin')
-HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
+const path = require('path')
+const postcssFlexbugsFixer = require('postcss-flexbugs-fixes')
+const postcssPresetEnv = require('postcss-preset-env')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent')
+const postcssImport = require('postcss-import')
+const cssvariables = require('postcss-css-variables')
+const SpriteLoaderPlugin = require('svg-sprite-loader/plugin')
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const OUTPUT_FOLDER = 'public'
 const ENTRY_FOLDER = 'resources'
@@ -65,27 +65,10 @@ const config = {
         path: path.resolve(__dirname, OUTPUT_FOLDER),
         filename: '[name].js',
     },
-    devtool: 'inline-source-map',
+    devtool: 'source-map',
     module: {
         rules: [
             {
-                test: /\.(ts|js)x?$/,
-                exclude: [path.resolve(__dirname, './node_modules')],
-                use: [
-                    {
-                        loader: 'ts-loader',
-                        options: {
-                            transpileOnly: true,
-                            experimentalWatchApi: true,
-                        },
-                    },
-                ],
-                resolve: {
-                    extensions: ['.ts', '.tsx', '.js'],
-                },
-            },
-            {
-                exclude: [path.resolve(__dirname, './node_modules')],
                 enforce: 'pre',
                 test: /\.js$/,
                 loader: 'source-map-loader',
@@ -157,6 +140,15 @@ const config = {
         // corresponding plugin for svg-sprite-loader
         new SpriteLoaderPlugin(),
         // for reloading laravel server
+        // new BrowserSyncPlugin({
+        //     // browse to http://localhost:8000/ during development,
+        //     // ./public directory is being served
+        //     // server: { baseDir: ['public'] },
+        //     proxy: 'http://127.0.0.1:8000',
+        //     host: 'localhost',
+        //     port: 8000,
+        // }),
+
         new webpack.HotModuleReplacementPlugin(),
     ],
 
@@ -164,9 +156,19 @@ const config = {
         minimizer: [],
     },
 }
+
 module.exports = (env, argv) => {
     if (argv.mode === 'production') {
-        // Plagins
+        // Rules
+        config.module.rules.push({
+            test: /\.(ts|js)x?$/,
+            exclude: [path.resolve(__dirname, './node_modules')],
+            use: 'ts-loader',
+            resolve: {
+                extensions: ['.ts', '.tsx', '.js'],
+            },
+        })
+
         config.plugins.unshift(
             new CleanWebpackPlugin([`${OUTPUT_FOLDER}/img`], {
                 root: __dirname,
@@ -174,11 +176,6 @@ module.exports = (env, argv) => {
                 dry: false,
             }),
         )
-        // config.plugins.push(
-        //     new webpack.LoaderOptionsPlugin({
-        //         minimize: true,
-        //     }),
-        // )
 
         // Minimizing
         config.optimization = {
@@ -186,10 +183,26 @@ module.exports = (env, argv) => {
             minimizer: [new TerserPlugin()],
         }
     } else {
+        config.module.rules.push({
+            test: /\.(ts|js)x?$/,
+            exclude: [path.resolve(__dirname, './node_modules')],
+            use: [
+                {
+                    loader: 'ts-loader',
+                    options: {
+                        transpileOnly: true,
+                        experimentalWatchApi: true,
+                    },
+                },
+            ],
+            resolve: {
+                extensions: ['.ts', '.tsx', '.js'],
+            },
+        })
         config.optimization.removeAvailableModules = false
         config.optimization.removeEmptyChunks = false
         config.optimization.splitChunks = false
-        config.output.pathinfo = false;
+        config.output.pathinfo = false
     }
 
     return config
