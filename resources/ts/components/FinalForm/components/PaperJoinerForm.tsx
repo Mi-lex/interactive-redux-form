@@ -1,22 +1,16 @@
 import React from 'react'
 import { Field, FormSection } from 'redux-form'
-import PaperJoinerBlock from './PaperJoinerBlock'
-import RadioBtn from '../../RadioBtn'
+import ConnectedHiddenBlock from './ConnectedHiddenBLock'
 import { PaperJoiners, PaperJoinerName } from '../../../store/types'
 import { paperJoinersNames } from '../../../store/consts'
-import ReduxCreatableSelect from '../../ReduxCreatableSelect'
-import { inputOptions } from '../../../store/data'
-import CheckBox from '../../CheckBox'
-import FieldLabel from '../../FieldLabel'
-import { Typography, Grid, FormGroup, FormControlLabel, FormControl, InputLabel, MenuItem } from '@material-ui/core'
-
+import { Box, Grid, FormGroup, FormControlLabel, FormControl, InputLabel, MenuItem } from '@material-ui/core'
 import renderSelect from '../../MaterialReduxForm/Select'
 import renderCheckbox from '../../MaterialReduxForm/Checkbox'
 import renderTextField from '../../MaterialReduxForm/TextField'
 
 const PaperJoinerForm = (): JSX.Element => {
     return (
-        <Grid container spacing={1}>
+        <Grid item xs={12} md={6} container spacing={2}>
             <Grid item xs={6} md={5}>
                 <FormSection name="paperJoiners">
                     <FormGroup>
@@ -32,18 +26,20 @@ const PaperJoinerForm = (): JSX.Element => {
                 </FormSection>
             </Grid>
             {/* Блоки, появляющиеся в зависимости от выделенного чекбокса */}
-            <Grid item xs={7}>
-                <PaperJoinerBlock blockName="paperClip">
-                    <FormControlLabel
-                        style={{ marginRight: 8, marginBottom: 0 }}
-                        control={<Field component={renderCheckbox} name="auto" />}
-                        label="Автомат"
-                    />
-                    <FormControlLabel
-                        style={{ marginRight: 8, marginBottom: 0 }}
-                        control={<Field component={renderCheckbox} name="manual" />}
-                        label="Ручная"
-                    />
+            <Grid item xs={6}>
+                <ConnectedHiddenBlock NamesMap={PaperJoiners} checkboxGroupName="paperJoiners" blockName="paperClip">
+                    <Box display="flex" justifyContent="space-between">
+                        <FormControlLabel
+                            style={{ marginRight: 8, marginBottom: 0 }}
+                            control={<Field component={renderCheckbox} name="auto" />}
+                            label="Автомат"
+                        />
+                        <FormControlLabel
+                            style={{ marginRight: 8, marginBottom: 0 }}
+                            control={<Field component={renderCheckbox} name="manual" />}
+                            label="Ручная"
+                        />
+                    </Box>
                     <Field fullWidth component={renderTextField} label="Количество" type="number" name="quantity" />
 
                     <FormControl fullWidth>
@@ -55,8 +51,8 @@ const PaperJoinerForm = (): JSX.Element => {
 
                     <Field fullWidth component={renderTextField} label="Толщина" type="number" name="width" />
                     <Field fullWidth component={renderTextField} label="Сползание" type="number" name="driftWidth" />
-                </PaperJoinerBlock>
-                <PaperJoinerBlock blockName="termo">
+                </ConnectedHiddenBlock>
+                <ConnectedHiddenBlock NamesMap={PaperJoiners} checkboxGroupName="paperJoiners" blockName="termo">
                     <Field fullWidth component={renderTextField} label="Корешок" type="text" name="spine" />
                     <FormControlLabel
                         control={<Field component={renderCheckbox} name="klapanCover" />}
@@ -70,8 +66,8 @@ const PaperJoinerForm = (): JSX.Element => {
                         control={<Field component={renderCheckbox} name="braces" />}
                         label="Укрепить скобами"
                     />
-                </PaperJoinerBlock>
-                <PaperJoinerBlock blockName="spring">
+                </ConnectedHiddenBlock>
+                <ConnectedHiddenBlock NamesMap={PaperJoiners} checkboxGroupName="paperJoiners" blockName="spring">
                     <Field fullWidth component={renderTextField} label="Положение" type="text" name="spine" />
                     <FormControl fullWidth>
                         <InputLabel>Положение</InputLabel>
@@ -89,12 +85,12 @@ const PaperJoinerForm = (): JSX.Element => {
                         type="number"
                         name="coverBlockRatio"
                     />
-                </PaperJoinerBlock>
-                <PaperJoinerBlock blockName="packet">
+                </ConnectedHiddenBlock>
+                <ConnectedHiddenBlock NamesMap={PaperJoiners} checkboxGroupName="paperJoiners" blockName="packet">
                     <Field fullWidth component={renderTextField} label="Цвет люверсов" type="text" name="luvColors" />
                     <Field fullWidth component={renderTextField} label="Цвет ручек" type="text" name="handsColor" />
-                </PaperJoinerBlock>
-                <PaperJoinerBlock blockName="splice">
+                </ConnectedHiddenBlock>
+                <ConnectedHiddenBlock NamesMap={PaperJoiners} checkboxGroupName="paperJoiners" blockName="splice">
                     <FormControl fullWidth>
                         <InputLabel>Тип клея</InputLabel>
                         <Field name="glueType" component={renderSelect}>
@@ -112,8 +108,8 @@ const PaperJoinerForm = (): JSX.Element => {
                             <MenuItem value="up">Сверху</MenuItem>
                         </Field>
                     </FormControl>
-                </PaperJoinerBlock>
-                <PaperJoinerBlock blockName="special">
+                </ConnectedHiddenBlock>
+                <ConnectedHiddenBlock NamesMap={PaperJoiners} checkboxGroupName="paperJoiners" blockName="special">
                     <Field
                         fullWidth
                         multiline
@@ -124,7 +120,7 @@ const PaperJoinerForm = (): JSX.Element => {
                         rows="8"
                         variant="outlined"
                     />
-                </PaperJoinerBlock>
+                </ConnectedHiddenBlock>
             </Grid>
         </Grid>
     )

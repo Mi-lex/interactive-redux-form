@@ -34,11 +34,17 @@ const OrderElementsRow: React.FC<OrderElementsFieldPropType> = () => (
                     </Field>
                 </FormControl>
             </Grid>
-            <Grid item xs={12} sm={6} md={2}>
-                <Field name="brighness" label="Красочность" component={renderTextField} type="number" />
+            <Grid item xs={12} md={2}>
+                <Field name="brighness" fullWidth label="Красочность" component={renderTextField} type="number" />
             </Grid>
-            <Grid item xs={12} sm={6} md={2}>
-                <Field name="colorInterpretation" label="Расшифровка цвета" component={renderTextField} type="text" />
+            <Grid item xs={12} md={2}>
+                <Field
+                    name="colorInterpretation"
+                    fullWidth
+                    label="Расшифровка цвета"
+                    component={renderTextField}
+                    type="text"
+                />
             </Grid>
         </Grid>
     </FormSection>

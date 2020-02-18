@@ -1,4 +1,4 @@
-import { PaperJoinerName } from './types'
+import { PaperJoinerName, PostPrintActionName } from './types'
 
 export const paperJoinersNames: PaperJoinerName[] = [
     'paperClip',
@@ -9,4 +9,15 @@ export const paperJoinersNames: PaperJoinerName[] = [
     'binding',
     'file',
     'special',
+]
+
+export const postPrintActionNames: PostPrintActionName[] = [
+    'lamitation',
+    'revanishing',
+    'embossing',
+    'stampCut',
+    'perforation',
+    'hotStamp',
+    'creasing',
+    'bookFolding',
 ]

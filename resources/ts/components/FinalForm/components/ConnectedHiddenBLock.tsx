@@ -1,8 +1,8 @@
 import React from 'react'
 import { formValueSelector, FormSection } from 'redux-form'
 import { useSelector } from 'react-redux'
-import { PaperJoiners, PaperJoinerName } from '../../../store/types'
-import Typography from '@material-ui/core/Typography';
+import { PostPrintActionName, PaperJoinerName } from '../../../store/types'
+import Typography from '@material-ui/core/Typography'
 const selector: Function = formValueSelector('passport')
 
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
@@ -18,26 +18,27 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 type Props = {
-    blockName: PaperJoinerName
+    checkboxGroupName: 'paperJoiners' | 'postprintActions'
+    blockName: PostPrintActionName | PaperJoinerName
     className?: string
-    children: React.ReactNode
+    NamesMap: any
 }
 
-const PaperJoinerBlock = (props: Props): JSX.Element => {
+const ConnectedHiddenBlock: React.FC<Props> = (props): JSX.Element => {
+    const { children, blockName, className = '', checkboxGroupName, NamesMap } = props
     const classes = useStyles()
-    const chosenJoiners = useSelector(state => selector(state, 'paperJoiners'))
-    const { children, blockName, className = '' } = props
+    const chosenCheckbox = useSelector(state => selector(state, checkboxGroupName))
 
-    const shown = chosenJoiners && chosenJoiners[blockName]
+    const shown = chosenCheckbox && chosenCheckbox[blockName]
 
     return (
         <FormSection name={blockName} className={`${classes.root} ${className}`} hidden={!shown}>
             <Typography style={{ paddingTop: 5 }} variant="h6">
-                {PaperJoiners[blockName]}
+                {NamesMap[blockName]}
             </Typography>
             {children}
         </FormSection>
     )
 }
 
-export default PaperJoinerBlock
+export default ConnectedHiddenBlock

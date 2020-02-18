@@ -8,7 +8,7 @@ class OrderTable extends React.Component {
     render() {
         return (
             <MaterialTable
-                icons={{ ...tableIcons, Filter: () => <div /> }}
+                icons={tableIcons}
                 title="Таблица заказов"
                 columns={[
                     {

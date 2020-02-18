@@ -1,12 +1,12 @@
 import React from 'react'
-import { Grid, TextField } from '@material-ui/core'
 import { Field } from 'redux-form'
 import PassportSidebar from './PassportSidebar'
-import InitialInfo from './InitialInfo'
-import renderTextField from './MaterialReduxForm/TextField'
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
-import OrderElementsTable from './OrderElementsTable'
 import FinalForm from './FinalForm'
+import InitialInfo from './InitialInfo'
+import OrderElementsTable from './OrderElementsTable'
+import renderTextField from './MaterialReduxForm/TextField'
+import { Grid, TextField } from '@material-ui/core'
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -63,9 +63,9 @@ const PassportForm = (): JSX.Element => {
                 </Grid>
                 {/* Elements */}
                 <OrderElementsTable />
+                {/* FinalForm */}
+                <FinalForm />
             </Grid>
-            {/* FinalForm */}
-            <FinalForm />
         </Grid>
     )
 }

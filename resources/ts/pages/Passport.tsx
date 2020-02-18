@@ -2,7 +2,6 @@ import React from 'react'
 import Paper from '@material-ui/core/Paper'
 import Container from '@material-ui/core/Container'
 import { reduxForm } from 'redux-form'
-import { inputOptions } from '../store/data'
 import PassportControl from '../components/PassportControl'
 import PassportForm from '../components/PassportForm'
 
@@ -26,30 +25,6 @@ const DecoratedPassportForm = reduxForm({
         orderId: '63590',
         orders: Array(2).fill({}),
         orderDate: new Date().getTime(),
-
-        revanish: {
-            type: inputOptions.varnishMaterial[0],
-            info: [''],
-        },
-
-        hotStamp: {
-            label: inputOptions.hotStampLabels[0],
-            info: [''],
-        },
-
-        laminate: {
-            type: inputOptions.laminateMaterial[0],
-            info: [''],
-        },
-
-        embossing: {
-            type: inputOptions.embossingTypes[0],
-            info: [''],
-        },
-
-        stampCut: {
-            info: [''],
-        },
     },
 })(Passport)
 
