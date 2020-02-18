@@ -75,6 +75,7 @@ const InitialInfo = () => {
                 <TextField
                     style={{ marginTop: '10px' }}
                     fullWidth
+                    name="delivery"
                     label="Доставить"
                     multiline
                     rows="8"

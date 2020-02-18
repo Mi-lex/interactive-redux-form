@@ -1,8 +1,8 @@
-import React from 'react';
-import MaterialTable from 'material-table';
-import tableIcons from './tableIcons';
-import { data } from './data';
-import ruLocale from 'date-fns/locale/ru';
+import React from 'react'
+import MaterialTable from 'material-table'
+import tableIcons from './tableIcons'
+import { data } from './data'
+import ruLocale from 'date-fns/locale/ru'
 
 class OrderTable extends React.Component {
     render() {
@@ -24,7 +24,13 @@ class OrderTable extends React.Component {
                             maxWidth: 20,
                         },
                     },
-                    { title: 'Название', field: 'name' },
+                    {
+                        title: 'Название',
+                        field: 'name',
+                        cellStyle: {
+                            whiteSpace: 'nowrap',
+                        },
+                    },
                     { title: 'Тип', field: 'type' },
                     { title: 'Менеджер', field: 'manager' },
                     { title: 'Клиент', field: 'client' },
@@ -68,8 +74,8 @@ class OrderTable extends React.Component {
                     },
                 }}
             />
-        );
+        )
     }
 }
 
-export default OrderTable;
+export default OrderTable

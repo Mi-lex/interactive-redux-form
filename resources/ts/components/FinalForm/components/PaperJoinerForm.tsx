@@ -32,7 +32,7 @@ const PaperJoinerForm = (): JSX.Element => {
                 </FormSection>
             </Grid>
             {/* Блоки, появляющиеся в зависимости от выделенного чекбокса */}
-            <Grid item xs={6}>
+            <Grid item xs={7}>
                 <PaperJoinerBlock blockName="paperClip">
                     <FormControlLabel
                         style={{ marginRight: 8, marginBottom: 0 }}
@@ -57,80 +57,72 @@ const PaperJoinerForm = (): JSX.Element => {
                     <Field fullWidth component={renderTextField} label="Сползание" type="number" name="driftWidth" />
                 </PaperJoinerBlock>
                 <PaperJoinerBlock blockName="termo">
-                    <FieldLabel labelText="корешок">
-                        <Field
-                            name="spine"
-                            className="passInputBorder passInputSize w-50"
-                            component="input"
-                            type="text"
-                        />
-                    </FieldLabel>
-                    <CheckBox name="klapanCover" className="passInputmb" label="обложка с клапаном" />
-                    <Field
-                        name="position"
-                        placeholder="вровень с блоком"
-                        component={ReduxCreatableSelect}
-                        options={inputOptions.ositions}
+                    <Field fullWidth component={renderTextField} label="Корешок" type="text" name="spine" />
+                    <FormControlLabel
+                        control={<Field component={renderCheckbox} name="klapanCover" />}
+                        label="Обложка с клапаном"
+                    />
+                    <FormControlLabel
+                        control={<Field component={renderCheckbox} name="position" />}
+                        label="Вровень с блоком"
+                    />
+                    <FormControlLabel
+                        control={<Field component={renderCheckbox} name="braces" />}
+                        label="Укрепить скобами"
                     />
                 </PaperJoinerBlock>
                 <PaperJoinerBlock blockName="spring">
+                    <Field fullWidth component={renderTextField} label="Положение" type="text" name="spine" />
+                    <FormControl fullWidth>
+                        <InputLabel>Положение</InputLabel>
+                        <Field name="position" component={renderSelect}>
+                            <MenuItem value="left">Слева</MenuItem>
+                            <MenuItem value="right">Справа</MenuItem>
+                            <MenuItem value="down">Снизу</MenuItem>
+                            <MenuItem value="up">Сверху</MenuItem>
+                        </Field>
+                    </FormControl>
                     <Field
-                        name="color"
-                        className="passInputmb"
-                        placeholder="цвет"
-                        component={ReduxCreatableSelect}
-                        options={[]}
+                        fullWidth
+                        component={renderTextField}
+                        label="Обложка &gt; блока"
+                        type="number"
+                        name="coverBlockRatio"
                     />
-                    <Field
-                        name="position"
-                        className="passInputmb"
-                        component={ReduxCreatableSelect}
-                        placeholder="слева"
-                        options={inputOptions.ositions}
-                    />
-                    <FieldLabel labelText="обложка &gt; блока">
-                        <Field
-                            name="coverBlockRatio"
-                            className="passInputBorder passInputSize w-25"
-                            component="input"
-                            type="number"
-                        />
-                    </FieldLabel>
                 </PaperJoinerBlock>
                 <PaperJoinerBlock blockName="packet">
-                    <Field
-                        name="type"
-                        className="passInputmb"
-                        placeholder="люверсы"
-                        component={ReduxCreatableSelect}
-                        isClearable={true}
-                        options={inputOptions.ypes}
-                    />
-                    <Field
-                        name="handles"
-                        className="passInputmb"
-                        placeholder="ручки"
-                        component={ReduxCreatableSelect}
-                        isClearable={true}
-                        options={inputOptions.andles}
-                    />
+                    <Field fullWidth component={renderTextField} label="Цвет люверсов" type="text" name="luvColors" />
+                    <Field fullWidth component={renderTextField} label="Цвет ручек" type="text" name="handsColor" />
                 </PaperJoinerBlock>
                 <PaperJoinerBlock blockName="splice">
+                    <FormControl fullWidth>
+                        <InputLabel>Тип клея</InputLabel>
+                        <Field name="glueType" component={renderSelect}>
+                            <MenuItem value="type1">Тип 1</MenuItem>
+                            <MenuItem value="type2">Тип 2</MenuItem>
+                            <MenuItem value="type3">Тип 3</MenuItem>
+                        </Field>
+                    </FormControl>
+                    <FormControl fullWidth>
+                        <InputLabel>Место склеивания</InputLabel>
+                        <Field name="position" component={renderSelect}>
+                            <MenuItem value="left">Слева</MenuItem>
+                            <MenuItem value="right">Справа</MenuItem>
+                            <MenuItem value="down">Снизу</MenuItem>
+                            <MenuItem value="up">Сверху</MenuItem>
+                        </Field>
+                    </FormControl>
+                </PaperJoinerBlock>
+                <PaperJoinerBlock blockName="special">
                     <Field
-                        name="material"
-                        className="passInputmb"
-                        placeholder="клей"
-                        component={ReduxCreatableSelect}
-                        isClearable={true}
-                        options={inputOptions.aterials}
-                    />
-                    <Field
-                        name="position"
-                        className="passInputmb"
-                        placeholder="сверху"
-                        component={ReduxCreatableSelect}
-                        isClearable={true}
-                        options={inputOptions.ositions}
+                        fullWidth
+                        multiline
+                        component={renderTextField}
+                        label="Описание"
+                        type="text"
+                        name="description"
+                        rows="8"
+                        variant="outlined"
                     />
                 </PaperJoinerBlock>
             </Grid>
