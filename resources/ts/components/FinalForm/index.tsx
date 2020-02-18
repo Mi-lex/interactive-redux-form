@@ -1,7 +1,7 @@
-import React from 'react';
-import AfterPrintSubform from './components/AfterPrintSubform';
-import PaperJoinerForm from './components/PaperJoinerForm';
-import Grid from '@material-ui/core/Grid';
+import React from 'react'
+import PostprintForm from './components/PostprintForm'
+import PaperJoinerForm from './components/PaperJoinerForm'
+import Grid from '@material-ui/core/Grid'
 
 const FinalForm: React.FC = () => {
     return (
@@ -10,10 +10,10 @@ const FinalForm: React.FC = () => {
                 <PaperJoinerForm />
             </Grid>
             <Grid item xs={12} md={8}>
-                <AfterPrintSubform />
+                <PostprintForm />
             </Grid>
         </Grid>
-    );
-};
+    )
+}
 
-export default FinalForm;
+export default FinalForm

@@ -7,7 +7,7 @@ import classes from '../../../../css/modules/AfterPrintSubform.module.css'
 import CheckBox from '../../CheckBox'
 import Box from '@material-ui/core/Box'
 
-const AfterPrintSubform: React.FC = () => {
+const PostprintForm: React.FC = () => {
     return (
         <Box display="flex">
             <div className={classes.col}>
@@ -69,4 +69,4 @@ const AfterPrintSubform: React.FC = () => {
     )
 }
 
-export default AfterPrintSubform
+export default PostprintForm
