@@ -1,12 +1,10 @@
 import React from 'react'
 import { Field, FormSection } from 'redux-form'
-import ConnectedHiddenBlock from './ConnectedHiddenBLock'
 import { PaperJoiners, PaperJoinerName } from '../store/types'
-import { paperJoinersNames } from '../store/consts'
 import { Box, Grid, FormGroup, FormControlLabel, FormControl, InputLabel, MenuItem } from '@material-ui/core'
-import renderSelect from './MaterialReduxForm/Select'
-import renderCheckbox from './MaterialReduxForm/Checkbox'
-import renderTextField from './MaterialReduxForm/TextField'
+import ConnectedHiddenBlock from './ConnectedHiddenBLock'
+import { Select, Checkbox, TextField } from './MaterialReduxForm'
+import { paperJoinersNames } from '../store/consts'
 
 const PaperJoinerForm = (): JSX.Element => {
     return (
@@ -18,7 +16,7 @@ const PaperJoinerForm = (): JSX.Element => {
                         {paperJoinersNames.map((joinerName: PaperJoinerName) => (
                             <FormControlLabel
                                 key={joinerName}
-                                control={<Field component={renderCheckbox} name={joinerName} />}
+                                control={<Field component={Checkbox} name={joinerName} />}
                                 label={PaperJoiners[joinerName]}
                             />
                         ))}
@@ -31,47 +29,44 @@ const PaperJoinerForm = (): JSX.Element => {
                     <Box display="flex" justifyContent="space-between">
                         <FormControlLabel
                             style={{ marginRight: 8, marginBottom: 0 }}
-                            control={<Field component={renderCheckbox} name="auto" />}
+                            control={<Field component={Checkbox} name="auto" />}
                             label="Автомат"
                         />
                         <FormControlLabel
                             style={{ marginRight: 8, marginBottom: 0 }}
-                            control={<Field component={renderCheckbox} name="manual" />}
+                            control={<Field component={Checkbox} name="manual" />}
                             label="Ручная"
                         />
                     </Box>
-                    <Field fullWidth component={renderTextField} label="Количество" type="number" name="quantity" />
+                    <Field fullWidth component={TextField} label="Количество" type="number" name="quantity" />
 
                     <FormControl fullWidth>
                         <InputLabel>Тип</InputLabel>
-                        <Field name="packageType" component={renderSelect}>
+                        <Field name="packageType" component={Select}>
                             <MenuItem value="file">Файловая</MenuItem>
                         </Field>
                     </FormControl>
 
-                    <Field fullWidth component={renderTextField} label="Толщина" type="number" name="width" />
-                    <Field fullWidth component={renderTextField} label="Сползание" type="number" name="driftWidth" />
+                    <Field fullWidth component={TextField} label="Толщина" type="number" name="width" />
+                    <Field fullWidth component={TextField} label="Сползание" type="number" name="driftWidth" />
                 </ConnectedHiddenBlock>
                 <ConnectedHiddenBlock NamesMap={PaperJoiners} checkboxGroupName="paperJoiners" blockName="termo">
-                    <Field fullWidth component={renderTextField} label="Корешок" type="text" name="spine" />
+                    <Field fullWidth component={TextField} label="Корешок" type="text" name="spine" />
                     <FormControlLabel
-                        control={<Field component={renderCheckbox} name="klapanCover" />}
+                        control={<Field component={Checkbox} name="klapanCover" />}
                         label="Обложка с клапаном"
                     />
                     <FormControlLabel
-                        control={<Field component={renderCheckbox} name="position" />}
+                        control={<Field component={Checkbox} name="position" />}
                         label="Вровень с блоком"
                     />
-                    <FormControlLabel
-                        control={<Field component={renderCheckbox} name="braces" />}
-                        label="Укрепить скобами"
-                    />
+                    <FormControlLabel control={<Field component={Checkbox} name="braces" />} label="Укрепить скобами" />
                 </ConnectedHiddenBlock>
                 <ConnectedHiddenBlock NamesMap={PaperJoiners} checkboxGroupName="paperJoiners" blockName="spring">
-                    <Field fullWidth component={renderTextField} label="Положение" type="text" name="spine" />
+                    <Field fullWidth component={TextField} label="Положение" type="text" name="spine" />
                     <FormControl fullWidth>
                         <InputLabel>Положение</InputLabel>
-                        <Field name="position" component={renderSelect}>
+                        <Field name="position" component={Select}>
                             <MenuItem value="left">Слева</MenuItem>
                             <MenuItem value="right">Справа</MenuItem>
                             <MenuItem value="down">Снизу</MenuItem>
@@ -80,20 +75,20 @@ const PaperJoinerForm = (): JSX.Element => {
                     </FormControl>
                     <Field
                         fullWidth
-                        component={renderTextField}
+                        component={TextField}
                         label="Обложка &gt; блока"
                         type="number"
                         name="coverBlockRatio"
                     />
                 </ConnectedHiddenBlock>
                 <ConnectedHiddenBlock NamesMap={PaperJoiners} checkboxGroupName="paperJoiners" blockName="packet">
-                    <Field fullWidth component={renderTextField} label="Цвет люверсов" type="text" name="luvColors" />
-                    <Field fullWidth component={renderTextField} label="Цвет ручек" type="text" name="handsColor" />
+                    <Field fullWidth component={TextField} label="Цвет люверсов" type="text" name="luvColors" />
+                    <Field fullWidth component={TextField} label="Цвет ручек" type="text" name="handsColor" />
                 </ConnectedHiddenBlock>
                 <ConnectedHiddenBlock NamesMap={PaperJoiners} checkboxGroupName="paperJoiners" blockName="splice">
                     <FormControl fullWidth>
                         <InputLabel>Тип клея</InputLabel>
-                        <Field name="glueType" component={renderSelect}>
+                        <Field name="glueType" component={Select}>
                             <MenuItem value="type1">Тип 1</MenuItem>
                             <MenuItem value="type2">Тип 2</MenuItem>
                             <MenuItem value="type3">Тип 3</MenuItem>
@@ -101,7 +96,7 @@ const PaperJoinerForm = (): JSX.Element => {
                     </FormControl>
                     <FormControl fullWidth>
                         <InputLabel>Место склеивания</InputLabel>
-                        <Field name="position" component={renderSelect}>
+                        <Field name="position" component={Select}>
                             <MenuItem value="left">Слева</MenuItem>
                             <MenuItem value="right">Справа</MenuItem>
                             <MenuItem value="down">Снизу</MenuItem>
@@ -113,7 +108,7 @@ const PaperJoinerForm = (): JSX.Element => {
                     <Field
                         fullWidth
                         multiline
-                        component={renderTextField}
+                        component={TextField}
                         label="Описание"
                         type="text"
                         name="description"

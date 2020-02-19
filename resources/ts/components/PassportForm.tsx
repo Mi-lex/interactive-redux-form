@@ -1,13 +1,13 @@
 import React from 'react'
-import { Field } from 'redux-form'
+import { useSelector } from 'react-redux'
+import { formValueSelector } from 'redux-form'
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+import { Grid } from '@material-ui/core'
+import InitialInfo from './InitialInfo'
 import PassportSidebar from './PassportSidebar'
+import ElementsTable from './ElementsTable'
 import PaperJoinerForm from './PaperJoinerForm'
 import PostPrintForm from './PostprintForm'
-import InitialInfo from './InitialInfo'
-import ElementsTable from './ElementsTable'
-import renderTextField from './MaterialReduxForm/TextField'
-import { Grid, TextField } from '@material-ui/core'
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -16,52 +16,30 @@ const useStyles = makeStyles((theme: Theme) =>
                 marginBottom: theme.spacing(1),
             },
         },
-        halfWidth: {
-            width: '45%',
-        },
     }),
 )
 
+const selector: Function = formValueSelector('passport')
+
 const PassportForm = (): JSX.Element => {
+    const { requiredDelivery, paymentCash } = useSelector(state => ({
+        requiredDelivery: selector(state, 'delivery'),
+        paymentCash: selector(state, 'paymentCash'),
+    }))
+
     const variant = 'standard'
     const classes = useStyles()
 
     return (
         <Grid container spacing={2}>
             {/* Sidebar */}
-            <PassportSidebar />
+            <PassportSidebar paymentCash={paymentCash} />
             {/* Initial */}
             <Grid item container xs={12} sm={6} md={10} justify="space-between" className={classes.root}>
                 {/* Initial info packaging */}
-                <InitialInfo />
+                <InitialInfo requiredDelivery={requiredDelivery} />
                 {/* Important info */}
-                <Grid item container xs={12} md={6} className={classes.root} direction="column">
-                    <TextField fullWidth label="Важно" multiline rows="8" variant="outlined" />
-                    <Field
-                        className={classes.halfWidth}
-                        component={renderTextField}
-                        name="isCut"
-                        type="number"
-                        variant={variant}
-                        label="Обрезной"
-                    />
-                    <Field
-                        className={classes.halfWidth}
-                        component={renderTextField}
-                        name="circulation"
-                        type="text"
-                        variant={variant}
-                        label="Тираж"
-                    />
-                    <Field
-                        className={classes.halfWidth}
-                        component={renderTextField}
-                        name="repeat"
-                        type="number"
-                        variant={variant}
-                        label="Повтор"
-                    />
-                </Grid>
+
                 {/* Elements */}
                 <ElementsTable />
                 {/* FinalForm (Lower one) */}

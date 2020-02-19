@@ -1,18 +1,14 @@
 import React from 'react'
-import Grid from '@material-ui/core/Grid'
-import Box from '@material-ui/core/Box'
-import renderDatePicker from './MaterialReduxForm/DatePicker'
-import renderTextField from './MaterialReduxForm/TextField'
-import renderSelect from './MaterialReduxForm/Select'
-import renderCheckbox from './MaterialReduxForm/Checkbox'
-import renderDateTimePicker from './MaterialReduxForm/DateTimePicker'
 import { Field } from 'redux-form'
-import InputLabel from '@material-ui/core/InputLabel'
-import MenuItem from '@material-ui/core/MenuItem'
-import FormGroup from '@material-ui/core/FormGroup'
-import FormControl from '@material-ui/core/FormControl'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import TextField from '@material-ui/core/TextField'
+import { Grid, Box, FormControl, FormControlLabel, InputLabel, MenuItem, FormGroup } from '@material-ui/core'
+import {
+    DatePicker,
+    TextField,
+    Select,
+    Checkbox,
+    DateTimePicker,
+    TextareaAutosize,
+} from '../components/MaterialReduxForm'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -29,97 +25,146 @@ const useStyles = makeStyles((theme: Theme) =>
         formControl: {
             minWidth: '100%',
         },
+        halfWidth: {
+            width: '45%',
+        },
     }),
 )
 
-const InitialInfo = () => {
+type Props = {
+    requiredDelivery: boolean
+}
+
+const InitialInfo: React.FC<Props> = props => {
+    const { requiredDelivery } = props
     const variant = 'standard'
     const classes = useStyles()
 
     return (
-        <Grid item container xs={12} md={6} spacing={3}>
-            {/* Заказ */}
-            <Grid item container className={classes.root} style={{ paddingBottom: 0 }}>
-                <Grid component={Box} item xs={12} md={6}>
+        <>
+            <Grid item container xs={12} md={6} spacing={3}>
+                {/* Заказ */}
+                <Grid item container className={classes.root} style={{ paddingBottom: 0 }}>
+                    <Grid component={Box} item xs={12} md={6}>
+                        <Field
+                            component={TextField}
+                            name="orderId"
+                            type="number"
+                            fullWidth={true}
+                            variant={variant}
+                            value="69590"
+                            disabled={true}
+                            label="Заказ"
+                        />
+                    </Grid>
+                </Grid>
+                {/* Left column */}
+                <Grid item xs={12} md={6} className={classes.root} style={{ paddingTop: 0 }}>
                     <Field
-                        component={renderTextField}
-                        name="orderId"
+                        component={DatePicker}
+                        name="orderDate"
+                        fullWidth={true}
+                        label="от"
+                        variant={variant}
+                        disabled={true}
+                    />
+                    <Field
+                        component={TextField}
+                        name="amount_in_package"
                         type="number"
+                        min={0}
                         fullWidth={true}
                         variant={variant}
                         value="69590"
-                        disabled={true}
-                        label="Заказ"
+                        label="Упаковать по"
+                    />
+                    <FormControl fullWidth style={{ marginBottom: 2 }}>
+                        <FormControlLabel control={<Field name="delivery" component={Checkbox} />} label="Доставить" />
+                    </FormControl>
+                    <Field
+                        component={TextareaAutosize}
+                        name="adress"
+                        label="Адрес"
+                        type="text"
+                        fullWidth
+                        rowsMin={6}
+                        variant="outlined"
+                        disabled={!requiredDelivery}
                     />
                 </Grid>
+                {/* Right column */}
+                <Grid item xs={12} md={6} className={classes.root} style={{ paddingTop: 0 }}>
+                    <Field
+                        component={DateTimePicker}
+                        name="makeTill"
+                        fullWidth={true}
+                        label="Изготовить до"
+                        variant={variant}
+                    />
+                    <FormControl className={classes.formControl}>
+                        <InputLabel>В</InputLabel>
+                        <Field name="packageType" variant={variant} component={Select}>
+                            <MenuItem value="box">коробку</MenuItem>
+                            <MenuItem value="pack">пачку</MenuItem>
+                        </Field>
+                    </FormControl>
+                    <FormGroup>
+                        <FormControlLabel
+                            control={<Field component={Checkbox} name="sampleOnPackage" />}
+                            label="Образец на упаковку"
+                        />
+                        <FormControlLabel
+                            control={<Field component={Checkbox} name="sortByTypes" />}
+                            label="По видам"
+                        />
+                        <FormControlLabel control={<Field component={Checkbox} name="label" />} label="Ярлык" />
+                        <FormControlLabel
+                            control={<Field component={Checkbox} name="palleting" />}
+                            label="Паллетирование"
+                        />
+                        <FormControlLabel
+                            control={<Field component={Checkbox} name="stretchWrap" />}
+                            label="Стреч-пленка"
+                        />
+                    </FormGroup>
+                </Grid>
             </Grid>
-            {/* Left column */}
-            <Grid item xs={12} md={6} className={classes.root} style={{ paddingTop: 0 }}>
+            <Grid item container xs={12} md={6} className={classes.root} direction="column">
                 <Field
-                    component={renderDatePicker}
-                    name="orderDate"
-                    fullWidth={true}
-                    label="от"
-                    variant={variant}
-                    disabled={true}
-                />
-                <Field
-                    component={renderTextField}
-                    name="amount_in_package"
-                    type="number"
-                    min={0}
-                    fullWidth={true}
-                    variant={variant}
-                    value="69590"
-                    label="Упаковать по"
-                />
-                <TextField
-                    style={{ marginTop: '10px' }}
+                    component={TextareaAutosize}
+                    name="importantInfo"
+                    label="Важно"
+                    type="text"
                     fullWidth
-                    name="delivery"
-                    label="Доставить"
-                    multiline
-                    rows="8"
+                    rowsMin={8}
                     variant="outlined"
                 />
-            </Grid>
-            {/* Right column */}
-            <Grid item xs={12} md={6} className={classes.root} style={{ paddingTop: 0 }}>
                 <Field
-                    component={renderDateTimePicker}
-                    name="makeTill"
-                    fullWidth={true}
-                    label="Изготовить до"
+                    className={classes.halfWidth}
+                    component={TextField}
+                    name="isCut"
+                    type="number"
                     variant={variant}
+                    label="Обрезной"
                 />
-                <FormControl className={classes.formControl}>
-                    <InputLabel>В</InputLabel>
-                    <Field name="packageType" variant={variant} component={renderSelect}>
-                        <MenuItem value="box">коробку</MenuItem>
-                        <MenuItem value="pack">пачку</MenuItem>
-                    </Field>
-                </FormControl>
-                <FormGroup>
-                    <FormControlLabel
-                        control={<Field component={renderCheckbox} name="sampleOnPackage" />}
-                        label="Образец на упаковку"
-                    />
-                    <FormControlLabel
-                        control={<Field component={renderCheckbox} name="sortByTypes" />}
-                        label="По видам"
-                    />
-                    <FormControlLabel control={<Field component={renderCheckbox} name="label" />} label="Ярлык" />
-                    <FormControlLabel
-                        control={<Field component={renderCheckbox} name="palleting" />}
-                        label="Паллетирование"
-                    />
-                    <FormControlLabel
-                        control={<Field component={renderCheckbox} name="stretchWrap" />}
-                        label="Стреч-пленка"
-                    />
-                </FormGroup>
+                <Field
+                    className={classes.halfWidth}
+                    component={TextField}
+                    name="circulation"
+                    type="text"
+                    variant={variant}
+                    label="Тираж"
+                />
+                <Field
+                    className={classes.halfWidth}
+                    component={TextField}
+                    name="repeat"
+                    type="number"
+                    variant={variant}
+                    label="Повтор"
+                />
             </Grid>
-        </Grid>
+        </>
     )
 }
 

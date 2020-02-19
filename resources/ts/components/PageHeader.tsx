@@ -1,16 +1,15 @@
 import React from 'react'
-import MenuIcon from '@material-ui/icons/Menu'
-import { AccountCircle } from '@material-ui/icons'
-import MailIcon from '@material-ui/icons/Mail'
-import NotificationsIcon from '@material-ui/icons/Notifications'
-import MoreIcon from '@material-ui/icons/MoreVert'
+import {
+    AccountCircle,
+    Menu as MenuIcon,
+    Notifications as NotificationsIcon,
+    Mail as MailIcon,
+    MoreVert as MoreIcon,
+} from '@material-ui/icons'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Badge from '@material-ui/core/Badge'
-import Toolbar from '@material-ui/core/Toolbar'
-import IconButton from '@material-ui/core/IconButton'
-import MenuItem from '@material-ui/core/MenuItem'
-import Menu from '@material-ui/core/Menu'
+import { Toolbar, IconButton, Menu, MenuItem } from '@material-ui/core'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({

@@ -1,4 +1,4 @@
-import React, { Ref } from 'react'
+import React from 'react'
 import { WrappedFieldProps } from 'redux-form'
 import TextField, { TextFieldProps } from '@material-ui/core/TextField'
 import TextareaAutosize, { TextareaAutosizeProps } from '@material-ui/core/TextareaAutosize'
