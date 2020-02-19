@@ -33,7 +33,14 @@ const PassportSidebar: React.FC = () => {
         <Grid item xs={12} sm={6} md={2} className={classes.root}>
             <Field component={renderTextField} name="client" fullWidth={true} variant={variant} label="Клиент" />
             <Field component={renderTextField} name="type" fullWidth={true} variant={variant} label="Тип" />
-            <Field component={renderTextField} name="orderName" fullWidth={true} variant={variant} label="Название" />
+            <Field
+                component={renderTextField}
+                name="orderName"
+                multiline
+                fullWidth={true}
+                variant={variant}
+                label="Название"
+            />
             <Divider variant="fullWidth" className={classes.divider} />
             <Field name="paymentCash" label="Наличными" color="primary" component={renderSwitcher} />
             <FormControl className={classes.formControl}>

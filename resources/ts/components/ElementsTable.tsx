@@ -5,12 +5,12 @@ import renderSelect from './MaterialReduxForm/Select'
 import PassportBtn from './PassportBtn'
 import { Grid, FormControl, InputLabel, MenuItem, Box } from '@material-ui/core'
 
-type OrderElementsFieldPropType = {
+type ElementsFieldPropType = {
     name: string
 }
 
-const OrderElementsRow: React.FC<OrderElementsFieldPropType> = () => (
-    <FormSection name="OrderElement">
+const ElementsRow: React.FC<ElementsFieldPropType> = ({ name }) => (
+    <FormSection name={name}>
         <Grid container item xs={12} style={{ marginLeft: 0, marginRight: 0 }} spacing={2}>
             <Grid item xs={6} md={2}>
                 <Field name="name" label="Часть" fullWidth component={renderTextField} type="text" />
@@ -50,10 +50,10 @@ const OrderElementsRow: React.FC<OrderElementsFieldPropType> = () => (
     </FormSection>
 )
 
-const OrderElementsTable = ({ fields }: WrappedFieldArrayProps<string>): JSX.Element => (
+const ElementsTable = ({ fields }: WrappedFieldArrayProps<string>): JSX.Element => (
     <>
         {fields.map((order, index) => (
-            <OrderElementsRow key={index} name={`${order}Element`} />
+            <ElementsRow key={index} name={`${order}Element`} />
         ))}
 
         <Box display="flex" width="100%" justifyContent="flex-end" pt={1} pr={2}>
@@ -75,7 +75,7 @@ const OrderElementsTable = ({ fields }: WrappedFieldArrayProps<string>): JSX.Ele
     </>
 )
 
-const OrderElementsForm: React.FC = () => (
+const ElementsForm: React.FC = () => (
     <Box
         borderTop="1px solid rgba(0, 0, 0, 0.12)"
         py={1}
@@ -83,8 +83,8 @@ const OrderElementsForm: React.FC = () => (
         borderBottom="1px solid rgba(0, 0, 0, 0.12)"
         borderRadius={4}
     >
-        <FieldArray name="orders" component={OrderElementsTable} />
+        <FieldArray name="orders" component={ElementsTable} />
     </Box>
 )
 
-export default OrderElementsForm
+export default ElementsForm

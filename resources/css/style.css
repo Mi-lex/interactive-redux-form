@@ -1,9 +1,9 @@
 @import './globals/normalize.css';
-@import './components/passport-form.css';
+@import './globals/fonts.css';
 
 :root {
     --page-font-color: black;
-    --page-font: Arial, 'Sans Serif';
+    --page-font: 'Roboto', 'Helvetica', 'Arial', sans-serif;
     --page-font-size: 16px;
     --page-line-height: normal;
 }
@@ -113,7 +113,7 @@ input[type='number']::-webkit-outer-spin-button {
 } */
 
 .MuiTableCell-head:first-of-type {
-    width: calc((100% - 0px) / 18) !important;
+    width: calc((100% - 0px) / 16) !important;
 }
 
 .MuiTableCell-head:nth-last-of-type(2) {

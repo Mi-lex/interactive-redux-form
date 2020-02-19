@@ -4,7 +4,7 @@ import PassportSidebar from './PassportSidebar'
 import PaperJoinerForm from './PaperJoinerForm'
 import PostPrintForm from './PostprintForm'
 import InitialInfo from './InitialInfo'
-import OrderElementsTable from './OrderElementsTable'
+import ElementsTable from './ElementsTable'
 import renderTextField from './MaterialReduxForm/TextField'
 import { Grid, TextField } from '@material-ui/core'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
@@ -27,7 +27,7 @@ const PassportForm = (): JSX.Element => {
     const classes = useStyles()
 
     return (
-        <Grid container spacing={3}>
+        <Grid container spacing={2}>
             {/* Sidebar */}
             <PassportSidebar />
             {/* Initial */}
@@ -63,7 +63,7 @@ const PassportForm = (): JSX.Element => {
                     />
                 </Grid>
                 {/* Elements */}
-                <OrderElementsTable />
+                <ElementsTable />
                 {/* FinalForm (Lower one) */}
                 <PaperJoinerForm />
                 <PostPrintForm />
