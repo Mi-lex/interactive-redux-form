@@ -1,5 +1,6 @@
 import React from 'react'
 import Grid from '@material-ui/core/Grid'
+import Box from '@material-ui/core/Box'
 import renderDatePicker from './MaterialReduxForm/DatePicker'
 import renderTextField from './MaterialReduxForm/TextField'
 import renderSelect from './MaterialReduxForm/Select'
@@ -38,8 +39,8 @@ const InitialInfo = () => {
     return (
         <Grid item container xs={12} md={6} spacing={3}>
             {/* Заказ */}
-            <Grid item container xs={12} spacing={1} style={{ paddingBottom: '8px' }}>
-                <Grid item xs={12} md={6}>
+            <Grid item container className={classes.root} style={{ paddingBottom: 0 }}>
+                <Grid component={Box} item xs={12} md={6}>
                     <Field
                         component={renderTextField}
                         name="orderId"
@@ -103,7 +104,10 @@ const InitialInfo = () => {
                         control={<Field component={renderCheckbox} name="sampleOnPackage" />}
                         label="Образец на упаковку"
                     />
-                    <FormControlLabel control={<Field component={renderCheckbox} name="sortByTypes" />} label="По видам" />
+                    <FormControlLabel
+                        control={<Field component={renderCheckbox} name="sortByTypes" />}
+                        label="По видам"
+                    />
                     <FormControlLabel control={<Field component={renderCheckbox} name="label" />} label="Ярлык" />
                     <FormControlLabel
                         control={<Field component={renderCheckbox} name="palleting" />}

@@ -1,11 +1,11 @@
 import React from 'react'
 import { formValueSelector, FormSection } from 'redux-form'
 import { useSelector } from 'react-redux'
-import { PostPrintActionName, PaperJoinerName } from '../../../store/types'
-import Typography from '@material-ui/core/Typography'
-const selector: Function = formValueSelector('passport')
-
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
+import { PostPrintActionName, PaperJoinerName } from '../store/types'
+
+const selector: Function = formValueSelector('passport')
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({

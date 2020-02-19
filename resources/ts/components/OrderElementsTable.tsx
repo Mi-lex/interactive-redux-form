@@ -41,7 +41,7 @@ const OrderElementsRow: React.FC<OrderElementsFieldPropType> = () => (
                 <Field
                     name="colorInterpretation"
                     fullWidth
-                    label="Расшифровка цвета"
+                    label="Расшифровка"
                     component={renderTextField}
                     type="text"
                 />

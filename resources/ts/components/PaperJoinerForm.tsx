@@ -1,12 +1,12 @@
 import React from 'react'
 import { Field, FormSection } from 'redux-form'
 import ConnectedHiddenBlock from './ConnectedHiddenBLock'
-import { PaperJoiners, PaperJoinerName } from '../../../store/types'
-import { paperJoinersNames } from '../../../store/consts'
+import { PaperJoiners, PaperJoinerName } from '../store/types'
+import { paperJoinersNames } from '../store/consts'
 import { Box, Grid, FormGroup, FormControlLabel, FormControl, InputLabel, MenuItem } from '@material-ui/core'
-import renderSelect from '../../MaterialReduxForm/Select'
-import renderCheckbox from '../../MaterialReduxForm/Checkbox'
-import renderTextField from '../../MaterialReduxForm/TextField'
+import renderSelect from './MaterialReduxForm/Select'
+import renderCheckbox from './MaterialReduxForm/Checkbox'
+import renderTextField from './MaterialReduxForm/TextField'
 
 const PaperJoinerForm = (): JSX.Element => {
     return (
@@ -14,7 +14,7 @@ const PaperJoinerForm = (): JSX.Element => {
             <Grid item xs={6} md={5}>
                 <FormSection name="paperJoiners">
                     <FormGroup>
-                        {/* Радио баттоны: скрепка, пакет и т.д.  */}
+                        {/* Чекбоксы баттоны: скрепка, пакет и т.д.  */}
                         {paperJoinersNames.map((joinerName: PaperJoinerName) => (
                             <FormControlLabel
                                 key={joinerName}

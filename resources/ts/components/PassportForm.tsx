@@ -1,7 +1,8 @@
 import React from 'react'
 import { Field } from 'redux-form'
 import PassportSidebar from './PassportSidebar'
-import FinalForm from './FinalForm'
+import PaperJoinerForm from './PaperJoinerForm'
+import PostPrintForm from './PostprintForm'
 import InitialInfo from './InitialInfo'
 import OrderElementsTable from './OrderElementsTable'
 import renderTextField from './MaterialReduxForm/TextField'
@@ -63,8 +64,9 @@ const PassportForm = (): JSX.Element => {
                 </Grid>
                 {/* Elements */}
                 <OrderElementsTable />
-                {/* FinalForm */}
-                <FinalForm />
+                {/* FinalForm (Lower one) */}
+                <PaperJoinerForm />
+                <PostPrintForm />
             </Grid>
         </Grid>
     )

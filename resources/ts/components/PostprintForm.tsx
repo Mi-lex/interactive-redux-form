@@ -1,12 +1,12 @@
 import React from 'react'
 import { Field, FormSection } from 'redux-form'
 import { Grid, FormGroup, FormControl, FormControlLabel, MenuItem, InputLabel } from '@material-ui/core'
-import { postPrintActionNames } from '../../../store/consts'
-import { PostPrintActionName, PostPrintActions } from '../../../store/types'
+import { postPrintActionNames } from '../store/consts'
+import { PostPrintActionName, PostPrintActions } from '../store/types'
 import ConnectedHiddenBlock from './ConnectedHiddenBLock'
-import renderCheckbox from '../../MaterialReduxForm/Checkbox'
-import renderSelect from '../../MaterialReduxForm/Select'
-import renderTextField from '../../MaterialReduxForm/TextField'
+import renderCheckbox from './MaterialReduxForm/Checkbox'
+import renderSelect from './MaterialReduxForm/Select'
+import renderTextField from './MaterialReduxForm/TextField'
 
 const PostprintForm: React.FC = () => {
     return (
