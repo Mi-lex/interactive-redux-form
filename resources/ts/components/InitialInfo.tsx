@@ -48,7 +48,7 @@ const InitialInfo: React.FC<Props> = props => {
                     <Grid component={Box} item xs={12} md={6}>
                         <Field
                             component={TextField}
-                            name="orderId"
+                            name="order.id"
                             type="number"
                             fullWidth={true}
                             variant={variant}
@@ -62,7 +62,7 @@ const InitialInfo: React.FC<Props> = props => {
                 <Grid item xs={12} md={6} className={classes.root} style={{ paddingTop: 0 }}>
                     <Field
                         component={DatePicker}
-                        name="orderDate"
+                        name="order.date"
                         fullWidth={true}
                         label="от"
                         variant={variant}
@@ -70,16 +70,15 @@ const InitialInfo: React.FC<Props> = props => {
                     />
                     <Field
                         component={TextField}
-                        name="amount_in_package"
+                        name="package.capacity"
                         type="number"
                         min={0}
                         fullWidth={true}
                         variant={variant}
-                        value="69590"
                         label="Упаковать по"
                     />
                     <FormControl fullWidth style={{ marginBottom: 2 }}>
-                        <FormControlLabel control={<Field name="delivery" component={Checkbox} />} label="Доставить" />
+                        <FormControlLabel control={<Field name="delivery.should_be_delivered" component={Checkbox} />} label="Доставить" />
                     </FormControl>
                     <Field
                         component={TextareaAutosize}

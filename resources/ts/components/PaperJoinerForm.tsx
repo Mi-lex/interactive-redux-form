@@ -63,7 +63,7 @@ const PaperJoinerForm = (): JSX.Element => {
                     <FormControlLabel control={<Field component={Checkbox} name="braces" />} label="Укрепить скобами" />
                 </ConnectedHiddenBlock>
                 <ConnectedHiddenBlock NamesMap={PaperJoiners} checkboxGroupName="paperJoiners" blockName="spring">
-                    <Field fullWidth component={TextField} label="Положение" type="text" name="spine" />
+                    <Field fullWidth component={TextField} label="Цвет" type="text" name="color" />
                     <FormControl fullWidth>
                         <InputLabel>Положение</InputLabel>
                         <Field name="position" component={Select}>

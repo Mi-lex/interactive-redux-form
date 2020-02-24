@@ -64,6 +64,9 @@ class OrderTable extends React.Component {
                 ]}
                 data={data}
                 options={{
+                    headerStyle: {
+                        borderBottom: 'none',
+                    },
                     filtering: true,
                     pageSize: 5,
                     pageSizeOptions: [5, 25, 50, 100],

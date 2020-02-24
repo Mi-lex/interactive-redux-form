@@ -108,9 +108,11 @@ input[type='number']::-webkit-outer-spin-button {
     height: 75%;
 }
 
-/* .MuiTableCell-root:first-of-type {
-    width: 20px !important;
-} */
+/* 
+    rewriting material table styles
+    I know that this looks awful, but its the only way for february 2020
+    to change the columns width
+*/
 
 .MuiTableCell-head:first-of-type {
     width: calc((100% - 0px) / 16) !important;
@@ -122,4 +124,8 @@ input[type='number']::-webkit-outer-spin-button {
 
 .MuiTableCell-head:nth-last-of-type(1) {
     width: calc((100% - 0px) / 15) !important;
+}
+
+.MuiTableCell-root {
+    padding: 10px !important;
 }
