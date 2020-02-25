@@ -1,12 +1,57 @@
 import React from 'react'
-import { Field, FormSection } from 'redux-form'
+import { useDispatch } from 'react-redux'
+import { resetSection, clearFields, Field, FormSection, WrappedFieldProps } from 'redux-form'
 import { PaperJoiners, PaperJoinerName } from '../store/types'
 import { Box, Grid, FormGroup, FormControlLabel, FormControl, InputLabel, MenuItem } from '@material-ui/core'
 import ConnectedHiddenBlock from './ConnectedHiddenBLock'
-import { Select, Checkbox, TextField } from './MaterialReduxForm'
+import { Select, TextField } from './MaterialReduxForm'
 import { paperJoinersNames } from '../store/consts'
+import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox'
+
+type CheckProps = WrappedFieldProps &
+    CheckboxProps & {
+        changeAction: () => void
+    }
+
+const renderCheckBox: React.FC<CheckProps> = props => {
+    const {
+        input,
+        changeAction,
+        value,
+        meta: { touched, invalid, error },
+    } = props
+
+    const changeCheckboxHandler = (ev: React.ChangeEvent<HTMLInputElement>) => {
+        changeAction()
+        input.onChange(ev.target.checked)
+    }
+    return (
+        <>
+            <Checkbox
+                {...input}
+                checked={input.value ? true : false}
+                onChange={changeCheckboxHandler}
+                color="primary"
+                value={value}
+            />
+            {touched && error && <span className="error_msg">{error}</span>}
+        </>
+    )
+}
 
 const PaperJoinerForm = (): JSX.Element => {
+    const dispatch = useDispatch()
+
+    const clearSectionInputs = () => {
+        /**
+         * Uncheck all checkboxes before checking new one
+         * this is basicallly radiobtn behaviour but with
+         * opportunity to uncheck all inputs
+         */
+        clearFields('passport', true, false, 'paperJoiners.spring')
+        dispatch(resetSection('passport', 'paperJoiners'))
+    }
+
     return (
         <Grid item xs={12} md={6} container spacing={2}>
             <Grid item xs={6} md={5}>
@@ -16,7 +61,13 @@ const PaperJoinerForm = (): JSX.Element => {
                         {paperJoinersNames.map((joinerName: PaperJoinerName) => (
                             <FormControlLabel
                                 key={joinerName}
-                                control={<Field component={Checkbox} name={joinerName} />}
+                                control={
+                                    <Field
+                                        component={renderCheckBox}
+                                        changeAction={clearSectionInputs}
+                                        name={joinerName}
+                                    />
+                                }
                                 label={PaperJoiners[joinerName]}
                             />
                         ))}

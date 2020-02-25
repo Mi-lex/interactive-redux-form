@@ -35,7 +35,7 @@ const ElementsRow: React.FC<ElementsFieldPropType> = ({ name }) => (
                 </FormControl>
             </Grid>
             <Grid item xs={12} md={2}>
-                <Field name="brighness" fullWidth label="Красочность" component={renderTextField} type="number" />
+                <Field name="brightness" fullWidth label="Красочность" component={renderTextField} type="text" />
             </Grid>
             <Grid item xs={12} md={2}>
                 <Field
