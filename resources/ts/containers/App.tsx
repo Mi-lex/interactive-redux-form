@@ -5,6 +5,7 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import ruLocale from 'date-fns/locale/ru'
 import DateFnsUtils from '@date-io/date-fns'
 import Passport from '../pages/Passport'
+import PassportV2 from '../pages/Passport.v2'
 import Container from '@material-ui/core/Container'
 import PageHeader from '../components/PageHeader'
 import Drawer from '@material-ui/core/Drawer'
@@ -36,9 +37,9 @@ const App: React.FC = () => {
                         <Route path="/" exact>
                             <Passport />
                         </Route>
-                        {/* <Route path="/" exact>
-                            <Passport />
-                        </Route> */}
+                        <Route path="/passport" exact>
+                            <PassportV2 />
+                        </Route>
                     </MuiPickersUtilsProvider>
                 </Switch>
             </Container>
