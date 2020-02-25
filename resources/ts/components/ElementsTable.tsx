@@ -26,11 +26,11 @@ const ElementsRow: React.FC<ElementsFieldPropType> = ({ name }) => (
                     {/* офсет, цифра, уф-принтер, плоттер, без печати */}
                     <InputLabel>Печать</InputLabel>
                     <Field name="packageType" component={renderSelect}>
-                        <MenuItem value="noPrinting">Без печати</MenuItem>
-                        <MenuItem value="offset">Оффсет</MenuItem>
-                        <MenuItem value="digital">Цифровая</MenuItem>
-                        <MenuItem value="ultraviolet">Уф-принтер</MenuItem>
-                        <MenuItem value="plotter">Плоттер</MenuItem>
+                        <MenuItem value="без_печати">Без печати</MenuItem>
+                        <MenuItem value="офсет">Оффсет</MenuItem>
+                        <MenuItem value="цифровая">Цифровая</MenuItem>
+                        <MenuItem value="уф-принтер">Уф-принтер</MenuItem>
+                        <MenuItem value="плоттер">Плоттер</MenuItem>
                     </Field>
                 </FormControl>
             </Grid>

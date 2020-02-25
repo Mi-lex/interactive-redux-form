@@ -16,7 +16,7 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->mediumIncrements('id');
             $table->boolean('payed_by_cash');
-            $table->date('payment_date');
+            $table->date('date');
 
             $table->unsignedMediumInteger('account_id')->nullable();
             $table->foreign('account_id')->references('id')->on('payment_accounts');

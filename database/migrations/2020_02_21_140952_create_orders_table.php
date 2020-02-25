@@ -16,6 +16,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('type');
             $table->unsignedMediumInteger('manager_id')->nullable(); // yet
             $table->unsignedMediumInteger('customer_id');
             $table->unsignedMediumInteger('payment_id');

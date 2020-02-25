@@ -1,25 +1,25 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Orders from '../pages/Orders';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import ruLocale from 'date-fns/locale/ru';
-import DateFnsUtils from '@date-io/date-fns';
-import Passport from '../pages/Passport';
-import Container from '@material-ui/core/Container';
-import PageHeader from '../components/PageHeader';
-import Drawer from '@material-ui/core/Drawer';
-import SideList from '../components/SideList';
+import React from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Orders from '../pages/Orders'
+import { MuiPickersUtilsProvider } from '@material-ui/pickers'
+import ruLocale from 'date-fns/locale/ru'
+import DateFnsUtils from '@date-io/date-fns'
+import Passport from '../pages/Passport'
+import Container from '@material-ui/core/Container'
+import PageHeader from '../components/PageHeader'
+import Drawer from '@material-ui/core/Drawer'
+import SideList from '../components/SideList'
 
 const App: React.FC = () => {
-    const [isOpen, setDrawerState] = React.useState(false);
+    const [isOpen, setDrawerState] = React.useState(false)
 
     const closeDrawer = (): void => {
-        setDrawerState(false);
-    };
+        setDrawerState(false)
+    }
 
     const toggleDrawer = (): void => {
-        setDrawerState(!isOpen);
-    };
+        setDrawerState(!isOpen)
+    }
 
     return (
         <Router>
@@ -36,11 +36,14 @@ const App: React.FC = () => {
                         <Route path="/" exact>
                             <Passport />
                         </Route>
+                        {/* <Route path="/" exact>
+                            <Passport />
+                        </Route> */}
                     </MuiPickersUtilsProvider>
                 </Switch>
             </Container>
         </Router>
-    );
-};
+    )
+}
 
-export default App;
+export default App
