@@ -8,6 +8,7 @@ import PassportSidebar from './PassportSidebar'
 import ElementsTable from './ElementsTable'
 import PaperJoinerForm from './PaperJoinerForm'
 import PostPrintForm from './PostprintForm'
+import Details from './Details'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -38,8 +39,8 @@ const PassportForm = (): JSX.Element => {
             <Grid item container xs={12} sm={6} md={10} justify="space-between" className={classes.root}>
                 {/* Initial info packaging */}
                 <InitialInfo requiredDelivery={requiredDelivery} />
-                {/* Important info */}
-
+                {/* Details */}
+                <Details />
                 {/* Elements */}
                 <ElementsTable />
                 {/* FinalForm (Lower one) */}

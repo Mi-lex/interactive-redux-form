@@ -129,30 +129,6 @@ const InitialInfo: React.FC<Props> = props => {
                     rowsMin={8}
                     variant="outlined"
                 />
-                <Field
-                    className={classes.halfWidth}
-                    component={TextField}
-                    name="isCut"
-                    type="number"
-                    variant={variant}
-                    label="Обрезной"
-                />
-                <Field
-                    className={classes.halfWidth}
-                    component={TextField}
-                    name="circulation"
-                    type="text"
-                    variant={variant}
-                    label="Тираж"
-                />
-                <Field
-                    className={classes.halfWidth}
-                    component={TextField}
-                    name="repeat"
-                    type="number"
-                    variant={variant}
-                    label="Повтор"
-                />
             </Grid>
         </>
     )
