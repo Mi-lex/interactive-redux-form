@@ -23,8 +23,8 @@ const selector: Function = formValueSelector('passport')
 
 const PassportForm = (): JSX.Element => {
     const { requiredDelivery, paymentCash } = useSelector(state => ({
-        requiredDelivery: selector(state, 'delivery'),
-        paymentCash: selector(state, 'paymentCash'),
+        requiredDelivery: selector(state, 'delivery.should_be_delivered'),
+        paymentCash: selector(state, 'payment.payed_by_cash'),
     }))
 
     const variant = 'standard'

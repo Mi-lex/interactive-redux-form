@@ -1,14 +1,7 @@
 import React from 'react'
 import { Field } from 'redux-form'
 import { Grid, Box, FormControl, FormControlLabel, InputLabel, MenuItem, FormGroup } from '@material-ui/core'
-import {
-    DatePicker,
-    TextField,
-    Select,
-    Checkbox,
-    DateTimePicker,
-    TextareaAutosize,
-} from '../components/MaterialReduxForm'
+import { DatePicker, TextField, Select, Checkbox, TimePicker, TextareaAutosize } from '../components/MaterialReduxForm'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -43,30 +36,23 @@ const InitialInfo: React.FC<Props> = props => {
     return (
         <>
             <Grid item container xs={12} md={6} spacing={3}>
-                {/* Заказ */}
-                <Grid item container className={classes.root} style={{ paddingBottom: 0 }}>
-                    <Grid component={Box} item xs={12} md={6}>
-                        <Field
-                            component={TextField}
-                            name="order.id"
-                            type="number"
-                            fullWidth={true}
-                            variant={variant}
-                            value="69590"
-                            disabled={true}
-                            label="Заказ"
-                        />
-                    </Grid>
-                </Grid>
                 {/* Left column */}
-                <Grid item xs={12} md={6} className={classes.root} style={{ paddingTop: 0 }}>
+                <Grid item xs={12} md={6} className={classes.root}>
                     <Field
-                        component={DatePicker}
-                        name="order.date"
+                        component={TextField}
+                        name="order.id"
+                        type="number"
                         fullWidth={true}
-                        label="от"
                         variant={variant}
                         disabled={true}
+                        label="Заказ"
+                    />
+                    <Field
+                        component={DatePicker}
+                        name="makeTill"
+                        fullWidth={true}
+                        label="Изготовить до"
+                        variant={variant}
                     />
                     <Field
                         component={TextField}
@@ -78,7 +64,10 @@ const InitialInfo: React.FC<Props> = props => {
                         label="Упаковать по"
                     />
                     <FormControl fullWidth style={{ marginBottom: 2 }}>
-                        <FormControlLabel control={<Field name="delivery.should_be_delivered" component={Checkbox} />} label="Доставить" />
+                        <FormControlLabel
+                            control={<Field name="delivery.should_be_delivered" component={Checkbox} />}
+                            label="Доставить"
+                        />
                     </FormControl>
                     <Field
                         component={TextareaAutosize}
@@ -92,19 +81,21 @@ const InitialInfo: React.FC<Props> = props => {
                     />
                 </Grid>
                 {/* Right column */}
-                <Grid item xs={12} md={6} className={classes.root} style={{ paddingTop: 0 }}>
+                <Grid item xs={12} md={6} className={classes.root}>
                     <Field
-                        component={DateTimePicker}
-                        name="makeTill"
+                        component={DatePicker}
+                        name="order.date"
                         fullWidth={true}
-                        label="Изготовить до"
+                        label="от"
                         variant={variant}
+                        disabled={true}
                     />
+                    <Field component={TimePicker} name="order.time" fullWidth={true} label="к" variant={variant} />
                     <FormControl className={classes.formControl}>
                         <InputLabel>В</InputLabel>
                         <Field name="packageType" variant={variant} component={Select}>
-                            <MenuItem value="box">коробку</MenuItem>
-                            <MenuItem value="pack">пачку</MenuItem>
+                            <MenuItem value="коробка">коробку</MenuItem>
+                            <MenuItem value="пачка">пачку</MenuItem>
                         </Field>
                     </FormControl>
                     <FormGroup>

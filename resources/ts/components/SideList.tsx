@@ -35,7 +35,13 @@ const SideList = (props: Props): JSX.Element => {
                     <ListItemIcon>
                         <DescriptionIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Паспорт" />
+                    <ListItemText primary="Паспорт v1" />
+                </ListItem>
+                <ListItem button component={Link} to="/passport">
+                    <ListItemIcon>
+                        <DescriptionIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Паспорт v2" />
                 </ListItem>
                 <ListItem button component={Link} to="/orders">
                     <ListItemIcon>

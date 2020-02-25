@@ -32,34 +32,41 @@ const PassportSidebar: React.FC<Props> = (props: Props) => {
 
     return (
         <Grid item xs={12} sm={6} md={2} className={classes.root}>
-            <Field component={TextField} name="client" fullWidth={true} variant={variant} label="Клиент" />
-            <Field component={TextField} name="type" fullWidth={true} variant={variant} label="Тип" />
+            <Field component={TextField} name="customer.name" fullWidth={true} variant={variant} label="Клиент" />
+            <Field component={TextField} name="order.type" fullWidth={true} variant={variant} label="Тип" />
             <Field
                 component={TextField}
-                name="orderName"
+                name="order.name"
                 multiline
                 fullWidth={true}
                 variant={variant}
                 label="Название"
             />
             <Divider variant="fullWidth" className={classes.divider} />
-            <Field name="paymentCash" label="Наличными" color="primary" component={Switcher} />
+            <Field name="payment.payed_by_cash" label="Наличными" color="primary" component={Switcher} />
             <FormControl className={classes.formControl}>
                 <InputLabel>Организация</InputLabel>
                 <Field
                     label="Организация"
-                    name="organization"
+                    name="payment_org_type"
                     variant={variant}
                     disabled={paymentCash}
                     component={Select}
                 >
-                    <MenuItem value="etalon">Эталон</MenuItem>
-                    <MenuItem value="standard">Стандарт</MenuItem>
-                    <MenuItem value="presscenter">Прессцентр</MenuItem>
+                    <MenuItem value="эталон">Эталон</MenuItem>
+                    <MenuItem value="стандарт">Стандарт</MenuItem>
+                    <MenuItem value="прессцентр">Прессцентр</MenuItem>
                 </Field>
             </FormControl>
-            <Field component={TextField} name="bill" fullWidth disabled={paymentCash} variant={variant} label="Счет" />
-            <Field component={DatePicker} name="paymentDate" fullWidth disabled={paymentCash} label="от" />
+            <Field
+                component={TextField}
+                name="account_number"
+                fullWidth
+                disabled={paymentCash}
+                variant={variant}
+                label="Счет"
+            />
+            <Field component={DatePicker} name="payment.date" fullWidth disabled={paymentCash} label="от" />
         </Grid>
     )
 }
