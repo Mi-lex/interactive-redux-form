@@ -15,16 +15,28 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('type');
-            $table->unsignedMediumInteger('manager_id')->nullable(); // yet
-            $table->unsignedMediumInteger('customer_id');
-            $table->unsignedMediumInteger('payment_id');
-            $table->unsignedMediumInteger('paper_joiner_id');
-            $table->unsignedMediumInteger('package_id');
-            $table->unsignedMediumInteger('delivery_id');
-            $table->unsignedBigInteger('post_action_id');
+            $table->string('name')->nullable();
+            $table->string('type')->nullable();
+            $table->text('important_info');
             $table->timestamps();
+            $table->date('completion_date')->nullabe();
+            $table->time('completion_time')->nullable();
+
+            /**
+             * implementation details. Might be a good idea to move
+             * details of implementation into separate table, might not ¯\_(ツ)_/¯ 
+             */
+            $table->boolean('is_cut')->default(false);
+            $table->string('circulation')->nullable();
+            $table->unsignedBigInteger('similar_order_id')->nullable();
+
+            $table->unsignedMediumInteger('manager_id')->nullable();
+            $table->unsignedMediumInteger('customer_id');
+            $table->unsignedMediumInteger('payment_id')->nullable();
+            $table->unsignedMediumInteger('paper_joiner_id')->nullable();
+            $table->unsignedMediumInteger('package_id')->nullable();
+            $table->unsignedMediumInteger('delivery_id')->nullable();
+            $table->unsignedBigInteger('post_action_id')->nullable();
 
             $table->foreign('manager_id')->references('id')->on('users');
             $table->foreign('customer_id')->references('id')->on('customers');
