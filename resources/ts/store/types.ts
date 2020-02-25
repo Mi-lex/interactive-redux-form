@@ -9,7 +9,7 @@ export enum PaperJoiners {
     termo = 'Термо',
     spring = 'Пружина',
     packet = 'Пакет',
-    splice = 'Проклейка',
+    glue_bonding = 'Проклейка',
     binding = 'Переплет',
     file = 'Папка',
     special = 'Спец. обр.',

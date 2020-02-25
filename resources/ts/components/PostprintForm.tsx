@@ -5,6 +5,7 @@ import { postPrintActionNames } from '../store/consts'
 import { PostPrintActionName, PostPrintActions } from '../store/types'
 import ConnectedHiddenBlock from './ConnectedHiddenBLock'
 import { Checkbox, Select, TextField } from './MaterialReduxForm'
+import RemovableComment from './RemovableComment'
 
 const PostprintForm: React.FC = () => {
     return (
@@ -26,6 +27,33 @@ const PostprintForm: React.FC = () => {
             <Grid item xs={6}>
                 <ConnectedHiddenBlock
                     NamesMap={PostPrintActions}
+                    blockName="creasing"
+                    checkboxGroupName="postprintActions"
+                >
+                    {/* Биговать */}
+                    <Field fullWidth component={TextField} label="Доли" type="text" name="parts" />
+                    <RemovableComment />
+                </ConnectedHiddenBlock>
+                <ConnectedHiddenBlock
+                    NamesMap={PostPrintActions}
+                    blockName="bookFolding"
+                    checkboxGroupName="postprintActions"
+                >
+                    {/* Фальцевать */}
+                    <FormControl fullWidth>
+                        <InputLabel>Вид</InputLabel>
+                        <Field name="type" component={Select}>
+                            <MenuItem value="евро">Евро</MenuItem>
+                            <MenuItem value="гармошка">Гармошка</MenuItem>
+                            <MenuItem value="оконная">Оконная</MenuItem>
+                        </Field>
+                    </FormControl>
+                    <Field fullWidth component={TextField} label="Цвет" type="text" name="color" />
+                    <Field fullWidth component={TextField} label="Элементы" type="text" name="description" />
+                    <RemovableComment />
+                </ConnectedHiddenBlock>
+                <ConnectedHiddenBlock
+                    NamesMap={PostPrintActions}
                     blockName="lamitation"
                     checkboxGroupName="postprintActions"
                 >
@@ -39,6 +67,7 @@ const PostprintForm: React.FC = () => {
                         </Field>
                     </FormControl>
                     <Field fullWidth component={TextField} label="Элементы" type="text" name="description" />
+                    <RemovableComment />
                 </ConnectedHiddenBlock>
                 <ConnectedHiddenBlock
                     NamesMap={PostPrintActions}
@@ -55,6 +84,7 @@ const PostprintForm: React.FC = () => {
                         </Field>
                     </FormControl>
                     <Field fullWidth component={TextField} label="Элементы" type="text" name="description" />
+                    <RemovableComment />
                 </ConnectedHiddenBlock>
                 <ConnectedHiddenBlock
                     NamesMap={PostPrintActions}
@@ -63,12 +93,15 @@ const PostprintForm: React.FC = () => {
                 >
                     {/* Тиснить фольгой */}
                     <FormControl fullWidth>
-                        <InputLabel>Вид</InputLabel>
+                        <InputLabel>Тип фольги</InputLabel>
                         <Field name="type" component={Select}>
+                            <MenuItem value="glossy">Глянцевая</MenuItem>
+                            <MenuItem value="matte">Матовая</MenuItem>
                             <MenuItem value="holographic">Голографическая</MenuItem>
                         </Field>
                     </FormControl>
                     <Field fullWidth component={TextField} label="Элементы" type="text" name="description" />
+                    <RemovableComment />
                 </ConnectedHiddenBlock>
                 <ConnectedHiddenBlock
                     NamesMap={PostPrintActions}
@@ -76,8 +109,9 @@ const PostprintForm: React.FC = () => {
                     checkboxGroupName="postprintActions"
                 >
                     {/* Вырубить штампом */}
-                    <Field fullWidth component={TextField} label="Штамп" type="text" name="description" />
+                    <Field fullWidth component={TextField} label="Штамп" type="text" name="stamp" />
                     <Field fullWidth component={TextField} label="Элементы" type="text" name="description" />
+                    <RemovableComment />
                 </ConnectedHiddenBlock>
                 <ConnectedHiddenBlock
                     NamesMap={PostPrintActions}
@@ -86,6 +120,7 @@ const PostprintForm: React.FC = () => {
                 >
                     {/* Перфорация */}
                     <Field fullWidth component={TextField} label="Элементы" type="text" name="description" />
+                    <RemovableComment />
                 </ConnectedHiddenBlock>
                 <ConnectedHiddenBlock
                     NamesMap={PostPrintActions}
@@ -100,6 +135,7 @@ const PostprintForm: React.FC = () => {
                         </Field>
                     </FormControl>
                     <Field fullWidth component={TextField} label="Элементы" type="text" name="description" />
+                    <RemovableComment />
                 </ConnectedHiddenBlock>
             </Grid>
         </Grid>

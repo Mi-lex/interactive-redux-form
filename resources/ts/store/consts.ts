@@ -5,19 +5,19 @@ export const paperJoinersNames: PaperJoinerName[] = [
     'termo',
     'spring',
     'packet',
-    'splice',
+    'glue_bonding',
     'binding',
     'file',
     'special',
 ]
 
 export const postPrintActionNames: PostPrintActionName[] = [
+    'creasing',
+    'bookFolding',
     'lamitation',
     'revanishing',
     'embossing',
     'stampCut',
     'perforation',
     'hotStamp',
-    'creasing',
-    'bookFolding',
 ]

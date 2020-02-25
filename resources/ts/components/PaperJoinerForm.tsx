@@ -118,10 +118,8 @@ const PaperJoinerForm = (): JSX.Element => {
                     <FormControl fullWidth>
                         <InputLabel>Положение</InputLabel>
                         <Field name="position" component={Select}>
-                            <MenuItem value="left">Слева</MenuItem>
-                            <MenuItem value="right">Справа</MenuItem>
-                            <MenuItem value="down">Снизу</MenuItem>
                             <MenuItem value="up">Сверху</MenuItem>
+                            <MenuItem value="left">Слева</MenuItem>
                         </Field>
                     </FormControl>
                     <Field
@@ -136,22 +134,18 @@ const PaperJoinerForm = (): JSX.Element => {
                     <Field fullWidth component={TextField} label="Цвет люверсов" type="text" name="luvColors" />
                     <Field fullWidth component={TextField} label="Цвет ручек" type="text" name="handsColor" />
                 </ConnectedHiddenBlock>
-                <ConnectedHiddenBlock NamesMap={PaperJoiners} checkboxGroupName="paperJoiners" blockName="splice">
+                <ConnectedHiddenBlock NamesMap={PaperJoiners} checkboxGroupName="paperJoiners" blockName="glue_bonding">
                     <FormControl fullWidth>
                         <InputLabel>Тип клея</InputLabel>
-                        <Field name="glueType" component={Select}>
-                            <MenuItem value="type1">Тип 1</MenuItem>
-                            <MenuItem value="type2">Тип 2</MenuItem>
-                            <MenuItem value="type3">Тип 3</MenuItem>
+                        <Field name="type" component={Select}>
+                            <MenuItem value="sitol">Sitol</MenuItem>
                         </Field>
                     </FormControl>
                     <FormControl fullWidth>
                         <InputLabel>Место склеивания</InputLabel>
                         <Field name="position" component={Select}>
-                            <MenuItem value="left">Слева</MenuItem>
-                            <MenuItem value="right">Справа</MenuItem>
-                            <MenuItem value="down">Снизу</MenuItem>
                             <MenuItem value="up">Сверху</MenuItem>
+                            <MenuItem value="left">Слева</MenuItem>
                         </Field>
                     </FormControl>
                 </ConnectedHiddenBlock>
