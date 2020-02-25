@@ -26,7 +26,7 @@ const DecoratedPassportForm = reduxForm({
             id: 63590,
             date: new Date().getTime(),
         },
-        orders: Array(2).fill({}),
+        order_elements: Array(2).fill({}),
     },
 })(Passport)
 

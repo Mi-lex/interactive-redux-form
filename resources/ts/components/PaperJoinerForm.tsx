@@ -48,14 +48,14 @@ const PaperJoinerForm = (): JSX.Element => {
          * this is basicallly radiobtn behaviour but with
          * opportunity to uncheck all inputs
          */
-        clearFields('passport', true, false, 'paperJoiners.spring')
-        dispatch(resetSection('passport', 'paperJoiners'))
+        clearFields('passport', true, false, 'paper_joiner.spring')
+        dispatch(resetSection('passport', 'paper_joiner'))
     }
 
     return (
         <Grid item xs={12} md={6} container spacing={2}>
             <Grid item xs={6} md={5}>
-                <FormSection name="paperJoiners">
+                <FormSection name="paper_joiner">
                     <FormGroup>
                         {/* Чекбоксы баттоны: скрепка, пакет и т.д.  */}
                         {paperJoinersNames.map((joinerName: PaperJoinerName) => (
@@ -76,7 +76,7 @@ const PaperJoinerForm = (): JSX.Element => {
             </Grid>
             {/* Блоки, появляющиеся в зависимости от выделенного чекбокса */}
             <Grid item xs={6}>
-                <ConnectedHiddenBlock NamesMap={PaperJoiners} checkboxGroupName="paperJoiners" blockName="paperClip">
+                <ConnectedHiddenBlock NamesMap={PaperJoiners} checkboxGroupName="paper_joiner" blockName="paper_clip">
                     <Box display="flex" justifyContent="space-between">
                         <FormControlLabel
                             style={{ marginRight: 8, marginBottom: 0 }}
@@ -93,7 +93,7 @@ const PaperJoinerForm = (): JSX.Element => {
 
                     <FormControl fullWidth>
                         <InputLabel>Тип</InputLabel>
-                        <Field name="packageType" component={Select}>
+                        <Field name="type" component={Select}>
                             <MenuItem value="file">Файловая</MenuItem>
                         </Field>
                     </FormControl>
@@ -101,7 +101,7 @@ const PaperJoinerForm = (): JSX.Element => {
                     <Field fullWidth component={TextField} label="Толщина" type="number" name="width" />
                     <Field fullWidth component={TextField} label="Сползание" type="number" name="driftWidth" />
                 </ConnectedHiddenBlock>
-                <ConnectedHiddenBlock NamesMap={PaperJoiners} checkboxGroupName="paperJoiners" blockName="termo">
+                <ConnectedHiddenBlock NamesMap={PaperJoiners} checkboxGroupName="paper_joiner" blockName="termo">
                     <Field fullWidth component={TextField} label="Корешок" type="text" name="spine" />
                     <FormControlLabel
                         control={<Field component={Checkbox} name="klapanCover" />}
@@ -113,7 +113,7 @@ const PaperJoinerForm = (): JSX.Element => {
                     />
                     <FormControlLabel control={<Field component={Checkbox} name="braces" />} label="Укрепить скобами" />
                 </ConnectedHiddenBlock>
-                <ConnectedHiddenBlock NamesMap={PaperJoiners} checkboxGroupName="paperJoiners" blockName="spring">
+                <ConnectedHiddenBlock NamesMap={PaperJoiners} checkboxGroupName="paper_joiner" blockName="spring">
                     <Field fullWidth component={TextField} label="Цвет" type="text" name="color" />
                     <FormControl fullWidth>
                         <InputLabel>Положение</InputLabel>
@@ -130,11 +130,11 @@ const PaperJoinerForm = (): JSX.Element => {
                         name="coverBlockRatio"
                     />
                 </ConnectedHiddenBlock>
-                <ConnectedHiddenBlock NamesMap={PaperJoiners} checkboxGroupName="paperJoiners" blockName="packet">
+                <ConnectedHiddenBlock NamesMap={PaperJoiners} checkboxGroupName="paper_joiner" blockName="packet">
                     <Field fullWidth component={TextField} label="Цвет люверсов" type="text" name="luvColors" />
                     <Field fullWidth component={TextField} label="Цвет ручек" type="text" name="handsColor" />
                 </ConnectedHiddenBlock>
-                <ConnectedHiddenBlock NamesMap={PaperJoiners} checkboxGroupName="paperJoiners" blockName="glue_bonding">
+                <ConnectedHiddenBlock NamesMap={PaperJoiners} checkboxGroupName="paper_joiner" blockName="glue_bonding">
                     <FormControl fullWidth>
                         <InputLabel>Тип клея</InputLabel>
                         <Field name="type" component={Select}>
@@ -149,7 +149,7 @@ const PaperJoinerForm = (): JSX.Element => {
                         </Field>
                     </FormControl>
                 </ConnectedHiddenBlock>
-                <ConnectedHiddenBlock NamesMap={PaperJoiners} checkboxGroupName="paperJoiners" blockName="special">
+                <ConnectedHiddenBlock NamesMap={PaperJoiners} checkboxGroupName="paper_joiner" blockName="special">
                     <Field
                         fullWidth
                         multiline

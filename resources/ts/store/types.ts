@@ -5,7 +5,7 @@ export type IconName = keyof typeof icons
 export type ElementSize = 'sm' | 'md' | 'big'
 
 export enum PaperJoiners {
-    paperClip = 'Скрепка',
+    paper_clip= 'Скрепка',
     termo = 'Термо',
     spring = 'Пружина',
     packet = 'Пакет',

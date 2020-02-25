@@ -1,7 +1,7 @@
 import { PaperJoinerName, PostPrintActionName } from './types'
 
 export const paperJoinersNames: PaperJoinerName[] = [
-    'paperClip',
+    'paper_clip',
     'termo',
     'spring',
     'packet',

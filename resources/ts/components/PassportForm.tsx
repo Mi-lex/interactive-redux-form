@@ -28,7 +28,6 @@ const PassportForm = (): JSX.Element => {
         paymentCash: selector(state, 'payment.payed_by_cash'),
     }))
 
-    const variant = 'standard'
     const classes = useStyles()
 
     return (

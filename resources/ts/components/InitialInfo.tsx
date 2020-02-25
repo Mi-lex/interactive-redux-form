@@ -1,5 +1,5 @@
 import React from 'react'
-import { Field } from 'redux-form'
+import { Field, FormSection } from 'redux-form'
 import { Grid, Box, FormControl, FormControlLabel, InputLabel, MenuItem, FormGroup } from '@material-ui/core'
 import { DatePicker, TextField, Select, Checkbox, TimePicker, TextareaAutosize } from '../components/MaterialReduxForm'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
@@ -49,7 +49,7 @@ const InitialInfo: React.FC<Props> = props => {
                     />
                     <Field
                         component={DatePicker}
-                        name="makeTill"
+                        name="order.completion_date"
                         fullWidth={true}
                         label="Изготовить до"
                         variant={variant}
@@ -71,7 +71,7 @@ const InitialInfo: React.FC<Props> = props => {
                     </FormControl>
                     <Field
                         component={TextareaAutosize}
-                        name="adress"
+                        name="delivery.adress"
                         label="Адрес"
                         type="text"
                         fullWidth
@@ -93,36 +93,41 @@ const InitialInfo: React.FC<Props> = props => {
                     <Field component={TimePicker} name="order.time" fullWidth={true} label="к" variant={variant} />
                     <FormControl className={classes.formControl}>
                         <InputLabel>В</InputLabel>
-                        <Field name="packageType" variant={variant} component={Select}>
+                        <Field name="package.type" variant={variant} component={Select}>
                             <MenuItem value="коробка">коробку</MenuItem>
                             <MenuItem value="пачка">пачку</MenuItem>
                         </Field>
                     </FormControl>
-                    <FormGroup>
-                        <FormControlLabel
-                            control={<Field component={Checkbox} name="sampleOnPackage" />}
-                            label="Образец на упаковку"
-                        />
-                        <FormControlLabel
-                            control={<Field component={Checkbox} name="sortByTypes" />}
-                            label="По видам"
-                        />
-                        <FormControlLabel control={<Field component={Checkbox} name="label" />} label="Ярлык" />
-                        <FormControlLabel
-                            control={<Field component={Checkbox} name="palleting" />}
-                            label="Паллетирование"
-                        />
-                        <FormControlLabel
-                            control={<Field component={Checkbox} name="stretchWrap" />}
-                            label="Стреч-пленка"
-                        />
-                    </FormGroup>
+                    <FormSection name="package">
+                        <FormGroup>
+                            <FormControlLabel
+                                control={<Field component={Checkbox} name="sample" />}
+                                label="Образец на упаковку"
+                            />
+                            <FormControlLabel
+                                control={<Field component={Checkbox} name="sort" />}
+                                label="По видам"
+                            />
+                            <FormControlLabel
+                                control={<Field component={Checkbox} name="label" />}
+                                label="Ярлык"
+                            />
+                            <FormControlLabel
+                                control={<Field component={Checkbox} name="palleting" />}
+                                label="Паллетирование"
+                            />
+                            <FormControlLabel
+                                control={<Field component={Checkbox} name="stretch_film" />}
+                                label="Стреч-пленка"
+                            />
+                        </FormGroup>
+                    </FormSection>
                 </Grid>
             </Grid>
             <Grid item container xs={12} md={6} className={classes.root} direction="column">
                 <Field
                     component={TextareaAutosize}
-                    name="importantInfo"
+                    name="order.important_info"
                     label="Важно"
                     type="text"
                     fullWidth

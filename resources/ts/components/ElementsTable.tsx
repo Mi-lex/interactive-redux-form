@@ -19,13 +19,13 @@ const ElementsRow: React.FC<ElementsFieldPropType> = ({ name }) => (
                 <Field name="stripes" label="Полос" fullWidth component={renderTextField} type="number" />
             </Grid>
             <Grid item xs={12} sm={6} md={2}>
-                <Field name="wrapMaterial" label="Материал" fullWidth component={renderTextField} type="text" />
+                <Field name="material" label="Материал" fullWidth component={renderTextField} type="text" />
             </Grid>
             <Grid item xs={12} sm={6} md={2}>
                 <FormControl fullWidth>
                     {/* офсет, цифра, уф-принтер, плоттер, без печати */}
                     <InputLabel>Печать</InputLabel>
-                    <Field name="packageType" component={renderSelect}>
+                    <Field name="print_type" component={renderSelect}>
                         <MenuItem value="без_печати">Без печати</MenuItem>
                         <MenuItem value="офсет">Оффсет</MenuItem>
                         <MenuItem value="цифровая">Цифровая</MenuItem>
@@ -39,7 +39,7 @@ const ElementsRow: React.FC<ElementsFieldPropType> = ({ name }) => (
             </Grid>
             <Grid item xs={12} md={2}>
                 <Field
-                    name="colorInterpretation"
+                    name="color_interpretation"
                     fullWidth
                     label="Расшифровка"
                     component={renderTextField}
@@ -53,7 +53,7 @@ const ElementsRow: React.FC<ElementsFieldPropType> = ({ name }) => (
 const ElementsTable = ({ fields }: WrappedFieldArrayProps<string>): JSX.Element => (
     <>
         {fields.map((order, index) => (
-            <ElementsRow key={index} name={`${order}Element`} />
+            <ElementsRow key={index} name={`${order}`} />
         ))}
 
         <Box display="flex" width="100%" justifyContent="flex-end" pt={1} pr={2}>
@@ -83,7 +83,7 @@ const ElementsForm: React.FC = () => (
         borderBottom="1px solid rgba(0, 0, 0, 0.12)"
         borderRadius={4}
     >
-        <FieldArray name="orders" component={ElementsTable} />
+        <FieldArray name="order_elements" component={ElementsTable} />
     </Box>
 )
 
