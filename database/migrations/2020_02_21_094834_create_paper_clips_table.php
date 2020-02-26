@@ -15,13 +15,14 @@ class CreatePaperClipsTable extends Migration
     {
         Schema::create('paper_clips', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('type')->nullable(); // ??
             $table->boolean('auto')->default(false);
             $table->boolean('manual')->default(false);
             $table->unsignedInteger('quantity')->nullable();
             $table->unsignedMediumInteger('width')->nullable();
             $table->unsignedMediumInteger('drift')->nullable();
-
+            
+            $table->unsignedSmallInteger('type_id')->nullable();
+            $table->foreign('type_id')->references('id')->on('paper_clip_types');
             $table->unsignedMediumInteger('paper_joiner_id');
             $table->foreign('paper_joiner_id')->references('id')->on('paper_joiners')->onDelete('cascade');
         });

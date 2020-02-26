@@ -13,5 +13,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(PaymentOrgTypeSeeder::class);
         $this->call(PrintTypeSeeder::class);
+        $this->call(PaperClipTypeSeeder::class);
     }
 }
