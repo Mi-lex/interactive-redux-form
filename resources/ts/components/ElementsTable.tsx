@@ -2,8 +2,9 @@ import React from 'react'
 import { Field, FieldArray, WrappedFieldArrayProps, FormSection } from 'redux-form'
 import renderTextField from './MaterialReduxForm/TextField'
 import renderSelect from './MaterialReduxForm/Select'
-import PassportBtn from './PassportBtn'
-import { Grid, FormControl, InputLabel, MenuItem, Box } from '@material-ui/core'
+import { Grid, FormControl, InputLabel, MenuItem, Box, IconButton } from '@material-ui/core'
+import AddRow from '@material-ui/icons/PlaylistAdd'
+import RemoveRow from '@material-ui/icons/DeleteForever'
 
 type ElementsFieldPropType = {
     name: string
@@ -57,20 +58,24 @@ const ElementsTable = ({ fields }: WrappedFieldArrayProps<string>): JSX.Element 
         ))}
 
         <Box display="flex" width="100%" justifyContent="flex-end" pt={1} pr={2}>
-            <PassportBtn
-                size="sm"
-                iconName={'newRow'}
+            <IconButton
+                aria-label="добавить строку"
                 onClick={(): void => {
                     fields.push('')
                 }}
-            />
-            <PassportBtn
-                size="sm"
-                iconName={'deleteRow'}
+                color="primary"
+            >
+                <AddRow fontSize="small" />
+            </IconButton>
+            <IconButton
+                aria-label="удалить строку"
                 onClick={(): void => {
                     fields.pop()
                 }}
-            />
+                color="primary"
+            >
+                <RemoveRow fontSize="small" />
+            </IconButton>
         </Box>
     </>
 )

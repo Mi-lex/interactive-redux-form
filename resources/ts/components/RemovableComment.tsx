@@ -1,41 +1,41 @@
 import React from 'react'
 import Box from '@material-ui/core/Box'
-import PassportBtn from './PassportBtn'
+import IconButton from '@material-ui/core/IconButton'
 import { Field, FieldArray, WrappedFieldArrayProps } from 'redux-form'
 import { TextareaAutosize } from './MaterialReduxForm'
+import AddComment from '@material-ui/icons/PlaylistAdd'
+import RemoveComment from '@material-ui/icons/DeleteForever'
 
 const Comments = ({ fields }: WrappedFieldArrayProps<string>): JSX.Element => (
     <>
         {fields.map((comment, index) => (
-            <Field
-                component={TextareaAutosize}
-                label="Дополнительно"
-                fullWidth
-                key={index}
-                name={comment}
-            />
+            <Field component={TextareaAutosize} label="Дополнительно" fullWidth key={index} name={comment} />
         ))}
-        <Box display="flex" width="100%" justifyContent="flex-end" pt={1} pr={2}>
-            <PassportBtn
-                size="sm"
-                iconName={'newRow'}
+        <Box display="flex" width="100%" justifyContent="flex-end" pt={1}>
+            <IconButton
+                aria-label="добавить строку"
                 onClick={(): void => {
                     fields.push('')
                 }}
-            />
-            <PassportBtn
-                size="sm"
-                iconName={'deleteRow'}
+                color="primary"
+            >
+                <AddComment fontSize="small" />
+            </IconButton>
+            <IconButton
+                aria-label="удалить строку"
                 onClick={(): void => {
                     fields.pop()
                 }}
-            />
+                color="primary"
+            >
+                <RemoveComment fontSize="small" />
+            </IconButton>
         </Box>
     </>
 )
 
 const RemovableComment = () => {
-    return <FieldArray name="comments" component={Comments} />
+    return <FieldArray name="additonals" component={Comments} />
 }
 
 export default RemovableComment

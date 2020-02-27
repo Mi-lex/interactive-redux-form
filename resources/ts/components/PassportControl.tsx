@@ -1,7 +1,10 @@
 import React from 'react'
-import PassportBtn from './PassportBtn'
-import Box from '@material-ui/core/Box'
+import { Box, IconButton } from '@material-ui/core'
 import { makeStyles, Theme } from '@material-ui/core/styles'
+import NoteAdd from '@material-ui/icons/NoteAdd'
+import LibraryAdd from '@material-ui/icons/LibraryAdd'
+import DoneAll from '@material-ui/icons/DoneAll'
+import Print from '@material-ui/icons/Print'
 
 const useStyles = makeStyles((theme: Theme) => ({
     container: {
@@ -13,11 +16,20 @@ const PassportControl: React.FC = () => {
     const classes = useStyles()
 
     return (
-        <Box display="flex" className={classes.container} justifyContent="flex-end" alignItems="center" mb={2} py={2}>
-            <PassportBtn size="md" style={{ marginRight: 'auto' }} iconName="createNewPassport" />
-            <PassportBtn size="md" iconName="addPassport" />
-            <PassportBtn size="md" iconName="approveForm" />
-            <PassportBtn size="md" iconName="print" />
+        <Box display="flex" className={classes.container} justifyContent="flex-end" alignItems="center" mb={2} py={1}>
+            <IconButton size="medium" aria-label="добавить документ" color="primary" style={{ marginRight: 'auto' }}>
+                <NoteAdd fontSize="large" />
+            </IconButton>
+
+            <IconButton size="medium" aria-label="добавить документ" color="primary">
+                <LibraryAdd fontSize="large" />
+            </IconButton>
+            <IconButton size="medium" aria-label="завершить заполнение" color="primary">
+                <DoneAll fontSize="large" />
+            </IconButton>
+            <IconButton size="medium" aria-label="печать" color="primary">
+                <Print fontSize="large" />
+            </IconButton>
         </Box>
     )
 }
