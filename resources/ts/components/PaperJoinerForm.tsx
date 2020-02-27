@@ -80,12 +80,12 @@ const PaperJoinerForm = (): JSX.Element => {
                     <Box display="flex" justifyContent="space-between">
                         <FormControlLabel
                             style={{ marginRight: 8, marginBottom: 0 }}
-                            control={<Field component={Checkbox} name="auto" />}
+                            control={<Field component={Checkbox} name="автомат" />}
                             label="Автомат"
                         />
                         <FormControlLabel
                             style={{ marginRight: 8, marginBottom: 0 }}
-                            control={<Field component={Checkbox} name="manual" />}
+                            control={<Field component={Checkbox} name="ручная" />}
                             label="Ручная"
                         />
                     </Box>
@@ -94,21 +94,22 @@ const PaperJoinerForm = (): JSX.Element => {
                     <FormControl fullWidth>
                         <InputLabel>Тип</InputLabel>
                         <Field name="type" component={Select}>
-                            <MenuItem value="file">Файловая</MenuItem>
+                            <MenuItem value="файловая">Файловая</MenuItem>
+                            <MenuItem value="овальная">Файловая</MenuItem>
                         </Field>
                     </FormControl>
 
                     <Field fullWidth component={TextField} label="Толщина" type="number" name="width" />
-                    <Field fullWidth component={TextField} label="Сползание" type="number" name="driftWidth" />
+                    <Field fullWidth component={TextField} label="Сползание" type="number" name="drift" />
                 </ConnectedHiddenBlock>
                 <ConnectedHiddenBlock NamesMap={PaperJoiners} checkboxGroupName="paper_joiner" blockName="termo">
-                    <Field fullWidth component={TextField} label="Корешок" type="text" name="spine" />
+                    <Field fullWidth component={TextField} label="Корешок" type="text" name="spine_width" />
                     <FormControlLabel
-                        control={<Field component={Checkbox} name="klapanCover" />}
+                        control={<Field component={Checkbox} name="flaps_cover" />}
                         label="Обложка с клапаном"
                     />
                     <FormControlLabel
-                        control={<Field component={Checkbox} name="position" />}
+                        control={<Field component={Checkbox} name="flush_with_block" />}
                         label="Вровень с блоком"
                     />
                     <FormControlLabel control={<Field component={Checkbox} name="braces" />} label="Укрепить скобами" />
@@ -127,12 +128,12 @@ const PaperJoinerForm = (): JSX.Element => {
                         component={TextField}
                         label="Обложка &gt; блока"
                         type="number"
-                        name="coverBlockRatio"
+                        name="cover_block_difference"
                     />
                 </ConnectedHiddenBlock>
                 <ConnectedHiddenBlock NamesMap={PaperJoiners} checkboxGroupName="paper_joiner" blockName="packet">
-                    <Field fullWidth component={TextField} label="Цвет люверсов" type="text" name="luvColors" />
-                    <Field fullWidth component={TextField} label="Цвет ручек" type="text" name="handsColor" />
+                    <Field fullWidth component={TextField} label="Цвет люверсов" type="text" name="grommet_color" />
+                    <Field fullWidth component={TextField} label="Цвет ручек" type="text" name="hands_color" />
                 </ConnectedHiddenBlock>
                 <ConnectedHiddenBlock NamesMap={PaperJoiners} checkboxGroupName="paper_joiner" blockName="glue_bonding">
                     <FormControl fullWidth>

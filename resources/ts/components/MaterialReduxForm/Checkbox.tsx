@@ -19,6 +19,7 @@ const CheckboxField: React.FC<Props> = props => {
                 onChange={input.onChange}
                 color="primary"
                 value={value}
+                {...custom}
             />
             {touched && error && <span className="error_msg">{error}</span>}
         </>

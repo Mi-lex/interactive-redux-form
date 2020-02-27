@@ -29,14 +29,14 @@ export type InputOptions = {
 }
 
 export enum PostPrintActions {
+    creasing = 'Биговать',
+    book_folding= 'Фальцевать',
     lamitation = 'Ламинировать',
     revanishing = 'Лакировать',
     embossing = 'Тиснить фольгой',
-    stampCut = 'Вырубить штампом',
-    creasing = 'Биговать',
-    bookFolding = 'Фальцевать',
+    stamp_cut= 'Вырубить штампом',
     perforation = 'Перфорация',
-    hotStamp = 'Конгрев',
+    hot_stamp= 'Конгрев',
 }
 
 export type PostPrintActionName = keyof typeof PostPrintActions
