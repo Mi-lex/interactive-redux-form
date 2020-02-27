@@ -7,15 +7,16 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent')
 const postcssImport = require('postcss-import')
 const cssvariables = require('postcss-css-variables')
-const SpriteLoaderPlugin = require('svg-sprite-loader/plugin')
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 const OUTPUT_FOLDER = 'public'
 const ENTRY_FOLDER = 'resources'
 
-const getStyleLoaders = (cssOptions, preProcessor) => {
+const getStyleLoaders = cssOptions => {
     const loaders = [
         {
             loader: MiniCssExtractPlugin.loader,
@@ -32,25 +33,6 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
             },
         },
     ]
-    if (preProcessor) {
-        if (Array.isArray(preProcessor)) {
-            for (let i = 0; i < preProcessor.length; i++) {
-                const element = preProcessor[i]
-
-                if (typeof element === 'string') {
-                    loaders.push(require.resolve(element))
-                } else {
-                    loaders.push(
-                        Object.assign(element, {
-                            loader: require.resolve(element.loader),
-                        }),
-                    )
-                }
-            }
-        } else {
-            loaders.push(require.resolve(preProcessor))
-        }
-    }
     return loaders
 }
 
@@ -65,13 +47,13 @@ const config = {
         path: path.resolve(__dirname, OUTPUT_FOLDER),
         filename: '[name].js',
     },
-    devtool: 'source-map',
+    // devtool: 'source-map',
     module: {
         rules: [
             {
                 enforce: 'pre',
                 test: /\.js$/,
-                loader: 'source-map-loader',
+                // loader: 'source-map-loader',
             },
             {
                 test: /\.css$/,
@@ -88,24 +70,15 @@ const config = {
                 }),
             },
             {
+                test: /\.svg$/,
+                loader: '@svgr/webpack',
+            },
+            {
                 test: /\.eot|ttf|woff2?$/,
                 loader: 'file-loader',
                 options: {
                     name: './fonts/[name].[ext]',
                 },
-            },
-            {
-                test: /\.svg$/,
-                use: [
-                    {
-                        loader: 'svg-sprite-loader',
-                        options: {
-                            extract: true,
-                            publicPath: `/img/`,
-                        },
-                    },
-                    'svgo-loader',
-                ],
             },
             {
                 test: /\.(png|jpe?g|gif)$/,
@@ -116,7 +89,6 @@ const config = {
                             name: './img/[name].[ext]',
                         },
                     },
-
                     'img-loader',
                 ],
             },
@@ -137,8 +109,7 @@ const config = {
             filename: '[name].css',
             chunkFilename: '[name].chunk.css',
         }),
-        // corresponding plugin for svg-sprite-loader
-        new SpriteLoaderPlugin(),
+        // copy static assets
         // for reloading laravel server
         // new BrowserSyncPlugin({
         //     // browse to http://localhost:8000/ during development,
@@ -176,6 +147,15 @@ module.exports = (env, argv) => {
                 dry: false,
             }),
         )
+
+        const productionPlugins = [
+            new CompressionPlugin({
+                test: /\.js(\?.*)?$/i,
+            }),
+            new BundleAnalyzerPlugin(),
+        ]
+
+        config.plugins = [...config.plugins, ...productionPlugins]
 
         // Minimizing
         config.optimization = {
