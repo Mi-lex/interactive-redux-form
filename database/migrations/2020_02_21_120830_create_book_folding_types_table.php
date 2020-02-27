@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePerforationsTable extends Migration
+class CreateBookFoldingTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreatePerforationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('perforations', function (Blueprint $table) {
-            $table->bigIncrements('id');
-
-            $table->unsignedBigInteger('post_action_id');
-            $table->foreign('post_action_id')->references('id')->on('post_actions');
+        Schema::create('book_folding_types', function (Blueprint $table) {
+            $table->tinyIncrements('id');
+            $table->string('name');
         });
     }
 
@@ -28,6 +26,6 @@ class CreatePerforationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('perforations');
+        Schema::dropIfExists('book_folding_types');
     }
 }

@@ -16,6 +16,8 @@ class CreatePostActionsTable extends Migration
         Schema::create('post_actions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('type');
+            $table->text('elements')->nullable();
+            $table->text('additional')->nullable();
         });
     }
 

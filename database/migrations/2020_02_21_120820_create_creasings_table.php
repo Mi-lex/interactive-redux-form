@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePerforationsTable extends Migration
+class CreateCreasingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CreatePerforationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('perforations', function (Blueprint $table) {
+        Schema::create('creasings', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('parts');
 
             $table->unsignedBigInteger('post_action_id');
             $table->foreign('post_action_id')->references('id')->on('post_actions');
@@ -28,6 +29,6 @@ class CreatePerforationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('perforations');
+        Schema::dropIfExists('creasings');
     }
 }

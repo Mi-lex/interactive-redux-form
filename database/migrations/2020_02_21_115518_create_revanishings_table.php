@@ -15,8 +15,6 @@ class CreateRevanishingsTable extends Migration
     {
         Schema::create('revanishings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('description');
-
             $table->unsignedBigInteger('post_action_id');
             $table->foreign('post_action_id')->references('id')->on('post_actions');
 
