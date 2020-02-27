@@ -1,12 +1,11 @@
 import React from 'react'
+import { reduxForm } from 'redux-form'
 import Paper from '@material-ui/core/Paper'
 import Container from '@material-ui/core/Container'
-import { reduxForm } from 'redux-form'
-import PassportControl from '../components/PassportControl'
-import PassportForm from '../components/PassportForm'
-import { palette } from '@material-ui/system'
 import blue from '@material-ui/core/colors/blue'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
+import PassportControl from '../components/PassportControl'
+import PassportForm from '../components/PassportForm'
 
 const textStyle = blue[700]
 

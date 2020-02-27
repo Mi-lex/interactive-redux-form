@@ -1,6 +1,7 @@
 import React from 'react'
 import { FormSection, Field } from 'redux-form'
-import { FormControlLabel, Grid, Box } from '@material-ui/core'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Grid from '@material-ui/core/Grid'
 import TextField from './MaterialReduxForm/TextField'
 import Checkbox from './MaterialReduxForm/Checkbox'
 

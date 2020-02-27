@@ -1,15 +1,16 @@
 import React from 'react'
-import {
-    AccountCircle,
-    Menu as MenuIcon,
-    Notifications as NotificationsIcon,
-    Mail as MailIcon,
-    MoreVert as MoreIcon,
-} from '@material-ui/icons'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Badge from '@material-ui/core/Badge'
-import { Toolbar, IconButton, Menu, MenuItem } from '@material-ui/core'
+import Toolbar from '@material-ui/core/Toolbar'
+import IconButton from '@material-ui/core/IconButton'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
+import AccountCircle from '@material-ui/icons/AccountCircle'
+import MailIcon from '@material-ui/icons/Mail'
+import NotificationsIcon from '@material-ui/icons/Notifications'
+import MenuIcon from '@material-ui/icons/Menu'
+import MoreIcon from '@material-ui/icons/MoreVert'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -150,8 +151,8 @@ export default function PageHeader(props: Props) {
                                 <MailIcon />
                             </Badge>
                         </IconButton>
-                        <IconButton aria-label="show 17 new notifications" color="inherit">
-                            <Badge badgeContent={17} color="secondary">
+                        <IconButton aria-label="show 7 new notifications" color="inherit">
+                            <Badge badgeContent={7} color="secondary">
                                 <NotificationsIcon />
                             </Badge>
                         </IconButton>

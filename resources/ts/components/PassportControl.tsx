@@ -1,5 +1,6 @@
 import React from 'react'
-import { Box, IconButton } from '@material-ui/core'
+import Box from '@material-ui/core/Box'
+import IconButton from '@material-ui/core/IconButton'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import NoteAdd from '@material-ui/icons/NoteAdd'
 import LibraryAdd from '@material-ui/icons/LibraryAdd'

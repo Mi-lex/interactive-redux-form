@@ -1,14 +1,14 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Orders from '../pages/Orders'
+import Container from '@material-ui/core/Container'
+import Drawer from '@material-ui/core/Drawer'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import ruLocale from 'date-fns/locale/ru'
 import DateFnsUtils from '@date-io/date-fns'
+import Orders from '../pages/Orders'
 import Passport from '../pages/Passport'
-import PassportV2 from '../pages/Passport.v2'
-import Container from '@material-ui/core/Container'
 import PageHeader from '../components/PageHeader'
-import Drawer from '@material-ui/core/Drawer'
+import PassportV2 from '../pages/Passport.v2'
 import SideList from '../components/SideList'
 
 const App: React.FC = () => {

@@ -1,7 +1,11 @@
 import React from 'react'
 import { Field } from 'redux-form'
 import { Switcher, Select, DatePicker, TextField } from './MaterialReduxForm'
-import { Grid, Divider, FormControl, InputLabel, MenuItem } from '@material-ui/core'
+import Grid from '@material-ui/core/Grid'
+import Divider from '@material-ui/core/Divider'
+import FormControl from '@material-ui/core/FormControl'
+import InputLabel from '@material-ui/core/InputLabel'
+import MenuItem from '@material-ui/core/MenuItem'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme: Theme) =>
