@@ -99,8 +99,8 @@ const InitialInfo: React.FC<Props> = props => {
                     <FormControl className={classes.formControl}>
                         <InputLabel>В</InputLabel>
                         <Field name="package.type" variant={variant} component={Select}>
-                            <MenuItem value="коробка">коробку</MenuItem>
-                            <MenuItem value="пачка">пачку</MenuItem>
+                            <MenuItem value="коробку">коробку</MenuItem>
+                            <MenuItem value="пачку">пачку</MenuItem>
                         </Field>
                     </FormControl>
                     <FormSection name="package">

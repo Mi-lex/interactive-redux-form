@@ -102,7 +102,7 @@ const PaperJoinerForm = (): JSX.Element => {
                         <InputLabel>Тип</InputLabel>
                         <Field name="type" component={Select}>
                             <MenuItem value="файловая">Файловая</MenuItem>
-                            <MenuItem value="овальная">Файловая</MenuItem>
+                            <MenuItem value="овальная">Овальная</MenuItem>
                         </Field>
                     </FormControl>
 

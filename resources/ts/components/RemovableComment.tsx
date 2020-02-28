@@ -35,7 +35,7 @@ const Comments = ({ fields }: WrappedFieldArrayProps<string>): JSX.Element => (
 )
 
 const RemovableComment = () => {
-    return <FieldArray name="additonals" component={Comments} />
+    return <FieldArray name="additonal" component={Comments} />
 }
 
 export default RemovableComment

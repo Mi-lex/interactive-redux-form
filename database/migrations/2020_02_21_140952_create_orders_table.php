@@ -17,11 +17,10 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name')->nullable();
             $table->string('type')->nullable();
-            $table->text('important_info');
+            $table->text('important_info')->nullable();
             $table->timestamps();
             $table->date('completion_date')->nullabe();
             $table->time('completion_time')->nullable();
-
             /**
              * implementation details. Might be a good idea to move
              * details of implementation into separate table, might not ¯\_(ツ)_/¯ 
@@ -31,10 +30,10 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('similar_order_id')->nullable();
 
             $table->unsignedMediumInteger('manager_id')->nullable();
-            $table->unsignedMediumInteger('customer_id');
+            $table->unsignedMediumInteger('customer_id')->nullable();
             $table->unsignedMediumInteger('payment_id')->nullable();
-            $table->unsignedMediumInteger('paper_joiner_id')->nullable();
             $table->unsignedMediumInteger('package_id')->nullable();
+            $table->unsignedMediumInteger('paper_joiner_id')->nullable();
             $table->unsignedMediumInteger('delivery_id')->nullable();
             $table->unsignedBigInteger('post_action_id')->nullable();
 
