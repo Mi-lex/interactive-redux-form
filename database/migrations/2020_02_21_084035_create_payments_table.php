@@ -18,8 +18,8 @@ class CreatePaymentsTable extends Migration
             $table->boolean('payed_by_cash');
             $table->date('date')->nullable();
 
-            $table->unsignedMediumInteger('account_id')->nullable();
-            $table->foreign('account_id')->references('id')->on('payment_accounts');
+            $table->unsignedMediumInteger('operation_id')->nullable();
+            $table->foreign('operation_id')->references('id')->on('payment_operations');
         });
     }
 

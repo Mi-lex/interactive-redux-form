@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePaymentAccountsTable extends Migration
+class CreatePaymentOperationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePaymentAccountsTable extends Migration
      */
     public function up()
     {
-        Schema::create('payment_accounts', function (Blueprint $table) {
+        Schema::create('payment_operations', function (Blueprint $table) {
             $table->mediumIncrements('id');
             $table->unsignedBigInteger('account_number');
 
@@ -29,6 +29,6 @@ class CreatePaymentAccountsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payment_accounts');
+        Schema::dropIfExists('payment_operations');
     }
 }
