@@ -5,12 +5,7 @@ import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox'
 type Props = WrappedFieldProps & CheckboxProps
 
 const CheckboxField: React.FC<Props> = props => {
-    const {
-        input,
-        value,
-        meta: { touched, invalid, error },
-        ...custom
-    } = props
+    const { input, ...custom } = props
     return (
         <>
             <Checkbox
@@ -18,10 +13,8 @@ const CheckboxField: React.FC<Props> = props => {
                 checked={input.value ? true : false}
                 onChange={input.onChange}
                 color="primary"
-                value={value}
                 {...custom}
             />
-            {touched && error && <span className="error_msg">{error}</span>}
         </>
     )
 }

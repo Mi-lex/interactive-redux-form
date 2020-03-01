@@ -5,7 +5,7 @@ import { WrappedFieldProps } from 'redux-form'
 type Props = SelectProps & WrappedFieldProps
 
 const SelectField: React.FC<Props> = ({ input, label, children, ...rest }) => (
-    <Select {...input} onChange={value => input.onChange(value)} {...rest}>
+    <Select {...input} onChange={input.onChange} {...rest}>
         {children}
     </Select>
 )

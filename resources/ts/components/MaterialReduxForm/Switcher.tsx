@@ -6,9 +6,9 @@ import Switch, { SwitchProps } from '@material-ui/core/Switch'
 
 type Props = WrappedFieldProps & SwitchProps & FormControlLabelProps
 
-const Switcher: React.FC<Props> = ({ input, color, label, ...rest }: Props) => (
+const Switcher: React.FC<Props> = ({ input, label, ...rest }: Props) => (
     <FormControlLabel
-        control={<Switch onChange={(ev, value) => input.onChange(value)} {...input} {...rest} color={color} />}
+        control={<Switch {...input} onChange={(_, value) => input.onChange(value)} {...rest} />}
         label={label}
     />
 )

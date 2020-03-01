@@ -35,7 +35,8 @@ const TextareaAutosizeField: React.FC<Props> = props => {
                 inputProps: { rowsMin },
             }}
             label={label}
-            error={touched && invalid}
+            error={error}
+            helperText={touched && error}
             {...custom}
         />
     )
