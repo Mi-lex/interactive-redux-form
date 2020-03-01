@@ -20,22 +20,17 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 )
 
-const selector: Function = formValueSelector('passport')
-
 const PassportForm = (): JSX.Element => {
-    const requiredDelivery = useSelector(state => selector(state, 'delivery.should_be_delivered'))
-    const paymentCash = useSelector(state => selector(state, 'payment.payed_by_cash'))
-
     const classes = useStyles()
 
     return (
         <Grid container spacing={2}>
             {/* Sidebar */}
-            <PassportSidebar paymentCash={paymentCash} />
+            <PassportSidebar />
             {/* Initial */}
             <Grid item container xs={12} sm={6} md={10} justify="space-between" className={classes.root}>
                 {/* Initial info packaging */}
-                <InitialInfo requiredDelivery={requiredDelivery} />
+                <InitialInfo />
                 {/* Details */}
                 <Details />
                 {/* Elements */}

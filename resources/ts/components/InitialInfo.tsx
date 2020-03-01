@@ -9,6 +9,7 @@ import FormGroup from '@material-ui/core/FormGroup'
 import { DatePicker, TextField, Select, Checkbox, TimePicker, TextareaAutosize } from '../components/MaterialReduxForm'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import AccessAlarm from '@material-ui/icons/AccessAlarm'
+import DeliveryBlock from './DeliveryBlock'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -30,12 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 )
 
-type Props = {
-    requiredDelivery: boolean
-}
-
-const InitialInfo: React.FC<Props> = props => {
-    const { requiredDelivery } = props
+const InitialInfo: React.FC = () => {
     const variant = 'standard'
     const classes = useStyles()
 
@@ -72,22 +68,7 @@ const InitialInfo: React.FC<Props> = props => {
                         variant={variant}
                         label="Упаковать по"
                     />
-                    <FormControl fullWidth style={{ marginBottom: 2 }}>
-                        <FormControlLabel
-                            control={<Field name="delivery.should_be_delivered" component={Checkbox} />}
-                            label="Доставить"
-                        />
-                    </FormControl>
-                    <Field
-                        component={TextareaAutosize}
-                        name="delivery.adress"
-                        label="Адрес"
-                        type="text"
-                        fullWidth
-                        rowsMin={6}
-                        variant="outlined"
-                        disabled={!requiredDelivery}
-                    />
+                    <DeliveryBlock />
                 </Grid>
                 {/* Right column */}
                 <Grid item xs={12} md={6} className={classes.root}>
