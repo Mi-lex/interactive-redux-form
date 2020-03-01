@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { formValueSelector } from 'redux-form'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
@@ -23,10 +23,8 @@ const useStyles = makeStyles((theme: Theme) =>
 const selector: Function = formValueSelector('passport')
 
 const PassportForm = (): JSX.Element => {
-    const { requiredDelivery, paymentCash } = useSelector(state => ({
-        requiredDelivery: selector(state, 'delivery.should_be_delivered'),
-        paymentCash: selector(state, 'payment.payed_by_cash'),
-    }))
+    const requiredDelivery = useSelector(state => selector(state, 'delivery.should_be_delivered'))
+    const paymentCash = useSelector(state => selector(state, 'payment.payed_by_cash'))
 
     const classes = useStyles()
 

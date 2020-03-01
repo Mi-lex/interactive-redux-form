@@ -12,23 +12,7 @@ const TextInput: React.FC<Props> = props => {
         ...custom
     } = props
 
-    const [value, setValue] = useState('')
-
-    const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setValue(e.target.value)
-    }
-
-    return (
-        <TextField
-            {...input}
-            value={value}
-            onChange={onChangeHandler}
-            label={label}
-            error={error}
-            helperText={touched && error}
-            {...custom}
-        />
-    )
+    return <TextField {...input} label={label} error={invalid} helperText={touched && error} {...custom} />
 }
 
 export default TextInput
