@@ -47,7 +47,7 @@ const PassportSidebar: React.FC<Props> = (props: Props) => {
                 label="Название"
             />
             <Divider variant="fullWidth" className={classes.divider} />
-            <Field name="payment.payed_by_cash" label="Наличными" color="primary" component={Switcher} />
+            <Field name="payment.payed_by_cash" label="Наличными" props={{ color: 'primary' }} component={Switcher} />
             <FormControl className={classes.formControl}>
                 <InputLabel>Организация</InputLabel>
                 <Field

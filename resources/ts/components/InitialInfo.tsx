@@ -8,6 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import FormGroup from '@material-ui/core/FormGroup'
 import { DatePicker, TextField, Select, Checkbox, TimePicker, TextareaAutosize } from '../components/MaterialReduxForm'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+import AccessAlarm from '@material-ui/icons/AccessAlarm'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -54,10 +55,13 @@ const InitialInfo: React.FC<Props> = props => {
                     />
                     <Field
                         component={DatePicker}
+                        variant="inline"
                         name="order.completion_date"
-                        fullWidth={true}
+                        props={{
+                            format: 'dd.MM.yy',
+                            fullWidth: true,
+                        }}
                         label="Изготовить до"
-                        variant={variant}
                     />
                     <Field
                         component={TextField}
@@ -90,12 +94,25 @@ const InitialInfo: React.FC<Props> = props => {
                     <Field
                         component={DatePicker}
                         name="order.date"
-                        fullWidth={true}
+                        props={{
+                            format: 'dd.MM.yy',
+                            fullWidth: true,
+                        }}
                         label="от"
-                        variant={variant}
                         disabled={true}
                     />
-                    <Field component={TimePicker} name="order.time" fullWidth={true} label="к" variant={variant} />
+                    <Field
+                        component={TimePicker}
+                        name="order.time"
+                        props={{
+                            format: 'HH:mm',
+                            keyboardIcon: <AccessAlarm />,
+                        }}
+                        fullWidth={true}
+                        // keyboardIcon={<AccessAlarm />}
+                        label="к"
+                        variant={variant}
+                    />
                     <FormControl className={classes.formControl}>
                         <InputLabel>В</InputLabel>
                         <Field name="package.type" variant={variant} component={Select}>
@@ -109,14 +126,8 @@ const InitialInfo: React.FC<Props> = props => {
                                 control={<Field component={Checkbox} name="sample" />}
                                 label="Образец на упаковку"
                             />
-                            <FormControlLabel
-                                control={<Field component={Checkbox} name="sort" />}
-                                label="По видам"
-                            />
-                            <FormControlLabel
-                                control={<Field component={Checkbox} name="label" />}
-                                label="Ярлык"
-                            />
+                            <FormControlLabel control={<Field component={Checkbox} name="sort" />} label="По видам" />
+                            <FormControlLabel control={<Field component={Checkbox} name="label" />} label="Ярлык" />
                             <FormControlLabel
                                 control={<Field component={Checkbox} name="palleting" />}
                                 label="Паллетирование"
