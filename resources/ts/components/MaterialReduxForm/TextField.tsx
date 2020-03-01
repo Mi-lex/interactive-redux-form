@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { WrappedFieldProps } from 'redux-form'
 import TextField, { TextFieldProps } from '@material-ui/core/TextField'
 
@@ -11,7 +11,24 @@ const TextInput: React.FC<Props> = props => {
         meta: { touched, invalid, error },
         ...custom
     } = props
-    return <TextField label={label} error={touched && invalid} helperText={touched && error} {...input} {...custom} />
+
+    const [value, setValue] = useState('')
+
+    const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setValue(e.target.value)
+    }
+
+    return (
+        <TextField
+            {...input}
+            value={value}
+            onChange={onChangeHandler}
+            label={label}
+            error={error}
+            helperText={touched && error}
+            {...custom}
+        />
+    )
 }
 
 export default TextInput
