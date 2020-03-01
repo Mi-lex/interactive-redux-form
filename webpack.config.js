@@ -12,6 +12,7 @@ const TerserPlugin = require('terser-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const WebpackLaravelMixManifest = require('webpack-laravel-mix-manifest')
 
 const OUTPUT_FOLDER = 'public'
 const ENTRY_FOLDER = 'resources'
@@ -102,13 +103,6 @@ const config = {
         new HtmlWebpackPlugin({
             template: `${ENTRY_FOLDER}/index.html`,
         }),
-        // put styles in one css file
-        new MiniCssExtractPlugin({
-            // Options similar to the same options in webpackOptions.output
-            // both options are optional
-            filename: '[name].css',
-            chunkFilename: '[name].chunk.css',
-        }),
         // copy static assets
         // for reloading laravel server
         // new BrowserSyncPlugin({
@@ -130,6 +124,7 @@ const config = {
 
 module.exports = (env, argv) => {
     if (argv.mode === 'production') {
+        config.output.filename = '[name].[hash].js'
         // Rules
         config.module.rules.push({
             test: /\.(ts|js)x?$/,
@@ -149,10 +144,19 @@ module.exports = (env, argv) => {
         )
 
         const productionPlugins = [
-            new CompressionPlugin({
-                test: /\.js(\?.*)?$/i,
+            // new CompressionPlugin({
+            //     test: /\.js(\?.*)?$/i,
+            // }),
+            // new BundleAnalyzerPlugin(),
+            // put styles in one css file
+            new MiniCssExtractPlugin({
+                // Options similar to the same options in webpackOptions.output
+                // both options are optional
+                filename: '[name].[hash].css',
+                chunkFilename: '[name].chunk.css',
             }),
-            new BundleAnalyzerPlugin(),
+
+            new WebpackLaravelMixManifest(),
         ]
 
         config.plugins = [...config.plugins, ...productionPlugins]
@@ -183,6 +187,15 @@ module.exports = (env, argv) => {
         config.optimization.removeEmptyChunks = false
         config.optimization.splitChunks = false
         config.output.pathinfo = false
+
+        const devPlugins = [
+            new MiniCssExtractPlugin({
+                filename: '[name].css',
+                chunkFilename: '[name].chunk.css',
+            }),
+        ]
+
+        config.plugins = [...config.plugins, ...devPlugins]
     }
 
     return config
