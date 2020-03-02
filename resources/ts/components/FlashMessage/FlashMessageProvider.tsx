@@ -4,6 +4,11 @@ import Button from '@material-ui/core/Button'
 import FlashMessageContext from './FlashMessageContext'
 import { ButtonProps } from '@material-ui/core/Button'
 import { FlashMessageProviderValue } from './FlashMessageContext'
+import MuiAlert, { AlertProps, Color as AlertType } from '@material-ui/lab/Alert'
+
+function Alert(props: AlertProps) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />
+}
 
 interface FlashMessageProviderProps {
     BtnProps?: Partial<ButtonProps>
@@ -11,11 +16,16 @@ interface FlashMessageProviderProps {
     FlashProps?: Partial<FlashMessageProps>
 }
 
-interface FlashMessageProviderState {
-    action?: string
-    message?: string
-    open: boolean
+export interface MessageOptions {
+    message: string
+    type?: AlertType
+    actionName?: string
     handleAction?: () => void
+    onClose?: () => void
+}
+
+interface FlashMessageProviderState extends MessageOptions {
+    open: boolean
 }
 
 export default class FlashMessageProvider extends PureComponent<FlashMessageProviderProps, FlashMessageProviderState> {
@@ -24,17 +34,20 @@ export default class FlashMessageProvider extends PureComponent<FlashMessageProv
     constructor(props: FlashMessageProviderProps) {
         super(props)
         this.contextValue = {
-            showMessage: this.showMessage,
+            show: this.show,
         }
 
         this.state = {
             message: null,
             open: false,
+            type: 'info',
         }
     }
 
-    showMessage = (message: string, action?: string, handleAction?: () => void) => {
-        this.setState({ open: true, message, action, handleAction })
+    show = (options: MessageOptions) => {
+        const { message, type = 'info', actionName = null, handleAction = () => {}, onClose = () => {} } = options
+
+        this.setState({ open: true, message, type, actionName, handleAction, onClose })
     }
 
     handleActionClick = () => {
@@ -44,10 +57,11 @@ export default class FlashMessageProvider extends PureComponent<FlashMessageProv
 
     handleClose = () => {
         this.setState({ open: false, handleAction: null })
+        this.state.onClose()
     }
 
     render() {
-        const { action, message, open } = this.state
+        const { actionName, message, open, type } = this.state
 
         const { BtnProps = {}, children, FlashProps: SnackProps = {} } = this.props
 
@@ -57,16 +71,19 @@ export default class FlashMessageProvider extends PureComponent<FlashMessageProv
                 <Snackbar
                     {...SnackProps}
                     open={open}
-                    message={message || ''}
                     action={
-                        action != null && (
-                            <Button color="secondary" size="small" {...BtnProps} onClick={this.handleActionClick}>
-                                {action}
+                        actionName != null && (
+                            <Button color="primary" size="small" {...BtnProps} onClick={this.handleActionClick}>
+                                {actionName}
                             </Button>
                         )
                     }
                     onClose={this.handleClose}
-                />
+                >
+                    <Alert severity={type} onClose={this.handleClose}>
+                        {message || ''}
+                    </Alert>
+                </Snackbar>
             </>
         )
     }
