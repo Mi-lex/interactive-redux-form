@@ -52,8 +52,6 @@ const Passport = (): JSX.Element => {
     }
 
     useEffect(() => {
-        console.log(currentOrder)
-
         if (currentOrder) {
             dispatch(change('passport', 'order.id', currentOrder.id))
             dispatch(change('passport', 'order.created_at', currentOrder.created_at))
