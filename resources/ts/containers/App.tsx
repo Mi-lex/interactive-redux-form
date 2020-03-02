@@ -10,6 +10,7 @@ import Passport from '../pages/Passport'
 import PageHeader from '../components/PageHeader'
 import PassportV2 from '../pages/Passport.v2'
 import SideList from '../components/SideList'
+import { FlashMessageProvider } from '../components/FlashMessage'
 
 const App: React.FC = () => {
     const [isOpen, setDrawerState] = React.useState(false)
@@ -30,17 +31,19 @@ const App: React.FC = () => {
             <Container maxWidth="xl">
                 <PageHeader toggleDrawer={toggleDrawer} />
                 <Switch>
-                    <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ruLocale}>
-                        <Route path="/orders" exact>
-                            <Orders />
-                        </Route>
-                        <Route path="/" exact>
-                            <Passport />
-                        </Route>
-                        <Route path="/passport" exact>
-                            <PassportV2 />
-                        </Route>
-                    </MuiPickersUtilsProvider>
+                    <FlashMessageProvider FlashProps={{ autoHideDuration: 5000 }}>
+                        <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ruLocale}>
+                            <Route path="/orders" exact>
+                                <Orders />
+                            </Route>
+                            <Route path="/" exact>
+                                <Passport />
+                            </Route>
+                            <Route path="/passport" exact>
+                                <PassportV2 />
+                            </Route>
+                        </MuiPickersUtilsProvider>
+                    </FlashMessageProvider>
                 </Switch>
             </Container>
         </Router>
