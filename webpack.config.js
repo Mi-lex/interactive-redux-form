@@ -147,7 +147,7 @@ module.exports = (env, argv) => {
             // new CompressionPlugin({
             //     test: /\.js(\?.*)?$/i,
             // }),
-            // new BundleAnalyzerPlugin(),
+            new BundleAnalyzerPlugin(),
             // put styles in one css file
             new MiniCssExtractPlugin({
                 // Options similar to the same options in webpackOptions.output

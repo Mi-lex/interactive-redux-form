@@ -1,5 +1,15 @@
 import axios from 'axios'
 
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequested'
+
+let baseUrl: string
+
+if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+    baseUrl = 'http://127.0.0.1:8000/api'
+} else {
+    baseUrl = '/api'
+}
+
 interface ErrorsObj {
     [key: string]: string
 }
@@ -35,5 +45,5 @@ export const getMessageFromError = (error: AcceptedError): string => {
 }
 
 export default axios.create({
-    baseURL: 'http://127.0.0.1:8000/api',
+    baseURL: baseUrl,
 })
