@@ -1,4 +1,5 @@
 import { PaperJoiners, PostPrintActions } from './enums'
+import { ForkEffect } from 'redux-saga/effects'
 import icons from '../assets/icons'
 
 export type IconName = keyof typeof icons
@@ -167,3 +168,5 @@ export type Action = {
     type: string
     payload?: any
 }
+
+export type SagaType = () => Generator<ForkEffect<never>, void, unknown>

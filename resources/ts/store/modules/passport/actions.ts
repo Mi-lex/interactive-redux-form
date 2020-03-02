@@ -35,3 +35,5 @@ export const types = {
     UPDATE_ORDER_SUCCESS,
     UPDATE_ORDER_ERROR,
 }
+
+export default { createOrderRequest, createOrderSuccess, createOrderError, updateOrderRequest }
