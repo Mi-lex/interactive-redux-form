@@ -10,6 +10,7 @@
     "dependencies": {
         "@material-ui/core": "^4.9.2",
         "@material-ui/icons": "^4.9.1",
+        "@material-ui/lab": "^4.0.0-alpha.45",
         "@material-ui/pickers": "^3.2.10",
         "@react-pdf/renderer": "^1.6.8",
         "date-fns": "^2.9.0",
