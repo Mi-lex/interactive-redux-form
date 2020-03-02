@@ -74,7 +74,7 @@ const InitialInfo: React.FC = () => {
                 <Grid item xs={12} md={6} className={classes.root}>
                     <Field
                         component={DatePicker}
-                        name="order.date"
+                        name="order.created_at"
                         props={{
                             format: 'dd.MM.yy',
                             fullWidth: true,
@@ -90,7 +90,6 @@ const InitialInfo: React.FC = () => {
                             keyboardIcon: <AccessAlarm />,
                         }}
                         fullWidth={true}
-                        // keyboardIcon={<AccessAlarm />}
                         label="к"
                         variant={variant}
                     />

@@ -1,16 +1,52 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { RootState } from '../store/rootReducer'
+import actionCreator from '../store/modules/passport/actions'
+import { useDispatch, useSelector } from 'react-redux'
 import Paper from '@material-ui/core/Paper'
 import Container from '@material-ui/core/Container'
-import { reduxForm } from 'redux-form'
+import { reduxForm, change } from 'redux-form'
 import PassportControl from '../components/PassportControl'
 import PassportForm from '../components/PassportForm'
+import { useFlashMessage } from '../components/FlashMessage'
+import LinearProgress from '@material-ui/core/LinearProgress'
 
 const Passport = (): JSX.Element => {
+    const dispatch = useDispatch()
+    const pending = useSelector((state: RootState) => state.passport.requestPending)
+    const currentOrder = useSelector((state: RootState) => state.passport.currentOrder)
+    const flashMessage = useFlashMessage()
+
+    const createNewPassport = (): void => {
+        if (currentOrder) {
+            flashMessage.show({
+                message: 'Завершите работу с текущим паспортом',
+                type: 'error',
+            })
+            return
+        }
+        dispatch(actionCreator.createOrderRequest())
+    }
+
+    useEffect(() => {
+        console.log(currentOrder)
+
+        if (currentOrder) {
+            dispatch(change('passport', 'order.id', currentOrder.id))
+            dispatch(change('passport', 'order.created_at', currentOrder.created_at))
+
+            flashMessage.show({
+                message: 'Создан новый паспорт',
+                type: 'success',
+            })
+        }
+    }, [currentOrder])
+
     return (
         <Paper>
             <Container>
                 <form action="POST" className="passportForm">
-                    <PassportControl />
+                    {pending && <LinearProgress color="secondary" />}
+                    <PassportControl createNewPassport={createNewPassport} />
                     <PassportForm />
                 </form>
             </Container>
@@ -22,11 +58,11 @@ const DecoratedPassportForm = reduxForm({
     form: 'passport',
 
     initialValues: {
-        order: {
-            id: 63590,
-            date: new Date().getTime(),
-        },
-        order_elements: Array(2).fill({}),
+        // order: {
+        //     id: 63590,
+        //     created_at: new Date().getTime(),
+        // },
+        order_elements: [{}, {}],
     },
 })(Passport)
 
