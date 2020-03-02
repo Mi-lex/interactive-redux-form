@@ -19,7 +19,7 @@ class CreateOrdersTable extends Migration
             $table->string('type')->nullable();
             $table->text('important_info')->nullable();
             $table->timestamps();
-            $table->date('completion_date')->nullabe();
+            $table->date('completion_date')->nullable();
             $table->time('completion_time')->nullable();
             /**
              * implementation details. Might be a good idea to move
