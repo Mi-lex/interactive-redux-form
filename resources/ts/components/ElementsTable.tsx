@@ -93,7 +93,7 @@ const ElementsForm: React.FC = () => (
         borderBottom="1px solid rgba(0, 0, 0, 0.12)"
         borderRadius={4}
     >
-        <FieldArray name="order_elements" component={ElementsTable} />
+        <FieldArray name="elements" component={ElementsTable} />
     </Box>
 )
 

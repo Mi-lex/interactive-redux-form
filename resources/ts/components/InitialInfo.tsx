@@ -42,7 +42,7 @@ const InitialInfo: React.FC = () => {
                 <Grid item xs={12} md={6} className={classes.root}>
                     <Field
                         component={TextField}
-                        name="order.id"
+                        name="id"
                         type="number"
                         fullWidth={true}
                         variant={variant}
@@ -52,7 +52,7 @@ const InitialInfo: React.FC = () => {
                     <Field
                         component={DatePicker}
                         variant="inline"
-                        name="order.completion_date"
+                        name="completion_date"
                         props={{
                             format: 'dd.MM.yy',
                             fullWidth: true,
@@ -74,7 +74,7 @@ const InitialInfo: React.FC = () => {
                 <Grid item xs={12} md={6} className={classes.root}>
                     <Field
                         component={DatePicker}
-                        name="order.created_at"
+                        name="created_at"
                         props={{
                             format: 'dd.MM.yy',
                             fullWidth: true,
@@ -84,7 +84,7 @@ const InitialInfo: React.FC = () => {
                     />
                     <Field
                         component={TimePicker}
-                        name="order.time"
+                        name="time"
                         props={{
                             format: 'HH:mm',
                             keyboardIcon: <AccessAlarm />,
@@ -123,7 +123,7 @@ const InitialInfo: React.FC = () => {
             <Grid item container xs={12} md={6} className={classes.root} direction="column">
                 <Field
                     component={TextareaAutosize}
-                    name="order.important_info"
+                    name="important_info"
                     label="Важно"
                     type="text"
                     fullWidth
