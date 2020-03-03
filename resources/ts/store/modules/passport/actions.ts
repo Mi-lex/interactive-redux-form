@@ -12,7 +12,7 @@ export const createOrderRequest = () => ({
     type: CREATE_ORDER_REQUEST,
 })
 
-export const createOrderSuccess = (success: boolean) => ({
+export const createOrderSuccess = (success: string) => ({
     type: CREATE_ORDER_SUCCESS,
     payload: success,
 })
@@ -22,9 +22,8 @@ export const createOrderError = (errorMessage: string) => ({
     payload: errorMessage,
 })
 
-export const updateOrderRequest = (order: Order) => ({
+export const updateOrderRequest = () => ({
     type: UPDATE_ORDER_REQUEST,
-    payload: order,
 })
 
 export const types = {
@@ -37,3 +36,15 @@ export const types = {
 }
 
 export default { createOrderRequest, createOrderSuccess, createOrderError, updateOrderRequest }
+
+export const messages = {
+    createOrder: {
+        success: 'Паспорт успешно создан',
+        error: 'Что-то произошло не так',
+    },
+
+    updateOrder: {
+        success: 'Изменения успешно сохранены',
+        error: 'Произошла ошибка',
+    },
+}
