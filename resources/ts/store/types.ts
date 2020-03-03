@@ -137,13 +137,24 @@ interface StampCut {
 
 interface PostAction {
     type: string
-    body?: {}
+    body?: Creasing | BookFolding | Lamination | Revanishing | Embossing | StampCut | {}
     elements?: string
     additionals?: string
 }
 
+interface OrderElement {
+    name: string
+    stripes: number
+    material: string
+    print_type: string
+    brightness: string
+    color_interpretation: string
+}
+
 export interface Order {
     id?: number
+    name?: string
+    type?: string
     created_at: string
     updated_at: string
     important_info?: string
@@ -157,6 +168,8 @@ export interface Order {
     manager?: Manager
     customer?: Customer
     payment?: Payment
+
+    elements?: OrderElement
 
     paper_joiner: PaperJoiner
     package?: Package
