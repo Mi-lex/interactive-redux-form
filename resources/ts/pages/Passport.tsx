@@ -14,13 +14,19 @@ const formSelector = formValueSelector('passport')
 
 const Passport = (): JSX.Element => {
     const dispatch = useDispatch()
-    const { requestPending: pending, requestSuccess: success, errorMessage } = useSelector(
+    const { requestPending: pending, successMessage, errorMessage } = useSelector(
         (state: RootState) => state.passport,
         shallowEqual,
     )
 
+    useEffect(() => {
+        return () => {
+            dispatch(actionCreator.createOrderSuccess(null))
+        }
+    }, [])
+
     const createNewPassport = (): void => {
-        if (success) {
+        if (successMessage) {
             dispatch(actionCreator.createOrderError('Завершите работу с текущим паспортом'))
 
             return
@@ -29,7 +35,7 @@ const Passport = (): JSX.Element => {
     }
 
     const updatePassport = (): void => {
-        const formValues = useSelector((state: RootState) => state.form.passport.values)
+        dispatch(actionCreator.updateOrderRequest())
     }
 
     const onCloseErrorMessage = () => {
@@ -38,7 +44,7 @@ const Passport = (): JSX.Element => {
 
     return (
         <Paper>
-            {success && <FlashMessageComponent type="success">Создан новый пасспорт</FlashMessageComponent>}
+            {successMessage && <FlashMessageComponent type="success">{successMessage}</FlashMessageComponent>}
             {errorMessage && (
                 <FlashMessageComponent type="error" onClose={onCloseErrorMessage}>
                     {errorMessage}
@@ -59,7 +65,7 @@ const DecoratedPassportForm = reduxForm({
     form: 'passport',
 
     initialValues: {
-        order_elements: [{}, {}],
+        elements: [{}, {}],
     },
 })(Passport)
 
