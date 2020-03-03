@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import { MessageOptions } from './FlashMessageProvider'
+import { MessageOptions } from './types'
 
 export interface FlashMessageProviderValue {
     show: (options: MessageOptions) => void

@@ -1,32 +1,8 @@
 import React, { PureComponent } from 'react'
-import Snackbar, { SnackbarProps as FlashMessageProps } from '@material-ui/core/Snackbar'
-import Button from '@material-ui/core/Button'
+import FlashMessageComponent from './FlashMessageComponent'
 import FlashMessageContext from './FlashMessageContext'
-import { ButtonProps } from '@material-ui/core/Button'
 import { FlashMessageProviderValue } from './FlashMessageContext'
-import MuiAlert, { AlertProps, Color as AlertType } from '@material-ui/lab/Alert'
-
-function Alert(props: AlertProps) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />
-}
-
-interface FlashMessageProviderProps {
-    BtnProps?: Partial<ButtonProps>
-    children: React.ReactNode
-    FlashProps?: Partial<FlashMessageProps>
-}
-
-export interface MessageOptions {
-    message: string
-    type?: AlertType
-    actionName?: string
-    handleAction?: () => void
-    onClose?: () => void
-}
-
-interface FlashMessageProviderState extends MessageOptions {
-    open: boolean
-}
+import { FlashMessageProviderProps, FlashMessageProviderState, MessageOptions } from './types'
 
 export default class FlashMessageProvider extends PureComponent<FlashMessageProviderProps, FlashMessageProviderState> {
     contextValue: FlashMessageProviderValue
@@ -45,45 +21,43 @@ export default class FlashMessageProvider extends PureComponent<FlashMessageProv
     }
 
     show = (options: MessageOptions) => {
+        console.log('showing')
+
         const { message, type = 'info', actionName = null, handleAction = () => {}, onClose = () => {} } = options
 
         this.setState({ open: true, message, type, actionName, handleAction, onClose })
     }
 
-    handleActionClick = () => {
-        this.handleClose()
-        this.state.handleAction()
-    }
-
     handleClose = () => {
-        this.setState({ open: false, handleAction: null })
+        console.log('closing')
+
+        console.log(this.state.open)
+
+        this.setState({ open: false })
         this.state.onClose()
     }
 
     render() {
-        const { actionName, message, open, type } = this.state
+        const { actionName, message, open, type, handleAction } = this.state
 
-        const { BtnProps = {}, children, FlashProps: SnackProps = {} } = this.props
+        const { BtnProps = {}, children, SnackProps = {} } = this.props
+
+        console.log('something happening')
 
         return (
             <>
                 <FlashMessageContext.Provider value={this.contextValue}>{children}</FlashMessageContext.Provider>
-                <Snackbar
-                    {...SnackProps}
+                <FlashMessageComponent
                     open={open}
-                    action={
-                        actionName != null && (
-                            <Button color="primary" size="small" {...BtnProps} onClick={this.handleActionClick}>
-                                {actionName}
-                            </Button>
-                        )
-                    }
-                    onClose={this.handleClose}
+                    SnackProps={SnackProps}
+                    BtnProps={BtnProps}
+                    actionName={actionName}
+                    handleAction={handleAction}
+                    handleClose={this.handleClose}
+                    type={type}
                 >
-                    <Alert severity={type} onClose={this.handleClose}>
-                        {message || ''}
-                    </Alert>
-                </Snackbar>
+                    {message}
+                </FlashMessageComponent>
             </>
         )
     }
