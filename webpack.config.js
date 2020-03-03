@@ -48,13 +48,12 @@ const config = {
         path: path.resolve(__dirname, OUTPUT_FOLDER),
         filename: '[name].js',
     },
-    // devtool: 'source-map',
     module: {
         rules: [
             {
                 enforce: 'pre',
                 test: /\.js$/,
-                // loader: 'source-map-loader',
+                loader: 'source-map-loader',
             },
             {
                 test: /\.css$/,
@@ -147,7 +146,7 @@ module.exports = (env, argv) => {
             // new CompressionPlugin({
             //     test: /\.js(\?.*)?$/i,
             // }),
-            new BundleAnalyzerPlugin(),
+            // new BundleAnalyzerPlugin(),
             // put styles in one css file
             new MiniCssExtractPlugin({
                 // Options similar to the same options in webpackOptions.output
@@ -196,6 +195,8 @@ module.exports = (env, argv) => {
         ]
 
         config.plugins = [...config.plugins, ...devPlugins]
+
+        config.devtool = 'source-map'
     }
 
     return config

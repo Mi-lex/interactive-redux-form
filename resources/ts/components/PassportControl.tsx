@@ -15,10 +15,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 type Props = {
     createNewPassport: () => void
+    updatePassport: () => void
 }
 
 const PassportControl: React.FC<Props> = (props: Props) => {
-    const { createNewPassport } = props
+    const { createNewPassport, updatePassport } = props
     const classes = useStyles()
 
     return (
@@ -33,7 +34,7 @@ const PassportControl: React.FC<Props> = (props: Props) => {
                 <NoteAdd fontSize="large" />
             </IconButton>
 
-            <IconButton size="medium" aria-label="добавить документ" color="primary">
+            <IconButton size="medium" aria-label="обновить документ" color="primary" onClick={updatePassport}>
                 <LibraryAdd fontSize="large" />
             </IconButton>
             <IconButton size="medium" aria-label="завершить заполнение" color="primary">

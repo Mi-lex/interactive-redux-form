@@ -8,5 +8,7 @@
         "lib": ["es2017", "DOM"],
         "jsx": "react",
         "esModuleInterop": true
-    }
+    },
+    "include": ["resources"],
+    "exclude": ["node_modules"]
 }

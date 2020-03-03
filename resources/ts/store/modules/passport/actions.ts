@@ -12,9 +12,9 @@ export const createOrderRequest = () => ({
     type: CREATE_ORDER_REQUEST,
 })
 
-export const createOrderSuccess = (order: Order) => ({
+export const createOrderSuccess = (success: boolean) => ({
     type: CREATE_ORDER_SUCCESS,
-    payload: order,
+    payload: success,
 })
 
 export const createOrderError = (errorMessage: string) => ({
