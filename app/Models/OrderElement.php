@@ -7,4 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class OrderElement extends Model
 {
     protected $guarded = [];
+    public $timestamps = false;
 }

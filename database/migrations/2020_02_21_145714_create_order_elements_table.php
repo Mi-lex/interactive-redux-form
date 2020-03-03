@@ -19,7 +19,7 @@ class CreateOrderElementsTable extends Migration
             $table->unsignedMediumInteger('stripes')->nullable();
             $table->string('material');
             $table->unsignedTinyInteger('print_type_id');
-            $table->unsignedSmallInteger('brightness');
+            $table->string('brightness');
             $table->string('color_interpretation');
             $table->unsignedBigInteger('order_id');
 

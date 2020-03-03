@@ -11,4 +11,9 @@ class Order extends Model
     protected $casts = [
         'is_cut' => 'booleadn',
     ];
+
+    public function elements()
+    {
+        return $this->hasMany('App\Models\OrderElement');
+    }
 }
