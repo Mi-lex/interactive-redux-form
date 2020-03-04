@@ -15,8 +15,8 @@ class CreatePaperClipsTable extends Migration
     {
         Schema::create('paper_clips', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->boolean('auto')->default(false);
-            $table->boolean('manual')->default(false);
+            $table->boolean('auto')->default(0);
+            $table->boolean('manual')->default(0);
             $table->unsignedInteger('quantity')->nullable();
             $table->unsignedMediumInteger('width')->nullable();
             $table->unsignedMediumInteger('drift')->nullable();
