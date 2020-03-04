@@ -16,6 +16,9 @@ class CreatePaperJoinersTable extends Migration
         Schema::create('paper_joiners', function (Blueprint $table) {
             $table->mediumIncrements('id');
             $table->string('type');
+
+            $table->unsignedBigInteger('order_id');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });
     }
 

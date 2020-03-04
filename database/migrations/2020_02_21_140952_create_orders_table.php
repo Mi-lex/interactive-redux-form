@@ -31,19 +31,9 @@ class CreateOrdersTable extends Migration
 
             $table->unsignedMediumInteger('manager_id')->nullable();
             $table->unsignedMediumInteger('customer_id')->nullable();
-            $table->unsignedMediumInteger('payment_id')->nullable();
-            $table->unsignedMediumInteger('package_id')->nullable();
-            $table->unsignedMediumInteger('paper_joiner_id')->nullable();
-            $table->unsignedMediumInteger('delivery_id')->nullable();
-            $table->unsignedBigInteger('post_action_id')->nullable();
 
             $table->foreign('manager_id')->references('id')->on('users');
             $table->foreign('customer_id')->references('id')->on('customers');
-            $table->foreign('payment_id')->references('id')->on('payments');
-            $table->foreign('paper_joiner_id')->references('id')->on('paper_joiners');
-            $table->foreign('package_id')->references('id')->on('packages');
-            $table->foreign('delivery_id')->references('id')->on('deliveries');
-            $table->foreign('post_action_id')->references('id')->on('post_actions');
         });
     }
 

@@ -23,7 +23,7 @@ class CreateOrderElementsTable extends Migration
             $table->string('color_interpretation');
             $table->unsignedBigInteger('order_id');
 
-            $table->foreign('order_id')->references('id')->on('orders');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->foreign('print_type_id')->references('id')->on('print_types');
         });
     }

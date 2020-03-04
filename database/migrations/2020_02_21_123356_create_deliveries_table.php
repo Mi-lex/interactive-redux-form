@@ -17,6 +17,9 @@ class CreateDeliveriesTable extends Migration
             $table->mediumIncrements('id');
             $table->boolean('should_be_delivered');
             $table->text('address')->nullable();
+
+            $table->unsignedBigInteger('order_id');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });
     }
 

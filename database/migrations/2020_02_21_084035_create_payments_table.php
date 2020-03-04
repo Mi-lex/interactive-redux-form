@@ -20,6 +20,9 @@ class CreatePaymentsTable extends Migration
 
             $table->unsignedMediumInteger('operation_id')->nullable();
             $table->foreign('operation_id')->references('id')->on('payment_operations');
+
+            $table->unsignedBigInteger('order_id');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });
     }
 

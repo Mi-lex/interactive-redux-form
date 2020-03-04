@@ -21,6 +21,9 @@ class CreatePackagesTable extends Migration
             $table->boolean('label')->default(false);
             $table->boolean('paletting')->default(false);
             $table->boolean('stretch_film')->default(false);
+
+            $table->unsignedBigInteger('order_id');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });
     }
 
