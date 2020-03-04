@@ -13,7 +13,7 @@ abstract class ModelWithType extends Model
         $this->TypeClassName = get_class($this) . 'Type';
     }
 
-    public function type()
+    protected function type()
     {
         return $this->belongsTo($this->TypeClassName);
     }
