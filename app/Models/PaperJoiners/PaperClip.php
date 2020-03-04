@@ -2,9 +2,16 @@
 
 namespace App\Models\PaperJoiners;
 
-use Illuminate\Database\Eloquent\Model;
+use App\AbstractClasses\ModelWithType;
+use App\Models\PaperJoiner;
 
-class PaperClip extends Model
+class PaperClip extends ModelWithType
 {
     protected $guarded = [];
+    public $timestamps = false;
+    
+    public function paperJoiner()
+    {
+        $this->belongsTo(PaperJoiner::class);
+    }
 }
