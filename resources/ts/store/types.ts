@@ -57,9 +57,11 @@ interface Payment {
 }
 
 interface PaperClip {
+    auto?: boolean
+    manual?: boolean
     type?: string
-    width?: string
-    drift: string
+    width?: number
+    drift?: number
 }
 
 interface Termo {
