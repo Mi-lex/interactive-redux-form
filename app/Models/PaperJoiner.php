@@ -12,10 +12,10 @@ class PaperJoiner extends Model
     const PACKET = 'packet';
     const GLUE_BONDING = 'glue_bonding';
     const BINDING = 'binding';
-    const FILE = 'file';
+    const PAPER_FILE = 'paper_file';
     const SPECIAL = 'special';
 
-    const NAMES = [self::PAPER_CLIP, self::TERMO, self::SPRING, self::PACKET, self::GLUE_BONDING, self::BINDING, self::FILE, self::SPECIAL];
+    const NAMES = [self::PAPER_CLIP, self::TERMO, self::SPRING, self::PACKET, self::GLUE_BONDING, self::BINDING, self::PAPER_FILE, self::SPECIAL];
 
     protected $guarded = [];
     public $timestamps = false;
@@ -27,10 +27,6 @@ class PaperJoiner extends Model
 
     public function body()
     {
-        $camelCasedTypeName = str_replace('_', '', ucwords($this->type, '_'));
-
-        $model = 'App\Models\PaperJoiners\\' . $camelCasedTypeName; 
-
-        return $this->hasOne($model);
-    }
+        return $this->morphTo('body', 'type', 'joinable_id');   
+    } 
 }

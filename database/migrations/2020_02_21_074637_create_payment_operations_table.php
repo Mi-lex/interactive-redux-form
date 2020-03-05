@@ -14,7 +14,7 @@ class CreatePaymentOperationsTable extends Migration
     public function up()
     {
         Schema::create('payment_operations', function (Blueprint $table) {
-            $table->mediumIncrements('id');
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('account_number');
 
             $table->unsignedTinyInteger('org_type_id');

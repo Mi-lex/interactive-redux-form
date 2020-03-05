@@ -14,8 +14,8 @@ class CreatePackagesTable extends Migration
     public function up()
     {
         Schema::create('packages', function (Blueprint $table) {
-            $table->mediumIncrements('id');
-            $table->unsignedMediumInteger('capacity')->nullable();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('capacity')->nullable();
             $table->boolean('sort')->default(false);
             $table->boolean('sample')->default(false);
             $table->boolean('label')->default(false);

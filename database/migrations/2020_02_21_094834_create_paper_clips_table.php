@@ -18,13 +18,11 @@ class CreatePaperClipsTable extends Migration
             $table->boolean('auto')->default(0);
             $table->boolean('manual')->default(0);
             $table->unsignedInteger('quantity')->nullable();
-            $table->unsignedMediumInteger('width')->nullable();
-            $table->unsignedMediumInteger('drift')->nullable();
+            $table->unsignedBigInteger('width')->nullable();
+            $table->unsignedBigInteger('drift')->nullable();
             
             $table->unsignedSmallInteger('type_id')->nullable();
             $table->foreign('type_id')->references('id')->on('paper_clip_types');
-            $table->unsignedMediumInteger('paper_joiner_id');
-            $table->foreign('paper_joiner_id')->references('id')->on('paper_joiners')->onDelete('cascade');
         });
     }
 

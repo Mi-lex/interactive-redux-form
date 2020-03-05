@@ -4,8 +4,8 @@ namespace App\Models\PaperJoiners;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Packet extends Model
+class PaperFile extends Model
 {
-    protected $fillable = ['grommet_color', 'hands_color'];
+    protected $guarded = [];
     public $timestamps = false;
 }

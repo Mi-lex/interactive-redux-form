@@ -16,6 +16,6 @@ export enum PaperJoiners {
     packet = 'Пакет',
     glue_bonding = 'Проклейка',
     binding = 'Переплет',
-    file = 'Папка',
+    paper_file = 'Папка',
     special = 'Спец. обр.',
 }

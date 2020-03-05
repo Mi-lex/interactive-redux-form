@@ -16,9 +16,6 @@ class CreateSpecialsTable extends Migration
         Schema::create('specials', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('description');
-
-            $table->unsignedMediumInteger('paper_joiner_id');
-            $table->foreign('paper_joiner_id')->references('id')->on('paper_joiners')->onDelete('cascade');
         });
     }
 

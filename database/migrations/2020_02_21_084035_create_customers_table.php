@@ -14,10 +14,10 @@ class CreateCustomersTable extends Migration
     public function up()
     {
         Schema::create('customers', function (Blueprint $table) {
-            $table->mediumIncrements('id');
+            $table->bigIncrements('id');
             $table->string('name');
 
-            $table->unsignedMediumInteger('contact_id')->nullable();
+            $table->unsignedBigInteger('contact_id')->nullable();
             $table->foreign('contact_id')->references('id')->on('contacts');
         });
     }

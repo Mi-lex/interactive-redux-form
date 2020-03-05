@@ -17,9 +17,6 @@ class CreateGlueBondingsTable extends Migration
             $table->bigIncrements('id');
             $table->string('type')->nullable();
             $table->string('position')->nullable();
-
-            $table->unsignedMediumInteger('paper_joiner_id');
-            $table->foreign('paper_joiner_id')->references('id')->on('paper_joiners')->onDelete('cascade');
         });
     }
 

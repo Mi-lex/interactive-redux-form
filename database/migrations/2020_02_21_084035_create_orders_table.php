@@ -29,8 +29,8 @@ class CreateOrdersTable extends Migration
             $table->string('circulation')->nullable();
             $table->unsignedBigInteger('similar_order_id')->nullable();
 
-            $table->unsignedMediumInteger('manager_id')->nullable();
-            $table->unsignedMediumInteger('customer_id')->nullable();
+            $table->unsignedBigInteger('manager_id')->nullable();
+            $table->unsignedBigInteger('customer_id')->nullable();
 
             $table->foreign('manager_id')->references('id')->on('users');
             $table->foreign('customer_id')->references('id')->on('customers');

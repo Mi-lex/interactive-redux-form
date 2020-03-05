@@ -7,7 +7,7 @@ export const paperJoinersNames: PaperJoinerName[] = [
     'packet',
     'glue_bonding',
     'binding',
-    'file',
+    'paper_file',
     'special',
 ]
 
