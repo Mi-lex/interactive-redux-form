@@ -12,6 +12,11 @@ class Order extends Model
         'is_cut' => 'booleadn',
     ];
 
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);     
+    }
+
     public function elements()
     {
         return $this->hasMany(OrderElement::class);
@@ -35,10 +40,5 @@ class Order extends Model
     public function package()
     {
         return $this->hasOne(Package::class);
-    }
-
-    public function customer()
-    {
-        return $this->belongsTo(Customer::class);
     }
 }

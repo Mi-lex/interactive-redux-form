@@ -31,7 +31,7 @@ const PaymentBlock = () => {
             </FormControl>
             <Field
                 component={TextField}
-                name="account_number"
+                name="payment.operation.account_number"
                 fullWidth
                 disabled={paymentCash}
                 variant={variant}

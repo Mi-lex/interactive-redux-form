@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PassportUpdateRequest;
 use App\Models\Order;
+use App\Models\OrderElement;
 use App\Models\PaperJoiner;
-use App\Rules\ExistInTypeTable;
+use App\Models\PrintType;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class OrderController extends Controller
 {
@@ -45,89 +46,78 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PassportUpdateRequest $request, $id)
     {
-        $paperJoinerNames = PaperJoiner::NAMES;
-
-        $request->validate([
-            'name' => ['string'],
-            'type' => ['string'],
-            'important_info' => ['string'],
-            'completion_date' => ['date_format:d.m.y'],
-            'completion_time' => ['date_format:H:i'],
-            // implementation
-            'is_cut' => ['boolean'],
-            'circulation' => ['string'],
-            "similar_order_id" => ['numeric'],
-            // elements
-            'elements' => ['array'],
-            'elements.*.name' => ['string', 'required'],
-            'elements.*.stripes' => ['string', 'required'],
-            'elements.*.material' => ['string', 'required'],
-            'elements.*.print_type' => ['string', 'required', 'exists:print_types,name'],
-            'elements.*.brightness' => ['string', 'required'],
-            'elements.*.color_interpretation' => ['string', 'required'],
-            // paper joiner
-            'paper_joiner' => ['array'],
-            'paper_joiner.name' => ['string', 'required', Rule::in($paperJoinerNames)],
-            'paper_joiner.body' => ['array', ''],
-            //  * type === 'paper_clip'
-            'paper_joiner.body.auto' => ['boolean'],
-            'paper_joiner.body.manual' => ['boolean'],
-            'paper_joiner.body.type' => ['string', new ExistInTypeTable($request['paper_joiner.name'])],
-            'paper_joiner.body.width' => ['numeric'],
-            'paper_joiner.body.drift' => ['numeric'],
-            // * type === 'termo'
-
-        ]);
-
         $order = Order::find($id);
-        // deleting joiner
-        $order->paperJoiner()->delete();
+        // return $order->customer;
+        if (isset($request['customer'])) {
+            $customerInfo = $request['customer'];
 
-        if (!empty($request['paper_joiner'])) {
-            $joinerType = $request['paper_joiner.name'];
+            if (!empty($order->customer)) {
+                $order->customer->update($customerInfo);
+            } else {
+                $customer = $order->customer()->create($customerInfo);
+                $order->customer()->associate($customer);
+            }
+            unset($request['customer']);
+        }
 
-            $joinerModel = $order->paperJoiner()->make(["type" => $joinerType]);
-            $joinerModelBody = $joinerModel->body()->create();
+        /**
+         * if field exists in the request it can be empty
+         * it means that paper_joiner was deleted
+         * if it's not empty we still should delete it, coz it could be redefined
+         */
+        if (isset($request['paper_joiner'])) {
+            $order->paperJoiner()->delete();
 
-            if (!empty($joinerBody = $request['paper_joiner.body'])) {
-                switch ($joinerType) {
-                    case PaperJoiner::PAPER_CLIP:
-                        $paperClipTypeName = $joinerBody['type'];
+            if (!empty($request['paper_joiner'])) {
+                $joinerType = $request['paper_joiner.name'];
 
-                        $joinerModelBody->associateTypeByName($paperClipTypeName);
+                $joinerModel = $order->paperJoiner()->make(["type" => $joinerType]);
+                $joinerModelBody = $joinerModel->body()->create();
 
-                        unset($joinerBody['type']);
+                if (!empty($joinerBody = $request['paper_joiner.body'])) {
+                    switch ($joinerType) {
+                        case PaperJoiner::PAPER_CLIP:
+                            $paperClipTypeName = $joinerBody['type'];
 
-                        break;
+                            $joinerModelBody->associateTypeByName($paperClipTypeName);
+
+                            unset($joinerBody['type']);
+
+                            break;
+                    }
+
+                    $joinerModelBody->update($joinerBody);
                 }
 
-                $joinerModelBody->update($joinerBody);
+                $joinerModel->body()->associate($joinerModelBody);
+                $joinerModel->save();
             }
-            
-            $joinerModel->body()->associate($joinerModelBody);
-            $joinerModel->save();
+
             unset($request['paper_joiner']);
         }
 
         $order->elements()->delete();
 
-        // Updating order elements
         if (isset($request['elements'])) {
-            $newElements = [];
+            $order->elements()->delete();
 
-            foreach ($request->elements as $element) {
-                $elementModel = OrderElement::make($element);
-                unset($elementModel->print_type);
+            if (!empty($request['elements'])) {
+                $newElements = [];
 
-                $elementModel->print_type_id = PrintType::whereName($element['print_type'])->first()->id;
-                $newElements[] = $elementModel;
+                foreach ($request->elements as $element) {
+                    $elementModel = OrderElement::make($element);
+                    unset($elementModel->print_type);
+
+                    $elementModel->print_type_id = PrintType::whereName($element['print_type'])->first()->id;
+                    $newElements[] = $elementModel;
+                }
+
+                $order->elements()->saveMany($newElements);
             }
 
             unset($request['elements']);
-
-            $order->elements()->saveMany($newElements);
         }
 
         $order->update(
@@ -137,7 +127,7 @@ class OrderController extends Controller
         $order->save();
 
         // return response()->json(Order::with(['paperJoiner', 'paperJoiner.body'])->with('paperJoiner.body')->get());
-        return response()->json([$order->with('paperJoiner', 'paperJoiner.body')->get(), $request->toArray()]);
+        return response()->json([$order->with('paperJoiner', 'paperJoiner.body', 'customer')->get(), $request->toArray()]);
     }
 
     /**
