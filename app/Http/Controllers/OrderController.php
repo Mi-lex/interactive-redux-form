@@ -88,28 +88,26 @@ class OrderController extends Controller
         if (!empty($request['paper_joiner'])) {
             $joinerType = $request['paper_joiner.name'];
 
-            $joinerModel = $order->paperJoiner()->create(["type" => $joinerType]);
+            $joinerModel = $order->paperJoiner()->make(["type" => $joinerType]);
+            $joinerModelBody = $joinerModel->body()->create();
 
             if (!empty($joinerBody = $request['paper_joiner.body'])) {
-                $joinerBodyModel = $joinerModel->body()->make();
-
-                switch ($joinerModel->type) {
+                switch ($joinerType) {
                     case PaperJoiner::PAPER_CLIP:
                         $paperClipTypeName = $joinerBody['type'];
 
-                        $joinerBodyModel->associateTypeByName($paperClipTypeName);
+                        $joinerModelBody->associateTypeByName($paperClipTypeName);
 
                         unset($joinerBody['type']);
 
                         break;
-                    case PaperJoiner::GLUE_BONDING:
-                    case PaperJoiner::SPRING:
                 }
 
-                $joinerBodyModel->fill($joinerBody);
-                $joinerBodyModel->save();
+                $joinerModelBody->update($joinerBody);
             }
-
+            
+            $joinerModel->body()->associate($joinerModelBody);
+            $joinerModel->save();
             unset($request['paper_joiner']);
         }
 
