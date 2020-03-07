@@ -7,8 +7,8 @@ use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderElement;
 use App\Models\PaperJoiner;
-use App\Models\PaymentOrgType;
 use App\Models\PrintType;
+use Illuminate\Http\Response;
 
 class OrderController extends Controller
 {
@@ -50,27 +50,18 @@ class OrderController extends Controller
     public function update(PassportUpdateRequest $request, $id)
     {
         $order = Order::find($id);
-        // return $order;
 
         if (isset($request['customer'])) {
             $customer = Customer::firstOrCreate(["name" => $request['customer.name']]);
             $order->customer()->associate($customer);
         }
 
-        if (isset($request['payment'])) {
-            $operation = isset($request['payment.operation']) ? $request['payment.operation'] : null;
+        $order->payment()->updateOrCreate([], $request['payment'] ?? []);
 
-            $order->payment()->updateOrCreate([], $request['payment']);
-            if ($operation) {
-                $operationModel = $order->payment->operation()->make([
-                    'date' => $operation['date'],
-                    'account_number' => $operation['account_number']
-                ]);
-                $operationModel->org_type()->associate(PaymentOrgType::whereName($operation['org_type'])->first());
-
-                $operationModel->save();
-            }
+        if (isset($request['payment.operation'])) {
+            $order->payment->operation()->updateOrCreate([], $request['payment.operation']);
         }
+
         /*
          * if field exists in the request it can be empty
          * it means that paper_joiner was deleted
@@ -83,11 +74,7 @@ class OrderController extends Controller
                 $joinerType = $request['paper_joiner.name'];
 
                 $joinerModel = $order->paperJoiner()->make(["type" => $joinerType]);
-                $joinerModelBody = $joinerModel->body()->create();
-
-                if (!empty($joinerBody = $request['paper_joiner.body'])) {
-                    $joinerModelBody->update($joinerBody);
-                }
+                $joinerModelBody = $joinerModel->body()->updateOrCreate([], $request['paper_joiner.body'] ?? []);
 
                 $joinerModel->body()->associate($joinerModelBody);
                 $joinerModel->save();
