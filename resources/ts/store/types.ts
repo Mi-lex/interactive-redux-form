@@ -108,7 +108,7 @@ interface Package {
 
 interface Delivery {
     should_be_delivered: boolean
-    adress?: string
+    address?: string
 }
 
 // Post print actions

@@ -20,7 +20,7 @@ const DeliveryBlock = () => {
             </FormControl>
             <Field
                 component={TextareaAutosize}
-                name="delivery.adress"
+                name="delivery.address"
                 label="Адрес"
                 type="text"
                 fullWidth

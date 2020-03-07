@@ -54,6 +54,10 @@ class PassportUpdateRequest extends FormRequest
             'package.label' => ['boolean'],
             'package.paletting' => ['boolean'],
             'package.stretch_film' => ['boolean'],
+            // delivery
+            'delivery' => ['array'],
+            'delivery.should_be_delivered' => ['boolean'],
+            'delivery.address' => ['string'],
             // elements
             'elements' => ['array'],
             'elements.*.name' => ['string', 'required'],

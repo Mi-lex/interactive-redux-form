@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\AbstractClasses\ModelWithType;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Package extends ModelWithType 
+class Package extends ModelWithType
 {
-    protected $guarded = [];
+    protected $fillable = ['capacity', 'sort', 'sample', 'label', 'paletting', 'stretch_film', 'type_id'];
     public $timestamps = false;
 
     public function type(): BelongsTo

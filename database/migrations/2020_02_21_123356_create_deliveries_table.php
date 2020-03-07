@@ -15,7 +15,7 @@ class CreateDeliveriesTable extends Migration
     {
         Schema::create('deliveries', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->boolean('should_be_delivered');
+            $table->boolean('should_be_delivered')->default(false);
             $table->text('address')->nullable();
 
             $table->unsignedBigInteger('order_id');

@@ -6,10 +6,9 @@ use App\Http\Requests\PassportUpdateRequest;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderElement;
-use App\Models\PaymentOrgType;
 use App\Models\PaperJoiner;
+use App\Models\PaymentOrgType;
 use App\Models\PrintType;
-use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
@@ -51,14 +50,11 @@ class OrderController extends Controller
     public function update(PassportUpdateRequest $request, $id)
     {
         $order = Order::find($id);
+        // return $order;
 
         if (isset($request['customer'])) {
-            $customerInfo = $request['customer'];
-
-            if (isset($customerInfo['name'])) {
-                $customer = Customer::firstOrCreate(["name" => $request['customer.name']]);
-                $order->customer()->associate($customer);
-            }
+            $customer = Customer::firstOrCreate(["name" => $request['customer.name']]);
+            $order->customer()->associate($customer);
         }
 
         if (isset($request['payment'])) {
@@ -68,28 +64,14 @@ class OrderController extends Controller
             if ($operation) {
                 $operationModel = $order->payment->operation()->make([
                     'date' => $operation['date'],
-                    'account_number' => $operation['account_number'],
+                    'account_number' => $operation['account_number']
                 ]);
                 $operationModel->org_type()->associate(PaymentOrgType::whereName($operation['org_type'])->first());
 
                 $operationModel->save();
             }
         }
-
-        if (isset($request['package'])) {
-            $packageInfo = $request['package'];
-            $package = $order->package;
-
-            if (!empty($package)) {
-                $package->update($packageInfo);
-            } else {
-                $package = $order->package()->make()->fill($packageInfo);
-            }
-
-            $package->save();
-        }
-
-        /**
+        /*
          * if field exists in the request it can be empty
          * it means that paper_joiner was deleted
          * if it's not empty we still should delete it, coz it could be redefined
@@ -111,9 +93,10 @@ class OrderController extends Controller
                 $joinerModel->save();
             }
         }
-
-        $order->elements()->delete();
-
+        /*
+         * if field is set, delete all elements
+         * if it's not empty update them
+         */
         if (isset($request['elements'])) {
             $order->elements()->delete();
 
@@ -131,13 +114,13 @@ class OrderController extends Controller
             }
         }
 
-        $order->update(
-            $request->toArray()
-        );
+        $order->package()->updateOrCreate([], $request['package'] ?? []);
 
-        $order->save();
+        $order->delivery()->updateOrCreate([], $request['delivery'] ?? []);
 
-        return response()->json([$order->with('paperJoiner', 'paperJoiner.body', 'customer', 'payment', 'payment.operation', 'package', 'package.type')->get(), $request->toArray()]);
+        $order->update($request->toArray());
+
+        return Order::with('paperJoiner', 'paperJoiner.body', 'customer', 'payment', 'payment.operation', 'package', 'package.type', 'delivery', 'elements', 'elements.printType')->find($order);
     }
 
     /**

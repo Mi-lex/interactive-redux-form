@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Delivery extends Model
 {
-    protected $guarded = [];
+    protected $fillable = ['should_be_delivered', 'address'];
+    public $timestamps = false;
 }
