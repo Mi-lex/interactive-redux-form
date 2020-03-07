@@ -20,6 +20,9 @@ class CreateContactsTable extends Migration
             $table->string('middle_name', 20);
             $table->string('phone', 15)->nullable();
             $table->string('email', 30)->nullable();
+
+            $table->unsignedBigInteger('customer_id')->nullable();
+            $table->foreign('customer_id')->references('id')->on('customers');
         });
     }
 
