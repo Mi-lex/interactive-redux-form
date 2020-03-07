@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PassportUpdateRequest;
+use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderElement;
+use App\Models\PaymentOrgType;
 use App\Models\PaperJoiner;
 use App\Models\PrintType;
 use Illuminate\Http\Request;
@@ -49,17 +51,42 @@ class OrderController extends Controller
     public function update(PassportUpdateRequest $request, $id)
     {
         $order = Order::find($id);
-        // return $order->customer;
+
         if (isset($request['customer'])) {
             $customerInfo = $request['customer'];
 
-            if (!empty($order->customer)) {
-                $order->customer->update($customerInfo);
-            } else {
-                $customer = $order->customer()->create($customerInfo);
+            if (isset($customerInfo['name'])) {
+                $customer = Customer::firstOrCreate(["name" => $request['customer.name']]);
                 $order->customer()->associate($customer);
             }
-            unset($request['customer']);
+        }
+
+        if (isset($request['payment'])) {
+            $operation = isset($request['payment.operation']) ? $request['payment.operation'] : null;
+
+            $order->payment()->updateOrCreate([], $request['payment']);
+            if ($operation) {
+                $operationModel = $order->payment->operation()->make([
+                    'date' => $operation['date'],
+                    'account_number' => $operation['account_number'],
+                ]);
+                $operationModel->org_type()->associate(PaymentOrgType::whereName($operation['org_type'])->first());
+
+                $operationModel->save();
+            }
+        }
+
+        if (isset($request['package'])) {
+            $packageInfo = $request['package'];
+            $package = $order->package;
+
+            if (!empty($package)) {
+                $package->update($packageInfo);
+            } else {
+                $package = $order->package()->make()->fill($packageInfo);
+            }
+
+            $package->save();
         }
 
         /**
@@ -77,25 +104,12 @@ class OrderController extends Controller
                 $joinerModelBody = $joinerModel->body()->create();
 
                 if (!empty($joinerBody = $request['paper_joiner.body'])) {
-                    switch ($joinerType) {
-                        case PaperJoiner::PAPER_CLIP:
-                            $paperClipTypeName = $joinerBody['type'];
-
-                            $joinerModelBody->associateTypeByName($paperClipTypeName);
-
-                            unset($joinerBody['type']);
-
-                            break;
-                    }
-
                     $joinerModelBody->update($joinerBody);
                 }
 
                 $joinerModel->body()->associate($joinerModelBody);
                 $joinerModel->save();
             }
-
-            unset($request['paper_joiner']);
         }
 
         $order->elements()->delete();
@@ -108,7 +122,6 @@ class OrderController extends Controller
 
                 foreach ($request->elements as $element) {
                     $elementModel = OrderElement::make($element);
-                    unset($elementModel->print_type);
 
                     $elementModel->print_type_id = PrintType::whereName($element['print_type'])->first()->id;
                     $newElements[] = $elementModel;
@@ -116,8 +129,6 @@ class OrderController extends Controller
 
                 $order->elements()->saveMany($newElements);
             }
-
-            unset($request['elements']);
         }
 
         $order->update(
@@ -126,8 +137,7 @@ class OrderController extends Controller
 
         $order->save();
 
-        // return response()->json(Order::with(['paperJoiner', 'paperJoiner.body'])->with('paperJoiner.body')->get());
-        return response()->json([$order->with('paperJoiner', 'paperJoiner.body', 'customer')->get(), $request->toArray()]);
+        return response()->json([$order->with('paperJoiner', 'paperJoiner.body', 'customer', 'payment', 'payment.operation', 'package', 'package.type')->get(), $request->toArray()]);
     }
 
     /**
