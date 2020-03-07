@@ -10,6 +10,10 @@ class OrderElement extends Model
     protected $fillable = ['name', 'stripes', 'material', 'print_type_id', 'brightness', 'color_interpretation', 'order_id'];
     public $timestamps = false;
 
+    protected $typeMap = [
+        'print_type' => 'print_types'
+    ];
+
     public function printType(): BelongsTo
     {
         return $this->belongsTo(PrintType::class);

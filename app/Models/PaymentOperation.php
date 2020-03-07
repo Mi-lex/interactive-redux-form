@@ -2,15 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\AbstractClasses\ModelWithTypes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class PaymentOperation extends Model
+class PaymentOperation extends ModelWithTypes
 {
     protected $fillable = ['account_number', 'org_type_id', 'date'];
     public $timestamps = false;
 
-    public function org_type()
+    protected $typeMap = [
+        'org_type' => 'payment_org_types'
+    ];
+
+    public function orgType(): BelongsTo
     {
-        return $this->belongsTo(PaymentOrgType::class); 
+        return $this->belongsTo(PaymentOrgType::class);
     }
 }
