@@ -41,9 +41,19 @@ class PassportUpdateRequest extends FormRequest
             'customer.name' => ['string'],
             // payment
             'payment.payed_by_cash' => ['boolean'],
-            'payment.org_type' => ['string', 'exists|payment_org_types,name'],
-            'payment.operation.account_number' => ['numeric', 'required_with:payment.org_type'],
-            'payment.operation.date' => ['numeric', 'required_with:payment.org_type'],
+            'payment.operation' => ['array'],
+            'payment.operation.org_type' => ['string', 'exists:payment_org_types,name', 'required_with:payment.operation'],
+            'payment.operation.account_number' => ['numeric', 'required_with:payment.operation'],
+            'payment.operation.date' => ['date_format:d.m.y', 'required_with:payment.operation'],
+            // package
+            'package' => ['array'],
+            'package.capacity' => ['numeric'],
+            'package.type' => ['string', 'exists:package_types,name'],
+            'package.sample' => ['boolean'],
+            'package.sort' => ['boolean'],
+            'package.label' => ['boolean'],
+            'package.paletting' => ['boolean'],
+            'package.stretch_film' => ['boolean'],
             // elements
             'elements' => ['array'],
             'elements.*.name' => ['string', 'required'],
