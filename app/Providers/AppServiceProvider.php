@@ -44,13 +44,13 @@ class AppServiceProvider extends ServiceProvider
             PaperJoiner::SPECIAL => "$paperJoinersPath\Special",
             // Post Actions
             PostAction::CREASING => "$postActionsPath\Creasing",
-            PostAction::BOOK_FOLDING => "$postActionsPath\Book_folding",
+            PostAction::BOOK_FOLDING => "$postActionsPath\BookFolding",
             PostAction::LAMITATION => "$postActionsPath\Lamitation",
             PostAction::REVANISHING => "$postActionsPath\Revanishing",
             PostAction::EMBOSSING => "$postActionsPath\Embossing",
-            PostAction::STAMP_CUT => "$postActionsPath\Stamp_cut",
+            PostAction::STAMP_CUT => "$postActionsPath\StampCut",
             PostAction::PERFORATION => "$postActionsPath\Perforation",
-            PostAction::HOT_STAMP => "$postActionsPath\Hot_stamp",
+            PostAction::HOT_STAMP => "$postActionsPath\HotStamp",
 
         ]);
     }
