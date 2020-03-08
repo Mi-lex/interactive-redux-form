@@ -69,7 +69,7 @@ class PassportUpdateRequest extends FormRequest
             // paper joiner
             'paper_joiner' => ['array'],
             'paper_joiner.name' => ['string', 'required', Rule::in($paperJoinerNames)],
-            /**
+            /*
              * if it's paper_clip this line means that type name should exists in papre_clip_types table
              * if it's glue_bonding it's gonna check glue_bonding_types table etc
              */
@@ -94,6 +94,20 @@ class PassportUpdateRequest extends FormRequest
             'paper_joiner.body.hands_color' => ['string'],
             // * type === 'glue_bonding'
             'paper_joiner.body.special' => ['string'],
+
+            // post actions
+            'post_actions' => ['array'],
+            'post_actions.*.elements' => ['string'],
+            'post_actions.*.additional' => ['string'],
+
+            'post_actions.creasing.body.parts' => ['string'],
+            'post_actions.book_folding.body.type' => ['string', 'exists:book_folding_types,name'],
+            'post_actions.book_folding.body.color' => ['string'],
+            'post_actions.lamination.body.type' => ['string', 'exists:lamination_types,name'],
+            'post_actions.revanishing.body.varnish_type' => ['string', 'exists:varnish_types,name'],
+            'post_action.embossing.body.foil_type' => ['string', 'exists:foil_types,name'],
+            'post_action.stamp_cut.body.name' => ['string'],
+            'post_action.perforation.body.name' => ['string'],
         ];
     }
 }
