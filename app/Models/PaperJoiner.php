@@ -27,6 +27,15 @@ class PaperJoiner extends Model
 
     public function body()
     {
-        return $this->morphTo('body', 'type', 'joinable_id');   
-    } 
+        return $this->morphTo('body', 'type', 'joinable_id');
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+        self::deleting(function ($joiner) {
+            $joiner->joinable_id = 666;
+            $joiner->body()->delete();
+        });
+    }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\PostActions\BookFolding;
+use App\Models\PostActions\Creasing;
 use Illuminate\Database\Eloquent\Model;
 
 class PostAction extends Model
@@ -23,5 +25,13 @@ class PostAction extends Model
     public function body()
     {
         return $this->morphTo('body', 'type', 'actionable_id');
+    }
+
+    public static function boot() {
+        parent::boot();
+        self::deleting(function($postAction) {
+           $postAction->actionable_id = 666;
+           $postAction->body()->delete();
+        });
     }
 }
