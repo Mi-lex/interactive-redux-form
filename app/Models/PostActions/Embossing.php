@@ -2,9 +2,17 @@
 
 namespace App\Models\PostActions;
 
-use Illuminate\Database\Eloquent\Model;
+use App\AbstractClasses\ModelWithTypes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Embossing extends Model
+class Embossing extends ModelWithTypes
 {
-    protected $fillable = ['description'];
+    protected $typeMap = [
+        'foil_type' => 'foil_types'
+    ];
+
+    public function foil_type(): BelongsTo
+    {
+        return $this->belongsTo(FoilType::class);
+    }
 }

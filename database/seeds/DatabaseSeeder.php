@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PaperClipTypeSeeder::class);
         $this->call(PackageTypeSeeder::class);
         $this->call(BookFoldingTypeSeeder::class);
-        $this->call(EmbossingTypeSeeder::class);
+        $this->call(FoilTypeSeeder::class);
         $this->call(LaminationTypeSeeder::class);
         $this->call(VarnishTypeSeeder::class);
     }

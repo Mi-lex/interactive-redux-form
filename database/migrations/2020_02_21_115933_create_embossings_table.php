@@ -15,11 +15,9 @@ class CreateEmbossingsTable extends Migration
     {
         Schema::create('embossings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('post_action_id');
-            $table->foreign('post_action_id')->references('id')->on('post_actions');
             
-            $table->unsignedTinyInteger('type_id');
-            $table->foreign('type_id')->references('id')->on('embossing_types');
+            $table->unsignedTinyInteger('foil_type_id')->nullable();
+            $table->foreign('foil_type_id')->references('id')->on('foil_types');
         });
     }
 

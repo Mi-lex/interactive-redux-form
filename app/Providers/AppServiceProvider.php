@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use App\Models\PaperJoiner;
+use App\Models\PostAction;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,8 +30,10 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         
         $paperJoinersPath = 'App\Models\PaperJoiners';
+        $postActionsPath = 'App\Models\PostActions';
 
         Relation::morphMap([
+            // Joiners
             PaperJoiner::PAPER_CLIP => "$paperJoinersPath\PaperClip",
             PaperJoiner::TERMO => "$paperJoinersPath\Termo",
             PaperJoiner::SPRING => "$paperJoinersPath\Spring",
@@ -39,6 +42,16 @@ class AppServiceProvider extends ServiceProvider
             PaperJoiner::BINDING => "$paperJoinersPath\Binding",
             PaperJoiner::PAPER_FILE => "$paperJoinersPath\PaperFile",
             PaperJoiner::SPECIAL => "$paperJoinersPath\Special",
+            // Post Actions
+            PostAction::CREASING => "$postActionsPath\Creasing",
+            PostAction::BOOK_FOLDING => "$postActionsPath\Book_folding",
+            PostAction::LAMITATION => "$postActionsPath\Lamitation",
+            PostAction::REVANISHING => "$postActionsPath\Revanishing",
+            PostAction::EMBOSSING => "$postActionsPath\Embossing",
+            PostAction::STAMP_CUT => "$postActionsPath\Stamp_cut",
+            PostAction::PERFORATION => "$postActionsPath\Perforation",
+            PostAction::HOT_STAMP => "$postActionsPath\Hot_stamp",
+
         ]);
     }
 }

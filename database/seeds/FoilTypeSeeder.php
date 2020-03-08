@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class EmbossingTypeSeeder extends Seeder
+class FoilTypeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,7 +11,7 @@ class EmbossingTypeSeeder extends Seeder
      */
     public function run()
     {
-        $embossingTypes = [
+        $foilTypes = [
             [
                 'name' => 'глянцевая',
             ],
@@ -23,8 +23,8 @@ class EmbossingTypeSeeder extends Seeder
             ],
         ];
 
-        foreach ($embossingTypes as $embossingType) {
-            DB::table('embossing_types')->insert($embossingType);
+        foreach ($foilTypes as $foilType) {
+            DB::table('foil_types')->insert($foilType);
         }
 
     }

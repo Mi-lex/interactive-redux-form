@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEmbossingTypesTable extends Migration
+class CreateFoilTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateEmbossingTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('embossing_types', function (Blueprint $table) {
+        Schema::create('foil_types', function (Blueprint $table) {
             $table->tinyIncrements('id');
             $table->string('name');
         });

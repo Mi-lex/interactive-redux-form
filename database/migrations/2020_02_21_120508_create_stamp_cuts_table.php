@@ -15,10 +15,7 @@ class CreateStampCutsTable extends Migration
     {
         Schema::create('stamp_cuts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-
-            $table->unsignedBigInteger('post_action_id');
-            $table->foreign('post_action_id')->references('id')->on('post_actions');
+            $table->string('name')->nullable();
         });
     }
 

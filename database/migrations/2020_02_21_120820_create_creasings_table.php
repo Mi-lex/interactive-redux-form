@@ -15,10 +15,7 @@ class CreateCreasingsTable extends Migration
     {
         Schema::create('creasings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('parts');
-
-            $table->unsignedBigInteger('post_action_id');
-            $table->foreign('post_action_id')->references('id')->on('post_actions');
+            $table->string('parts')->nullable();
         });
     }
 

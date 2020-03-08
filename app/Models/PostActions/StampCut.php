@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class StampCut extends Model
 {
-    protected $fillable = ['name', 'description'];
+    protected $fillable = ['name'];
 }
