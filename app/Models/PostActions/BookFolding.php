@@ -11,7 +11,7 @@ class BookFolding extends ModelWithTypes
     public $timestamps = false;
 
     protected $typeMap = [
-        'type' => 'book_foldint_types'
+        'type' => 'book_folding_types'
     ];
 
     public function type(): BelongsTo

@@ -6,9 +6,8 @@ use App\Http\Requests\PassportUpdateRequest;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderElement;
-use App\Models\PaperJoiner;
+use App\Models\PostAction;
 use App\Models\PrintType;
-use Illuminate\Http\Response;
 
 class OrderController extends Controller
 {
@@ -61,7 +60,6 @@ class OrderController extends Controller
         if (isset($request['payment.operation'])) {
             $order->payment->operation()->updateOrCreate([], $request['payment.operation']);
         }
-
         /*
          * if field exists in the request it can be empty
          * it means that paper_joiner was deleted
@@ -101,13 +99,28 @@ class OrderController extends Controller
             }
         }
 
+        if (isset($request['post_actions'])) {
+            $order->postActions()->delete();
+            $postActions = [];
+
+            foreach ($request['post_actions'] as $actionType => $actionItem) {
+                $postAction = PostAction::make(['type' => $actionType])->fill($actionItem);
+                // return $postAction;
+                $bodyModel = $postAction->body()->updateOrCreate([], $actionItem['body']);
+                $postAction->body()->associate($bodyModel);
+                $postActions[] = $postAction;
+            }
+
+            $order->postActions()->saveMany($postActions);
+        }
+
         $order->package()->updateOrCreate([], $request['package'] ?? []);
 
         $order->delivery()->updateOrCreate([], $request['delivery'] ?? []);
 
         $order->update($request->toArray());
 
-        return Order::with('paperJoiner', 'paperJoiner.body', 'customer', 'payment', 'payment.operation', 'package', 'package.type', 'delivery', 'elements', 'elements.printType')->find($order);
+        return response()->json([Order::with('paperJoiner', 'paperJoiner.body', 'customer', 'payment', 'payment.operation', 'package', 'package.type', 'delivery', 'elements', 'elements.printType', 'postActions', 'postActions.body')->find($order), $request->toArray()]);
     }
 
     /**

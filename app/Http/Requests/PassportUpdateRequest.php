@@ -73,7 +73,6 @@ class PassportUpdateRequest extends FormRequest
              * if it's paper_clip this line means that type name should exists in papre_clip_types table
              * if it's glue_bonding it's gonna check glue_bonding_types table etc
              */
-            'paper_joiner.body.type' => ['string', "exists:" . $this->paper_joiner['name'] . '_types,name'],
             'paper_joiner.body' => ['array'],
             //  * type === 'paper_clip'
             'paper_joiner.body.auto' => ['boolean'],
