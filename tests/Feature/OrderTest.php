@@ -18,7 +18,7 @@ class OrderTest extends TestCase
     public function a_user_can_create_an_order()
     {
         $this->withoutExceptionHandling();
-        
+
         $content = $this->post('/api/passport')->decodeResponseJson();
         $this->assertDatabaseHas('orders', $content);
     }
@@ -33,7 +33,7 @@ class OrderTest extends TestCase
         $response = $this->patch("api/passport/$order->id", $order->toArray(), ["accept" => "application/json"]);
 
         $response->assertSuccessful();
-        
+
         $this->assertDatabaseHas('orders', [
             "name" => $order['name'],
             "type" => $order['type']
@@ -44,6 +44,7 @@ class OrderTest extends TestCase
     public function a_user_can_store_and_update_different_payment_type_info()
     {
         $this->withoutExceptionHandling();
+
         $payedWithCash = [
             "payment" => [
                 'payed_by_cash' => true,
@@ -54,28 +55,52 @@ class OrderTest extends TestCase
 
         $response = $this->patch("api/passport/$order->id", $payedWithCash, ["accept" => "application/json"]);
         $response->assertSuccessful();
-        $payedWithCash['payment']['order_id'] = 1;
+        $payedWithCash['payment']['order_id'] = $order->id;
 
         $this->assertDatabaseHas('payments', $payedWithCash['payment']);
+
+        $orgType = \App\Models\PaymentOrgType::create(['name' => $this->faker->name]);
+
+        $operationAttributes = factory('App\Models\PaymentOperation')->raw([
+            'org_type' => $orgType->name
+        ]);
 
         $paydWithOperation = [
             "payment" => [
                 'payed_by_cash' => false,
-                'operation' => factory('App\Models\PaymentOperation')->raw()
+                'operation' => $operationAttributes
             ]
         ];
-
-        $org = \App\Models\PaymentOrgType::create(['name' => $this->faker->name]);
-
-        $paydWithOperation['payment']['operation']['org_type'] = $org->name;
 
         $response = $this->patch("api/passport/$order->id", $paydWithOperation, ["accept" => "application/json"]);
 
         $paymentAttributes = [
             'order_id' =>   $order->id,
-            'payed_by_cash' => false
+            'payed_by_cash' => false,
         ];
 
         $this->assertDatabaseHas('payments', $paymentAttributes);
+    }
+
+    /** @test */
+    public function a_user_can_store_and_update_package_info()
+    {
+        $this->withoutExceptionHandling();
+
+        $order = Order::create();
+
+        $packageAttributes = factory('App\Models\Package', 2)->make()->each(function ($package) {
+            $package->type_id = \App\Models\PackageType::create(['name' => $this->faker->name])->id;
+        })->toArray();
+
+        foreach ($packageAttributes as $package) {
+            $response = $this->patch("api/passport/$order->id", ["package" => $package], ["accept" => "application/json"]);
+
+            $response->assertSuccessful();
+
+            $package['order_id'] = $order->id;
+
+            $this->assertDatabaseHas('packages', $package);
+        }
     }
 }
