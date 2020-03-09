@@ -60,15 +60,15 @@ class PassportUpdateRequest extends FormRequest
             'delivery.address' => ['string'],
             // elements
             'elements' => ['array'],
-            'elements.*.name' => ['string', 'required'],
-            'elements.*.stripes' => ['string', 'required'],
-            'elements.*.material' => ['string', 'required'],
-            'elements.*.print_type' => ['string', 'required', 'exists:print_types,name'],
-            'elements.*.brightness' => ['string', 'required'],
-            'elements.*.color_interpretation' => ['string', 'required'],
+            'elements.*.name' => ['string', 'required_with:elements'],
+            'elements.*.stripes' => ['string', 'required_with:elements'],
+            'elements.*.material' => ['string', 'required_with:elements'],
+            'elements.*.print_type' => ['string', 'required_with:elements', 'exists:print_types,name'],
+            'elements.*.brightness' => ['string', 'required_with:elements'],
+            'elements.*.color_interpretation' => ['string', 'required_with:elements'],
             // paper joiner
             'paper_joiner' => ['array'],
-            'paper_joiner.name' => ['string', 'required', Rule::in($paperJoinerNames)],
+            'paper_joiner.name' => ['string', 'required_with:paper_joiner', Rule::in($paperJoinerNames)],
             /*
              * if it's paper_clip this line means that type name should exists in papre_clip_types table
              * if it's glue_bonding it's gonna check glue_bonding_types table etc
