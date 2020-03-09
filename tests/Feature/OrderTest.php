@@ -103,4 +103,24 @@ class OrderTest extends TestCase
             $this->assertDatabaseHas('packages', $package);
         }
     }
+
+    /** @test */
+    public function a_user_can_store_and_update_delivery_info()
+    {
+        $this->withoutExceptionHandling();
+
+        $order = Order::create();
+
+        $deliveryAttributes = factory('App\Models\Delivery', 3)->make()->toArray();
+
+        foreach ($deliveryAttributes as $delivery) {
+            $response = $this->patch("api/passport/$order->id", ["delivery" => $delivery], ["accept" => "application/json"]);
+
+            $response->assertSuccessful();
+
+            $delivery['order_id'] = $order->id;
+
+            $this->assertDatabaseHas('deliveries', $delivery);
+        }
+    }
 }
