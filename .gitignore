@@ -4,6 +4,7 @@
 /public/hot
 /public/storage
 /public/*.hot-update*
+/public/vendor
 /storage/*.key
 /vendor
 .env
@@ -13,3 +14,4 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+**/telescope.php
