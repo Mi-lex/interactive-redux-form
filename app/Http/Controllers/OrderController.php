@@ -57,7 +57,9 @@ class OrderController extends Controller
 
         $order->payment()->updateOrCreate([], $request['payment'] ?? []);
 
-        if (isset($request['payment.operation'])) {
+        $order->payment->operation()->delete();
+
+        if (isset($request['payment.operation']) && $request['payment.payed_by_cash'] === false) {
             $order->payment->operation()->updateOrCreate([], $request['payment.operation']);
         }
         /*
@@ -105,7 +107,6 @@ class OrderController extends Controller
 
             foreach ($request['post_actions'] as $actionType => $actionItem) {
                 $postAction = PostAction::make(['type' => $actionType])->fill($actionItem);
-                // return $postAction;
                 $bodyModel = $postAction->body()->updateOrCreate([], $actionItem['body']);
                 $postAction->body()->associate($bodyModel);
                 $postActions[] = $postAction;
@@ -119,8 +120,7 @@ class OrderController extends Controller
         $order->delivery()->updateOrCreate([], $request['delivery'] ?? []);
 
         $order->update($request->toArray());
-
-        return response()->json([Order::with('paperJoiner', 'paperJoiner.body', 'customer', 'payment', 'payment.operation', 'package', 'package.type', 'delivery', 'elements', 'elements.printType', 'postActions', 'postActions.body')->find($order), $request->toArray()]);
+        return response()->json(Order::with(['paperJoiner', 'paperJoiner.body', 'customer', 'payment', 'payment.operation', 'package', 'package.type', 'delivery', 'elements', 'elements.printType', 'postActions', 'postActions.body'])->whereId($order->id)->first());
     }
 
     /**
