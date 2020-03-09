@@ -22,7 +22,7 @@ class CreatePackagesTable extends Migration
             $table->boolean('paletting')->default(false);
             $table->boolean('stretch_film')->default(false);
 
-            $table->unsignedTinyInteger('type_id');
+            $table->unsignedTinyInteger('type_id')->nullable();
             $table->foreign('type_id')->references('id')->on('package_types');
 
             $table->unsignedBigInteger('order_id');
