@@ -22,5 +22,5 @@ Route::group([
 ], function () {
     Route::get('/{order}', 'OrderController@show');
     Route::post('/', 'OrderController@store');
-    Route::patch('/{id}', 'OrderController@update');
+    Route::patch('/{order}', 'OrderController@update');
 });

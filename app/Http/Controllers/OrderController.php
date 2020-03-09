@@ -46,10 +46,8 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PassportUpdateRequest $request, $id)
+    public function update(PassportUpdateRequest $request, Order $order)
     {
-        $order = Order::find($id);
-
         if (isset($request['customer'])) {
             $customer = Customer::firstOrCreate(["name" => $request['customer.name']]);
             $order->customer()->associate($customer);
