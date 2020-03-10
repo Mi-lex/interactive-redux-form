@@ -2,8 +2,8 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use Carbon\Carbon;
 use App\Models\Order;
+use Carbon\Carbon;
 use Faker\Generator as Faker;
 
 $factory->define(Order::class, function (Faker $faker) {
