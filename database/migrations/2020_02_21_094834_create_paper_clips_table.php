@@ -20,9 +20,9 @@ class CreatePaperClipsTable extends Migration
             $table->unsignedInteger('quantity')->nullable();
             $table->unsignedBigInteger('width')->nullable();
             $table->unsignedBigInteger('drift')->nullable();
-            
-            $table->unsignedSmallInteger('type_id')->nullable();
-            $table->foreign('type_id')->references('id')->on('paper_clip_types');
+
+            $table->string('type')->nullable();
+            $table->foreign('type')->references('alias')->on('paper_clip_types');
         });
     }
 

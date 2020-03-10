@@ -16,8 +16,7 @@ class CreateEmbossingsTable extends Migration
         Schema::create('embossings', function (Blueprint $table) {
             $table->bigIncrements('id');
             
-            $table->unsignedTinyInteger('foil_type_id')->nullable();
-            $table->foreign('foil_type_id')->references('id')->on('foil_types');
+            $table->string('foil_type')->nullable();
         });
     }
 

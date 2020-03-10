@@ -14,8 +14,8 @@ class CreatePackageTypesTable extends Migration
     public function up()
     {
         Schema::create('package_types', function (Blueprint $table) {
-            $table->tinyIncrements('id');
-            $table->string('name', 15);
+            $table->string('alias')->unique();
+            $table->string('name');
         });
     }
 

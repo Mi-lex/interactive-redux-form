@@ -17,13 +17,13 @@ class CreatePaymentOperationsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('account_number');
 
-            $table->unsignedBigInteger('payment_id')->nullable();
+            $table->unsignedBigInteger('payment_id');
             $table->foreign('payment_id')->references('id')->on('payments')->onDelete('cascade');
 
             $table->date('date')->nullable();
 
-            $table->unsignedTinyInteger('org_type_id');
-            $table->foreign('org_type_id')->references('id')->on('payment_org_types');
+            $table->string('org_type');
+            $table->foreign('org_type')->references('alias')->on('payment_org_types');
         });
     }
 

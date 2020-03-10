@@ -18,13 +18,12 @@ class CreateOrderElementsTable extends Migration
             $table->string('name');
             $table->unsignedBigInteger('stripes')->nullable();
             $table->string('material');
-            $table->unsignedTinyInteger('print_type_id');
+            $table->string('print_type');
             $table->string('brightness');
             $table->string('color_interpretation');
+            
             $table->unsignedBigInteger('order_id');
-
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
-            $table->foreign('print_type_id')->references('id')->on('print_types');
         });
     }
 

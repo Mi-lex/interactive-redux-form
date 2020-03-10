@@ -14,7 +14,7 @@ class CreatePaymentOrgTypesTable extends Migration
     public function up()
     {
         Schema::create('payment_org_types', function (Blueprint $table) {
-            $table->tinyIncrements('id');
+            $table->string('alias')->unique();
             $table->string('name', 20);
         });
     }

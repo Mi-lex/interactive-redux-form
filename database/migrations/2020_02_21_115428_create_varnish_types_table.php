@@ -14,7 +14,7 @@ class CreateVarnishTypesTable extends Migration
     public function up()
     {
         Schema::create('varnish_types', function (Blueprint $table) {
-            $table->tinyIncrements('id');
+            $table->string('alias')->unique();
             $table->string('name');
         });
     }

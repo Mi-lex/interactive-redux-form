@@ -14,7 +14,7 @@ class CreateLaminationTypesTable extends Migration
     public function up()
     {
         Schema::create('lamination_types', function (Blueprint $table) {
-            $table->tinyIncrements('id');
+            $table->string('alias')->unique();
             $table->string('name');
         });
     }

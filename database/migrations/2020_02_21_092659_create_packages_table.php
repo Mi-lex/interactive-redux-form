@@ -22,8 +22,8 @@ class CreatePackagesTable extends Migration
             $table->boolean('paletting')->default(false);
             $table->boolean('stretch_film')->default(false);
 
-            $table->unsignedTinyInteger('type_id')->nullable();
-            $table->foreign('type_id')->references('id')->on('package_types');
+            $table->string('type')->nullable();
+            $table->foreign('type')->references('alias')->on('package_types');
 
             $table->unsignedBigInteger('order_id');
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');

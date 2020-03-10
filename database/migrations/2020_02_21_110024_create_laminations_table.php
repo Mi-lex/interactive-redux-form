@@ -16,8 +16,7 @@ class CreateLaminationsTable extends Migration
         Schema::create('laminations', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->unsignedTinyInteger('lamination_type_id')->nullable();
-            $table->foreign('lamination_type_id')->references('id')->on('lamination_types');
+            $table->string('lamination_type')->nullable();
         });
     }
 

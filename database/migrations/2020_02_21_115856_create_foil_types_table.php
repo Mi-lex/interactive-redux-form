@@ -14,7 +14,7 @@ class CreateFoilTypesTable extends Migration
     public function up()
     {
         Schema::create('foil_types', function (Blueprint $table) {
-            $table->tinyIncrements('id');
+            $table->string('alias')->unique();
             $table->string('name');
         });
     }

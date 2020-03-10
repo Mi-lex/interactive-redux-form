@@ -17,8 +17,8 @@ class CreateBookFoldingsTable extends Migration
             $table->bigIncrements('id');
             $table->string('color')->nullable();
 
-            $table->unsignedTinyInteger('type_id')->nullable();
-            $table->foreign('type_id')->references('id')->on('book_folding_types');
+            $table->string('type')->nullable();
+            $table->foreign('type')->references('alias')->on('book_folding_types');
         });
     }
 

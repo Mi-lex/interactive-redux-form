@@ -14,7 +14,7 @@ class CreateBookFoldingTypesTable extends Migration
     public function up()
     {
         Schema::create('book_folding_types', function (Blueprint $table) {
-            $table->tinyIncrements('id');
+            $table->string('alias')->unique();
             $table->string('name');
         });
     }

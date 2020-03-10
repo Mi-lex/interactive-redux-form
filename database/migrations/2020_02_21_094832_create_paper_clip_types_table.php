@@ -14,7 +14,7 @@ class CreatePaperClipTypesTable extends Migration
     public function up()
     {
         Schema::create('paper_clip_types', function (Blueprint $table) {
-            $table->smallIncrements('id');
+            $table->string('alias')->unique();
             $table->string('name');
         });
     }
