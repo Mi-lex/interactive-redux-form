@@ -45,7 +45,7 @@ class AppServiceProvider extends ServiceProvider
             // Post Actions
             PostAction::CREASING => "$postActionsPath\Creasing",
             PostAction::BOOK_FOLDING => "$postActionsPath\BookFolding",
-            PostAction::LAMITATION => "$postActionsPath\Lamitation",
+            PostAction::LAMINATION => "$postActionsPath\Lamination",
             PostAction::REVANISHING => "$postActionsPath\Revanishing",
             PostAction::EMBOSSING => "$postActionsPath\Embossing",
             PostAction::STAMP_CUT => "$postActionsPath\StampCut",

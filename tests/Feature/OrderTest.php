@@ -2,13 +2,13 @@
 
 namespace Tests\Feature;
 
-use App\Models\Order;
-use Carbon\Carbon;
-use Error;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\Order;
+use App\Models\PaperJoiner;
 
 class OrderTest extends TestCase
 {
@@ -41,45 +41,33 @@ class OrderTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_store_and_update_different_payment_type_info()
+    public function a_user_can_store_and_update_different_payment_type()
     {
         $this->withoutExceptionHandling();
 
-        $payedWithCash = [
-            "payment" => [
-                'payed_by_cash' => true,
-            ]
-        ];
-
         $order = Order::create();
 
-        $response = $this->patch("api/passport/$order->id", $payedWithCash, ["accept" => "application/json"]);
-        $response->assertSuccessful();
-        $payedWithCash['payment']['order_id'] = $order->id;
-
-        $this->assertDatabaseHas('payments', $payedWithCash['payment']);
-
-        $orgType = \App\Models\PaymentOrgType::create(['name' => $this->faker->name]);
-
-        $operationAttributes = factory('App\Models\PaymentOperation')->raw([
-            'org_type' => $orgType->name
-        ]);
-
-        $paydWithOperation = [
-            "payment" => [
-                'payed_by_cash' => false,
-                'operation' => $operationAttributes
+        $paymentAttributes = [
+            [
+                "payed_by_cash" => false,
+                "operation" => factory('App\Models\PaymentOperation')->raw(),
+            ],
+            [
+                "payed_by_cash" => true
             ]
         ];
 
-        $response = $this->patch("api/passport/$order->id", $paydWithOperation, ["accept" => "application/json"]);
+        foreach ($paymentAttributes as $payment) {
+            $response = $this->patch("api/passport/$order->id", ["payment" => $payment], ["accept" => "application/json"]);
 
-        $paymentAttributes = [
-            'order_id' =>   $order->id,
-            'payed_by_cash' => false,
-        ];
+            $response->assertSuccessful();
 
-        $this->assertDatabaseHas('payments', $paymentAttributes);
+            $payment['order_id'] = $order->id;
+
+            unset($payment['operation']);
+
+            $this->assertDatabaseHas('payments', $payment);
+        }
     }
 
     /** @test */
@@ -89,9 +77,7 @@ class OrderTest extends TestCase
 
         $order = Order::create();
 
-        $packageAttributes = factory('App\Models\Package', 2)->make()->each(function ($package) {
-            $package->type_id = \App\Models\PackageType::create(['name' => $this->faker->name])->id;
-        })->toArray();
+        $packageAttributes = factory('App\Models\Package', 2)->make()->toArray();
 
         foreach ($packageAttributes as $package) {
             $response = $this->patch("api/passport/$order->id", ["package" => $package], ["accept" => "application/json"]);
@@ -121,6 +107,33 @@ class OrderTest extends TestCase
             $delivery['order_id'] = $order->id;
 
             $this->assertDatabaseHas('deliveries', $delivery);
+        }
+    }
+
+    /** @test */
+    public function a_user_can_store_and_update_paper_joiner_info()
+    {
+        $this->withoutExceptionHandling();
+
+        $order = Order::create();
+
+        foreach (PaperJoiner::NAMES as $joinerType) {
+            $body = factory(Relation::getMorphedModel($joinerType))->create();
+
+            $rowBody = $body->toArray();
+            unset($rowBody['id']);
+
+            $joinerRequestParams = [
+                $joinerType => $rowBody
+            ];
+
+            $response = $this->patch("api/passport/$order->id", ["paper_joiner" => $joinerRequestParams], ["accept" => "application/json"]);
+            
+            $response->assertSuccessful();
+
+            $this->assertDatabaseHas('paper_joiners', ['type' => $joinerType, 'order_id' => $order->id]);
+            // check created joiner body existence
+            $this->assertDatabaseHas($body->getTable(), $rowBody);
         }
     }
 }
