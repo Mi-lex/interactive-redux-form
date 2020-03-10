@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\PaperJoiner;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class PassportUpdateRequest extends FormRequest
 {
@@ -25,8 +23,6 @@ class PassportUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        $paperJoinerNames = PaperJoiner::NAMES;
-
         return [
             'name' => ['string'],
             'type' => ['string'],
@@ -69,13 +65,14 @@ class PassportUpdateRequest extends FormRequest
             // paper joiner
             'paper_joiner' => ['array'],
             /*
-             * if it's paper_clip this line means that type name should exists in papre_clip_types table
+             * if it's paper_clip this line means that type name should exists in paper_clip_types table
              * if it's glue_bonding it's gonna check glue_bonding_types table etc
              */
-            'paper_joiner.*' => ['array'],
+            // 'paper_joiner.*' => ['array'],
             //  * type === 'paper_clip'
-            'paper_joiner.paper_clip.type' => ['string', 'exissts:paper_clip_types,alias'],
+            'paper_joiner.paper_clip.type' => ['string', 'exists:paper_clip_types,alias'],
             'paper_joiner.paper_clip.auto' => ['boolean'],
+            'paper_joiner.paper_clip.quantity' => ['numeric'],
             'paper_joiner.paper_clip.manual' => ['boolean'],
             'paper_joiner.paper_clip.width' => ['numeric'],
             'paper_joiner.paper_clip.drift' => ['numeric'],
@@ -87,12 +84,15 @@ class PassportUpdateRequest extends FormRequest
             // * type === 'spring'
             'paper_joiner.spring.color' => ['string'],
             'paper_joiner.spring.position' => ['string'],
-            'paper_joiner.spring.cover_block_difference' => ['string'],
+            'paper_joiner.spring.cover_block_difference' => ['numeric'],
             // * type === 'packet'
             'paper_joiner.packet.grommet_color' => ['string'],
             'paper_joiner.packet.hands_color' => ['string'],
             // * type === 'glue_bonding'
-            'paper_joiner.glue_bonding.special' => ['string'],
+            'paper_joiner.glue_bonding.type' => ['string'],
+            'paper_joiner.glue_bonding.position' => ['string'],
+            // * type === 'special'
+            'paper_joiner.special.description' => ['string'],
 
             // post actions
             'post_actions' => ['array'],
