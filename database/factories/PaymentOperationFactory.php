@@ -7,11 +7,14 @@ use App\Models\PaymentOperation;
 use Faker\Generator as Faker;
 
 $factory->define(PaymentOperation::class, function (Faker $faker) {
-    $org_types = DB::table('payment_org_types')->get()->pluck('name');
-
     return [
-        "org_type" => $faker->randomElement($org_types),
         "account_number" => $faker->randomDigit,
-        "date" => Carbon::now()->format('d.m.y')
+        "date" => Carbon::now()->format('d.m.y'),
+        "org_type" => function () use ($faker) {
+            return \App\Models\PaymentOrgType::create(["alias" => $faker->text(5), "name" => $faker->text(15)])->alias;
+        },
+        "payment_id" => function() {
+           return factory('App\Models\Payment')->create()->id; 
+        }
     ];
 });

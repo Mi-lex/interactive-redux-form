@@ -13,7 +13,9 @@ $factory->define(Package::class, function (Faker $faker) {
         'label' => $faker->boolean,
         'paletting' => $faker->boolean,
         'stretch_film' => $faker->boolean,
-        'type_id' => $faker->randomDigit,
         'order_id' => $faker->randomDigit,
+        'type' => function () use ($faker) {
+            return \App\Models\PackageType::create(["alias" => $faker->text(5), "name" => $faker->text(15)])->alias;
+        }
     ];
 });
