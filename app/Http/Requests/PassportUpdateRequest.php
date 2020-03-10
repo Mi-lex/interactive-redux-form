@@ -42,13 +42,13 @@ class PassportUpdateRequest extends FormRequest
             // payment
             'payment.payed_by_cash' => ['boolean'],
             'payment.operation' => ['array'],
-            'payment.operation.org_type' => ['string', 'exists:payment_org_types,name', 'required_with:payment.operation'],
+            'payment.operation.org_type' => ['string', 'exists:payment_org_types,alias', 'required_with:payment.operation'],
             'payment.operation.account_number' => ['numeric', 'required_with:payment.operation'],
             'payment.operation.date' => ['date_format:d.m.y', 'required_with:payment.operation'],
             // package
             'package' => ['array'],
             'package.capacity' => ['numeric'],
-            'package.type' => ['string', 'exists:package_types,name'],
+            'package.type' => ['string', 'exists:package_types,alias'],
             'package.sample' => ['boolean'],
             'package.sort' => ['boolean'],
             'package.label' => ['boolean'],
@@ -63,36 +63,36 @@ class PassportUpdateRequest extends FormRequest
             'elements.*.name' => ['string', 'required_with:elements'],
             'elements.*.stripes' => ['string', 'required_with:elements'],
             'elements.*.material' => ['string', 'required_with:elements'],
-            'elements.*.print_type' => ['string', 'required_with:elements', 'exists:print_types,name'],
+            'elements.*.print_type' => ['string', 'required_with:elements', 'exists:print_types,alias'],
             'elements.*.brightness' => ['string', 'required_with:elements'],
             'elements.*.color_interpretation' => ['string', 'required_with:elements'],
             // paper joiner
             'paper_joiner' => ['array'],
-            'paper_joiner.name' => ['string', 'required_with:paper_joiner', Rule::in($paperJoinerNames)],
             /*
              * if it's paper_clip this line means that type name should exists in papre_clip_types table
              * if it's glue_bonding it's gonna check glue_bonding_types table etc
              */
-            'paper_joiner.body' => ['array'],
+            'paper_joiner.*' => ['array'],
             //  * type === 'paper_clip'
-            'paper_joiner.body.auto' => ['boolean'],
-            'paper_joiner.body.manual' => ['boolean'],
-            'paper_joiner.body.width' => ['numeric'],
-            'paper_joiner.body.drift' => ['numeric'],
+            'paper_joiner.paper_clip.type' => ['string', 'exissts:paper_clip_types,alias'],
+            'paper_joiner.paper_clip.auto' => ['boolean'],
+            'paper_joiner.paper_clip.manual' => ['boolean'],
+            'paper_joiner.paper_clip.width' => ['numeric'],
+            'paper_joiner.paper_clip.drift' => ['numeric'],
             // * type === 'termo'
-            'paper_joiner.body.spine_width' => ['numeric'],
-            'paper_joiner.body.flaps_cover' => ['boolean'],
-            'paper_joiner.body.flush_with_block' => ['boolean'],
-            'paper_joiner.body.braces' => ['boolean'],
+            'paper_joiner.termo.spine_width' => ['numeric'],
+            'paper_joiner.termo.flaps_cover' => ['boolean'],
+            'paper_joiner.termo.flush_with_block' => ['boolean'],
+            'paper_joiner.termo.braces' => ['boolean'],
             // * type === 'spring'
-            'paper_joiner.body.color' => ['string'],
-            'paper_joiner.body.position' => ['string'],
-            'paper_joiner.body.cover_block_difference' => ['string'],
+            'paper_joiner.spring.color' => ['string'],
+            'paper_joiner.spring.position' => ['string'],
+            'paper_joiner.spring.cover_block_difference' => ['string'],
             // * type === 'packet'
-            'paper_joiner.body.grommet_color' => ['string'],
-            'paper_joiner.body.hands_color' => ['string'],
+            'paper_joiner.packet.grommet_color' => ['string'],
+            'paper_joiner.packet.hands_color' => ['string'],
             // * type === 'glue_bonding'
-            'paper_joiner.body.special' => ['string'],
+            'paper_joiner.glue_bonding.special' => ['string'],
 
             // post actions
             'post_actions' => ['array'],
@@ -100,11 +100,11 @@ class PassportUpdateRequest extends FormRequest
             'post_actions.*.additional' => ['string'],
 
             'post_actions.creasing.body.parts' => ['string'],
-            'post_actions.book_folding.body.type' => ['string', 'exists:book_folding_types,name'],
+            'post_actions.book_folding.body.type' => ['string', 'exists:book_folding_types,alias'],
             'post_actions.book_folding.body.color' => ['string'],
-            'post_actions.lamination.body.type' => ['string', 'exists:lamination_types,name'],
-            'post_actions.revanishing.body.varnish_type' => ['string', 'exists:varnish_types,name'],
-            'post_action.embossing.body.foil_type' => ['string', 'exists:foil_types,name'],
+            'post_actions.lamination.body.type' => ['string', 'exists:lamination_types,alias'],
+            'post_actions.revanishing.body.varnish_type' => ['string', 'exists:varnish_types,alias'],
+            'post_action.embossing.body.foil_type' => ['string', 'exists:foil_types,alias'],
             'post_action.stamp_cut.body.name' => ['string'],
             'post_action.perforation.body.name' => ['string'],
         ];
