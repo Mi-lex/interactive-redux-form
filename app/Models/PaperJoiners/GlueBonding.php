@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class GlueBonding extends Model
 {
-    protected $guarded = [];
+    protected $fillable = ['type', 'position'];
     public $timestamps = false;
 }

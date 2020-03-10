@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Binding extends Model
 {
-    protected $guarded = [];
+    public $fillable = [];
     public $timestamps = false;
 }

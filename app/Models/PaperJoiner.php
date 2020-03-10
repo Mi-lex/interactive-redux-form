@@ -15,9 +15,9 @@ class PaperJoiner extends Model
     const PAPER_FILE = 'paper_file';
     const SPECIAL = 'special';
 
-    const NAMES = [self::PAPER_CLIP, self::TERMO, self::SPRING, self::PACKET, self::GLUE_BONDING, self::BINDING, self::PAPER_FILE, self::SPECIAL];
+    const NAMES = [self::TERMO, self::SPECIAL, self::PAPER_CLIP,  self::SPRING, self::PACKET, self::GLUE_BONDING, self::BINDING, self::PAPER_FILE];
 
-    protected $guarded = [];
+    protected $fillable = ['type', 'order_id', 'joinable_id'];
     public $timestamps = false;
 
     public function order()

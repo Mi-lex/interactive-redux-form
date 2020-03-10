@@ -11,6 +11,8 @@ class PaperClipType extends Model
     protected $keyType = 'string';
     public $timestamps = false;
 
+    public $fillable = ['name', 'alias'];
+
     public function paper_clip()
     {
         return $this->belongsTo(PaperClip::class);

@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Special extends Model
 {
-    protected $guarded = [];
+    protected $fillable = ['description'];
     public $timestamps = false;
 }

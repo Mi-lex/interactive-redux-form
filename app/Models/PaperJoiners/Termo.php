@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Termo extends Model
 {
-    protected $guarded = [];
+    protected $fillable = ['spine_width', 'flaps_cover', 'flush_with_block', 'braces'];
     public $timestamps = false;
 }

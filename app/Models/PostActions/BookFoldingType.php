@@ -9,4 +9,6 @@ class BookFoldingType extends Model
     public $incrementing = false;
     protected $primaryKey = 'alias';
     protected $keyType = 'string';
+
+    public $fillable = ['name', 'alias'];
 }

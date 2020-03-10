@@ -11,11 +11,11 @@ class Order extends Model
 {
     // protected $guarded = [];
     protected $fillable = [
-        'name', 'type', 'importaint_info', 'completion_date', 'completion_time', 'is_cut', 'circulation', 'similar_order_id', 'manager_id', 'customer_id',
+        'name', 'type', 'important_info', 'completion_date', 'completion_time', 'is_cut', 'circulation', 'similar_order_id', 'manager_id', 'customer_id',
     ];
 
     protected $casts = [
-        'is_cut' => 'booleadn',
+        'is_cut' => 'boolean',
     ];
 
     public function customer(): BelongsTo
