@@ -13,12 +13,15 @@ class LaminationTypeSeeder extends Seeder
     {
         $laminationTypes = [
             [
-                'name' => 'глянцевая',
+                'alias' => 'glos',
+                'name' => 'глянцевый',
             ],
             [
-                'name' => 'матовая',
+                'alias' => 'matt',
+                'name' => 'матовый',
             ],
             [
+                'alias' => 'soft',
                 'name' => 'софт-тач',
             ],
         ];

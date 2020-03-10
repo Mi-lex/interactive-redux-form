@@ -13,12 +13,15 @@ class BookFoldingTypeSeeder extends Seeder
     {
         $bookFoldingTypes = [
             [
+                'alias' => 'eu',
                 'name' => 'евро',
             ],
             [
+                'alias' => 'gar',
                 'name' => 'гармошка',
             ],
             [
+                'alias' => 'win',
                 'name' => 'оконная',
             ],
         ];

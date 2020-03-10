@@ -13,18 +13,23 @@ class PrintTypeSeeder extends Seeder
     {
         $printTypes = [
             [
+                'alias' => 'none',
                 'name' => 'без_печати',
             ],
             [
+                'alias' => 'ofs',
                 'name' => 'офсет',
             ],
             [
+                'alias' => 'digit',
                 'name' => 'цифровая',
             ],
             [
+                'alias' => 'ultr',
                 'name' => 'уф-принтер',
             ],
             [
+                'alias' => 'plot',
                 'name' => 'плоттер',
             ]
         ];

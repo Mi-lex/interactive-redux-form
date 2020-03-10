@@ -13,12 +13,15 @@ class FoilTypeSeeder extends Seeder
     {
         $foilTypes = [
             [
+                'alias' => 'gls',
                 'name' => 'глянцевая',
             ],
             [
+                'alias' => 'mat',
                 'name' => 'матовая',
             ],
             [
+                'alias' => 'hol',
                 'name' => 'голографическая',
             ],
         ];

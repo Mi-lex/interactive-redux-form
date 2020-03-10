@@ -13,9 +13,11 @@ class PaperClipTypeSeeder extends Seeder
     {
         $paperClipTypes = [
             [
+                "alias" => 'file',
                 "name" => 'файловая',
             ],
             [
+                "alias" => 'oval',
                 "name" => 'овальная',
             ],
         ];

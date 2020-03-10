@@ -13,9 +13,11 @@ class PackageTypeSeeder extends Seeder
     {
         $packageTypes = [
             [
+                'alias' => 'box',
                 'name' => 'коробка',
             ],
             [
+                'alias' => 'pac',
                 'name' => 'пачка',
             ],
         ];

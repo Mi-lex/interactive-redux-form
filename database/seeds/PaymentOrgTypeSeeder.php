@@ -13,12 +13,15 @@ class PaymentOrgTypeSeeder extends Seeder
     {
         $orgs = [
             [
+                'alias' => 'et',
                 'name' => 'эталон',
             ],
             [
+                'alias' => 'st',
                 'name' => 'стандарт',
             ],
             [
+                'alias' => 'pr',
                 'name' => 'прессцентр',
             ],
         ];

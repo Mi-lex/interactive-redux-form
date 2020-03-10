@@ -13,12 +13,15 @@ class VarnishTypeSeeder extends Seeder
     {
         $varnishTypes = [
             [
+                'alias' => 'glos',
                 'name' => 'глянцевый',
             ],
             [
+                'alias' => 'matt',
                 'name' => 'матовый',
             ],
             [
+                'alias' => 'soft',
                 'name' => 'софт-тач',
             ],
         ];
