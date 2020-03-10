@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Lamination extends Model
 {
-    protected $fillable = ['type_id'];
+    protected $fillable = ['type'];
 
     public function type(): BelongsTo
     {

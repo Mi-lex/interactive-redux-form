@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class PaperClipType extends Model
 {
+    public $incrementing = false;
+    protected $primaryKey = 'alias';
+    protected $keyType = 'string';
     public $timestamps = false;
 
     public function paper_clip()

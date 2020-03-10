@@ -2,17 +2,13 @@
 
 namespace App\Models\PostActions;
 
-use App\AbstractClasses\ModelWithTypes;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class BookFolding extends ModelWithTypes
+class BookFolding extends Model
 {
-    protected $fillable = ['color', 'type_id'];
+    protected $fillable = ['color', 'type'];
     public $timestamps = false;
-
-    protected $typeMap = [
-        'type' => 'book_folding_types'
-    ];
 
     public function type(): BelongsTo
     {

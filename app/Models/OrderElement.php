@@ -7,15 +7,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class OrderElement extends Model
 {
-    protected $fillable = ['name', 'stripes', 'material', 'print_type_id', 'brightness', 'color_interpretation', 'order_id'];
+    protected $fillable = ['name', 'stripes', 'material', 'print_type', 'brightness', 'color_interpretation', 'order_id'];
     public $timestamps = false;
-
-    protected $typeMap = [
-        'print_type' => 'print_types'
-    ];
 
     public function printType(): BelongsTo
     {
-        return $this->belongsTo(PrintType::class);
+        return $this->belongsTo(PrintType::class, 'alias');
     }
 }

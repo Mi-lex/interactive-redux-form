@@ -2,16 +2,12 @@
 
 namespace App\Models\PostActions;
 
-use App\AbstractClasses\ModelWithTypes;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Revanishing extends ModelWithTypes
+class Revanishing extends Model
 {
     protected $fillable = ['varnish_type'];
-
-    protected $typeMap = [
-        'varnish_type' => 'varnish_types'
-    ];
 
     public function varnish_type(): BelongsTo
     {

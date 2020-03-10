@@ -2,19 +2,15 @@
 
 namespace App\Models;
 
-use App\AbstractClasses\ModelWithTypes;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Package extends ModelWithTypes
+class Package extends Model
 {
-    protected $fillable = ['capacity', 'sort', 'sample', 'label', 'paletting', 'stretch_film', 'type_id'];
+    protected $fillable = ['capacity', 'sort', 'sample', 'label', 'paletting', 'stretch_film', 'type'];
     public $timestamps = false;
 
-    protected $typeMap = [
-        'type' => 'package_types'
-    ];
-
-    public function type(): BelongsTo
+    public function typeModel(): BelongsTo
     {
         return $this->belongsTo(PackageType::class);
     }
