@@ -69,7 +69,7 @@ class OrderController extends Controller
             $order->paperJoiner()->delete();
 
             if (!empty($request['paper_joiner'])) {
-                $joinerType = $request['paper_joiner.name'];
+                $joinerType = array_key_first($request['paper_joiner']);
 
                 $joinerModel = $order->paperJoiner()->make(["type" => $joinerType]);
                 $joinerModelBody = $joinerModel->body()->updateOrCreate([], $request['paper_joiner.body'] ?? []);
@@ -90,8 +90,6 @@ class OrderController extends Controller
 
                 foreach ($request->elements as $element) {
                     $elementModel = OrderElement::make($element);
-
-                    $elementModel->print_type_id = PrintType::whereName($element['print_type'])->first()->id;
                     $newElements[] = $elementModel;
                 }
 
@@ -118,7 +116,7 @@ class OrderController extends Controller
         $order->delivery()->updateOrCreate([], $request['delivery'] ?? []);
 
         $order->update($request->toArray());
-        return response()->json(Order::with(['paperJoiner', 'paperJoiner.body', 'customer', 'payment', 'payment.operation', 'package', 'package.type', 'delivery', 'elements', 'elements.printType', 'postActions', 'postActions.body'])->whereId($order->id)->first());
+        return response()->json(Order::with(['paperJoiner', 'paperJoiner.body', 'customer', 'payment', 'payment.operation', 'package', 'delivery', 'elements', 'postActions', 'postActions.body'])->whereId($order->id)->first());
     }
 
     /**
