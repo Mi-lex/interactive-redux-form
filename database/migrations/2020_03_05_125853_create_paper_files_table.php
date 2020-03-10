@@ -15,7 +15,6 @@ class CreatePaperFilesTable extends Migration
     {
         Schema::create('paper_files', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
         });
     }
 

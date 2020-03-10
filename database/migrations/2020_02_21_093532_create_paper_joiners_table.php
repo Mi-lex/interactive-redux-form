@@ -17,7 +17,7 @@ class CreatePaperJoinersTable extends Migration
             $table->bigIncrements('id');
             $table->string('type');
 
-            $table->unsignedBigInteger('joinable_id');
+            $table->unsignedBigInteger('joinable_id')->nullable();
 
             $table->unsignedBigInteger('order_id');
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');

@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\OrderElement;
 use App\Models\PostAction;
 use App\Models\PrintType;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
@@ -72,9 +73,12 @@ class OrderController extends Controller
                 $joinerType = array_key_first($request['paper_joiner']);
 
                 $joinerModel = $order->paperJoiner()->make(["type" => $joinerType]);
-                $joinerModelBody = $joinerModel->body()->updateOrCreate([], $request['paper_joiner.body'] ?? []);
 
-                $joinerModel->body()->associate($joinerModelBody);
+                if (empty($bodyInfo = $request['paper_joiner'][$joinerType])) {
+                    $joinerModelBody = $joinerModel->body()->create($bodyInfo);
+                    $joinerModel->body()->associate($joinerModelBody);
+                }
+
                 $joinerModel->save();
             }
         }
