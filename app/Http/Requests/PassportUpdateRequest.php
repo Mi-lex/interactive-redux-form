@@ -23,18 +23,27 @@ class PassportUpdateRequest extends FormRequest
      */
     public function rules()
     {
+        //
+        // si
+        /**
+         * I would probably recommend to make almost every input values nullable
+         * since user can just delete random input and update it
+         * and they are supposed to be nullables according to requirements
+         */
         return [
-            'name' => ['string'],
-            'type' => ['string'],
-            'important_info' => ['string'],
-            'completion_date' => ['date_format:d.m.y'],
-            'completion_time' => ['date_format:H:i'],
+            'name' => ['nullable','string'],
+            'type' => ['nullable','string'],
+            'important_info' => ['nullable', 'string'],
+            'completion_date' => ['nullable', 'date_format:d.m.y'],
+            'completion_time' => ['nullable', 'date_format:H:i'],
+            'is_similar_order' => ['boolean'],
+            'similar_order_id' => ['nullable', 'numeric'],
             // implementation
             'is_cut' => ['boolean'],
-            'circulation' => ['string'],
-            "similar_order_id" => ['numeric'],
+            'circulation' => ['nullable', 'string'],
+            "similar_order_id" => ['nullable','numeric'],
             // customer
-            'customer.name' => ['string'],
+            'customer.name' => ['nullable', 'string'],
             // payment
             'payment.payed_by_cash' => ['boolean'],
             'payment.operation' => ['array'],
@@ -43,7 +52,7 @@ class PassportUpdateRequest extends FormRequest
             'payment.operation.date' => ['date_format:d.m.y', 'required_with:payment.operation'],
             // package
             'package' => ['array'],
-            'package.capacity' => ['numeric'],
+            'package.capacity' => ['nullable','numeric'],
             'package.type' => ['string', 'exists:package_types,alias'],
             'package.sample' => ['boolean'],
             'package.sort' => ['boolean'],
@@ -53,7 +62,7 @@ class PassportUpdateRequest extends FormRequest
             // delivery
             'delivery' => ['array'],
             'delivery.should_be_delivered' => ['boolean'],
-            'delivery.address' => ['string'],
+            'delivery.address' => ['nullable', 'string'],
             // elements
             'elements' => ['array'],
             'elements.*.name' => ['string', 'required_with:elements'],
@@ -72,22 +81,22 @@ class PassportUpdateRequest extends FormRequest
             //  * type === 'paper_clip'
             'paper_joiner.paper_clip.type' => ['string', 'exists:paper_clip_types,alias'],
             'paper_joiner.paper_clip.auto' => ['boolean'],
-            'paper_joiner.paper_clip.quantity' => ['numeric'],
+            'paper_joiner.paper_clip.quantity' => ['nullable','numeric'],
             'paper_joiner.paper_clip.manual' => ['boolean'],
-            'paper_joiner.paper_clip.width' => ['numeric'],
-            'paper_joiner.paper_clip.drift' => ['numeric'],
+            'paper_joiner.paper_clip.width' => ['nullable', 'numeric'],
+            'paper_joiner.paper_clip.drift' => ['nullable', 'numeric'],
             // * type === 'termo'
-            'paper_joiner.termo.spine_width' => ['numeric'],
+            'paper_joiner.termo.spine_width' => ['nullable','numeric'],
             'paper_joiner.termo.flaps_cover' => ['boolean'],
             'paper_joiner.termo.flush_with_block' => ['boolean'],
             'paper_joiner.termo.braces' => ['boolean'],
             // * type === 'spring'
-            'paper_joiner.spring.color' => ['string'],
+            'paper_joiner.spring.color' => ['nullable','string'],
             'paper_joiner.spring.position' => ['string'],
-            'paper_joiner.spring.cover_block_difference' => ['numeric'],
+            'paper_joiner.spring.cover_block_difference' => ['nullable','numeric'],
             // * type === 'packet'
-            'paper_joiner.packet.grommet_color' => ['string'],
-            'paper_joiner.packet.hands_color' => ['string'],
+            'paper_joiner.packet.grommet_color' => ['nullable','string'],
+            'paper_joiner.packet.hands_color' => ['nullable','string'],
             // * type === 'glue_bonding'
             'paper_joiner.glue_bonding.type' => ['string'],
             'paper_joiner.glue_bonding.position' => ['string'],
@@ -96,17 +105,16 @@ class PassportUpdateRequest extends FormRequest
 
             // post actions
             'post_actions' => ['array'],
-            'post_actions.*.elements' => ['string'],
-            'post_actions.*.additional' => ['string'],
+            'post_actions.*.elements' => ['nullable','string'],
+            'post_actions.*.additional' => ['nullable','string'],
 
-            'post_actions.creasing.body.parts' => ['string'],
+            'post_actions.creasing.body.parts' => ['nullable','string'],
             'post_actions.book_folding.body.type' => ['string', 'exists:book_folding_types,alias'],
             'post_actions.book_folding.body.color' => ['string'],
             'post_actions.lamination.body.type' => ['string', 'exists:lamination_types,alias'],
             'post_actions.revarnishing.body.varnish_type' => ['string', 'exists:varnish_types,alias'],
             'post_action.embossing.body.foil_type' => ['string', 'exists:foil_types,alias'],
             'post_action.stamp_cut.body.name' => ['string'],
-            'post_action.perforation.body.name' => ['string'],
         ];
     }
 }
