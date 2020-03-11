@@ -2,13 +2,8 @@
 
 namespace App\Models\PostActions;
 
-use Illuminate\Database\Eloquent\Model;
+use App\AbstractClasses\TypeModel;
 
-class BookFoldingType extends Model
+class BookFoldingType Extends TypeModel
 {
-    public $incrementing = false;
-    protected $primaryKey = 'alias';
-    protected $keyType = 'string';
-    public $fillable = ['name', 'alias'];
-    public $timestamps = false;
 }

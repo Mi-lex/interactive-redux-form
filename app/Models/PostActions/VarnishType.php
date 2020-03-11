@@ -2,13 +2,8 @@
 
 namespace App\Models\PostActions;
 
-use Illuminate\Database\Eloquent\Model;
+use App\AbstractClasses\TypeModel;
 
-class VarnishType extends Model
+class VarnishType Extends TypeModel
 {
-    public $incrementing = false;
-    protected $primaryKey = 'alias';
-    protected $keyType = 'string';
-    public $timestamps = false;
-    public $fillable = ['name', 'alias'];
 }

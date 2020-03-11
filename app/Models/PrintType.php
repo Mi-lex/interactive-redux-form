@@ -2,13 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\AbstractClasses\TypeModel;
 
-class PrintType extends Model
+class PrintType Extends TypeModel
 {
-    public $incrementing = false;
-    protected $primaryKey = 'alias';
-    protected $keyType = 'string';
-    protected $fillable = ['alias', 'name'];
-    public $timestamps = false;
 }

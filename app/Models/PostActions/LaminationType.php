@@ -2,13 +2,8 @@
 
 namespace App\Models\PostActions;
 
-use Illuminate\Database\Eloquent\Model;
+use App\AbstractClasses\TypeModel;
 
-class LaminationType extends Model
+class LaminationType Extends TypeModel
 {
-    public $incrementing = false;
-    protected $primaryKey = 'alias';
-    protected $keyType = 'string';
-    public $timestamps = false;
-    public $fillable = ['name', 'alias'];
 }
