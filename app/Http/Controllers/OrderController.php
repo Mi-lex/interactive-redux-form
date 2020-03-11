@@ -60,7 +60,7 @@ class OrderController extends Controller
             $order->payment->operation()->updateOrCreate([], $request['payment.operation']);
         }
         /*
-         * if field exists in the request it can be empty
+         * if field exists in the request and it's empty
          * it means that paper_joiner was deleted
          * if it's not empty we still should delete it, coz it could be redefined
          */
@@ -105,8 +105,12 @@ class OrderController extends Controller
 
             foreach ($request['post_actions'] as $actionType => $actionItem) {
                 $postAction = PostAction::make(['type' => $actionType])->fill($actionItem);
-                $bodyModel = $postAction->body()->updateOrCreate([], $actionItem['body']);
-                $postAction->body()->associate($bodyModel);
+
+                if (!empty($actionItem['body'])) {
+                    $bodyModel = $postAction->body()->updateOrCreate([], $actionItem['body']);
+                    $postAction->body()->associate($bodyModel);
+                }
+
                 $postActions[] = $postAction;
             }
 

@@ -4,11 +4,11 @@ namespace Tests\Feature;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Order;
 use App\Models\PaperJoiner;
+use App\Models\PostAction;
 
 class OrderTest extends TestCase
 {
@@ -120,11 +120,11 @@ class OrderTest extends TestCase
         foreach (PaperJoiner::NAMES as $joinerType) {
             $body = factory(Relation::getMorphedModel($joinerType))->create();
 
-            $rowBody = $body->toArray();
-            unset($rowBody['id']);
+            $rawBody = $body->toArray();
+            unset($rawBody['id']);
 
             $joinerRequestParams = [
-                $joinerType => $rowBody
+                $joinerType => $rawBody
             ];
 
             $response = $this->patch("api/passport/$order->id", ["paper_joiner" => $joinerRequestParams], ["accept" => "application/json"]);
@@ -133,13 +133,10 @@ class OrderTest extends TestCase
 
             $this->assertDatabaseHas('paper_joiners', ['type' => $joinerType, 'order_id' => $order->id]);
             // check created joiner body existence
-            $this->assertDatabaseHas($body->getTable(), $rowBody);
+            $this->assertDatabaseHas($body->getTable(), $rawBody);
         }
     }
 
-    // There could be a lot of elements right
-    // so we just need to create a case with one element and several
-    // try to save them and check the existence of elements and their quantity 
     /** @test */
     public function a_user_can_store_and_update_element()
     {
@@ -161,7 +158,136 @@ class OrderTest extends TestCase
             }
 
             $elementCount = Order::find($order->id)->elements->count();
-            $this->assertEquals($elementCount, $quantity);
+            $this->assertEquals($quantity, $elementCount);
+        }
+    }
+
+    // wtf with this name right
+    /**
+     * if column doesn't have specific values (yet) there is no need to create table for
+     * that and store only ids.
+     */
+    private function assertUpdatingPostActionSuccess(string $postActionType, bool $isTableEmpty = false): void
+    {
+        $this->withoutExceptionHandling();
+
+        $order = Order::create();
+
+        $bodyModelName = Relation::getMorphedModel($postActionType);
+        $body = factory($bodyModelName)->make();
+        $rawBody = $body->toArray();
+
+        $postActionAttributes = [
+            $postActionType => [
+                'additional' => $this->faker->text,
+                'elements' => $this->faker->text,
+                'body' => $rawBody
+            ]
+        ];
+
+        $response = $this->patch("api/passport/$order->id", ["post_actions" => $postActionAttributes], ["accept" => "application/json"]);
+
+        $response->assertSuccessful();
+
+        unset($postActionAttributes[$postActionType]['body']);
+
+        $this->assertDatabaseHas('post_actions', $postActionAttributes[$postActionType]);
+
+        if (!$isTableEmpty) {
+            $this->assertDatabaseHas($body->getTable(), $rawBody);
+        }
+    }
+
+    // post actions:
+
+    /** @test */
+    public function a_user_can_store_and_update_book_folding_info()
+    {
+        $type = PostAction::BOOK_FOLDING;
+        $this->assertUpdatingPostActionSuccess($type);
+    }
+
+    /** @test */
+    public function a_user_can_store_and_update_creasing_info()
+    {
+        $type = PostAction::CREASING;
+        $this->assertUpdatingPostActionSuccess($type);
+    }
+
+    /** @test */
+    public function a_user_can_store_and_update_embossing_info()
+    {
+        $type = PostAction::EMBOSSING;
+        $this->assertUpdatingPostActionSuccess($type);
+    }
+
+    /** @test */
+    public function a_user_can_store_and_update_hot_stamp_info()
+    {
+        $type = PostAction::HOT_STAMP;
+        $this->assertUpdatingPostActionSuccess($type, true);
+    }
+
+    /** @test */
+    public function a_user_can_store_and_update_lamination_info()
+    {
+        $type = PostAction::LAMINATION;
+        $this->assertUpdatingPostActionSuccess($type);
+    }
+
+    /** @test */
+    public function a_user_can_store_and_update_perforation_info()
+    {
+        $type = PostAction::PERFORATION;
+        $this->assertUpdatingPostActionSuccess($type, true);
+    }
+
+    /** @test */
+    public function a_user_can_store_and_update_revarnishing_info()
+    {
+        $type = PostAction::REVARNISHING;
+        $this->assertUpdatingPostActionSuccess($type);
+    }
+
+    /** @test */
+    public function a_user_can_store_and_update_stamp_cut_info()
+    {
+        $type = PostAction::STAMP_CUT;
+        $this->assertUpdatingPostActionSuccess($type);
+    }
+
+    /** @test */
+    public function a_user_can_store_and_update_several_post_actions()
+    {
+        $this->withoutExceptionHandling();
+
+        $order = Order::create();
+
+        for ($i = 0; $i < 2; $i++) {
+            // get random quantity of different post actions
+            $postActionBodyNames = $this->faker->randomElements(PostAction::NAMES, $this->faker->numberBetween(1, count(PostAction::NAMES)));
+
+            $bodies = collect($postActionBodyNames)->mapWithKeys(function ($postActionName) {
+                return [$postActionName => factory(Relation::getMorphedModel($postActionName))->create()];
+            });
+
+            $postActionsAttributes = $bodies->mapWithKeys(function ($postAction, $postActionName) {
+                $postActionBodyArr = $postAction->toArray();
+                unset($postActionBodyArr['id']);
+                return [$postActionName => [
+                    'body' => $postActionBodyArr,
+                    'additional' => $this->faker->text,
+                    'elements' => $this->faker->text,
+                ]];
+            })->toArray();
+
+            $response = $this->patch("api/passport/$order->id", ["post_actions" => $postActionsAttributes], ["accept" => "application/json"]);
+            $response->assertSuccessful();
+
+            //  just assert that array lengths are equals 
+            $updatedOrder = Order::find($order->id);
+
+            $this->assertEquals($bodies->count(), $updatedOrder->postActions->count());
         }
     }
 }
