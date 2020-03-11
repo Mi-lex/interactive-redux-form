@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class PaymentOperation extends Model
 {
     protected $fillable = ['account_number', 'org_type', 'date'];
+    protected $dateFormat = 'd.m.y';
+
     public $timestamps = false;
 
     public function orgType(): BelongsTo

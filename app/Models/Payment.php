@@ -13,4 +13,8 @@ class Payment extends Model
     {
         return $this->hasOne(PaymentOperation::class);    
     } 
+
+    protected $casts = [
+        'payed_by_cash' => 'boolean',
+    ];
 }

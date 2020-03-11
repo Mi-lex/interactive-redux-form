@@ -14,4 +14,12 @@ class Package extends Model
     {
         return $this->belongsTo(PackageType::class);
     }
+
+    protected $casts = [
+        'sort' => 'boolean',
+        'sample' => 'boolean',
+        'label' => 'boolean',
+        'paletting' => 'boolean',
+        'stretch_film' => 'boolean',
+    ];
 }

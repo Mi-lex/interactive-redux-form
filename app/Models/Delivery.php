@@ -8,4 +8,8 @@ class Delivery extends Model
 {
     protected $fillable = ['should_be_delivered', 'address'];
     public $timestamps = false;
+
+    protected $casts = [
+        'should_be_delivered' => 'boolean'
+    ];
 }
