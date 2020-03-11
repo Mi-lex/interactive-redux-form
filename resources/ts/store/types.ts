@@ -127,7 +127,7 @@ interface BookFolding extends WithType {
 
 interface Lamination extends WithType {}
 
-interface Revanishing {
+interface Revarnishing {
     varnish_type?: string
 }
 
@@ -139,7 +139,7 @@ interface StampCut {
 
 interface PostAction {
     type: string
-    body?: Creasing | BookFolding | Lamination | Revanishing | Embossing | StampCut | {}
+    body?: Creasing | BookFolding | Lamination | Revarnishing | Embossing | StampCut | {}
     elements?: string
     additionals?: string
 }

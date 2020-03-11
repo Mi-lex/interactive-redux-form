@@ -17,6 +17,7 @@ class CreateEmbossingsTable extends Migration
             $table->bigIncrements('id');
             
             $table->string('foil_type')->nullable();
+            $table->foreign('foil_type')->references('alias')->on('foil_types');
         });
     }
 

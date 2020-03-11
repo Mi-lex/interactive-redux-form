@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRevanishingsTable extends Migration
+class CreateRevarnishingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateRevanishingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('revanishings', function (Blueprint $table) {
+        Schema::create('revarnishings', function (Blueprint $table) {
             $table->bigIncrements('id');
 
             $table->string('varnish_type')->nullable();
+            $table->foreign('varnish_type')->references('alias')->on('varnish_types');
         });
     }
 
@@ -27,6 +28,6 @@ class CreateRevanishingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('revanishings');
+        Schema::dropIfExists('revarnishings');
     }
 }

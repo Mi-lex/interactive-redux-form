@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLaminationsTable extends Migration
+class CreateHotStampsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateLaminationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('laminations', function (Blueprint $table) {
+        Schema::create('hot_stamps', function (Blueprint $table) {
             $table->bigIncrements('id');
-
-            $table->string('type')->nullable();
-            $table->foreign('type')->references('alias')->on('lamination_types');
         });
     }
 
@@ -28,6 +25,6 @@ class CreateLaminationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('laminations');
+        Schema::dropIfExists('hot_stamps');
     }
 }

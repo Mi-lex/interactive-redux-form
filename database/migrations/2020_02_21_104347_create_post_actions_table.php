@@ -19,7 +19,7 @@ class CreatePostActionsTable extends Migration
             $table->text('elements')->nullable();
             $table->text('additional')->nullable();
 
-            $table->bigInteger('actionable_id');
+            $table->bigInteger('actionable_id')->nullable();
 
             $table->unsignedBigInteger('order_id');
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');

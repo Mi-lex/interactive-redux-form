@@ -103,7 +103,7 @@ class PassportUpdateRequest extends FormRequest
             'post_actions.book_folding.body.type' => ['string', 'exists:book_folding_types,alias'],
             'post_actions.book_folding.body.color' => ['string'],
             'post_actions.lamination.body.type' => ['string', 'exists:lamination_types,alias'],
-            'post_actions.revanishing.body.varnish_type' => ['string', 'exists:varnish_types,alias'],
+            'post_actions.revarnishing.body.varnish_type' => ['string', 'exists:varnish_types,alias'],
             'post_action.embossing.body.foil_type' => ['string', 'exists:foil_types,alias'],
             'post_action.stamp_cut.body.name' => ['string'],
             'post_action.perforation.body.name' => ['string'],

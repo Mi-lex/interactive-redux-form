@@ -15,7 +15,7 @@ export const postPrintActionNames: PostPrintActionName[] = [
     'creasing',
     'book_folding',
     'lamitation',
-    'revanishing',
+    'revarnishing',
     'embossing',
     'stamp_cut',
     'perforation',

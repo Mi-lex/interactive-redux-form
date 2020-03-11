@@ -2,7 +2,7 @@ export enum PostPrintActions {
     creasing = 'Биговать',
     book_folding = 'Фальцевать',
     lamitation = 'Ламинировать',
-    revanishing = 'Лакировать',
+    revarnishing = 'Лакировать',
     embossing = 'Тиснить фольгой',
     stamp_cut = 'Вырубить штампом',
     perforation = 'Перфорация',

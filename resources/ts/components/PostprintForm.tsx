@@ -73,7 +73,7 @@ const PostprintForm: React.FC = () => {
                 </ConnectedHiddenBlock>
                 <ConnectedHiddenBlock
                     NamesMap={PostPrintActions}
-                    blockName="revanishing"
+                    blockName="revarnishing"
                     checkboxGroupName="post_actions"
                 >
                     {/* Лакировать */}
