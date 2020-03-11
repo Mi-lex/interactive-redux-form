@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Faker\Generator as Faker;
 
 $factory->define(Order::class, function (Faker $faker) {
-    return [
+    $orderAttributes = [
         "name" => $faker->name,
         'type' => $faker->name,
         "important_info" => $faker->text,
@@ -16,6 +16,13 @@ $factory->define(Order::class, function (Faker $faker) {
         "is_cut" => $faker->boolean,
         "circulation" => $faker->name,
         // should change it when there will be links to actual orders
-        "similar_order_id" => $faker->randomDigit
+        "is_similar_order" => $faker->boolean
+
     ];
+
+    if ($orderAttributes["is_similar_order"]) {
+        $orderAttributes["similar_order_id"] = $faker->randomDigit;
+    }
+
+    return $orderAttributes;
 });

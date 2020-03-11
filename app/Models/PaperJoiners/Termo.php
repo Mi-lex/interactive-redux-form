@@ -8,4 +8,9 @@ class Termo extends Model
 {
     protected $fillable = ['spine_width', 'flaps_cover', 'flush_with_block', 'braces'];
     public $timestamps = false;
+
+    protected $casts = [
+        'flaps_cover' => 'boolean',
+        'braces' => 'boolean',
+    ];
 }

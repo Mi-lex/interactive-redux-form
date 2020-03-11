@@ -25,9 +25,10 @@ class CreateOrdersTable extends Migration
              * implementation details. Might be a good idea to move
              * details of implementation into separate table, might not ¯\_(ツ)_/¯ 
              */
+            $table->boolean('is_similar_order')->default(false);
+            $table->unsignedBigInteger('similar_order_id')->nullable();
             $table->boolean('is_cut')->default(false);
             $table->string('circulation')->nullable();
-            $table->unsignedBigInteger('similar_order_id')->nullable();
 
             $table->unsignedBigInteger('manager_id')->nullable();
             $table->unsignedBigInteger('customer_id')->nullable();

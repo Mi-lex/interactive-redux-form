@@ -59,7 +59,6 @@ class OrderTest extends TestCase
 
         foreach ($paymentAttributes as $payment) {
             $response = $this->patch("api/passport/$order->id", ["payment" => $payment], ["accept" => "application/json"]);
-
             $response->assertSuccessful();
 
             $payment['order_id'] = $order->id;

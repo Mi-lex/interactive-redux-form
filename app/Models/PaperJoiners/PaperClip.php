@@ -14,4 +14,9 @@ class PaperClip extends Model
     {
         return $this->belongsTo(PaperClipType::class); 
     }
+
+    protected $casts = [
+        'auto' => 'boolean', 
+        'manual' => 'boolean'
+    ];
 }
