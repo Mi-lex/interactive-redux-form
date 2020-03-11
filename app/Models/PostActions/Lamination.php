@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Lamination extends Model
 {
     protected $fillable = ['type'];
+    public $timestamps = false;
 
     public function type(): BelongsTo
     {
