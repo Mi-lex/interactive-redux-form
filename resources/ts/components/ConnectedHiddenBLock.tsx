@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 type Props = {
-    checkboxGroupName: 'paper_joiner' | 'post_actions'
+    checkboxGroupName: 'paper_joiner_checks' | 'post_actions_checks'
     blockName: PostPrintActionName | PaperJoinerName
     className?: string
     NamesMap: any

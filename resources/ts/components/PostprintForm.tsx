@@ -14,10 +14,12 @@ import { Checkbox, Select, TextField } from './MaterialReduxForm'
 import RemovableComment from './RemovableComment'
 
 const PostprintForm: React.FC = () => {
+    const checkboxesGroupName = 'post_actions_checks'
+
     return (
         <Grid container item xs={12} md={6} spacing={2}>
             <Grid item xs={6}>
-                <FormSection name="post_actions">
+                <FormSection name={checkboxesGroupName}>
                     <FormGroup>
                         {/* Радио баттоны: скрепка, пакет и т.д.  */}
                         {postPrintActionNames.map((postAction: PostPrintActionName) => (
@@ -31,7 +33,7 @@ const PostprintForm: React.FC = () => {
                 </FormSection>
             </Grid>
             <Grid item xs={6}>
-                <ConnectedHiddenBlock NamesMap={PostPrintActions} blockName="creasing" checkboxGroupName="post_actions">
+                <ConnectedHiddenBlock NamesMap={PostPrintActions} blockName="creasing" checkboxGroupName={checkboxesGroupName}>
                     {/* Биговать */}
                     <Field fullWidth component={TextField} label="Доли" type="text" name="parts" />
                     <RemovableComment />
@@ -39,7 +41,7 @@ const PostprintForm: React.FC = () => {
                 <ConnectedHiddenBlock
                     NamesMap={PostPrintActions}
                     blockName="book_folding"
-                    checkboxGroupName="post_actions"
+                    checkboxGroupName={checkboxesGroupName}
                 >
                     {/* Фальцевать */}
                     <FormControl fullWidth>
@@ -57,7 +59,7 @@ const PostprintForm: React.FC = () => {
                 <ConnectedHiddenBlock
                     NamesMap={PostPrintActions}
                     blockName="lamitation"
-                    checkboxGroupName="post_actions"
+                    checkboxGroupName={checkboxesGroupName}
                 >
                     {/* Ламинировать */}
                     <FormControl fullWidth>
@@ -74,7 +76,7 @@ const PostprintForm: React.FC = () => {
                 <ConnectedHiddenBlock
                     NamesMap={PostPrintActions}
                     blockName="revarnishing"
-                    checkboxGroupName="post_actions"
+                    checkboxGroupName={checkboxesGroupName}
                 >
                     {/* Лакировать */}
                     <FormControl fullWidth>
@@ -91,7 +93,7 @@ const PostprintForm: React.FC = () => {
                 <ConnectedHiddenBlock
                     NamesMap={PostPrintActions}
                     blockName="embossing"
-                    checkboxGroupName="post_actions"
+                    checkboxGroupName={checkboxesGroupName}
                 >
                     {/* Тиснить фольгой */}
                     <FormControl fullWidth>
@@ -108,7 +110,7 @@ const PostprintForm: React.FC = () => {
                 <ConnectedHiddenBlock
                     NamesMap={PostPrintActions}
                     blockName="stamp_cut"
-                    checkboxGroupName="post_actions"
+                    checkboxGroupName={checkboxesGroupName}
                 >
                     {/* Вырубить штампом */}
                     <Field fullWidth component={TextField} label="Штамп" type="text" name="name" />
@@ -118,7 +120,7 @@ const PostprintForm: React.FC = () => {
                 <ConnectedHiddenBlock
                     NamesMap={PostPrintActions}
                     blockName="perforation"
-                    checkboxGroupName="post_actions"
+                    checkboxGroupName={checkboxesGroupName}
                 >
                     {/* Перфорация */}
                     <Field fullWidth component={TextField} label="Элементы" type="text" name="elements" />
@@ -127,7 +129,7 @@ const PostprintForm: React.FC = () => {
                 <ConnectedHiddenBlock
                     NamesMap={PostPrintActions}
                     blockName="hot_stamp"
-                    checkboxGroupName="post_actions"
+                    checkboxGroupName={checkboxesGroupName}
                 >
                     {/* Конгрев*/}
                     <FormControl fullWidth>
