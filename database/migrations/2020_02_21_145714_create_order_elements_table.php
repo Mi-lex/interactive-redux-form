@@ -16,7 +16,7 @@ class CreateOrderElementsTable extends Migration
         Schema::create('order_elements', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->unsignedBigInteger('stripes')->nullable();
+            $table->string('stripes')->nullable();
             $table->string('material');
             $table->string('print_type');
             $table->string('brightness');

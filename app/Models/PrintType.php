@@ -9,6 +9,6 @@ class PrintType extends Model
     public $incrementing = false;
     protected $primaryKey = 'alias';
     protected $keyType = 'string';
-    protected $fillabe = ['alias', 'name'];
+    protected $fillable = ['alias', 'name'];
     public $timestamps = false;
 }

@@ -128,12 +128,40 @@ class OrderTest extends TestCase
             ];
 
             $response = $this->patch("api/passport/$order->id", ["paper_joiner" => $joinerRequestParams], ["accept" => "application/json"]);
-            
+
             $response->assertSuccessful();
 
             $this->assertDatabaseHas('paper_joiners', ['type' => $joinerType, 'order_id' => $order->id]);
             // check created joiner body existence
             $this->assertDatabaseHas($body->getTable(), $rowBody);
+        }
+    }
+
+    // There could be a lot of elements right
+    // so we just need to create a case with one element and several
+    // try to save them and check the existence of elements and their quantity 
+    /** @test */
+    public function a_user_can_store_and_update_element()
+    {
+        $this->withoutExceptionHandling();
+
+        $elementQuantities = [3, 1];
+
+        $order = Order::create();
+
+        foreach ($elementQuantities as $quantity) {
+            $elements = factory('App\Models\OrderElement', $quantity)->raw();
+            $response = $this->patch("api/passport/$order->id", ["elements" => $elements], ["accept" => "application/json"]);
+
+            $response->assertSuccessful();
+
+            foreach ($elements as $element) {
+                unset($element['order_id']);
+                $this->assertDatabaseHas('order_elements', $element);
+            }
+
+            $elementCount = Order::find($order->id)->elements->count();
+            $this->assertEquals($elementCount, $quantity);
         }
     }
 }

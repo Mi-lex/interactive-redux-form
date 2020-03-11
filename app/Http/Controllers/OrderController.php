@@ -7,8 +7,6 @@ use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderElement;
 use App\Models\PostAction;
-use App\Models\PrintType;
-use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
