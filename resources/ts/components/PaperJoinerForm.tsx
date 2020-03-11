@@ -18,13 +18,14 @@ const PaperJoinerForm = (): JSX.Element => {
     const dispatch = useDispatch()
     const checkboxesGroupName = 'paper_joiner_checks'
 
-    const clearSectionInputs = () => {
+    const clearSectionInputs = (blockName: PaperJoinerName) => {
         /**
          * Uncheck all checkboxes before checking new one
-         * this is basicallly radiobtn behaviour but with
+         * this is basically radiobtn behavior but with
          * opportunity to uncheck all inputs
          */
         dispatch(resetSection('passport', checkboxesGroupName))
+        dispatch(resetSection('passport', 'paper_joiner'))
     }
 
     return (
@@ -32,12 +33,16 @@ const PaperJoinerForm = (): JSX.Element => {
             <Grid item xs={6} md={5}>
                 <FormSection name={checkboxesGroupName}>
                     <FormGroup>
-                        {/* Чекбоксы баттоны: скрепка, пакет и т.д.  */}
+                        {/* Чекбоксы-баттоны: скрепка, пакет и т.д.  */}
                         {paperJoinersNames.map((joinerName: PaperJoinerName) => (
                             <FormControlLabel
                                 key={joinerName}
                                 control={
-                                    <Field component={Checkbox} changeAction={clearSectionInputs} name={joinerName} />
+                                    <Field
+                                        component={Checkbox}
+                                        changeAction={clearSectionInputs}
+                                        name={joinerName}
+                                    />
                                 }
                                 label={PaperJoiners[joinerName]}
                             />
