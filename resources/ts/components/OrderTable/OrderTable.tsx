@@ -3,6 +3,7 @@ import MaterialTable from 'material-table'
 import tableIcons from './tableIcons'
 import { Data } from './data'
 import ruLocale from 'date-fns/locale/ru'
+import { Link } from 'react-router-dom'
 
 type Props = {
     data: Data 
@@ -30,6 +31,7 @@ class OrderTable extends React.Component<Props> {
                         headerStyle: {
                             maxWidth: 20,
                         },
+                        render: rowData => <Link to={`passport/${rowData.id}`}>{rowData.id}</Link>
                     },
                     {
                         title: 'Название',

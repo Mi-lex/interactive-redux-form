@@ -33,7 +33,7 @@ const App: React.FC = () => {
                         <Route path="/orders" exact>
                             <Orders />
                         </Route>
-                        <Route path="/" exact>
+                        <Route path="/passport/:id?" exact>
                             <Passport />
                         </Route>
                     </MuiPickersUtilsProvider>

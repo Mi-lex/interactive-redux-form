@@ -63,7 +63,11 @@ class OrderTest extends TestCase
 
             $payment['order_id'] = $order->id;
 
-            unset($payment['operation']);
+            if (isset($payment['operation'])) {
+                unset($payment['operation']['payment_id']);
+                $this->assertDatabaseHas('payment_operations', $payment['operation']);
+                unset($payment['operation']);
+            }
 
             $this->assertDatabaseHas('payments', $payment);
         }

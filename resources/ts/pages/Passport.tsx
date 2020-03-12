@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import { RootState } from '../store/rootReducer'
 import actionCreator from '../store/modules/passport/actions'
 import { useDispatch, useSelector, shallowEqual, connect } from 'react-redux'
@@ -14,12 +15,17 @@ const formSelector = formValueSelector('passport')
 
 const Passport = (): JSX.Element => {
     const dispatch = useDispatch()
+    const { id } = useParams()
     const { requestPending: pending, successMessage, errorMessage } = useSelector(
         (state: RootState) => state.passport,
         shallowEqual,
     )
 
     useEffect(() => {
+        if (id) {
+          console.log('IMGOING CRAZY', id)  
+        }
+
         return () => {
             dispatch(actionCreator.createOrderSuccess(null))
         }

@@ -47,7 +47,7 @@ interface Customer {
 
 interface PaymentOperation {
     account_number: string
-    org_type: string
+    organization: { name: string }
 }
 
 interface Payment {

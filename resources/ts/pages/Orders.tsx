@@ -28,7 +28,7 @@ const Orders = () => {
             managerSecondName: manager ? manager.second_name : 'отсутствует',
             customerName: customer ? customer.name : 'отсутстсует',
             paymentOrgType:
-                order.payment && !order.payment.payed_by_cash ? order.payment.operation.org_type : 'наличные',
+                order.payment && !order.payment.payed_by_cash ? order.payment.operation.organization.name : 'наличные',
         }
     })
 
