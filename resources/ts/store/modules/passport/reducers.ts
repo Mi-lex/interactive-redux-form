@@ -3,7 +3,7 @@ import { types } from './actions'
 
 interface PassportState {
     requestPending: boolean
-    successMessage: string
+    successMessage?: string
     errorMessage?: string
 }
 

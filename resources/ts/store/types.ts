@@ -47,7 +47,7 @@ interface Customer {
 
 interface PaymentOperation {
     account_number: string
-    organization: string
+    org_type: string
 }
 
 interface Payment {
@@ -166,6 +166,7 @@ export interface Order {
     // implementation details
     is_cut?: string
     circulation?: string
+    is_similar_order: boolean
     similar_order_id?: string
     manager?: Manager
     customer?: Customer
