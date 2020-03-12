@@ -8,7 +8,6 @@ import DateFnsUtils from '@date-io/date-fns'
 import Orders from '../pages/Orders'
 import Passport from '../pages/Passport'
 import PageHeader from '../components/PageHeader'
-// import PassportV2 from '../pages/Passport.v2'
 import SideList from '../components/SideList'
 
 const App: React.FC = () => {
@@ -37,9 +36,6 @@ const App: React.FC = () => {
                         <Route path="/" exact>
                             <Passport />
                         </Route>
-                        {/* <Route path="/passport" exact>
-                                <PassportV2 />
-                            </Route> */}
                     </MuiPickersUtilsProvider>
                 </Switch>
             </Container>

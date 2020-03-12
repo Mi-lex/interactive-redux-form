@@ -1,10 +1,18 @@
 import React from 'react'
 import MaterialTable from 'material-table'
 import tableIcons from './tableIcons'
-import { data } from './data'
+import { Data } from './data'
 import ruLocale from 'date-fns/locale/ru'
 
-class OrderTable extends React.Component {
+type Props = {
+    data: Data 
+}
+
+class OrderTable extends React.Component<Props> {
+    constructor(props: Props) {
+        super(props)
+    }
+
     render() {
         return (
             <MaterialTable
@@ -16,11 +24,10 @@ class OrderTable extends React.Component {
                         field: 'id',
                         type: 'numeric',
                         cellStyle: {
-                            width: '20px !important',
+                            width: '20px',
                             maxWidth: 20,
                         },
                         headerStyle: {
-                            width: '20px !important',
                             maxWidth: 20,
                         },
                     },
@@ -32,37 +39,35 @@ class OrderTable extends React.Component {
                         },
                     },
                     { title: 'Тип', field: 'type' },
-                    { title: 'Менеджер', field: 'manager' },
-                    { title: 'Клиент', field: 'client' },
-                    { title: 'Организация', field: 'organization' },
+                    { title: 'Менеджер', field: 'managerSecondName' },
+                    { title: 'Клиент', field: 'customerName' },
+                    { title: 'Организация', field: 'paymentOrgType' },
                     {
                         title: 'Оформлен',
                         field: 'createdAt',
                         type: 'date',
                         cellStyle: {
-                            width: '30px !important',
+                            width: '30px',
                             maxWidth: 30,
                         },
                         headerStyle: {
-                            width: '30px !important',
                             maxWidth: 30,
                         },
                     },
                     {
                         title: 'Завершен',
-                        field: 'finishedAt',
+                        field: 'completionDate',
                         type: 'date',
                         cellStyle: {
-                            width: '30px !important',
+                            width: '30px',
                             maxWidth: 30,
                         },
                         headerStyle: {
-                            width: '30px !important',
                             maxWidth: 30,
                         },
                     },
                 ]}
-                data={data}
+                data={this.props.data}
                 options={{
                     headerStyle: {
                         borderBottom: 'none',
