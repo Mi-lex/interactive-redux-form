@@ -24,3 +24,9 @@ Route::group([
     Route::post('/', 'OrderController@store');
     Route::patch('/{order}', 'OrderController@update');
 });
+
+Route::group([
+    'prefix' => 'orders',
+], function () {
+    Route::get('/', 'OrderController@index');
+});

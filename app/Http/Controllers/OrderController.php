@@ -11,13 +11,28 @@ use App\Models\PostAction;
 class OrderController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Return a list of orders
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        return Order::with(['manager', 'customer', 'payment.operation.orgType'])
+            ->get()->map(function ($order) {
+                if ($order->manager !== null) {
+                    $order->manager = $order->manager->only('second_name');
+                }
+
+                if ($order->customer !== null) {
+                    $order->customer = $order->customer->only('name');
+                }
+
+                if ($order->payment !== null) {
+                    $order->payment = $order->payment->only('payed_by_cash', 'operation');
+                }
+
+                return  $order->only(['name', 'id', 'type', 'manager', 'customer', 'payment']);
+            });
     }
 
     public function store()

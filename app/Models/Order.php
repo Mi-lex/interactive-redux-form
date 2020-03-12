@@ -24,6 +24,10 @@ class Order extends Model
         return $this->belongsTo(Customer::class);
     }
 
+    public function manager(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'manager_id');
+    }
     public function elements(): HasMany
     {
         return $this->hasMany(OrderElement::class);
