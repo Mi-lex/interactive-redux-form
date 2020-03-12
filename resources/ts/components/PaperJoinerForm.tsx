@@ -17,15 +17,19 @@ import { paperJoinersNames } from '../store/consts'
 const PaperJoinerForm = (): JSX.Element => {
     const dispatch = useDispatch()
     const checkboxesGroupName = 'paper_joiner_checks'
+    const blockUpperSectionName = 'paper_joiner'
 
-    const clearSectionInputs = (blockName: PaperJoinerName) => {
+    const clearSectionInputs = (checked: boolean) => {
         /**
          * Uncheck all checkboxes before checking new one
          * this is basically radiobtn behavior but with
          * opportunity to uncheck all inputs
          */
+        if (!checked) {
+            // also clear whole paper joiner form when checkbox is changing
+            dispatch(resetSection('passport', blockUpperSectionName))
+        }
         dispatch(resetSection('passport', checkboxesGroupName))
-        dispatch(resetSection('passport', 'paper_joiner'))
     }
 
     return (
@@ -38,11 +42,7 @@ const PaperJoinerForm = (): JSX.Element => {
                             <FormControlLabel
                                 key={joinerName}
                                 control={
-                                    <Field
-                                        component={Checkbox}
-                                        changeAction={clearSectionInputs}
-                                        name={joinerName}
-                                    />
+                                    <Field component={Checkbox} changeAction={clearSectionInputs} name={joinerName} />
                                 }
                                 label={PaperJoiners[joinerName]}
                             />
@@ -52,7 +52,8 @@ const PaperJoinerForm = (): JSX.Element => {
             </Grid>
             {/* Блоки, появляющиеся в зависимости от выделенного чекбокса */}
             <Grid item xs={6}>
-                <FormSection name="paper_joiner">
+                <FormSection name={blockUpperSectionName}>
+                    {/* Скрепка */}
                     <ConnectedHiddenBlock
                         NamesMap={PaperJoiners}
                         checkboxGroupName={checkboxesGroupName}
@@ -71,7 +72,6 @@ const PaperJoinerForm = (): JSX.Element => {
                             />
                         </Box>
                         <Field fullWidth component={TextField} label="Количество" type="number" name="quantity" />
-
                         <FormControl fullWidth>
                             <InputLabel>Тип</InputLabel>
                             <Field name="type" component={Select}>
@@ -79,10 +79,10 @@ const PaperJoinerForm = (): JSX.Element => {
                                 <MenuItem value="овальная">Овальная</MenuItem>
                             </Field>
                         </FormControl>
-
                         <Field fullWidth component={TextField} label="Толщина" type="number" name="width" />
                         <Field fullWidth component={TextField} label="Сползание" type="number" name="drift" />
                     </ConnectedHiddenBlock>
+                    {/* Термо */}
                     <ConnectedHiddenBlock
                         NamesMap={PaperJoiners}
                         checkboxGroupName={checkboxesGroupName}
@@ -102,6 +102,7 @@ const PaperJoinerForm = (): JSX.Element => {
                             label="Укрепить скобами"
                         />
                     </ConnectedHiddenBlock>
+                    {/* Пружина*/}
                     <ConnectedHiddenBlock
                         NamesMap={PaperJoiners}
                         checkboxGroupName={checkboxesGroupName}
@@ -123,6 +124,7 @@ const PaperJoinerForm = (): JSX.Element => {
                             name="cover_block_difference"
                         />
                     </ConnectedHiddenBlock>
+                    {/* Пакет */}
                     <ConnectedHiddenBlock
                         NamesMap={PaperJoiners}
                         checkboxGroupName={checkboxesGroupName}
@@ -131,6 +133,7 @@ const PaperJoinerForm = (): JSX.Element => {
                         <Field fullWidth component={TextField} label="Цвет люверсов" type="text" name="grommet_color" />
                         <Field fullWidth component={TextField} label="Цвет ручек" type="text" name="hands_color" />
                     </ConnectedHiddenBlock>
+                    {/* Проклейка */}
                     <ConnectedHiddenBlock
                         NamesMap={PaperJoiners}
                         checkboxGroupName={checkboxesGroupName}
@@ -150,6 +153,7 @@ const PaperJoinerForm = (): JSX.Element => {
                             </Field>
                         </FormControl>
                     </ConnectedHiddenBlock>
+                    {/* Спец. обработка */}
                     <ConnectedHiddenBlock
                         NamesMap={PaperJoiners}
                         checkboxGroupName={checkboxesGroupName}
@@ -166,7 +170,7 @@ const PaperJoinerForm = (): JSX.Element => {
                             variant="outlined"
                         />
                     </ConnectedHiddenBlock>
-                </FormSection>{' '}
+                </FormSection>
             </Grid>
         </Grid>
     )

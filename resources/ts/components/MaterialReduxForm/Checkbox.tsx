@@ -4,14 +4,14 @@ import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox'
 
 type Props = WrappedFieldProps &
     CheckboxProps & {
-        changeAction: () => void
+        changeAction: (checked: boolean) => void
     }
 
 const CheckboxField: React.FC<Props> = props => {
     const { input, changeAction = () => {}, ...custom } = props
 
     const onCheckHandler = (ev: React.ChangeEvent<HTMLInputElement>) => {
-        changeAction()
+        changeAction(ev.target.checked)
         input.onChange(ev.target.checked)
     }
 
