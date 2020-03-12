@@ -1,9 +1,9 @@
-import React from 'react'
-import { formValueSelector, FormSection } from 'redux-form'
-import { useSelector } from 'react-redux'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import { PostPrintActionName, PaperJoinerName } from '../store/types'
+import React from 'react'
+import { useSelector } from 'react-redux'
+import { FormSection, formValueSelector, resetSection } from 'redux-form'
+import { PaperJoinerName, PostPrintActionName } from '../store/types'
 
 const selector: Function = formValueSelector('passport')
 
@@ -27,9 +27,8 @@ type Props = {
 const ConnectedHiddenBlock: React.FC<Props> = (props): JSX.Element => {
     const { children, blockName, className = '', checkboxGroupName, NamesMap } = props
     const classes = useStyles()
-    const chosenCheckbox = useSelector(state => selector(state, checkboxGroupName))
-
-    const shown = chosenCheckbox && chosenCheckbox[blockName]
+    const chosenCheckbox = useSelector(state => selector(state,`${checkboxGroupName}.${blockName}`))
+    const shown = chosenCheckbox || false
 
     return (
         <FormSection name={blockName} className={`${classes.root} ${className}`} hidden={!shown}>
