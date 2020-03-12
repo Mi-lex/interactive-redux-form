@@ -31,7 +31,7 @@ class OrderController extends Controller
                     $order->payment = $order->payment->only('payed_by_cash', 'operation');
                 }
 
-                return  $order->only(['name', 'id', 'type', 'manager', 'customer', 'payment']);
+                return  $order->only(['name', 'id', 'type', 'manager', 'customer', 'payment', 'completion_date', 'created_at']);
             });
     }
 
