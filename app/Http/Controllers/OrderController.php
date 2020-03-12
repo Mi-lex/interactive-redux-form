@@ -10,6 +10,16 @@ use App\Models\PostAction;
 
 class OrderController extends Controller
 {
+    private function returnPassport($id)
+    {
+        return response()->json(Order::with(
+            [
+                'paperJoiner.body', 'customer',
+                'payment.operation', 'package', 'delivery',
+                'elements', 'postActions', 'postActions.body'
+            ]
+        )->whereId($id)->first());
+    }
     /**
      * Return a list of orders
      *
@@ -17,7 +27,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return Order::with(['manager', 'customer', 'payment.operation.orgType'])
+        return Order::with(['manager', 'customer', 'payment.operation.organization'])
             ->get()->map(function ($order) {
                 if ($order->manager !== null) {
                     $order->manager = $order->manager->only('second_name');
@@ -48,9 +58,9 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show($id)
     {
-        return $order;
+        return $this->returnPassport($id);
     }
 
     /**
@@ -137,7 +147,8 @@ class OrderController extends Controller
         $order->delivery()->updateOrCreate([], $request['delivery'] ?? []);
 
         $order->update($request->toArray());
-        return response()->json(Order::with(['paperJoiner', 'paperJoiner.body', 'customer', 'payment', 'payment.operation', 'package', 'delivery', 'elements', 'postActions', 'postActions.body'])->whereId($order->id)->first());
+
+        return $this->returnPassport($order->id);
     }
 
     /**

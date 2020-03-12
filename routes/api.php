@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group([
     'prefix' => 'passport',
 ], function () {
-    Route::get('/{order}', 'OrderController@show');
+    Route::get('/{id}', 'OrderController@show');
     Route::post('/', 'OrderController@store');
     Route::patch('/{order}', 'OrderController@update');
 });

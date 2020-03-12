@@ -12,8 +12,8 @@ class PaymentOperation extends Model
 
     public $timestamps = false;
 
-    public function orgType(): BelongsTo
+    public function organization(): BelongsTo
     {
-        return $this->belongsTo(PaymentOrgType::class);
+        return $this->belongsTo(PaymentOrgType::class, 'org_type');
     }
 }
