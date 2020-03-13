@@ -1,5 +1,5 @@
 import actionCreator, { types, messages } from './actions'
-import { call, put, takeLatest, select } from 'redux-saga/effects'
+import { call, put, takeLatest, take, select } from 'redux-saga/effects'
 import api, { getMessageFromError } from '../../../services'
 
 function* createOrderRequest() {
@@ -31,8 +31,9 @@ type FetchAction = {
     payload: Number
 }
 
-function* fetchOrderRequest({ payload: orderId } : FetchAction) {
+function* fetchOrderRequest() {
     try {
+        const { payload: orderId } = yield take(types.FETCH_ORDER_REQUEST)
         const response = yield call(api.get, `passport/${orderId}`)
 
         yield put(actionCreator.fetchOrderSuccess(response.data))
@@ -47,12 +48,12 @@ function* watchLastCreateRequest() {
     yield takeLatest(types.CREATE_ORDER_REQUEST, createOrderRequest)
 }
 
+function* watchFetchRequest() {
+    yield takeLatest(types.CREATE_CLEAN_UP, fetchOrderRequest)
+}
+
 function* watchLastUpdateRequest() {
     yield takeLatest(types.UPDATE_ORDER_REQUEST, updateOrderRequest)
 }
 
-function* watchLastFetchRequest() {
-    yield takeLatest(types.FETCH_ORDER_REQUEST, fetchOrderRequest)
-}
-
-export default [watchLastCreateRequest, watchLastUpdateRequest, watchLastFetchRequest]
+export default [watchLastCreateRequest, watchLastUpdateRequest, watchFetchRequest]
