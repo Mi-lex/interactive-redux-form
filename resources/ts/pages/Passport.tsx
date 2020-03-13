@@ -1,42 +1,56 @@
 import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { Order } from '../store/types'
+import { useParams, Redirect } from 'react-router-dom'
 import { RootState } from '../store/rootReducer'
 import actionCreator from '../store/modules/passport/actions'
-import { useDispatch, useSelector, shallowEqual, connect } from 'react-redux'
+import { useDispatch, connect } from 'react-redux'
 import Paper from '@material-ui/core/Paper'
 import Container from '@material-ui/core/Container'
-import { reduxForm, formValueSelector, change } from 'redux-form'
+import { reduxForm, InjectedFormProps } from 'redux-form'
 import PassportControl from '../components/PassportControl'
 import PassportForm from '../components/PassportForm'
 import { FlashMessageComponent } from '../components/FlashMessage'
 import LinearProgress from '@material-ui/core/LinearProgress'
 
-const formSelector = formValueSelector('passport')
+type PassportProps = InjectedFormProps & {
+    createOrderSuccess: boolean
+    createOrderError: string
+    updateOrderSuccess: boolean
+    updateOrderError: boolean
+    fetchOrderSuccess: boolean
+    fetchOrderError: boolean
+    requestPending: boolean
+    initialValues: Order
+}
 
-const Passport = (): JSX.Element => {
+const Passport = (props: PassportProps) => {
+    const {
+        initialValues,
+        createOrderSuccess,
+        createOrderError,
+        requestPending,
+        updateOrderSuccess,
+        updateOrderError,
+        fetchOrderSuccess,
+        fetchOrderError,
+    } = props
+
     const dispatch = useDispatch()
     const { id } = useParams()
-    const { requestPending: pending, successMessage, errorMessage } = useSelector(
-        (state: RootState) => state.passport,
-        shallowEqual,
-    )
 
     useEffect(() => {
         if (id) {
-          console.log('IMGOING CRAZY', id)  
+            dispatch(actionCreator.fetchOrderRequest(id))
+        } else {
+            dispatch(actionCreator.fetchOrderSuccess(null))
         }
 
         return () => {
-            dispatch(actionCreator.createOrderSuccess(null))
+            dispatch(actionCreator.createCleanUp())
         }
-    }, [])
+    }, [id])
 
     const createNewPassport = (): void => {
-        if (successMessage) {
-            dispatch(actionCreator.createOrderError('Завершите работу с текущим паспортом'))
-
-            return
-        }
         dispatch(actionCreator.createOrderRequest())
     }
 
@@ -50,16 +64,21 @@ const Passport = (): JSX.Element => {
 
     return (
         <Paper>
-            {successMessage && <FlashMessageComponent type="success">{successMessage}</FlashMessageComponent>}
-            {errorMessage && (
+            {createOrderSuccess && !id && <Redirect to={`/passport/${initialValues.id}`} />}
+            {/* {successMessage && <FlashMessageComponent type="success">{successMessage}</FlashMessageComponent>} */}
+            {createOrderError && (
                 <FlashMessageComponent type="error" onClose={onCloseErrorMessage}>
-                    {errorMessage}
+                    {createOrderError}
                 </FlashMessageComponent>
             )}
-            {pending && <LinearProgress color="secondary" />}
+            {requestPending && <LinearProgress color="secondary" />}
             <Container>
                 <form action="POST" className="passportForm">
-                    <PassportControl createNewPassport={createNewPassport} updatePassport={updatePassport} />
+                    <PassportControl
+                        editMode={Boolean(id)}
+                        createNewPassport={createNewPassport}
+                        updatePassport={updatePassport}
+                    />
                     <PassportForm />
                 </form>
             </Container>
@@ -67,12 +86,31 @@ const Passport = (): JSX.Element => {
     )
 }
 
-const DecoratedPassportForm = reduxForm({
+const Decorated = reduxForm({
     form: 'passport',
-
-    initialValues: {
-        elements: [{}, {}],
-    },
+    enableReinitialize: true,
 })(Passport)
 
-export default DecoratedPassportForm
+const Connected = connect((state: RootState) => {
+    const { success: createOrderSuccess, error: createOrderError, pending: createOrderPending } = state.passport.create
+    const { success: updateOrderSuccess, error: updateOrderError, pending: updateOrderPending } = state.passport.update
+    const {
+        success: fetchOrderSuccess,
+        error: fetchOrderError,
+        pending: fetchOrderPending,
+        fetched: initialValues,
+    } = state.passport.fetch
+
+    return {
+        initialValues,
+        createOrderSuccess,
+        createOrderError,
+        updateOrderSuccess,
+        updateOrderError,
+        fetchOrderSuccess,
+        fetchOrderError,
+        requestPending: createOrderPending || updateOrderPending || fetchOrderPending,
+    }
+})(Decorated)
+
+export default Connected

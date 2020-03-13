@@ -145,20 +145,20 @@ interface PostAction {
 }
 
 interface OrderElement {
-    name: string
-    stripes: number
-    material: string
-    print_type: string
-    brightness: string
-    color_interpretation: string
+    name?: string
+    stripes?: number
+    material?: string
+    print_type?: string
+    brightness?: string
+    color_interpretation?: string
 }
 
 export interface Order {
     id?: number
     name?: string
     type?: string
-    created_at: string
-    updated_at: string
+    created_at?: string
+    updated_at?: string
     important_info?: string
     completion_date?: string
     completion_time?: string
@@ -166,18 +166,18 @@ export interface Order {
     // implementation details
     is_cut?: string
     circulation?: string
-    is_similar_order: boolean
+    is_similar_order?: boolean
     similar_order_id?: string
     manager?: Manager
     customer?: Customer
     payment?: Payment
 
-    elements?: OrderElement
+    elements?: OrderElement[]
 
-    paper_joiner: PaperJoiner
+    paper_joiner?: PaperJoiner
     package?: Package
     delivery?: Delivery
-    post_action: PostAction[]
+    post_action?: PostAction[]
 }
 
 export type Action = {

@@ -49,7 +49,7 @@ class OrderController extends Controller
     {
         $newOrder = Order::create();
 
-        return $newOrder;
+        return $newOrder->only(['id', 'created_at']);
     }
 
     /**

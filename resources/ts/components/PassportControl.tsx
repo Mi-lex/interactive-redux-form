@@ -16,23 +16,26 @@ const useStyles = makeStyles((theme: Theme) => ({
 type Props = {
     createNewPassport: () => void
     updatePassport: () => void
+    editMode: boolean
 }
 
 const PassportControl: React.FC<Props> = (props: Props) => {
-    const { createNewPassport, updatePassport } = props
+    const { createNewPassport, updatePassport, editMode } = props
     const classes = useStyles()
 
     return (
         <Box display="flex" className={classes.container} justifyContent="flex-end" alignItems="center" mb={2} py={1}>
-            <IconButton
-                size="medium"
-                aria-label="добавить документ"
-                color="primary"
-                onClick={createNewPassport}
-                style={{ marginRight: 'auto' }}
-            >
-                <NoteAdd fontSize="large" />
-            </IconButton>
+            {!editMode && (
+                <IconButton
+                    size="medium"
+                    aria-label="добавить документ"
+                    color="primary"
+                    onClick={createNewPassport}
+                    style={{ marginRight: 'auto' }}
+                >
+                    <NoteAdd fontSize="large" />
+                </IconButton>
+            )}
 
             <IconButton size="medium" aria-label="обновить документ" color="primary" onClick={updatePassport}>
                 <LibraryAdd fontSize="large" />

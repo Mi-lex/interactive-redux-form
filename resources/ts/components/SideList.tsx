@@ -31,19 +31,13 @@ const SideList = (props: Props): JSX.Element => {
     return (
         <div className={classes.list} role="presentation" onClick={closeDrawer} onKeyDown={closeDrawer}>
             <List>
-                <ListItem button component={Link} to="/">
-                    <ListItemIcon>
-                        <DescriptionIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Паспорт v1" />
-                </ListItem>
                 <ListItem button component={Link} to="/passport">
                     <ListItemIcon>
                         <DescriptionIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Паспорт v2" />
+                    <ListItemText primary="Паспорт" />
                 </ListItem>
-                <ListItem button component={Link} to="/orders">
+                <ListItem button component={Link} to="/">
                     <ListItemIcon>
                         <TocIcon />
                     </ListItemIcon>

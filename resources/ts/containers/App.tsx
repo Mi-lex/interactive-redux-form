@@ -6,7 +6,7 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import ruLocale from 'date-fns/locale/ru'
 import DateFnsUtils from '@date-io/date-fns'
 import Orders from '../pages/Orders'
-import Passport from '../pages/Passport'
+import Decorated from '../pages/Passport'
 import PageHeader from '../components/PageHeader'
 import SideList from '../components/SideList'
 
@@ -30,11 +30,11 @@ const App: React.FC = () => {
                 <PageHeader toggleDrawer={toggleDrawer} />
                 <Switch>
                     <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ruLocale}>
-                        <Route path="/orders" exact>
+                        <Route path="/" exact>
                             <Orders />
                         </Route>
                         <Route path="/passport/:id?" exact>
-                            <Passport />
+                            <Decorated />
                         </Route>
                     </MuiPickersUtilsProvider>
                 </Switch>

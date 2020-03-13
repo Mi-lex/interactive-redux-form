@@ -1,15 +1,13 @@
 import actionCreator, { types, messages } from './actions'
 import { call, put, takeLatest, select } from 'redux-saga/effects'
-import { change } from 'redux-form'
 import api, { getMessageFromError } from '../../../services'
 
 function* createOrderRequest() {
     try {
-        const order = yield call(api.post, 'passport')
+        const response = yield call(api.post, 'passport')
 
-        yield put(change('passport', 'id', order.data.id))
-        yield put(change('passport', 'created_at', order.data.created_at))
-        yield put(actionCreator.createOrderSuccess(messages.createOrder.success))
+        yield put(actionCreator.fetchOrderSuccess(response.data))
+        yield put(actionCreator.createOrderSuccess())
     } catch (error) {
         const message = getMessageFromError(error)
 
@@ -18,6 +16,7 @@ function* createOrderRequest() {
 }
 
 function* updateOrderRequest() {
+    // should be tested
     try {
         const formValues = yield select(state => state.form.passport.values)
         yield call(api.patch, `/passport/${formValues.id}`, JSON.stringify(formValues))
@@ -25,6 +24,22 @@ function* updateOrderRequest() {
         const message = getMessageFromError(error)
 
         yield put(actionCreator.createOrderError(message))
+    }
+}
+
+type FetchAction = {
+    payload: Number
+}
+
+function* fetchOrderRequest({ payload: orderId } : FetchAction) {
+    try {
+        const response = yield call(api.get, `passport/${orderId}`)
+
+        yield put(actionCreator.fetchOrderSuccess(response.data))
+    } catch (error) {
+        const message = getMessageFromError(error)
+
+        yield put(actionCreator.fetchOrderError(message))
     }
 }
 
@@ -36,4 +51,8 @@ function* watchLastUpdateRequest() {
     yield takeLatest(types.UPDATE_ORDER_REQUEST, updateOrderRequest)
 }
 
-export default [watchLastCreateRequest, watchLastUpdateRequest]
+function* watchLastFetchRequest() {
+    yield takeLatest(types.FETCH_ORDER_REQUEST, fetchOrderRequest)
+}
+
+export default [watchLastCreateRequest, watchLastUpdateRequest, watchLastFetchRequest]
