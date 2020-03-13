@@ -66,9 +66,9 @@ const Passport = (props: PassportProps) => {
         <Paper>
             {createOrderSuccess && !id && <Redirect to={`/passport/${initialValues.id}`} />}
             {/* {successMessage && <FlashMessageComponent type="success">{successMessage}</FlashMessageComponent>} */}
-            {createOrderError && (
+            {createOrderError || fetchOrderError && (
                 <FlashMessageComponent type="error" onClose={onCloseErrorMessage}>
-                    {createOrderError}
+                    {createOrderError || fetchOrderError}
                 </FlashMessageComponent>
             )}
             {requestPending && <LinearProgress color="secondary" />}
