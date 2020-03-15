@@ -1,10 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { formValueSelector } from 'redux-form'
-import { Field } from 'redux-form'
+import { Field, formValueSelector } from 'redux-form'
 import { DatePicker, TextField, Select, Switcher } from '../components/MaterialReduxForm'
 import InputLabel from '@material-ui/core/InputLabel'
-import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import { paymentOrgOptions } from '../store/consts'
 

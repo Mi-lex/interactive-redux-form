@@ -1,9 +1,9 @@
 import React from 'react'
-import { formValueSelector } from 'redux-form'
 import { useSelector } from 'react-redux'
-import { Field } from 'redux-form'
+import { Field, formValueSelector } from 'redux-form'
 import FormControl from '@material-ui/core/FormControl'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
+
 import { Checkbox, TextareaAutosize } from '../components/MaterialReduxForm'
 
 const selector: Function = formValueSelector('passport')

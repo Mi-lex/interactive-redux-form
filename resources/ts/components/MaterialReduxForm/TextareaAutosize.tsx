@@ -23,7 +23,7 @@ const TextareaAutosizeField: React.FC<Props> = props => {
         label,
         input,
         rowsMin,
-        meta: { touched, invalid, error },
+        meta: { touched, error },
         ...custom
     } = props
 

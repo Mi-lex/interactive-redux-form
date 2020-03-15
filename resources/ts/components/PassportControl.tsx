@@ -2,9 +2,9 @@ import React from 'react'
 import Box from '@material-ui/core/Box'
 import IconButton from '@material-ui/core/IconButton'
 import { makeStyles, Theme } from '@material-ui/core/styles'
-import NoteAdd from '@material-ui/icons/NoteAdd'
-import LibraryAdd from '@material-ui/icons/LibraryAdd'
 import DoneAll from '@material-ui/icons/DoneAll'
+import LibraryAdd from '@material-ui/icons/LibraryAdd'
+import NoteAdd from '@material-ui/icons/NoteAdd'
 import Print from '@material-ui/icons/Print'
 
 const useStyles = makeStyles((theme: Theme) => ({

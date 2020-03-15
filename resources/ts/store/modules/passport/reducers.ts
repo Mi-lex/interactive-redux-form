@@ -2,14 +2,6 @@ import { combineReducers } from 'redux'
 import { Action, Order } from '../../types'
 import { types } from './actions'
 
-interface PassportState {
-    requestPending: boolean
-    createSuccess: boolean
-    successMessage?: string
-    errorMessage?: string
-    current?: Order
-}
-
 interface InitialState {
     pending: boolean
     success: boolean

@@ -1,10 +1,11 @@
 import React from 'react'
+import { Field, FieldArray, WrappedFieldArrayProps } from 'redux-form'
 import Box from '@material-ui/core/Box'
 import IconButton from '@material-ui/core/IconButton'
-import { Field, FieldArray, WrappedFieldArrayProps } from 'redux-form'
-import { TextareaAutosize } from './MaterialReduxForm'
-import AddComment from '@material-ui/icons/PlaylistAdd'
 import RemoveComment from '@material-ui/icons/DeleteForever'
+import AddComment from '@material-ui/icons/PlaylistAdd'
+
+import { TextareaAutosize } from './MaterialReduxForm'
 
 const Comments = ({ fields }: WrappedFieldArrayProps<string>): JSX.Element => (
     <>

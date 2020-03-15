@@ -1,14 +1,15 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import DateFnsUtils from '@date-io/date-fns'
 import Container from '@material-ui/core/Container'
 import Drawer from '@material-ui/core/Drawer'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import ruLocale from 'date-fns/locale/ru'
-import DateFnsUtils from '@date-io/date-fns'
-import Orders from '../pages/Orders'
-import Decorated from '../pages/Passport'
+
 import PageHeader from '../components/PageHeader'
 import SideList from '../components/SideList'
+import Orders from '../pages/Orders'
+import Decorated from '../pages/Passport'
 
 const App: React.FC = () => {
     const [isOpen, setDrawerState] = React.useState(false)

@@ -1,4 +1,5 @@
 import { createContext } from 'react'
+
 import { MessageOptions } from './types'
 
 export interface FlashMessageProviderValue {

@@ -1,4 +1,5 @@
 import React from 'react'
+
 import SnackbarContext from './FlashMessageContext'
 
 export default function useSnackbar() {

@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
-import Snackbar, { SnackbarProps } from '@material-ui/core/Snackbar'
 import Button from '@material-ui/core/Button'
-import MuiAlert, { AlertProps, Color as AlertType } from '@material-ui/lab/Alert'
+import Snackbar from '@material-ui/core/Snackbar'
+import MuiAlert, { AlertProps } from '@material-ui/lab/Alert'
+import React, { useState } from 'react'
+
 import { FlashMessageProviderProps, MessageOptions } from './types'
 
 function Alert(props: AlertProps) {

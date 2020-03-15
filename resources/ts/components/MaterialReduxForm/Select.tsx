@@ -1,7 +1,7 @@
 import React from 'react'
-import Select, { SelectProps } from '@material-ui/core/Select'
 import { WrappedFieldProps } from 'redux-form'
 import MenuItem from '@material-ui/core/MenuItem'
+import Select, { SelectProps } from '@material-ui/core/Select'
 
 interface SelectOption {
     name: string

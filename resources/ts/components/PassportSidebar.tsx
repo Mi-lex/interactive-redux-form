@@ -1,9 +1,10 @@
 import React from 'react'
 import { Field } from 'redux-form'
-import { TextField } from './MaterialReduxForm'
-import Grid from '@material-ui/core/Grid'
 import Divider from '@material-ui/core/Divider'
+import Grid from '@material-ui/core/Grid'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+
+import { TextField } from './MaterialReduxForm'
 import PaymentBlock from './PaymentBlock'
 
 const useStyles = makeStyles((theme: Theme) =>

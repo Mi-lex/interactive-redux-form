@@ -1,8 +1,9 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { FormSection, formValueSelector, resetSection } from 'redux-form'
+import { FormSection, formValueSelector } from 'redux-form'
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
+
 import { PaperJoinerName, PostPrintActionName } from '../store/types'
 
 const selector: Function = formValueSelector('passport')

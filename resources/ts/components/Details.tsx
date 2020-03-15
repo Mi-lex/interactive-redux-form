@@ -1,9 +1,10 @@
 import React from 'react'
-import { FormSection, Field } from 'redux-form'
+import { Field, FormSection } from 'redux-form'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Grid from '@material-ui/core/Grid'
-import TextField from './MaterialReduxForm/TextField'
+
 import Checkbox from './MaterialReduxForm/Checkbox'
+import TextField from './MaterialReduxForm/TextField'
 
 const Details = () => {
     const variant = 'standard'

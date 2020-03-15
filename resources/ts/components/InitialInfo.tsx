@@ -1,15 +1,16 @@
 import React from 'react'
 import { Field, FormSection } from 'redux-form'
-import Grid from '@material-ui/core/Grid'
 import FormControl from '@material-ui/core/FormControl'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
-import InputLabel from '@material-ui/core/InputLabel'
 import FormGroup from '@material-ui/core/FormGroup'
-import { DatePicker, TextField, Select, Checkbox, TimePicker, TextareaAutosize } from '../components/MaterialReduxForm'
+import Grid from '@material-ui/core/Grid'
+import InputLabel from '@material-ui/core/InputLabel'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import AccessAlarm from '@material-ui/icons/AccessAlarm'
-import DeliveryBlock from './DeliveryBlock'
+
+import { Checkbox, DatePicker, Select, TextareaAutosize, TextField, TimePicker } from '../components/MaterialReduxForm'
 import { packageOptions } from '../store/consts'
+import DeliveryBlock from './DeliveryBlock'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({

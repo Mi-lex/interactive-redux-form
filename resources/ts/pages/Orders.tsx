@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react'
-import { RootState } from '../store/rootReducer'
 import { useDispatch, useSelector } from 'react-redux'
-import actionCreator from '../store/modules/order/actions'
-import { Order } from '../store/types'
-import OrderTable from '../components/OrderTable/OrderTable'
-import { FlashMessageComponent } from '../components/FlashMessage'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import format from 'date-fns/format'
+
+import { FlashMessageComponent } from '../components/FlashMessage'
+import OrderTable from '../components/OrderTable/OrderTable'
+import actionCreator from '../store/modules/order/actions'
+import { RootState } from '../store/rootReducer'
+import { Order } from '../store/types'
 
 const Orders = () => {
     const orders: Order[] = useSelector((state: RootState) => state.order.list)
     const pending = useSelector((state: RootState) => state.order.requestPending)
     const errorMessage = useSelector((state: RootState) => state.order.errorMessage)
-    console.log(orders)
 
     const dispatch = useDispatch()
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { WrappedFieldProps } from 'redux-form'
 
 const reduxFieldDatePickerWrapper = <T extends {}>(

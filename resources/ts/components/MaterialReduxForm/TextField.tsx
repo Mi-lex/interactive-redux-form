@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { WrappedFieldProps } from 'redux-form'
 import TextField, { TextFieldProps } from '@material-ui/core/TextField'
 

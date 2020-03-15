@@ -1,18 +1,19 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { resetSection, Field, FormSection, WrappedFieldProps } from 'redux-form'
-import { PaperJoinerName } from '../store/types'
-import { PaperJoiners } from '../store/enums'
+import { Field, FormSection, resetSection } from 'redux-form'
 import Box from '@material-ui/core/Box'
-import Grid from '@material-ui/core/Grid'
-import FormGroup from '@material-ui/core/FormGroup'
 import FormControl from '@material-ui/core/FormControl'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
+import FormGroup from '@material-ui/core/FormGroup'
+import Grid from '@material-ui/core/Grid'
 import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
+
+import { paperClipTypeOptions, paperJoinersNames, positionOptions } from '../store/consts'
+import { PaperJoiners } from '../store/enums'
+import { PaperJoinerName } from '../store/types'
 import ConnectedHiddenBlock from './ConnectedHiddenBLock'
-import { Select, TextField, Checkbox } from './MaterialReduxForm'
-import { paperJoinersNames, paperClipTypeOptions, positionOptions } from '../store/consts'
+import { Checkbox, Select, TextField } from './MaterialReduxForm'
 
 const PaperJoinerForm = (): JSX.Element => {
     const dispatch = useDispatch()

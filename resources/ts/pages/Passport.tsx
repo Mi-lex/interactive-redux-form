@@ -30,9 +30,9 @@ const Passport = (props: PassportProps) => {
         createOrderSuccess,
         createOrderError,
         requestPending,
-        updateOrderSuccess,
-        updateOrderError,
-        fetchOrderSuccess,
+        // updateOrderSuccess,
+        // updateOrderError,
+        // fetchOrderSuccess,
         fetchOrderError,
     } = props
 

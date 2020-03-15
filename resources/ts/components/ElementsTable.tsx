@@ -1,15 +1,16 @@
 import React from 'react'
-import { Field, FieldArray, WrappedFieldArrayProps, FormSection } from 'redux-form'
-import TextField from './MaterialReduxForm/TextField'
-import Select from './MaterialReduxForm/Select'
-import Grid from '@material-ui/core/Grid'
-import FormControl from '@material-ui/core/FormControl'
-import InputLabel from '@material-ui/core/InputLabel'
-import { printOptions } from '../store/consts'
+import { Field, FieldArray, FormSection, WrappedFieldArrayProps } from 'redux-form'
 import Box from '@material-ui/core/Box'
+import FormControl from '@material-ui/core/FormControl'
+import Grid from '@material-ui/core/Grid'
 import IconButton from '@material-ui/core/IconButton'
-import AddRow from '@material-ui/icons/PlaylistAdd'
+import InputLabel from '@material-ui/core/InputLabel'
 import RemoveRow from '@material-ui/icons/DeleteForever'
+import AddRow from '@material-ui/icons/PlaylistAdd'
+
+import { printOptions } from '../store/consts'
+import Select from './MaterialReduxForm/Select'
+import TextField from './MaterialReduxForm/TextField'
 
 type ElementsFieldPropType = {
     name: string
