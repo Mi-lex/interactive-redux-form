@@ -1,7 +1,6 @@
 import React from 'react'
-import { WrappedFieldProps } from 'redux-form'
-import TextField, { TextFieldProps } from '@material-ui/core/TextField'
 import TextareaAutosize, { TextareaAutosizeProps } from '@material-ui/core/TextareaAutosize'
+import TextField, { Props as TextFieldProps } from './TextField'
 
 type AutoSizeProps = TextareaAutosizeProps & {
     inputRef: any
@@ -13,30 +12,19 @@ const renderTextareaAutosize: React.FC<AutoSizeProps> = props => {
     return <TextareaAutosize {...custom} />
 }
 
-type Props = WrappedFieldProps &
-    TextFieldProps & {
-        rowsMin: number | string
-    }
+type Props = TextFieldProps & {
+    rowsMin: number | string
+}
 
 const TextareaAutosizeField: React.FC<Props> = props => {
-    const {
-        label,
-        input,
-        rowsMin,
-        meta: { touched, error },
-        ...custom
-    } = props
+    const { rowsMin, ...custom } = props
 
     return (
         <TextField
-            {...input}
             InputProps={{
                 inputComponent: renderTextareaAutosize as any,
                 inputProps: { rowsMin },
             }}
-            label={label}
-            error={error}
-            helperText={touched && error}
             {...custom}
         />
     )
