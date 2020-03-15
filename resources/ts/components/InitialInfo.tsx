@@ -45,7 +45,7 @@ const InitialInfo: React.FC = () => {
                         component={TextField}
                         name="id"
                         type="number"
-                        fullWidth={true}
+                        fullwidth
                         variant={variant}
                         disabled={true}
                         label="Заказ"
@@ -54,9 +54,9 @@ const InitialInfo: React.FC = () => {
                         component={DatePicker}
                         variant="inline"
                         name="completion_date"
+                        fullwidth
                         props={{
                             format: 'dd.MM.yy',
-                            fullWidth: true,
                         }}
                         label="Изготовить до"
                     />
@@ -65,7 +65,7 @@ const InitialInfo: React.FC = () => {
                         name="package.capacity"
                         type="number"
                         min={0}
-                        fullWidth={true}
+                        fullwidth
                         variant={variant}
                         label="Упаковать по"
                     />
@@ -76,9 +76,9 @@ const InitialInfo: React.FC = () => {
                     <Field
                         component={DatePicker}
                         name="created_at"
+                        fullWidth
                         props={{
                             format: 'dd.MM.yy',
-                            fullWidth: true,
                         }}
                         label="от"
                         disabled={true}
@@ -90,18 +90,13 @@ const InitialInfo: React.FC = () => {
                             format: 'HH:mm',
                             keyboardIcon: <AccessAlarm />,
                         }}
-                        fullWidth={true}
+                        fullwidth
                         label="к"
                         variant={variant}
                     />
                     <FormControl className={classes.formControl}>
                         <InputLabel>В</InputLabel>
-                        <Field
-                            name="package.type"
-                            variant={variant}
-                            options={packageOptions}
-                            component={Select}
-                        />
+                        <Field name="package.type" variant={variant} options={packageOptions} component={Select} />
                     </FormControl>
                     <FormSection name="package">
                         <FormGroup>

@@ -33,7 +33,16 @@ const PaymentBlock = () => {
                 variant={variant}
                 label="Счет"
             />
-            <Field component={DatePicker} name="payment.date" fullWidth disabled={paymentCash} label="от" />
+            <Field
+                component={DatePicker}
+                name="payment.date"
+                fullWidth
+                disabled={paymentCash}
+                props={{
+                    format: 'dd.MM.yy',
+                }}
+                label="от"
+            />
         </>
     )
 }
