@@ -11,6 +11,11 @@ function Alert(props: AlertProps) {
 
 type Props = FlashMessageProviderProps & MessageOptions & { open?: boolean; handleClose?: () => void }
 
+/**
+ * Component for showing messages.
+ * When used alone basically represents
+ * Snackbar and MuiAlert material ui component
+ */
 const FlashMessageComponent: React.FC<Props> = (props: Props) => {
     const [open, setOpen] = useState(true)
 
