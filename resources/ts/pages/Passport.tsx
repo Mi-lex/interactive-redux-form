@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react'
-import { Order } from '../store/types'
-import { useParams, Redirect } from 'react-router-dom'
-import { RootState } from '../store/rootReducer'
-import actionCreator from '../store/modules/passport/actions'
-import { useDispatch, connect } from 'react-redux'
-import Paper from '@material-ui/core/Paper'
+import { connect, useDispatch } from 'react-redux'
+import { Redirect, useParams } from 'react-router-dom'
+import { InjectedFormProps, reduxForm } from 'redux-form'
 import Container from '@material-ui/core/Container'
-import { reduxForm, InjectedFormProps } from 'redux-form'
+import LinearProgress from '@material-ui/core/LinearProgress'
+import Paper from '@material-ui/core/Paper'
+
+import { FlashMessageComponent } from '../components/FlashMessage'
 import PassportControl from '../components/PassportControl'
 import PassportForm from '../components/PassportForm'
-import { FlashMessageComponent } from '../components/FlashMessage'
-import LinearProgress from '@material-ui/core/LinearProgress'
+import actionCreator from '../store/modules/passport/actions'
+import { RootState } from '../store/rootReducer'
+import { Order } from '../store/types'
 
 type PassportProps = InjectedFormProps & {
     createOrderSuccess: boolean
@@ -98,11 +99,13 @@ const Connected = connect((state: RootState) => {
         success: fetchOrderSuccess,
         error: fetchOrderError,
         pending: fetchOrderPending,
-        fetched: initialValues,
+        fetched,
     } = state.passport.fetch
 
     return {
-        initialValues,
+        initialValues: fetched || {
+            elements: [{}, {}]
+        },
         createOrderSuccess,
         createOrderError,
         updateOrderSuccess,

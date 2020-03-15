@@ -6,6 +6,7 @@ import { DatePicker, TextField, Select, Switcher } from '../components/MaterialR
 import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
+import { paymentOrgOptions } from '../store/consts'
 
 const selector: Function = formValueSelector('passport')
 
@@ -18,16 +19,13 @@ const PaymentBlock = () => {
             <FormControl fullWidth>
                 <InputLabel>Организация</InputLabel>
                 <Field
+                    component={Select}
                     label="Организация"
                     name="payment_org_type"
                     variant={variant}
                     disabled={paymentCash}
-                    component={Select}
-                >
-                    <MenuItem value="эталон">Эталон</MenuItem>
-                    <MenuItem value="стандарт">Стандарт</MenuItem>
-                    <MenuItem value="прессцентр">Прессцентр</MenuItem>
-                </Field>
+                    options={paymentOrgOptions}
+                />
             </FormControl>
             <Field
                 component={TextField}

@@ -12,7 +12,7 @@ import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 import ConnectedHiddenBlock from './ConnectedHiddenBLock'
 import { Select, TextField, Checkbox } from './MaterialReduxForm'
-import { paperJoinersNames } from '../store/consts'
+import { paperJoinersNames, paperClipTypeOptions, positionOptions } from '../store/consts'
 
 const PaperJoinerForm = (): JSX.Element => {
     const dispatch = useDispatch()
@@ -74,10 +74,7 @@ const PaperJoinerForm = (): JSX.Element => {
                         <Field fullWidth component={TextField} label="Количество" type="number" name="quantity" />
                         <FormControl fullWidth>
                             <InputLabel>Тип</InputLabel>
-                            <Field name="type" component={Select}>
-                                <MenuItem value="файловая">Файловая</MenuItem>
-                                <MenuItem value="овальная">Овальная</MenuItem>
-                            </Field>
+                            <Field name="type" component={Select} options={paperClipTypeOptions} />
                         </FormControl>
                         <Field fullWidth component={TextField} label="Толщина" type="number" name="width" />
                         <Field fullWidth component={TextField} label="Сползание" type="number" name="drift" />
@@ -111,10 +108,7 @@ const PaperJoinerForm = (): JSX.Element => {
                         <Field fullWidth component={TextField} label="Цвет" type="text" name="color" />
                         <FormControl fullWidth>
                             <InputLabel>Положение</InputLabel>
-                            <Field name="position" component={Select}>
-                                <MenuItem value="up">Сверху</MenuItem>
-                                <MenuItem value="left">Слева</MenuItem>
-                            </Field>
+                            <Field name="position" options={positionOptions} component={Select} />
                         </FormControl>
                         <Field
                             fullWidth
@@ -147,10 +141,7 @@ const PaperJoinerForm = (): JSX.Element => {
                         </FormControl>
                         <FormControl fullWidth>
                             <InputLabel>Место склеивания</InputLabel>
-                            <Field name="position" component={Select}>
-                                <MenuItem value="up">Сверху</MenuItem>
-                                <MenuItem value="left">Слева</MenuItem>
-                            </Field>
+                            <Field name="position" options={positionOptions} component={Select} />
                         </FormControl>
                     </ConnectedHiddenBlock>
                     {/* Спец. обработка */}

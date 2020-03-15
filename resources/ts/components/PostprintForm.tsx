@@ -7,12 +7,13 @@ import FormControl from '@material-ui/core/FormControl'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
-import { postPrintActionNames } from '../store/consts'
+import { postPrintActionNames, bookfoldingOptions, foilOptions } from '../store/consts'
 import { PostPrintActionName } from '../store/types'
 import { PostPrintActions } from '../store/enums'
 import ConnectedHiddenBlock from './ConnectedHiddenBLock'
 import { Checkbox, Select, TextField } from './MaterialReduxForm'
 import RemovableComment from './RemovableComment'
+import { laminationOptions, varnishOptions } from '../store/consts'
 
 const PostprintForm: React.FC = () => {
     const checkboxesGroupName = 'post_actions_checks'
@@ -68,11 +69,7 @@ const PostprintForm: React.FC = () => {
                         {/* Фальцевать */}
                         <FormControl fullWidth>
                             <InputLabel>Вид</InputLabel>
-                            <Field name="type" component={Select}>
-                                <MenuItem value="евро">Евро</MenuItem>
-                                <MenuItem value="гармошка">Гармошка</MenuItem>
-                                <MenuItem value="оконная">Оконная</MenuItem>
-                            </Field>
+                            <Field name="type" component={Select} options={bookfoldingOptions} />
                         </FormControl>
                         <Field fullWidth component={TextField} label="Цвет" type="text" name="color" />
                         <Field fullWidth component={TextField} label="Элементы" type="text" name="elements" />
@@ -86,11 +83,7 @@ const PostprintForm: React.FC = () => {
                         {/* Ламинировать */}
                         <FormControl fullWidth>
                             <InputLabel>Вид ламинации</InputLabel>
-                            <Field name="type" component={Select}>
-                                <MenuItem value="glossy">Глянцевая</MenuItem>
-                                <MenuItem value="matte">Матовая</MenuItem>
-                                <MenuItem value="softtouch">Cофт-тач</MenuItem>
-                            </Field>
+                            <Field name="type" component={Select} options={laminationOptions} />
                         </FormControl>
                         <Field fullWidth component={TextField} label="Элементы" type="text" name="elements" />
                         <RemovableComment />
@@ -103,11 +96,7 @@ const PostprintForm: React.FC = () => {
                         {/* Лакировать */}
                         <FormControl fullWidth>
                             <InputLabel>Лак</InputLabel>
-                            <Field name="varnish_type" component={Select}>
-                                <MenuItem value="glossy">Глянцевый</MenuItem>
-                                <MenuItem value="matte">Матовый</MenuItem>
-                                <MenuItem value="softtouch">Cофт-тач</MenuItem>
-                            </Field>
+                            <Field name="varnish_type" component={Select} options={varnishOptions} />
                         </FormControl>
                         <Field fullWidth component={TextField} label="Элементы" type="text" name="elements" />
                         <RemovableComment />
@@ -120,11 +109,7 @@ const PostprintForm: React.FC = () => {
                         {/* Тиснить фольгой */}
                         <FormControl fullWidth>
                             <InputLabel>Тип фольги</InputLabel>
-                            <Field name="type" component={Select}>
-                                <MenuItem value="glossy">Глянцевая</MenuItem>
-                                <MenuItem value="matte">Матовая</MenuItem>
-                                <MenuItem value="holographic">Голографическая</MenuItem>
-                            </Field>
+                            <Field name="type" component={Select} options={foilOptions} />
                         </FormControl>
                         <Field fullWidth component={TextField} label="Элементы" type="text" name="elements" />
                         <RemovableComment />
@@ -163,7 +148,7 @@ const PostprintForm: React.FC = () => {
                         <Field fullWidth component={TextField} label="Элементы" type="text" name="elements" />
                         <RemovableComment />
                     </ConnectedHiddenBlock>
-                </FormSection>{' '}
+                </FormSection>
             </Grid>
         </Grid>
     )

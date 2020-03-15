@@ -4,12 +4,12 @@ import Grid from '@material-ui/core/Grid'
 import FormControl from '@material-ui/core/FormControl'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import InputLabel from '@material-ui/core/InputLabel'
-import MenuItem from '@material-ui/core/MenuItem'
 import FormGroup from '@material-ui/core/FormGroup'
 import { DatePicker, TextField, Select, Checkbox, TimePicker, TextareaAutosize } from '../components/MaterialReduxForm'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import AccessAlarm from '@material-ui/icons/AccessAlarm'
 import DeliveryBlock from './DeliveryBlock'
+import { packageOptions } from '../store/consts'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -95,10 +95,12 @@ const InitialInfo: React.FC = () => {
                     />
                     <FormControl className={classes.formControl}>
                         <InputLabel>В</InputLabel>
-                        <Field name="package.type" variant={variant} component={Select}>
-                            <MenuItem value="коробку">коробку</MenuItem>
-                            <MenuItem value="пачку">пачку</MenuItem>
-                        </Field>
+                        <Field
+                            name="package.type"
+                            variant={variant}
+                            options={packageOptions}
+                            component={Select}
+                        />
                     </FormControl>
                     <FormSection name="package">
                         <FormGroup>

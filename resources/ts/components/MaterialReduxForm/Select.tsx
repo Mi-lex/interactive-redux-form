@@ -1,12 +1,22 @@
 import React from 'react'
 import Select, { SelectProps } from '@material-ui/core/Select'
 import { WrappedFieldProps } from 'redux-form'
+import MenuItem from '@material-ui/core/MenuItem'
 
-type Props = SelectProps & WrappedFieldProps
+interface SelectOption {
+    name: string
+    value: string
+}
 
-const SelectField: React.FC<Props> = ({ input, label, children, ...rest }) => (
+type Props = SelectProps & WrappedFieldProps & {
+    options: SelectOption[]
+}
+
+const SelectField: React.FC<Props> = ({ input, children, options = [], ...rest }) => (
     <Select {...input} onChange={input.onChange} {...rest}>
-        {children}
+        {options.map(option => (
+            <MenuItem key={option.value} value={option.value}>{option.name}</MenuItem>
+        ))}
     </Select>
 )
 
