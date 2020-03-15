@@ -44,9 +44,7 @@ const FETCH_INITIAL_STATE: FetchOrderState = {
     pending: false,
     success: false,
     error: false,
-    fetched: {
-        elements: [{}, {}],
-    },
+    fetched: {},
 }
 
 const createReducer = (state = CREATE_INITIAL_STATE, action: Action): CreateOrderState => {
