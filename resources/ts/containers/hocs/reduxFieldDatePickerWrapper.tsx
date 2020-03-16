@@ -9,34 +9,31 @@ const reduxFieldDatePickerWrapper = <T extends {}>(
         meta: { touched, invalid, error },
         ...rest
     } = props
+
     const [selectedDate, setValue] = useState(() => {
         return input.value ? new Date(input.value) : null
     })
 
-    let initialDate: Date
-
-    if (input.value) {
-        initialDate = new Date(input.value)
-    }
-
     useEffect(() => {
         if (!selectedDate && input.value) {
-            setValue(initialDate)
+            setValue(new Date(input.value))
+        }
+
+        if (!input.value) {
+            setValue(null)
         }
     })
 
     return (
-        <>
-            <WrappedComponent
-                autoOk
-                {...input}
-                value={selectedDate}
-                invalidDateMessage="Неверный формат данных"
-                onChange={setValue}
-                {...((rest as unknown) as T)}
-            />
-            {touched && invalid && <span className="error_msg">{error}</span>}
-        </>
+        <WrappedComponent
+            autoOk
+            {...input}
+            value={selectedDate}
+            helperText={touched && invalid && error}
+            invalidDateMessage="Неверный формат данных"
+            onChange={setValue}
+            {...((rest as unknown) as T)}
+        />
     )
 }
 
