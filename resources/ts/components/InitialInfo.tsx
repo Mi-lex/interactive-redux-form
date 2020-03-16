@@ -45,7 +45,7 @@ const InitialInfo: React.FC = () => {
                         component={TextField}
                         name="id"
                         type="number"
-                        fullwidth
+                        fullWidth
                         variant={variant}
                         disabled={true}
                         label="Заказ"
@@ -54,7 +54,7 @@ const InitialInfo: React.FC = () => {
                         component={DatePicker}
                         variant="inline"
                         name="completion_date"
-                        fullwidth
+                        fullWidth
                         props={{
                             format: 'dd.MM.yy',
                         }}
@@ -65,7 +65,7 @@ const InitialInfo: React.FC = () => {
                         name="package.capacity"
                         type="number"
                         min={0}
-                        fullwidth
+                        fullWidth
                         variant={variant}
                         label="Упаковать по"
                     />
@@ -86,11 +86,11 @@ const InitialInfo: React.FC = () => {
                     <Field
                         component={TimePicker}
                         name="time"
+                        fullWidth
                         props={{
                             format: 'HH:mm',
                             keyboardIcon: <AccessAlarm />,
                         }}
-                        fullwidth
                         label="к"
                         variant={variant}
                     />

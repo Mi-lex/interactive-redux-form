@@ -30,8 +30,8 @@ const PassportSidebar: React.FC = () => {
 
     return (
         <Grid item xs={12} sm={6} md={2} className={classes.root}>
-            <Field component={TextField} name="customer.name" fullwidth variant={variant} label="Клиент" />
-            <Field component={TextField} name="type" fullwidth variant={variant} label="Тип" />
+            <Field component={TextField} name="customer.name" fullWidth variant={variant} label="Клиент" />
+            <Field component={TextField} name="type" fullWidth variant={variant} label="Тип" />
             <Field
                 component={TextField}
                 name="name"
