@@ -7,30 +7,34 @@ import AddComment from '@material-ui/icons/PlaylistAdd'
 
 import { TextField } from './MaterialReduxForm'
 
-const Comments = ({ fields }: WrappedFieldArrayProps<string>): JSX.Element => (
+const Comments = ({ fields}: WrappedFieldArrayProps<string>): JSX.Element => (
     <>
         {fields.map((comment, index) => (
             <Field component={TextField} multiline label="Дополнительно" fullWidth key={index} name={comment} />
         ))}
         <Box display="flex" width="100%" justifyContent="flex-end" pt={1}>
-            <IconButton
-                aria-label="добавить строку"
-                onClick={(): void => {
-                    fields.push('')
-                }}
-                color="primary"
-            >
-                <AddComment fontSize="small" />
-            </IconButton>
-            <IconButton
-                aria-label="удалить строку"
-                onClick={(): void => {
-                    fields.pop()
-                }}
-                color="primary"
-            >
-                <RemoveComment fontSize="small" />
-            </IconButton>
+            {fields.length < 1 && (
+                <IconButton
+                    aria-label="добавить строку"
+                    onClick={(): void => {
+                        fields.push('')
+                    }}
+                    color="primary"
+                >
+                    <AddComment fontSize="small" />
+                </IconButton>
+            )}
+            {fields.length >= 1 && (
+                <IconButton
+                    aria-label="удалить строку"
+                    onClick={(): void => {
+                        fields.pop()
+                    }}
+                    color="primary"
+                >
+                    <RemoveComment fontSize="small" />
+                </IconButton>
+            )}
         </Box>
     </>
 )
