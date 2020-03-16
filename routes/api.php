@@ -21,7 +21,7 @@ Route::group([
     'prefix' => 'passport',
 ], function () {
     Route::get('/{id}', 'OrderController@show');
-    Route::post('/', 'OrderController@store');
+    Route::post('/', 'OrderController@create');
     Route::patch('/{order}', 'OrderController@update');
 });
 

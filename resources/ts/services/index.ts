@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import { FetchedOrder, FormOrder, PaperJoinerName } from '../store/types'
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequested'
 
 let baseUrl: string
@@ -37,11 +37,50 @@ export const getMessageFromError = (error: AcceptedError): string => {
         } else {
             message = error.response.data.message
         }
-    } else {
+    } else if (error.message) {
         message = error.message
     }
 
     return message
+}
+
+export const getFormData = (order: FetchedOrder): FormOrder => {
+    const formOrder: FormOrder = { ...order, paper_joiner: {}, post_actions: {} }
+
+    if (order.paper_joiner) {
+        const joinerType: PaperJoinerName = order.paper_joiner.type
+
+        formOrder.paper_joiner_checks = {
+            [joinerType]: true,
+        }
+        delete order.paper_joiner.body.id
+
+        formOrder.paper_joiner = {
+            [joinerType]: order.paper_joiner.body,
+        }
+    }
+
+    if (order.post_actions) {
+        formOrder.post_actions = {}
+        formOrder.post_actions_checks = {}
+
+        order.post_actions.forEach(({ type, body, additional, elements }) => {
+            delete body.id
+
+            formOrder.post_actions_checks[type] = true
+
+            formOrder.post_actions = {
+                ...formOrder.post_actions,
+                [type]: {
+                    ...body,
+                    additional: [additional],
+                    elements,
+                },
+            }
+        })
+    }
+
+    return formOrder
 }
 
 export default axios.create({

@@ -29,7 +29,7 @@ export const printOptions = [
     },
     {
         name: 'офсет',
-        value: 'ofc',
+        value: 'ofs',
     },
     {
         name: 'цифровая',

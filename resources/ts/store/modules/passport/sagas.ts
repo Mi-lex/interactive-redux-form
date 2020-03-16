@@ -1,6 +1,6 @@
 import actionCreator, { types } from './actions'
 import { call, put, takeLatest, select } from 'redux-saga/effects'
-import api, { getMessageFromError } from '../../../services'
+import api, { getMessageFromError, getFormData } from '../../../services'
 import { Action } from '../../types'
 
 function* createOrderRequest() {
@@ -30,12 +30,13 @@ function* updateOrderRequest() {
 
 function* fetchOrderRequest(action: Action) {
     try {
-        const { payload: orderId } = action;
+        const { payload: orderId } = action
         const response = yield call(api.get, `passport/${orderId}`)
-        
+        const formOrder = getFormData(response.data)
 
-        yield put(actionCreator.fetchOrderSuccess(response.data))
+        yield put(actionCreator.fetchOrderSuccess(formOrder))
     } catch (error) {
+        console.log(error)
         const message = getMessageFromError(error)
 
         yield put(actionCreator.fetchOrderError(message))

@@ -9,6 +9,7 @@ use Tests\TestCase;
 use App\Models\Order;
 use App\Models\PaperJoiner;
 use App\Models\PostAction;
+use Carbon\Carbon;
 
 class OrderTest extends TestCase
 {
@@ -20,6 +21,8 @@ class OrderTest extends TestCase
         $this->withoutExceptionHandling();
 
         $content = $this->post('/api/passport')->decodeResponseJson();
+        unset($content['created_at']);
+
         $this->assertDatabaseHas('orders', $content);
     }
 
