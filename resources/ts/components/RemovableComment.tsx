@@ -5,12 +5,12 @@ import IconButton from '@material-ui/core/IconButton'
 import RemoveComment from '@material-ui/icons/DeleteForever'
 import AddComment from '@material-ui/icons/PlaylistAdd'
 
-import { TextareaAutosize } from './MaterialReduxForm'
+import { TextField } from './MaterialReduxForm'
 
 const Comments = ({ fields }: WrappedFieldArrayProps<string>): JSX.Element => (
     <>
         {fields.map((comment, index) => (
-            <Field component={TextareaAutosize} label="Дополнительно" fullWidth key={index} name={comment} />
+            <Field component={TextField} multiline label="Дополнительно" fullWidth key={index} name={comment} />
         ))}
         <Box display="flex" width="100%" justifyContent="flex-end" pt={1}>
             <IconButton
@@ -36,7 +36,7 @@ const Comments = ({ fields }: WrappedFieldArrayProps<string>): JSX.Element => (
 )
 
 const RemovableComment = () => {
-    return <FieldArray name="additonal" component={Comments} />
+    return <FieldArray name="additional" component={Comments} />
 }
 
 export default RemovableComment

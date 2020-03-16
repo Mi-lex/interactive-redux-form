@@ -19,7 +19,7 @@ const PaymentBlock = () => {
                 <Field
                     component={Select}
                     label="Организация"
-                    name="payment_org_type"
+                    name="payment.operation.org_type"
                     variant={variant}
                     disabled={paymentCash}
                     options={paymentOrgOptions}
@@ -35,7 +35,7 @@ const PaymentBlock = () => {
             />
             <Field
                 component={DatePicker}
-                name="payment.date"
+                name="payment.operation.date"
                 fullWidth
                 disabled={paymentCash}
                 props={{

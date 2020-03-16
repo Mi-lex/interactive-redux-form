@@ -16,15 +16,13 @@ const CheckboxField: React.FC<Props> = props => {
     }
 
     return (
-        <>
-            <Checkbox
-                {...input}
-                checked={input.value ? true : false}
-                onChange={onCheckHandler}
-                color="primary"
-                {...custom}
-            />
-        </>
+        <Checkbox
+            {...input}
+            checked={input.value ? true : false}
+            onChange={onCheckHandler}
+            color="primary"
+            {...custom}
+        />
     )
 }
 

@@ -9,7 +9,7 @@ function Alert(props: AlertProps) {
     return <MuiAlert elevation={6} variant="filled" {...props} />
 }
 
-type Props = FlashMessageProviderProps & MessageOptions & { open?: boolean; handleClose?: () => void }
+type Props = FlashMessageProviderProps & MessageOptions & { open?: boolean; handleClose?: () => void; children: string }
 
 /**
  * Component for showing messages.
@@ -55,7 +55,8 @@ const FlashMessageComponent: React.FC<Props> = (props: Props) => {
             onClose={handleClose}
         >
             <Alert severity={type} onClose={handleClose}>
-                {children || ''}
+                <span>{children || ''}</span>
+                {/* {children || ''} */}
             </Alert>
         </Snackbar>
     )
