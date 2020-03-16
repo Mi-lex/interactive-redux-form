@@ -6,6 +6,10 @@ export type IconName = keyof typeof icons
 
 export type ElementSize = 'sm' | 'md' | 'big'
 
+type PartialRecord<K extends keyof any, T> = {
+    [P in K]?: T
+}
+
 interface Option {
     label: string
     value: string
@@ -91,9 +95,11 @@ interface Special {
     description: string
 }
 
+type PaperJoinerBody = PaperClip | Termo | Spring | Packet | GlueBonding | Special | {}
+
 interface PaperJoiner {
     type: PaperJoinerName
-    body: PaperClip | Termo | Spring | Packet | GlueBonding | Special | {}
+    body: PaperJoinerBody & { id: number }
 }
 
 interface Package {
@@ -137,11 +143,25 @@ interface StampCut {
     name: string
 }
 
+// Причина в том , что у нас есть post action body в виде всяких ламинаций, лакировак , биговок и т.д
+// Когда данные приходят с сервера, то этот body находится внутри свойства body
+// В форме они хранятся в виде PostAction в перемешку
+
 interface PostAction {
-    type: string
-    body?: Creasing | BookFolding | Lamination | Revarnishing | Embossing | StampCut | {}
+    type?: PostPrintActionName
     elements?: string
-    additionals?: string
+}
+
+type PostActionBody = Creasing | BookFolding | Lamination | Revarnishing | Embossing | StampCut | {}
+
+export type FormPostAction = PostAction &
+    PostActionBody & {
+        additional?: string[]
+    }
+
+export interface FetchedPostAction extends PostAction {
+    body?: PostActionBody & { id: number }
+    additional?: string
 }
 
 interface OrderElement {
@@ -174,10 +194,22 @@ export interface Order {
 
     elements?: OrderElement[]
 
-    paper_joiner?: PaperJoiner
     package?: Package
     delivery?: Delivery
-    post_action?: PostAction[]
+}
+
+export interface FormOrder extends Order {
+    paper_joiner?: PartialRecord<PaperJoinerName, PaperJoinerBody>
+    post_actions?: PartialRecord<PostPrintActionName, FormPostAction>
+
+    // post_actions?: PartialRecord<PostPrintActionName, FormPostAction>
+    paper_joiner_checks?: PartialRecord<PaperJoinerName, boolean>
+    post_actions_checks?: PartialRecord<PostPrintActionName, boolean>
+}
+
+export interface FetchedOrder extends Order {
+    paper_joiner?: PaperJoiner
+    post_actions?: FetchedPostAction[]
 }
 
 export type Action = {
