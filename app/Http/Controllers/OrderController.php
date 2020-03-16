@@ -16,7 +16,7 @@ class OrderController extends Controller
             [
                 'paperJoiner.body', 'customer',
                 'payment.operation', 'package', 'delivery',
-                'elements', 'postActions', 'postActions.body'
+                'elements', 'postActions.body'
             ]
         )->whereId($id)->first());
     }
@@ -45,7 +45,7 @@ class OrderController extends Controller
             });
     }
 
-    public function store()
+    public function create()
     {
         $newOrder = Order::create();
 
@@ -97,9 +97,10 @@ class OrderController extends Controller
 
                 $joinerModel = $order->paperJoiner()->make(["type" => $joinerType]);
 
-                if (empty($bodyInfo = $request['paper_joiner'][$joinerType])) {
+                if (!empty($bodyInfo = $request['paper_joiner'][$joinerType])) {
                     $joinerModelBody = $joinerModel->body()->create($bodyInfo);
                     $joinerModel->body()->associate($joinerModelBody);
+                    $joinerModel->body->save();
                 }
 
                 $joinerModel->save();
