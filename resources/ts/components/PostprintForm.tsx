@@ -1,6 +1,5 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import { Field, FormSection, resetSection } from 'redux-form'
+import { Field, FormSection } from 'redux-form'
 import FormControl from '@material-ui/core/FormControl'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormGroup from '@material-ui/core/FormGroup'
@@ -8,7 +7,13 @@ import Grid from '@material-ui/core/Grid'
 import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 
-import { bookfoldingOptions, foilOptions, laminationOptions, postPrintActionNames, varnishOptions } from '../store/consts'
+import {
+    bookfoldingOptions,
+    foilOptions,
+    laminationOptions,
+    postPrintActionNames,
+    varnishOptions,
+} from '../store/consts'
 import { PostPrintActions } from '../store/enums'
 import { PostPrintActionName } from '../store/types'
 import ConnectedHiddenBlock from './ConnectedHiddenBLock'
@@ -18,15 +23,6 @@ import RemovableComment from './RemovableComment'
 const PostprintForm: React.FC = () => {
     const checkboxesGroupName = 'post_actions_checks'
     const blockUpperSectionName = 'post_actions'
-    const dispatch = useDispatch()
-
-    const clearCorrespondingBlock = (blockName: PostPrintActionName) => {
-        return (checked: boolean) => {
-            if (!checked) {
-                dispatch(resetSection('passport', `${blockUpperSectionName}.${blockName}`))
-            }
-        }
-    }
 
     return (
         <Grid container item xs={12} md={6} spacing={2}>
@@ -37,13 +33,7 @@ const PostprintForm: React.FC = () => {
                         {postPrintActionNames.map((postAction: PostPrintActionName) => (
                             <FormControlLabel
                                 key={postAction}
-                                control={
-                                    <Field
-                                        component={Checkbox}
-                                        changeAction={clearCorrespondingBlock(postAction)}
-                                        name={postAction}
-                                    />
-                                }
+                                control={<Field component={Checkbox} name={postAction} />}
                                 label={PostPrintActions[postAction]}
                             />
                         ))}
