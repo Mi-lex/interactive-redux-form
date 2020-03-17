@@ -85,7 +85,7 @@ const InitialInfo: React.FC = () => {
                     />
                     <Field
                         component={TimePicker}
-                        name="time"
+                        name="completion_time"
                         fullWidth
                         props={{
                             format: 'HH:mm',

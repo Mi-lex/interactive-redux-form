@@ -15,7 +15,6 @@ import { PaperJoiners } from '../store/enums'
 import { PaperJoinerName } from '../store/types'
 import ConnectedHiddenBlock from './ConnectedHiddenBLock'
 import { Checkbox, Select, TextField } from './MaterialReduxForm'
-import { RootState } from '../store/rootReducer'
 
 const selector: Function = formValueSelector('passport')
 
@@ -28,20 +27,18 @@ const PaperJoinerForm = (): JSX.Element => {
     const checkboxesGroupName = 'paper_joiner_checks'
     const blockUpperSectionName = 'paper_joiner'
 
-    const clearChecks = (currentCheck: PaperJoinerName) => {
-        return (checked: boolean) => {
-            /**
-             * Uncheck active checkbox before checking new one
-             * this is basically radiobtn behavior but with
-             * opportunity to uncheck all inputs
-             */
-            if (activeChecks.length > 0) {
-                const activeChecksNames = activeChecks.map(([name, _]) => `${checkboxesGroupName}.${name}`)
-                const correspondingBlocks = activeChecks.map(([name, _]) => `${blockUpperSectionName}.${name}`)
-                // dispatch(clearFields('passport', false, false, `${checkboxesGroupName}`))
-                dispatch(clearFields('passport', false, false, ...activeChecksNames))
-                dispatch(clearFields('passport', false, false, ...correspondingBlocks))
-            }
+    const clearChecksAndSections = () => {
+        /**
+         * Uncheck active checkbox before checking new one
+         * this is basically radiobtn behavior but with
+         * opportunity to uncheck all inputs
+         */
+        if (activeChecks.length > 0) {
+            const activeChecksNames = activeChecks.map(([name, _]) => `${checkboxesGroupName}.${name}`)
+            const correspondingBlocks = activeChecks.map(([name, _]) => `${blockUpperSectionName}.${name}`)
+
+            dispatch(clearFields('passport', false, false, ...activeChecksNames))
+            dispatch(clearFields('passport', false, false, ...correspondingBlocks))
         }
     }
 
@@ -57,7 +54,7 @@ const PaperJoinerForm = (): JSX.Element => {
                                 control={
                                     <Field
                                         component={Checkbox}
-                                        changeAction={clearChecks(joinerName)}
+                                        changeAction={clearChecksAndSections}
                                         name={joinerName}
                                     />
                                 }

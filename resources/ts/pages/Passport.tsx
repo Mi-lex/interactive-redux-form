@@ -67,12 +67,11 @@ const Passport = (props: PassportProps) => {
         <Paper>
             {createOrderSuccess && !id && <Redirect to={`/passport/${initialValues.id}`} />}
             {/* {successMessage && <FlashMessageComponent type="success">{successMessage}</FlashMessageComponent>} */}
-            {createOrderError ||
-                (fetchOrderError && (
-                    <FlashMessageComponent type="error" onClose={onCloseErrorMessage}>
-                        {createOrderError || 'Что-то пошло не так'}
-                    </FlashMessageComponent>
-                ))}
+            {(createOrderError || fetchOrderError) && (
+                <FlashMessageComponent type="error" onClose={onCloseErrorMessage}>
+                    {createOrderError || 'Что-то пошло не так'}
+                </FlashMessageComponent>
+            )}
             {requestPending && <LinearProgress color="secondary" />}
             <Container>
                 <form action="POST" className="passportForm">

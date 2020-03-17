@@ -18,10 +18,6 @@ const reduxFieldDatePickerWrapper = <T extends {}>(
         if (!selectedDate && input.value) {
             setValue(new Date(input.value))
         }
-
-        if (!input.value) {
-            setValue(null)
-        }
     })
 
     return (
