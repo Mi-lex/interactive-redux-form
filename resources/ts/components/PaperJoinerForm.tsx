@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Field, FormSection, formValueSelector, resetSection, clearFields } from 'redux-form'
+import { Field, FormSection, formValueSelector, clearFields } from 'redux-form'
 
 import Box from '@material-ui/core/Box'
 import FormControl from '@material-ui/core/FormControl'

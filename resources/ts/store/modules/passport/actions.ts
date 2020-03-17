@@ -31,6 +31,10 @@ export const updateOrderRequest = () => ({
     type: UPDATE_ORDER_REQUEST,
 })
 
+export const updateOrderSuccess = () => ({
+    type: UPDATE_ORDER_SUCCESS,
+})
+
 export const updateOrderError = () => ({
     type: CREATE_ORDER_ERROR,
 })
@@ -41,7 +45,7 @@ export const createCleanUp = () => ({
 
 export const fetchOrderRequest = (id: number | string) => ({
     type: FETCH_ORDER_REQUEST,
-    payload: id
+    payload: id,
 })
 
 export const fetchOrderSuccess = (order: Order) => ({
@@ -72,7 +76,11 @@ export default {
     createOrderRequest,
     createOrderSuccess,
     createOrderError,
+
     updateOrderRequest,
+    updateOrderSuccess,
+    updateOrderError,
+
     createCleanUp,
     fetchOrderRequest,
     fetchOrderSuccess,

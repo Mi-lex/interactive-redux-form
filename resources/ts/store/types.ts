@@ -52,11 +52,11 @@ interface Customer {
 interface PaymentOperation {
     account_number: string
     organization: { name: string }
+    date: string
 }
 
 interface Payment {
     payed_by_cash: string
-    date: string
     operation?: PaymentOperation
 }
 
@@ -156,7 +156,7 @@ type PostActionBody = Creasing | BookFolding | Lamination | Revarnishing | Embos
 
 export type FormPostAction = PostAction &
     PostActionBody & {
-        additional?: string[]
+        additional?: string[] | string
     }
 
 export interface FetchedPostAction extends PostAction {
@@ -202,7 +202,6 @@ export interface FormOrder extends Order {
     paper_joiner?: PartialRecord<PaperJoinerName, PaperJoinerBody>
     post_actions?: PartialRecord<PostPrintActionName, FormPostAction>
 
-    // post_actions?: PartialRecord<PostPrintActionName, FormPostAction>
     paper_joiner_checks?: PartialRecord<PaperJoinerName, boolean>
     post_actions_checks?: PartialRecord<PostPrintActionName, boolean>
 }
