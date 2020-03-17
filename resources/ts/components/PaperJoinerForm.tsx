@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Field, FormSection, resetSection } from 'redux-form'
+
 import Box from '@material-ui/core/Box'
 import FormControl from '@material-ui/core/FormControl'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
@@ -26,10 +27,6 @@ const PaperJoinerForm = (): JSX.Element => {
          * this is basically radiobtn behavior but with
          * opportunity to uncheck all inputs
          */
-        if (!checked) {
-            // also clear whole paper joiner form when checkbox is changing
-            dispatch(resetSection('passport', blockUpperSectionName))
-        }
         dispatch(resetSection('passport', checkboxesGroupName))
     }
 
