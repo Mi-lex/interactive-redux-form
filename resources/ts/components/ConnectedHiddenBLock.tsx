@@ -28,17 +28,17 @@ type Props = {
 const ConnectedHiddenBlock: React.FC<Props> = (props): JSX.Element => {
     const { children, blockName, className = '', checkboxGroupName, NamesMap } = props
     const classes = useStyles()
-    const chosenCheckbox = useSelector(state => selector(state,`${checkboxGroupName}.${blockName}`))
+    const chosenCheckbox = useSelector(state => selector(state, `${checkboxGroupName}.${blockName}`))
     const shown = chosenCheckbox || false
 
-    return (
-        <FormSection name={blockName} className={`${classes.root} ${className}`} hidden={!shown}>
+    return shown ? (
+        <FormSection name={blockName} className={`${classes.root} ${className}`}>
             <Typography style={{ paddingTop: 5 }} variant="h6">
                 {NamesMap[blockName]}
             </Typography>
             {children}
         </FormSection>
-    )
+    ) : null
 }
 
 export default ConnectedHiddenBlock
