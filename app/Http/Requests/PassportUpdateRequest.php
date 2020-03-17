@@ -34,8 +34,8 @@ class PassportUpdateRequest extends FormRequest
             'name' => ['nullable','string'],
             'type' => ['nullable','string'],
             'important_info' => ['nullable', 'string'],
-            'completion_date' => ['nullable', 'date_format:d.m.y'],
-            'completion_time' => ['nullable', 'date_format:H:i'],
+            'completion_date' => ['nullable', 'date'],
+            'completion_time' => ['nullable', 'date'],
             'is_similar_order' => ['boolean'],
             'similar_order_id' => ['nullable', 'numeric'],
             // implementation
@@ -47,9 +47,9 @@ class PassportUpdateRequest extends FormRequest
             // payment
             'payment.payed_by_cash' => ['boolean'],
             'payment.operation' => ['array'],
-            'payment.operation.org_type' => ['string', 'exists:payment_org_types,alias', 'required_with:payment.operation'],
-            'payment.operation.account_number' => ['numeric', 'required_with:payment.operation'],
-            'payment.operation.date' => ['date_format:d.m.y', 'required_with:payment.operation'],
+            'payment.operation.org_type' => ['string', 'exists:payment_org_types,alias'],
+            'payment.operation.account_number' => ['numeric'],
+            'payment.operation.date' => ['date'],
             // package
             'package' => ['array'],
             'package.capacity' => ['nullable','numeric'],
