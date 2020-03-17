@@ -1,12 +1,17 @@
 import React from 'react'
-import { Field } from 'redux-form'
+import { useSelector } from 'react-redux'
+import { Field, formValueSelector } from 'redux-form'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Grid from '@material-ui/core/Grid'
 
 import Checkbox from './MaterialReduxForm/Checkbox'
 import TextField from './MaterialReduxForm/TextField'
 
+const selector: Function = formValueSelector('passport')
+
 const Details = () => {
+    const isSimilar = useSelector(state => selector(state, 'is_similar_order'))
+
     const variant = 'standard'
     return (
         <Grid container item xs={12} spacing={3}>
@@ -27,6 +32,7 @@ const Details = () => {
             <Grid item xs={12} md={3}>
                 {/* Повтор - номер повторяемого заказа */}
                 <Field
+                    disabled={!isSimilar}
                     fullWidth
                     component={TextField}
                     name="similar_order_id"
