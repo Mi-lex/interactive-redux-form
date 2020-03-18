@@ -79,8 +79,8 @@ class OrderTable extends React.Component<Props> {
                         borderBottom: 'none',
                     },
                     filtering: true,
-                    pageSize: 5,
-                    pageSizeOptions: [5, 25, 50, 100],
+                    pageSize: 30,
+                    pageSizeOptions: [30, 60, 120],
                 }}
                 localization={{
                     body: {
