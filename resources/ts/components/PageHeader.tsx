@@ -130,7 +130,7 @@ export default function PageHeader(props: Props) {
 
     return (
         <div className={classes.grow}>
-            <AppBar position="static">
+            <AppBar position="static" elevation={0}>
                 <Toolbar>
                     <IconButton
                         onClick={toggleDrawer}
