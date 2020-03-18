@@ -7,7 +7,8 @@ function* createOrderRequest() {
     try {
         const response = yield call(api.post, 'passport')
 
-        yield put(actionCreator.fetchOrderSuccess(response.data))
+        const formOrder = getFormData(response.data)
+        yield put(actionCreator.fetchOrderSuccess(formOrder))
         yield put(actionCreator.createOrderSuccess())
     } catch (error) {
         const message = getMessageFromError(error)
@@ -31,7 +32,8 @@ function* updateOrderRequest() {
         yield put(actionCreator.fetchOrderSuccess(formOrder))
     } catch (error) {
         const message = getMessageFromError(error)
-
+        console.log(error);
+        
         yield put(actionCreator.updateOrderError())
         yield put(actionCreator.createOrderError(message))
     }
@@ -45,6 +47,7 @@ function* fetchOrderRequest(action: Action) {
 
         yield put(actionCreator.fetchOrderSuccess(formOrder))
     } catch (error) {
+        console.log(error);
         const message = getMessageFromError(error)
 
         yield put(actionCreator.fetchOrderError(message))
