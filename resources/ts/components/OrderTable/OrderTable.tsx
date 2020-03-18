@@ -1,10 +1,11 @@
 import React from 'react'
-import MaterialTable from 'material-table'
+import MaterialTable, { MTableToolbar } from 'material-table'
 import Paper, { PaperProps } from '@material-ui/core/Paper'
 import tableIcons from './tableIcons'
 import { Data } from './data'
 import ruLocale from 'date-fns/locale/ru'
 import { Link } from 'react-router-dom'
+import PageHeader from '../../components/PageHeader'
 
 type Props = {
     data: Data
@@ -20,6 +21,11 @@ class OrderTable extends React.Component<Props> {
             <MaterialTable
                 components={{
                     Container: (props: PaperProps) => <Paper {...props} elevation={0} />,
+                    Toolbar: props => (
+                        <PageHeader>
+                            <MTableToolbar {...props} />
+                        </PageHeader>
+                    ),
                 }}
                 icons={tableIcons}
                 title="Таблица заказов"
@@ -77,7 +83,7 @@ class OrderTable extends React.Component<Props> {
                 options={{
                     headerStyle: {
                         borderBottom: 'none',
-                        color: '#caccce'
+                        color: '#caccce',
                     },
                     filtering: true,
                     pageSize: 30,

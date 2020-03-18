@@ -1,4 +1,6 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { toggleDrawer } from '../store/modules/drawer/actions'
 import AppBar from '@material-ui/core/AppBar'
 import Badge from '@material-ui/core/Badge'
 import IconButton from '@material-ui/core/IconButton'
@@ -41,13 +43,16 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 )
 
-type Props = {
-    toggleDrawer: () => void
-}
+const PageHeader: React.FC = props => {
+    const { children } = props
+    const dispatch = useDispatch()
 
-export default function PageHeader(props: Props) {
-    const { toggleDrawer } = props
+    const toggle = () => {
+        dispatch(toggleDrawer())
+    }
+
     const classes = useStyles()
+
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null)
 
@@ -133,7 +138,7 @@ export default function PageHeader(props: Props) {
             <AppBar position="static" elevation={0}>
                 <Toolbar>
                     <IconButton
-                        onClick={toggleDrawer}
+                        onClick={toggle}
                         edge="start"
                         className={classes.menuButton}
                         color="inherit"
@@ -141,10 +146,7 @@ export default function PageHeader(props: Props) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    {/* <Typography className={classes.title} variant="h6" noWrap>
-                        Заказы
-                    </Typography> */}
-                    <div className={classes.grow} />
+                    <div className={classes.grow}>{children}</div>
                     <div className={classes.sectionDesktop}>
                         <IconButton aria-label="show 4 new mails" color="inherit">
                             <Badge badgeContent={4} color="secondary">
@@ -185,3 +187,5 @@ export default function PageHeader(props: Props) {
         </div>
     )
 }
+
+export default PageHeader

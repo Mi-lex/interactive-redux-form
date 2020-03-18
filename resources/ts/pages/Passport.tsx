@@ -12,6 +12,7 @@ import PassportForm from '../components/PassportForm'
 import actionCreator from '../store/modules/passport/actions'
 import { RootState } from '../store/rootReducer'
 import { Order } from '../store/types'
+import PageHeader from '../components/PageHeader'
 
 type PassportProps = InjectedFormProps & {
     createOrderSuccess: boolean
@@ -64,26 +65,29 @@ const Passport = (props: PassportProps) => {
     }
 
     return (
-        <Paper elevation={0}>
-            {createOrderSuccess && !id && <Redirect to={`/passport/${initialValues.id}`} />}
-            {/* {successMessage && <FlashMessageComponent type="success">{successMessage}</FlashMessageComponent>} */}
-            {(createOrderError || fetchOrderError) && (
-                <FlashMessageComponent type="error" onClose={onCloseErrorMessage}>
-                    {createOrderError || 'Что-то пошло не так'}
-                </FlashMessageComponent>
-            )}
+        <>
+            <PageHeader />
             {requestPending && <LinearProgress color="secondary" />}
-            <Container>
-                <form action="POST" className="passportForm">
-                    <PassportControl
-                        editMode={Boolean(id)}
-                        createNewPassport={createNewPassport}
-                        updatePassport={updatePassport}
-                    />
-                    <PassportForm />
-                </form>
-            </Container>
-        </Paper>
+            <Paper elevation={0}>
+                {createOrderSuccess && !id && <Redirect to={`/passport/${initialValues.id}`} />}
+                {/* {successMessage && <FlashMessageComponent type="success">{successMessage}</FlashMessageComponent>} */}
+                {(createOrderError || fetchOrderError) && (
+                    <FlashMessageComponent type="error" onClose={onCloseErrorMessage}>
+                        {createOrderError || 'Что-то пошло не так'}
+                    </FlashMessageComponent>
+                )}
+                <Container>
+                    <form action="POST" className="passportForm">
+                        <PassportControl
+                            editMode={Boolean(id)}
+                            createNewPassport={createNewPassport}
+                            updatePassport={updatePassport}
+                        />
+                        <PassportForm />
+                    </form>
+                </Container>
+            </Paper>
+        </>
     )
 }
 
