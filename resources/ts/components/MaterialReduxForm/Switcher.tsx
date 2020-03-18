@@ -7,7 +7,7 @@ type Props = WrappedFieldProps & SwitchProps & FormControlLabelProps
 
 const Switcher: React.FC<Props> = ({ input, label, ...rest }: Props) => (
     <FormControlLabel
-        control={<Switch {...input} onChange={(_, value) => input.onChange(value)} {...rest} />}
+        control={<Switch {...input} checked={input.value ? true : false} onChange={(_, value) => input.onChange(value)} {...rest} />}
         label={label}
     />
 )

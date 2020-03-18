@@ -94,6 +94,10 @@ export const getFormData = (order: FetchedOrder): FormOrder => {
         formOrder.completion_time = format(parsed, 'HH:mm')
     }
 
+    if (order.payment && order.payment.operation) {
+        formOrder.payment.operation.date = format(new Date(order.payment.operation.date), 'dd.MM.yy')
+    }
+
     return formOrder
 }
 
