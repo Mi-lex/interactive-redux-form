@@ -77,6 +77,7 @@ class OrderTable extends React.Component<Props> {
                 options={{
                     headerStyle: {
                         borderBottom: 'none',
+                        color: '#caccce'
                     },
                     filtering: true,
                     pageSize: 30,
