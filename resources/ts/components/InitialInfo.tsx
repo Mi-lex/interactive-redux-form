@@ -1,5 +1,6 @@
 import React from 'react'
 import { Field, FormSection } from 'redux-form'
+import parse from 'date-fns/parse'
 import FormControl from '@material-ui/core/FormControl'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormGroup from '@material-ui/core/FormGroup'
@@ -107,7 +108,7 @@ const InitialInfo: React.FC = () => {
                             <FormControlLabel control={<Field component={Checkbox} name="sort" />} label="По видам" />
                             <FormControlLabel control={<Field component={Checkbox} name="label" />} label="Ярлык" />
                             <FormControlLabel
-                                control={<Field component={Checkbox} name="palleting" />}
+                                control={<Field component={Checkbox} name="paletting" />}
                                 label="Паллетирование"
                             />
                             <FormControlLabel

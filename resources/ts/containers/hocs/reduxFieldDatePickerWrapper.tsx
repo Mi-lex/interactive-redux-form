@@ -1,22 +1,36 @@
 import React, { useEffect, useState } from 'react'
 import { WrappedFieldProps } from 'redux-form'
+import parse from 'date-fns/parse'
+
+type OwnProps = {
+    format: string
+}
 
 const reduxFieldDatePickerWrapper = <T extends {}>(
     WrappedComponent: React.ComponentType<T>,
-): React.ComponentType<T & WrappedFieldProps> => (props: WrappedFieldProps & T) => {
+): React.ComponentType<T & WrappedFieldProps> => (props: WrappedFieldProps & T & OwnProps) => {
     const {
         input,
         meta: { touched, invalid, error },
+        format,
         ...rest
     } = props
 
+    const parser = format
+        ? (dateValue: string) => parse(dateValue, format, new Date())
+        : (dateValue: string) => new Date(dateValue)
+
     const [selectedDate, setValue] = useState(() => {
-        return input.value ? new Date(input.value) : null
+        return input.value ? 
+        parser(input.value)
+        : null
     })
 
     useEffect(() => {
         if (!selectedDate && input.value) {
-            setValue(new Date(input.value))
+            const parsed = parser(input.value)
+
+            setValue(parsed)
         }
     })
 
@@ -28,6 +42,7 @@ const reduxFieldDatePickerWrapper = <T extends {}>(
             helperText={touched && invalid && error}
             invalidDateMessage="Неверный формат данных"
             onChange={setValue}
+            format={format}
             {...((rest as unknown) as T)}
         />
     )

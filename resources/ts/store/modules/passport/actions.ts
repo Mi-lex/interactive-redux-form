@@ -36,7 +36,7 @@ export const updateOrderSuccess = () => ({
 })
 
 export const updateOrderError = () => ({
-    type: CREATE_ORDER_ERROR,
+    type: UPDATE_ORDER_ERROR,
 })
 
 export const createCleanUp = () => ({

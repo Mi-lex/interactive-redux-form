@@ -83,14 +83,15 @@ export const getFormData = (order: FetchedOrder): FormOrder => {
         })
     }
 
-    formOrder.created_at = format(new Date(order.created_at), 'MM.dd.yy')
+    formOrder.created_at = format(new Date(order.created_at), 'dd.MM.yy')
 
     if (order.completion_date) {
-        formOrder.completion_date = format(new Date(order.completion_date), 'MM.dd.yy')
+        formOrder.completion_date = format(new Date(order.completion_date), 'dd.MM.yy')
     }
 
     if (order.completion_time) {
-        formOrder.completion_time = format(new Date(order.completion_time), 'HH:mm')
+        const parsed = parse(order.completion_time, 'HH:mm:ss', new Date())
+        formOrder.completion_time = format(parsed, 'HH:mm')
     }
 
     return formOrder
@@ -143,11 +144,6 @@ export const getRequestData = (order: FormOrder): FormOrder => {
         })
     }
 
-    if (order.completion_date) {
-        const parsed = parse(order.completion_date, 'dd.MM.yy', new Date())
-        requestOrder.completion_date = format(parsed, 'yyyy-MM-dd')
-    }
-
     if (order.completion_time) {
         const parsed = parse(order.completion_time, 'HH:mm', new Date())
         requestOrder.completion_time = format(parsed, 'HH:mm:ss')
@@ -156,6 +152,11 @@ export const getRequestData = (order: FormOrder): FormOrder => {
     if (order.payment && order.payment.operation) {
         const parsed = parse(order.payment.operation.date, 'dd.MM.yy', new Date())
         requestOrder.payment.operation.date = format(parsed, 'yyyy-MM-dd')
+    }
+
+    if (order.completion_date) {
+        const parsed = parse(order.completion_date, 'dd.MM.yy', new Date())
+        requestOrder.completion_date = format(parsed, 'yyyy-MM-dd')
     }
 
     return requestOrder

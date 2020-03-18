@@ -35,7 +35,7 @@ class PassportUpdateRequest extends FormRequest
             'type' => ['nullable','string'],
             'important_info' => ['nullable', 'string'],
             'completion_date' => ['nullable', 'date'],
-            'completion_time' => ['nullable', 'date'],
+            'completion_time' => ['nullable', 'date_format:H:i:s'],
             'is_similar_order' => ['boolean'],
             'similar_order_id' => ['nullable', 'numeric'],
             // implementation

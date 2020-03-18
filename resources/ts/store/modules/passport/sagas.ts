@@ -32,6 +32,7 @@ function* updateOrderRequest() {
     } catch (error) {
         const message = getMessageFromError(error)
 
+        yield put(actionCreator.updateOrderError())
         yield put(actionCreator.createOrderError(message))
     }
 }
