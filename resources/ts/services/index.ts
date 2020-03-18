@@ -68,7 +68,7 @@ export const getFormData = (order: FetchedOrder): FormOrder => {
         formOrder.post_actions_checks = {}
 
         order.post_actions.forEach(({ type, body, additional, elements }) => {
-            delete body.id
+            // delete body.id
 
             formOrder.post_actions_checks[type] = true
 

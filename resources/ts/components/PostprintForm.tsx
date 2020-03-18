@@ -99,7 +99,7 @@ const PostprintForm: React.FC = () => {
                         {/* Тиснить фольгой */}
                         <FormControl fullWidth>
                             <InputLabel>Тип фольги</InputLabel>
-                            <Field name="type" component={Select} options={foilOptions} />
+                            <Field name="foil_type" component={Select} options={foilOptions} />
                         </FormControl>
                         <Field fullWidth component={TextField} label="Элементы" type="text" name="elements" />
                         <RemovableComment />
