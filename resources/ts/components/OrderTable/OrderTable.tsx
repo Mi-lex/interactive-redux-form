@@ -88,6 +88,9 @@ class OrderTable extends React.Component<Props> {
                     filtering: true,
                     pageSize: 30,
                     pageSizeOptions: [30, 60, 120],
+                    searchFieldStyle: {
+                        color: 'white',
+                    },
                 }}
                 localization={{
                     body: {

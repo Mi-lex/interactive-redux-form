@@ -137,3 +137,11 @@ input[type='number']::-webkit-outer-spin-button {
 .MuiTableBody-root .MuiTableRow-root:first-child .MuiTableCell-root {
     padding-top: 0 !important;
 }
+
+.MuiToolbar-regular .MuiInput-underline:before {
+    border-bottom-color: white;
+}
+
+.MuiToolbar-regular .MuiInput-underline:hover:not(.Mui-disabled):before {
+    border-bottom: 2px solid white;
+}

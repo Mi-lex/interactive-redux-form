@@ -22,10 +22,6 @@ const App: React.FC = () => {
         dispatch(toggleDrawer(false))
     }
 
-    const toggle = () => {
-        dispatch(toggleDrawer())
-    }
-
     return (
         <Router>
             <Drawer open={isDrawerOpen} onClose={closeDrawer}>
