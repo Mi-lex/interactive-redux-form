@@ -9,7 +9,7 @@ import ruLocale from 'date-fns/locale/ru'
 import PageHeader from '../components/PageHeader'
 import SideList from '../components/SideList'
 import Orders from '../pages/Orders'
-import Decorated from '../pages/Passport'
+import Passport from '../pages/Passport'
 
 const App: React.FC = () => {
     const [isOpen, setDrawerState] = React.useState(false)
@@ -35,7 +35,7 @@ const App: React.FC = () => {
                             <Orders />
                         </Route>
                         <Route path="/passport/:id?" exact>
-                            <Decorated />
+                            <Passport />
                         </Route>
                     </MuiPickersUtilsProvider>
                 </Switch>

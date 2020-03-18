@@ -64,7 +64,7 @@ const Passport = (props: PassportProps) => {
     }
 
     return (
-        <Paper>
+        <Paper elevation={0}>
             {createOrderSuccess && !id && <Redirect to={`/passport/${initialValues.id}`} />}
             {/* {successMessage && <FlashMessageComponent type="success">{successMessage}</FlashMessageComponent>} */}
             {(createOrderError || fetchOrderError) && (

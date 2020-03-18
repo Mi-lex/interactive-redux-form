@@ -1,12 +1,13 @@
 import React from 'react'
 import MaterialTable from 'material-table'
+import Paper, { PaperProps } from '@material-ui/core/Paper'
 import tableIcons from './tableIcons'
 import { Data } from './data'
 import ruLocale from 'date-fns/locale/ru'
 import { Link } from 'react-router-dom'
 
 type Props = {
-    data: Data 
+    data: Data
 }
 
 class OrderTable extends React.Component<Props> {
@@ -17,6 +18,9 @@ class OrderTable extends React.Component<Props> {
     render() {
         return (
             <MaterialTable
+                components={{
+                    Container: (props: PaperProps) => <Paper {...props} elevation={0} />,
+                }}
                 icons={tableIcons}
                 title="Таблица заказов"
                 columns={[
@@ -31,7 +35,7 @@ class OrderTable extends React.Component<Props> {
                         headerStyle: {
                             maxWidth: 20,
                         },
-                        render: rowData => <Link to={`passport/${rowData.id}`}>{rowData.id}</Link>
+                        render: rowData => <Link to={`passport/${rowData.id}`}>{rowData.id}</Link>,
                     },
                     {
                         title: 'Название',
