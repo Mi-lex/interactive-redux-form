@@ -1,6 +1,5 @@
 import React from 'react'
 import { Field, FormSection } from 'redux-form'
-import parse from 'date-fns/parse'
 import FormControl from '@material-ui/core/FormControl'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormGroup from '@material-ui/core/FormGroup'
