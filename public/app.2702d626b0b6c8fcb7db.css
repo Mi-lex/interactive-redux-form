@@ -362,3 +362,16 @@ input[type='number']::-webkit-outer-spin-button {
 .MuiTableCell-root {
     padding: 10px !important;
 }
+.MuiTableCell-head {
+    padding-bottom: 0 !important;
+}
+.MuiTableBody-root .MuiTableRow-root:first-child .MuiTableCell-root {
+    padding-top: 0 !important;
+}
+.MuiToolbar-regular .MuiInput-underline:before {
+    border-bottom-color: white;
+}
+.MuiToolbar-regular .MuiInput-underline:hover:not(.Mui-disabled):before {
+    border-bottom: 2px solid white;
+}
+
