@@ -51,10 +51,10 @@ const PaperJoinerForm = (): JSX.Element => {
                         {paperJoinersNames.map((joinerName: PaperJoinerName) => (
                             <FormControlLabel
                                 key={joinerName}
+                                className="coloredLabel"
                                 control={
                                     <Field
                                         component={Checkbox}
-                                        className="coloredLabel"
                                         changeAction={clearChecksAndSections}
                                         name={joinerName}
                                     />
