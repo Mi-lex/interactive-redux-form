@@ -17,7 +17,7 @@ class CreateSpringsTable extends Migration
             $table->bigIncrements('id');
             $table->string('color')->nullable();
             $table->string('position')->nullable();
-            $table->unsignedSmallInteger('cover_block_difference')->nullable();
+            $table->unsignedInteger('cover_block_difference')->nullable();
         });
     }
 
