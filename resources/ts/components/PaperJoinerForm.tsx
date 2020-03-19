@@ -48,20 +48,25 @@ const PaperJoinerForm = (): JSX.Element => {
                 <FormSection name={checkboxesGroupName}>
                     <FormGroup>
                         {/* Чекбоксы-баттоны: скрепка, пакет и т.д.  */}
-                        {paperJoinersNames.map((joinerName: PaperJoinerName) => (
-                            <FormControlLabel
-                                key={joinerName}
-                                className="coloredLabel"
-                                control={
-                                    <Field
-                                        component={Checkbox}
-                                        changeAction={clearChecksAndSections}
-                                        name={joinerName}
+                        {paperJoinersNames.map(
+                            (joinerName: PaperJoinerName) =>
+                                !(
+                                    activeChecks.length > 0 && !activeChecks.find(([name, _]) => name === joinerName)
+                                ) && (
+                                    <FormControlLabel
+                                        key={joinerName}
+                                        className="coloredLabel"
+                                        control={
+                                            <Field
+                                                component={Checkbox}
+                                                changeAction={clearChecksAndSections}
+                                                name={joinerName}
+                                            />
+                                        }
+                                        label={PaperJoiners[joinerName]}
                                     />
-                                }
-                                label={PaperJoiners[joinerName]}
-                            />
-                        ))}
+                                ),
+                        )}
                     </FormGroup>
                 </FormSection>
             </Grid>
