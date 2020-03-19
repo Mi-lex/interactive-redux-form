@@ -1,4 +1,5 @@
 import React from 'react'
+import IconButton from '@material-ui/core/IconButton'
 import { forwardRef } from 'react'
 import AddBox from '@material-ui/icons/AddBox'
 import ArrowDownward from '@material-ui/icons/ArrowDownward'
@@ -32,7 +33,11 @@ const tableIcons: Icons = {
     PreviousPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref} />),
     ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
     Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
-    SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
+    SortArrow: forwardRef((props, ref) => (
+        <IconButton size="small">
+            <ArrowDownward {...props} ref={ref} style={{ margin: 0 }} />
+        </IconButton>
+    )),
     ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
 }
