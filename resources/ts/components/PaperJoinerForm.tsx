@@ -107,7 +107,7 @@ const PaperJoinerForm = (): JSX.Element => {
                         checkboxGroupName={checkboxesGroupName}
                         blockName="termo"
                     >
-                        <Field fullWidth component={TextField} label="Корешок" type="text" name="spine_width" />
+                        <Field fullWidth component={TextField} label="Корешок" type="number" name="spine_width" />
                         <FormControlLabel
                             control={<Field component={Checkbox} name="flaps_cover" />}
                             label="Обложка с клапаном"
