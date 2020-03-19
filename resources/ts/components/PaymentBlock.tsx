@@ -1,9 +1,10 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Field, formValueSelector } from 'redux-form'
-import { KeyboardDatePicker, TextField, Select, Switcher } from '../components/MaterialReduxForm'
+import { KeyboardDatePicker, TextField, Select, Checkbox } from '../components/MaterialReduxForm'
 import InputLabel from '@material-ui/core/InputLabel'
 import FormControl from '@material-ui/core/FormControl'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
 import { paymentOrgOptions } from '../store/consts'
 
 const selector: Function = formValueSelector('passport')
@@ -13,7 +14,19 @@ const PaymentBlock = () => {
     const variant = 'standard'
     return (
         <>
-            <Field name="payment.payed_by_cash" label="Наличными" props={{ color: 'primary' }} component={Switcher} />
+            <FormControl fullWidth>
+                <FormControlLabel
+                    label="Наличными"
+                    control={
+                        <Field
+                            name="payment.payed_by_cash"
+                            props={{ color: 'primary' }}
+                            className="coloredLabel"
+                            component={Checkbox}
+                        />
+                    }
+                />
+            </FormControl>
             {!paymentCash && (
                 <>
                     <FormControl fullWidth>
