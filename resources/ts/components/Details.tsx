@@ -16,7 +16,7 @@ const Details = () => {
     return (
         <Grid container item xs={12} spacing={3}>
             <Grid item xs={12} md={3}>
-                <Field fullWidth component={TextField} name="is_cut" type="number" variant={variant} label="Обрезной" />
+                <Field fullWidth component={TextField} name="is_cut" type="text" variant={variant} label="Обрезной" />
             </Grid>
             <Grid item xs={12} md={3}>
                 <Field fullWidth component={TextField} name="circulation" type="text" variant={variant} label="Тираж" />

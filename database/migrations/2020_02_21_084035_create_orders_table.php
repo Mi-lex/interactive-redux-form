@@ -27,7 +27,7 @@ class CreateOrdersTable extends Migration
              */
             $table->boolean('is_similar_order')->default(false);
             $table->unsignedBigInteger('similar_order_id')->nullable();
-            $table->boolean('is_cut')->default(false);
+            $table->string('is_cut')->nullable();
             $table->string('circulation')->nullable();
 
             $table->unsignedBigInteger('manager_id')->nullable();

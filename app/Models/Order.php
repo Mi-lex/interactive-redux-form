@@ -15,7 +15,6 @@ class Order extends Model
     ];
 
     protected $casts = [
-        'is_cut' => 'boolean',
         'is_similar_order' => 'boolean',
     ];
     

@@ -13,7 +13,7 @@ $factory->define(Order::class, function (Faker $faker) {
         "important_info" => $faker->text,
         "completion_date" => Carbon::now()->format('d.m.y'),
         "completion_time" => Carbon::now()->format('H:i'),
-        "is_cut" => $faker->boolean,
+        "is_cut" => $faker->word,
         "circulation" => $faker->name,
         // should change it when there will be links to actual orders
         "is_similar_order" => $faker->boolean

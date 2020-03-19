@@ -39,7 +39,7 @@ class PassportUpdateRequest extends FormRequest
             'is_similar_order' => ['boolean'],
             'similar_order_id' => ['nullable', 'numeric'],
             // implementation
-            'is_cut' => ['boolean'],
+            'is_cut' => ['string'],
             'circulation' => ['nullable', 'string'],
             "similar_order_id" => ['nullable','numeric'],
             // customer
