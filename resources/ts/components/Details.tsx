@@ -29,18 +29,20 @@ const Details = () => {
                     label="Повтор"
                 />
             </Grid>
-            <Grid item xs={12} md={3}>
-                {/* Повтор - номер повторяемого заказа */}
-                <Field
-                    disabled={!isSimilar}
-                    fullWidth
-                    component={TextField}
-                    name="similar_order_id"
-                    type="number"
-                    variant={variant}
-                    label=" "
-                />
-            </Grid>
+            {isSimilar && (
+                <Grid item xs={12} md={3}>
+                    {/* Повтор - номер повторяемого заказа */}
+                    <Field
+                        disabled={!isSimilar}
+                        fullWidth
+                        component={TextField}
+                        name="similar_order_id"
+                        type="number"
+                        variant={variant}
+                        label=" "
+                    />
+                </Grid>
+            )}
         </Grid>
     )
 }
