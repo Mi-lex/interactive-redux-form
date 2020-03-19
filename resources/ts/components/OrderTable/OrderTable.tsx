@@ -1,4 +1,5 @@
 import React from 'react'
+import TablePagination from '@material-ui/core/TablePagination'
 import MaterialTable, { MTableToolbar } from 'material-table'
 import Paper, { PaperProps } from '@material-ui/core/Paper'
 import tableIcons from './tableIcons'
@@ -11,9 +12,18 @@ type Props = {
     data: Data
 }
 
-class OrderTable extends React.Component<Props> {
+class OrderTable extends React.Component<Props, { paging: boolean }> {
     constructor(props: Props) {
         super(props)
+        this.state = {
+            paging: true,
+        }
+    }
+
+    showAll = () => {
+        this.setState({
+            paging: false,
+        })
     }
 
     render() {
@@ -25,6 +35,22 @@ class OrderTable extends React.Component<Props> {
                         <PageHeader>
                             <MTableToolbar {...props} />
                         </PageHeader>
+                    ),
+                    Pagination: props => (
+                        <TablePagination
+                            {...props}
+                            rowsPerPageOptions={[
+                                ...props.rowsPerPageOptions,
+                                { value: this.props.data ? this.props.data.length : -1, label: 'все' },
+                            ]}
+                            onChangeRowsPerPage={event => {
+                                if (Number(event.target.value) === -1) {
+                                    this.showAll()
+                                } else {
+                                    props.onChangeRowsPerPage(event)
+                                }
+                            }}
+                        />
                     ),
                 }}
                 icons={tableIcons}
@@ -86,6 +112,7 @@ class OrderTable extends React.Component<Props> {
                         color: '#caccce',
                     },
                     filtering: true,
+                    paging: this.state.paging,
                     pageSize: 30,
                     pageSizeOptions: [30, 60, 120],
                     searchFieldStyle: {
