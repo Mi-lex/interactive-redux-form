@@ -13,6 +13,8 @@ import actionCreator from '../store/modules/passport/actions'
 import { RootState } from '../store/rootReducer'
 import { Order } from '../store/types'
 import PageHeader from '../components/PageHeader'
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
+import blue from '@material-ui/core/colors/blue'
 
 type PassportProps = InjectedFormProps & {
     createOrderSuccess: boolean
@@ -24,6 +26,36 @@ type PassportProps = InjectedFormProps & {
     requestPending: boolean
     initialValues: Order
 }
+
+const textStyle = blue[700]
+
+const theme = createMuiTheme({
+    overrides: {
+        MuiFormControlLabel: {
+            root: {
+                textTransform: 'lowercase'
+            }
+        },
+        MuiFormLabel: {
+            root: {
+                textTransform: "lowercase"
+            },
+            filled: {
+                color: textStyle,
+            },
+        },
+        MuiInput: {
+            root: {
+                color: textStyle,
+            },
+        },
+        MuiInputBase: {
+            root: {
+                color: textStyle,
+            },
+        },
+    },
+})
 
 const Passport = (props: PassportProps) => {
     const {
@@ -65,7 +97,7 @@ const Passport = (props: PassportProps) => {
     }
 
     return (
-        <>
+        <ThemeProvider theme={theme}>
             <PageHeader>
                 <PassportControl
                     editMode={Boolean(id)}
@@ -88,7 +120,7 @@ const Passport = (props: PassportProps) => {
                     </form>
                 </Container>
             </Paper>
-        </>
+        </ThemeProvider>
     )
 }
 
