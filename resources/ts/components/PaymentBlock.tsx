@@ -14,35 +14,36 @@ const PaymentBlock = () => {
     return (
         <>
             <Field name="payment.payed_by_cash" label="Наличными" props={{ color: 'primary' }} component={Switcher} />
-            <FormControl fullWidth>
-                <InputLabel>Организация</InputLabel>
-                <Field
-                    component={Select}
-                    label="Организация"
-                    name="payment.operation.org_type"
-                    variant={variant}
-                    disabled={paymentCash}
-                    options={paymentOrgOptions}
-                />
-            </FormControl>
-            <Field
-                component={TextField}
-                name="payment.operation.account_number"
-                fullWidth
-                disabled={paymentCash}
-                variant={variant}
-                label="Счет"
-            />
-            <Field
-                component={DatePicker}
-                name="payment.operation.date"
-                fullWidth
-                disabled={paymentCash}
-                props={{
-                    format: 'dd.MM.yy',
-                }}
-                label="от"
-            />
+            {!paymentCash && (
+                <>
+                    <FormControl fullWidth>
+                        <InputLabel>Организация</InputLabel>
+                        <Field
+                            component={Select}
+                            label="Организация"
+                            name="payment.operation.org_type"
+                            variant={variant}
+                            options={paymentOrgOptions}
+                        />
+                    </FormControl>
+                    <Field
+                        component={TextField}
+                        name="payment.operation.account_number"
+                        fullWidth
+                        variant={variant}
+                        label="Счет"
+                    />
+                    <Field
+                        component={DatePicker}
+                        name="payment.operation.date"
+                        fullWidth
+                        props={{
+                            format: 'dd.MM.yy',
+                        }}
+                        label="от"
+                    />
+                </>
+            )}
         </>
     )
 }

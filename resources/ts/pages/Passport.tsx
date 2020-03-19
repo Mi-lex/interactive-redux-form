@@ -33,12 +33,12 @@ const theme = createMuiTheme({
     overrides: {
         MuiFormControlLabel: {
             root: {
-                textTransform: 'lowercase'
-            }
+                textTransform: 'lowercase',
+            },
         },
         MuiFormLabel: {
             root: {
-                textTransform: "lowercase"
+                textTransform: 'lowercase',
             },
             filled: {
                 color: textStyle,
@@ -141,6 +141,9 @@ const Connected = connect((state: RootState) => {
 
     return {
         initialValues: fetched || {
+            payment: {
+                payed_by_cash: false,
+            },
             elements: [{}, {}],
         },
         createOrderSuccess,
