@@ -7,12 +7,18 @@ import { Data } from './data'
 import ruLocale from 'date-fns/locale/ru'
 import { Link } from 'react-router-dom'
 import PageHeader from '../../components/PageHeader'
+import LinearProgress from '@material-ui/core/LinearProgress'
 
 type Props = {
     data: Data
+    pending: boolean
 }
 
-class OrderTable extends React.Component<Props, { paging: boolean }> {
+type TableState = {
+    paging: boolean
+}
+
+class OrderTable extends React.Component<Props, TableState> {
     constructor(props: Props) {
         super(props)
         this.state = {
@@ -32,9 +38,12 @@ class OrderTable extends React.Component<Props, { paging: boolean }> {
                 components={{
                     Container: (props: PaperProps) => <Paper {...props} elevation={0} />,
                     Toolbar: props => (
-                        <PageHeader>
-                            <MTableToolbar {...props} />
-                        </PageHeader>
+                        <>
+                            <PageHeader>
+                                <MTableToolbar {...props} />
+                            </PageHeader>
+                            {this.props.pending && <LinearProgress color="secondary" />}
+                        </>
                     ),
                     Pagination: props => (
                         <TablePagination

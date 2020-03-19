@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import LinearProgress from '@material-ui/core/LinearProgress'
 import format from 'date-fns/format'
 
 import { FlashMessageComponent } from '../components/FlashMessage'
@@ -42,9 +41,8 @@ const Orders = () => {
 
     return (
         <>
-            {pending && <LinearProgress color="secondary" />}
             {errorMessage && <FlashMessageComponent type="error">{errorMessage}</FlashMessageComponent>}
-            <OrderTable data={data} />
+            <OrderTable data={data} pending={pending} />
         </>
     )
 }
