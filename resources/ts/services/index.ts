@@ -106,7 +106,7 @@ export const getRequestData = (order: FormOrder): FormOrder => {
 
     if (order.paper_joiner_checks) {
         const selectedJoiner = (Object.entries(order.paper_joiner_checks) as Array<[PaperJoinerName, boolean]>).find(
-            (_, value) => value,
+            ([_, value]) => value,
         )
 
         if (selectedJoiner) {
@@ -162,6 +162,8 @@ export const getRequestData = (order: FormOrder): FormOrder => {
         const parsed = parse(order.completion_date, 'dd.MM.yy', new Date())
         requestOrder.completion_date = format(parsed, 'yyyy-MM-dd')
     }
+
+    delete order.created_at
 
     return requestOrder
 }

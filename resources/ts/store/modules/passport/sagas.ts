@@ -21,6 +21,7 @@ function* updateOrderRequest() {
     try {
         const formValues = yield select(state => state.form.passport.values)
         const requestData = getRequestData(formValues)
+
         const response = yield call(api.patch, `/passport/${formValues.id}`, JSON.stringify(requestData), {
             headers: {
                 'Content-Type': 'application/json',
@@ -32,8 +33,7 @@ function* updateOrderRequest() {
         yield put(actionCreator.fetchOrderSuccess(formOrder))
     } catch (error) {
         const message = getMessageFromError(error)
-        console.log(error);
-        
+
         yield put(actionCreator.updateOrderError())
         yield put(actionCreator.createOrderError(message))
     }
@@ -47,7 +47,6 @@ function* fetchOrderRequest(action: Action) {
 
         yield put(actionCreator.fetchOrderSuccess(formOrder))
     } catch (error) {
-        console.log(error);
         const message = getMessageFromError(error)
 
         yield put(actionCreator.fetchOrderError(message))
