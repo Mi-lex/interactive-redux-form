@@ -82,13 +82,13 @@ const PaperJoinerForm = (): JSX.Element => {
                         <Box display="flex" justifyContent="space-between">
                             <FormControlLabel
                                 style={{ marginRight: 8, marginBottom: 0 }}
-                                control={<Field component={Checkbox} name="автомат" />}
+                                control={<Field component={Checkbox} name="auto" />}
                                 className="coloredLabel"
                                 label="Автомат"
                             />
                             <FormControlLabel
                                 style={{ marginRight: 8, marginBottom: 0 }}
-                                control={<Field component={Checkbox} name="ручная" />}
+                                control={<Field component={Checkbox} name="manual" />}
                                 className="coloredLabel"
                                 label="Ручная"
                             />
