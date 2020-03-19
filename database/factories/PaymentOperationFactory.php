@@ -9,12 +9,12 @@ use Faker\Generator as Faker;
 $factory->define(PaymentOperation::class, function (Faker $faker) {
     return [
         "account_number" => $faker->randomDigit,
-        "date" => Carbon::now()->format('d.m.y'),
+        "date" => $faker->date,
         "org_type" => function () use ($faker) {
             return \App\Models\PaymentOrgType::create(["alias" => $faker->text(5), "name" => $faker->text(15)])->alias;
         },
-        "payment_id" => function() {
-           return factory('App\Models\Payment')->create()->id; 
+        "payment_id" => function () {
+            return factory('App\Models\Payment')->create()->id;
         }
     ];
 });

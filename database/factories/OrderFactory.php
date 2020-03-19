@@ -11,8 +11,8 @@ $factory->define(Order::class, function (Faker $faker) {
         "name" => $faker->name,
         'type' => $faker->name,
         "important_info" => $faker->text,
-        "completion_date" => Carbon::now()->format('d.m.y'),
-        "completion_time" => Carbon::now()->format('H:i'),
+        "completion_date" => $faker->date,
+        "completion_time" => $faker->time,
         "is_cut" => $faker->word,
         "circulation" => $faker->name,
         // should change it when there will be links to actual orders
