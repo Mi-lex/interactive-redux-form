@@ -25,6 +25,7 @@ const Details = () => {
                 {/* Повтор - Checkbox */}
                 <FormControlLabel
                     labelPlacement="end"
+                    className="coloredLabel"
                     control={<Field component={Checkbox} name="is_similar_order" />}
                     label="Повтор"
                 />

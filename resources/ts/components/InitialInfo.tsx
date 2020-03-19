@@ -79,18 +79,29 @@ const InitialInfo: React.FC = () => {
                     <FormSection name="package">
                         <FormGroup>
                             <FormControlLabel
+                                className="coloredLabel"
                                 control={<Field component={Checkbox} name="sample" />}
                                 label="Образец на упаковку"
                             />
-                            <FormControlLabel control={<Field component={Checkbox} name="sort" />} label="По видам" />
-                            <FormControlLabel control={<Field component={Checkbox} name="label" />} label="Ярлык" />
                             <FormControlLabel
-                                control={<Field component={Checkbox} name="paletting" />}
+                                className="coloredLabel"
+                                control={<Field component={Checkbox} name="sort" />}
+                                label="По видам"
+                            />
+                            <FormControlLabel
+                                className="coloredLabel"
+                                control={<Field component={Checkbox} name="label" />}
+                                label="Ярлык"
+                            />
+                            <FormControlLabel
+                                control={<Field className="coloredLabel" component={Checkbox} name="paletting" />}
+                                className="coloredLabel"
                                 label="Паллетирование"
                             />
                             <FormControlLabel
-                                control={<Field component={Checkbox} name="stretch_film" />}
+                                control={<Field className="coloredLabel" component={Checkbox} name="stretch_film" />}
                                 label="Стреч-пленка"
+                                className="coloredLabel"
                             />
                         </FormGroup>
                     </FormSection>

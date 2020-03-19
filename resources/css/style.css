@@ -118,7 +118,6 @@ input[type='number']::-webkit-outer-spin-button {
     width: calc((100% - 0px) / 16) !important;
 }
 
-
 /* Last two columns */
 .MuiTableCell-head:nth-last-of-type(2) {
     width: calc((100% - 0px) / 13) !important;
@@ -146,4 +145,8 @@ input[type='number']::-webkit-outer-spin-button {
 
 .MuiToolbar-regular .MuiInput-underline:hover:not(.Mui-disabled):before {
     border-bottom: 2px solid white;
+}
+
+.coloredLabel .Mui-checked + .MuiFormControlLabel-label {
+    color: #5d80b6;
 }

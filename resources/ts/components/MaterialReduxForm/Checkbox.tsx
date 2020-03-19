@@ -5,10 +5,11 @@ import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox'
 type Props = WrappedFieldProps &
     CheckboxProps & {
         changeAction: (checked: boolean) => void
+        checkedClassName?: string
     }
 
 const CheckboxField: React.FC<Props> = props => {
-    const { input, changeAction = () => {}, ...custom } = props
+    const { input, changeAction = () => {}, checkedClassName = '', ...custom } = props
 
     const onCheckHandler = (ev: React.ChangeEvent<HTMLInputElement>) => {
         changeAction(ev.target.checked)
@@ -18,6 +19,7 @@ const CheckboxField: React.FC<Props> = props => {
     return (
         <Checkbox
             {...input}
+            classes={{ checked: checkedClassName }}
             checked={input.value ? true : false}
             onChange={onCheckHandler}
             color="primary"

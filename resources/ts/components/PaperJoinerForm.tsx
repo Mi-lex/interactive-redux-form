@@ -54,6 +54,7 @@ const PaperJoinerForm = (): JSX.Element => {
                                 control={
                                     <Field
                                         component={Checkbox}
+                                        className="coloredLabel"
                                         changeAction={clearChecksAndSections}
                                         name={joinerName}
                                     />
@@ -77,11 +78,13 @@ const PaperJoinerForm = (): JSX.Element => {
                             <FormControlLabel
                                 style={{ marginRight: 8, marginBottom: 0 }}
                                 control={<Field component={Checkbox} name="автомат" />}
+                                className="coloredLabel"
                                 label="Автомат"
                             />
                             <FormControlLabel
                                 style={{ marginRight: 8, marginBottom: 0 }}
                                 control={<Field component={Checkbox} name="ручная" />}
+                                className="coloredLabel"
                                 label="Ручная"
                             />
                         </Box>
@@ -103,14 +106,17 @@ const PaperJoinerForm = (): JSX.Element => {
                         <FormControlLabel
                             control={<Field component={Checkbox} name="flaps_cover" />}
                             label="Обложка с клапаном"
+                            className="coloredLabel"
                         />
                         <FormControlLabel
                             control={<Field component={Checkbox} name="flush_with_block" />}
                             label="Вровень с блоком"
+                            className="coloredLabel"
                         />
                         <FormControlLabel
                             control={<Field component={Checkbox} name="braces" />}
                             label="Укрепить скобами"
+                            className="coloredLabel"
                         />
                     </ConnectedHiddenBlock>
                     {/* Пружина*/}

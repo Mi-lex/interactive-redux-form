@@ -35,6 +35,7 @@ const PostprintForm: React.FC = () => {
                                 key={postAction}
                                 control={<Field component={Checkbox} name={postAction} />}
                                 label={PostPrintActions[postAction]}
+                                className="coloredLabel"
                             />
                         ))}
                     </FormGroup>

@@ -14,7 +14,6 @@ import { RootState } from '../store/rootReducer'
 import { Order } from '../store/types'
 import PageHeader from '../components/PageHeader'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
-import blue from '@material-ui/core/colors/blue'
 
 type PassportProps = InjectedFormProps & {
     createOrderSuccess: boolean
