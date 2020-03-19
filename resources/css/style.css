@@ -118,12 +118,14 @@ input[type='number']::-webkit-outer-spin-button {
     width: calc((100% - 0px) / 16) !important;
 }
 
+
+/* Last two columns */
 .MuiTableCell-head:nth-last-of-type(2) {
-    width: calc((100% - 0px) / 15) !important;
+    width: calc((100% - 0px) / 13) !important;
 }
 
 .MuiTableCell-head:nth-last-of-type(1) {
-    width: calc((100% - 0px) / 15) !important;
+    width: calc((100% - 0px) / 13) !important;
 }
 
 .MuiTableCell-root {
