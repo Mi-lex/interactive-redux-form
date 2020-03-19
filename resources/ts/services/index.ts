@@ -56,7 +56,6 @@ export const getFormData = (order: FetchedOrder): FormOrder => {
         formOrder.paper_joiner_checks = {
             [joinerType]: true,
         }
-        delete order.paper_joiner.body.id
 
         formOrder.paper_joiner = {
             [joinerType]: order.paper_joiner.body,
@@ -68,8 +67,6 @@ export const getFormData = (order: FetchedOrder): FormOrder => {
         formOrder.post_actions_checks = {}
 
         order.post_actions.forEach(({ type, body, additional, elements }) => {
-            // delete body.id
-
             formOrder.post_actions_checks[type] = true
 
             formOrder.post_actions = {
@@ -155,7 +152,14 @@ export const getRequestData = (order: FormOrder): FormOrder => {
 
     if (order.payment && order.payment.operation) {
         const parsed = parse(order.payment.operation.date, 'dd.MM.yy', new Date())
-        requestOrder.payment.operation.date = format(parsed, 'yyyy-MM-dd')
+
+        requestOrder.payment = {
+            ...order.payment,
+            operation: {
+                ...order.payment.operation,
+                date: format(parsed, 'yyyy-MM-dd'),
+            },
+        }
     }
 
     if (order.completion_date) {
@@ -163,7 +167,8 @@ export const getRequestData = (order: FormOrder): FormOrder => {
         requestOrder.completion_date = format(parsed, 'yyyy-MM-dd')
     }
 
-    delete order.created_at
+    const parsedCreatedAt = parse(order.created_at, 'dd.MM.yy', new Date())
+    requestOrder.created_at = format(parsedCreatedAt, 'yyyy-MM-dd')
 
     return requestOrder
 }
