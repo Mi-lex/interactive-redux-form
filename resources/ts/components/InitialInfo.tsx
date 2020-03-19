@@ -69,7 +69,24 @@ const InitialInfo: React.FC = () => {
                         variant={variant}
                         label="Упаковать по"
                     />
-                    <DeliveryBlock />
+                    <FormSection name="package">
+                        <FormGroup>
+                            <FormControlLabel
+                                control={<Field component={Checkbox} name="sample" />}
+                                label="Образец на упаковку"
+                            />
+                            <FormControlLabel control={<Field component={Checkbox} name="sort" />} label="По видам" />
+                            <FormControlLabel control={<Field component={Checkbox} name="label" />} label="Ярлык" />
+                            <FormControlLabel
+                                control={<Field component={Checkbox} name="paletting" />}
+                                label="Паллетирование"
+                            />
+                            <FormControlLabel
+                                control={<Field component={Checkbox} name="stretch_film" />}
+                                label="Стреч-пленка"
+                            />
+                        </FormGroup>
+                    </FormSection>
                 </Grid>
                 {/* Right column */}
                 <Grid item xs={12} md={6} className={classes.root}>
@@ -98,24 +115,7 @@ const InitialInfo: React.FC = () => {
                         <InputLabel>В</InputLabel>
                         <Field name="package.type" variant={variant} options={packageOptions} component={Select} />
                     </FormControl>
-                    <FormSection name="package">
-                        <FormGroup>
-                            <FormControlLabel
-                                control={<Field component={Checkbox} name="sample" />}
-                                label="Образец на упаковку"
-                            />
-                            <FormControlLabel control={<Field component={Checkbox} name="sort" />} label="По видам" />
-                            <FormControlLabel control={<Field component={Checkbox} name="label" />} label="Ярлык" />
-                            <FormControlLabel
-                                control={<Field component={Checkbox} name="paletting" />}
-                                label="Паллетирование"
-                            />
-                            <FormControlLabel
-                                control={<Field component={Checkbox} name="stretch_film" />}
-                                label="Стреч-пленка"
-                            />
-                        </FormGroup>
-                    </FormSection>
+                    <DeliveryBlock />
                 </Grid>
             </Grid>
             <Grid item container xs={12} md={6} className={classes.root} direction="column">
