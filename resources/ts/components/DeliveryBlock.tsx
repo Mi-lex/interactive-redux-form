@@ -4,7 +4,6 @@ import { Field, formValueSelector } from 'redux-form'
 import FormControl from '@material-ui/core/FormControl'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 
-import ColoredControlLabel from './ColoredControlLabel'
 import { Checkbox, TextareaAutosize } from '../components/MaterialReduxForm'
 
 const selector: Function = formValueSelector('passport')
