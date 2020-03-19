@@ -33,7 +33,7 @@ const ConnectedHiddenBlock: React.FC<Props> = (props): JSX.Element => {
 
     return shown ? (
         <FormSection name={blockName} className={`${classes.root} ${className}`}>
-            <Typography style={{ paddingTop: 5 }} variant="h6">
+            <Typography style={{ paddingTop: 5, color: '#5d80b6' }} variant="h6">
                 {NamesMap[blockName]}
             </Typography>
             {children}
