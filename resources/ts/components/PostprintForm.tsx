@@ -68,7 +68,7 @@ const PostprintForm: React.FC = () => {
                     </ConnectedHiddenBlock>
                     <ConnectedHiddenBlock
                         NamesMap={PostPrintActions}
-                        blockName="lamitation"
+                        blockName="lamination"
                         checkboxGroupName={checkboxesGroupName}
                     >
                         {/* Ламинировать */}

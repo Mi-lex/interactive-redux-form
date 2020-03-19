@@ -14,7 +14,7 @@ export const paperJoinersNames: PaperJoinerName[] = [
 export const postPrintActionNames: PostPrintActionName[] = [
     'creasing',
     'book_folding',
-    'lamitation',
+    'lamination',
     'revarnishing',
     'embossing',
     'stamp_cut',
