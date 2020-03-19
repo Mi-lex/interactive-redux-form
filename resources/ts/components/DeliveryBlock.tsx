@@ -18,16 +18,17 @@ const DeliveryBlock = () => {
                     label="Доставить"
                 />
             </FormControl>
-            <Field
-                component={TextareaAutosize}
-                name="delivery.address"
-                label="Адрес"
-                type="text"
-                fullWidth
-                rowsMin={6}
-                variant="outlined"
-                disabled={!requiredDelivery}
-            />
+            {requiredDelivery && (
+                <Field
+                    component={TextareaAutosize}
+                    name="delivery.address"
+                    label="Адрес"
+                    type="text"
+                    fullWidth
+                    rowsMin={6}
+                    variant="outlined"
+                />
+            )}
         </>
     )
 }
