@@ -1,5 +1,5 @@
 export { default as Checkbox } from './Checkbox'
-export { default as DatePicker } from './DatePicker'
+export { default as KeyboardDatePicker } from './KeyBoardDatePicker'
 export { default as TimePicker } from './TimePicker'
 export { default as DateTimePicker } from './DateTimePicker'
 export { default as Select } from './Select'

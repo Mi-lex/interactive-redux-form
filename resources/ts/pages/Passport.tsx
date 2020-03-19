@@ -27,7 +27,8 @@ type PassportProps = InjectedFormProps & {
     initialValues: Order
 }
 
-const textStyle = blue[700]
+const textStyle = '#5d80b6'
+const greyLabels = '#caccce'
 
 const theme = createMuiTheme({
     overrides: {
@@ -41,7 +42,7 @@ const theme = createMuiTheme({
                 textTransform: 'lowercase',
             },
             filled: {
-                color: textStyle,
+                color: greyLabels,
             },
         },
         MuiInput: {

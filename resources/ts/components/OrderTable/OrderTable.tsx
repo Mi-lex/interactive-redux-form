@@ -50,7 +50,7 @@ class OrderTable extends React.Component<Props, TableState> {
                             {...props}
                             rowsPerPageOptions={[
                                 ...props.rowsPerPageOptions,
-                                { value: this.props.data ? this.props.data.length : -1, label: 'все' },
+                                { value: this.props.data.length ? this.props.data.length : -1, label: 'все' },
                             ]}
                             onChangeRowsPerPage={event => {
                                 if (Number(event.target.value) === -1) {

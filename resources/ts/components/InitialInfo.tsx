@@ -8,7 +8,14 @@ import InputLabel from '@material-ui/core/InputLabel'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import AccessAlarm from '@material-ui/icons/AccessAlarm'
 
-import { Checkbox, DatePicker, Select, TextareaAutosize, TextField, TimePicker } from '../components/MaterialReduxForm'
+import {
+    Checkbox,
+    KeyboardDatePicker,
+    Select,
+    TextareaAutosize,
+    TextField,
+    TimePicker,
+} from '../components/MaterialReduxForm'
 import { packageOptions } from '../store/consts'
 import DeliveryBlock from './DeliveryBlock'
 
@@ -51,7 +58,7 @@ const InitialInfo: React.FC = () => {
                         label="Заказ"
                     />
                     <Field
-                        component={DatePicker}
+                        component={KeyboardDatePicker}
                         variant="inline"
                         name="completion_date"
                         fullWidth
@@ -90,16 +97,7 @@ const InitialInfo: React.FC = () => {
                 </Grid>
                 {/* Right column */}
                 <Grid item xs={12} md={6} className={classes.root}>
-                    <Field
-                        component={DatePicker}
-                        name="created_at"
-                        fullWidth
-                        props={{
-                            format: 'dd.MM.yy',
-                        }}
-                        label="от"
-                        disabled={true}
-                    />
+                    <Field component={TextField} name="created_at" fullWidth label="от" disabled={true} />
                     <Field
                         component={TimePicker}
                         name="completion_time"

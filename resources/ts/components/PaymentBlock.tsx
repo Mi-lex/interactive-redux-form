@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Field, formValueSelector } from 'redux-form'
-import { DatePicker, TextField, Select, Switcher } from '../components/MaterialReduxForm'
+import { KeyboardDatePicker, TextField, Select, Switcher } from '../components/MaterialReduxForm'
 import InputLabel from '@material-ui/core/InputLabel'
 import FormControl from '@material-ui/core/FormControl'
 import { paymentOrgOptions } from '../store/consts'
@@ -34,7 +34,7 @@ const PaymentBlock = () => {
                         label="Счет"
                     />
                     <Field
-                        component={DatePicker}
+                        component={KeyboardDatePicker}
                         name="payment.operation.date"
                         fullWidth
                         props={{
