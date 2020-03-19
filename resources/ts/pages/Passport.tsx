@@ -42,11 +42,17 @@ const theme = createMuiTheme({
             },
             filled: {
                 color: greyLabels,
+                // '& + .MuiInput-underline:before': {
+                //     display: 'none',
+                // },
             },
         },
         MuiInput: {
             root: {
                 color: textStyle,
+                '&.$Mui-disabled': {
+                    color: textStyle,
+                },
             },
         },
         MuiInputBase: {
