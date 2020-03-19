@@ -24,12 +24,12 @@ const PassportControl: React.FC<Props> = (props: Props) => {
     const classes = useStyles()
 
     return (
-        <Box display="flex" className={classes.container} justifyContent="flex-end" alignItems="center" mb={2} py={1}>
+        <Box display="flex" className={classes.container} justifyContent="flex-end" alignItems="center">
             {!editMode && (
                 <IconButton
                     size="medium"
                     aria-label="добавить документ"
-                    color="primary"
+                    color="inherit"
                     onClick={createNewPassport}
                     style={{ marginRight: 'auto' }}
                 >
@@ -37,13 +37,22 @@ const PassportControl: React.FC<Props> = (props: Props) => {
                 </IconButton>
             )}
 
-            <IconButton size="medium" aria-label="обновить документ" color="primary" onClick={updatePassport}>
-                <LibraryAdd fontSize="large" />
-            </IconButton>
-            <IconButton size="medium" aria-label="завершить заполнение" color="primary">
-                <DoneAll fontSize="large" />
-            </IconButton>
-            <IconButton size="medium" aria-label="печать" color="primary">
+            {editMode && (
+                <>
+                    <IconButton size="medium" aria-label="обновить документ" color="inherit">
+                        <LibraryAdd fontSize="large" />
+                    </IconButton>
+                    <IconButton
+                        size="medium"
+                        aria-label="завершить заполнение"
+                        color="inherit"
+                        onClick={updatePassport}
+                    >
+                        <DoneAll fontSize="large" />
+                    </IconButton>
+                </>
+            )}
+            <IconButton size="medium" aria-label="печать" color="inherit">
                 <Print fontSize="large" />
             </IconButton>
         </Box>

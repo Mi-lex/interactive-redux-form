@@ -66,7 +66,13 @@ const Passport = (props: PassportProps) => {
 
     return (
         <>
-            <PageHeader />
+            <PageHeader>
+                <PassportControl
+                    editMode={Boolean(id)}
+                    createNewPassport={createNewPassport}
+                    updatePassport={updatePassport}
+                />
+            </PageHeader>
             {requestPending && <LinearProgress color="secondary" />}
             <Paper elevation={0}>
                 {createOrderSuccess && !id && <Redirect to={`/passport/${initialValues.id}`} />}
@@ -76,13 +82,8 @@ const Passport = (props: PassportProps) => {
                         {createOrderError || 'Что-то пошло не так'}
                     </FlashMessageComponent>
                 )}
-                <Container>
+                <Container style={{ paddingTop: 10 }}>
                     <form action="POST" className="passportForm">
-                        <PassportControl
-                            editMode={Boolean(id)}
-                            createNewPassport={createNewPassport}
-                            updatePassport={updatePassport}
-                        />
                         <PassportForm />
                     </form>
                 </Container>
