@@ -116,14 +116,14 @@ const InitialInfo: React.FC = () => {
                     <DeliveryBlock />
                 </Grid>
             </Grid>
-            <Grid item container xs={12} md={6} className={classes.root} direction="column">
+            <Grid item container xs={12} className={classes.root} direction="column">
                 <Field
                     component={TextareaAutosize}
                     name="important_info"
                     label="Важно"
                     type="text"
                     fullWidth
-                    rowsMin={8}
+                    rowsMin={2}
                     variant="outlined"
                 />
             </Grid>
