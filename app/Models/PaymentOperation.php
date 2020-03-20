@@ -16,4 +16,9 @@ class PaymentOperation extends Model
     {
         return $this->belongsTo(PaymentOrgType::class, 'org_type');
     }
+
+    public function payment(): BelongsTo
+    {
+        return $this->belongsTo(Payment::class);
+    }
 }
