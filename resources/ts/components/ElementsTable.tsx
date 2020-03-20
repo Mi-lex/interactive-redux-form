@@ -51,13 +51,13 @@ const ElementsTable = ({ fields }: WrappedFieldArrayProps<string>): JSX.Element 
             <ElementsRow key={index} name={`${order}`} />
         ))}
 
-        <Box display="flex" width="100%" justifyContent="flex-end" pt={1} pr={2}>
+        <Box display="flex" width="100%" justifyContent="flex-end" pt={1} pr={2} style={{color: 'grey'}}>
             <IconButton
                 aria-label="добавить строку"
                 onClick={(): void => {
                     fields.push('')
                 }}
-                color="primary"
+                color="inherit"
             >
                 <AddRow fontSize="small" />
             </IconButton>
@@ -66,7 +66,7 @@ const ElementsTable = ({ fields }: WrappedFieldArrayProps<string>): JSX.Element 
                 onClick={(): void => {
                     fields.pop()
                 }}
-                color="primary"
+                color="inherit"
             >
                 <RemoveRow fontSize="small" />
             </IconButton>
