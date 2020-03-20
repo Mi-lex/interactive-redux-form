@@ -3,7 +3,8 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Models\Order;
-use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Customer;
 use Faker\Generator as Faker;
 
 $factory->define(Order::class, function (Faker $faker) {
@@ -16,8 +17,13 @@ $factory->define(Order::class, function (Faker $faker) {
         "is_cut" => $faker->word,
         "circulation" => $faker->name,
         // should change it when there will be links to actual orders
-        "is_similar_order" => $faker->boolean
-
+        "is_similar_order" => $faker->boolean,
+        'manager_id' => function () {
+            return factory(User::class)->create()->id;
+        },
+        'customer' => function () {
+            return factory(Customer::class)->create()->id;
+        }
     ];
 
     if ($orderAttributes["is_similar_order"]) {
