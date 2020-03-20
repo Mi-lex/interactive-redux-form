@@ -21,7 +21,7 @@ $factory->define(Order::class, function (Faker $faker) {
         'manager_id' => function () {
             return factory(User::class)->create()->id;
         },
-        'customer' => function () {
+        'customer_id' => function () {
             return factory(Customer::class)->create()->id;
         }
     ];
@@ -31,4 +31,14 @@ $factory->define(Order::class, function (Faker $faker) {
     }
 
     return $orderAttributes;
+});
+
+$factory->afterCreating(Order::class, function ($order, $faker) {
+    $payed_by_cash = $faker->boolean;
+
+    if ($payed_by_cash) {
+        $order->payment()->create(['payed_by_cash' => $payed_by_cash]);
+    } else {
+        factory('App\Models\PaymentOperation')->create()->payment->update(['order_id' => $order->id]);
+    }
 });
