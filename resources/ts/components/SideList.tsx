@@ -10,6 +10,7 @@ import DescriptionIcon from '@material-ui/icons/Description'
 import MailIcon from '@material-ui/icons/Mail'
 import InboxIcon from '@material-ui/icons/MoveToInbox'
 import TocIcon from '@material-ui/icons/Toc'
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 
 const useStyles = makeStyles({
     list: {
@@ -18,15 +19,15 @@ const useStyles = makeStyles({
     fullList: {
         width: 'auto',
     },
-});
+})
 
 type Props = {
-    closeDrawer: () => void;
-};
+    closeDrawer: () => void
+}
 
 const SideList = (props: Props): JSX.Element => {
-    const classes = useStyles();
-    const { closeDrawer } = props;
+    const classes = useStyles()
+    const { closeDrawer } = props
 
     return (
         <div className={classes.list} role="presentation" onClick={closeDrawer} onKeyDown={closeDrawer}>
@@ -45,7 +46,7 @@ const SideList = (props: Props): JSX.Element => {
                 </ListItem>
                 <ListItem button component={Link} to="/login">
                     <ListItemIcon>
-                        <TocIcon />
+                        <LockOutlinedIcon />
                     </ListItemIcon>
                     <ListItemText primary="Вход" />
                 </ListItem>
@@ -58,7 +59,7 @@ const SideList = (props: Props): JSX.Element => {
                 ))}
             </List>
         </div>
-    );
-};
+    )
+}
 
-export default SideList;
+export default SideList

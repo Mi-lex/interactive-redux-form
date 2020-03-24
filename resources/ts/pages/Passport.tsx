@@ -28,23 +28,32 @@ type PassportProps = InjectedFormProps & {
 
 const textStyle = '#5d80b6'
 const greyLabels = '#caccce'
+const anotherGrey = '#98999b'
 
 const theme = createMuiTheme({
     overrides: {
         MuiFormControlLabel: {
             root: {
                 textTransform: 'lowercase',
+                color: anotherGrey,
             },
         },
         MuiFormLabel: {
             root: {
                 textTransform: 'lowercase',
+                color: anotherGrey,
+                '&.$Mui-disabled': {
+                    color: anotherGrey,
+                },
+                '& + .MuiInput-underline:before': {
+                    borderBottomStyle: 'dotted',
+                },
             },
             filled: {
                 color: greyLabels,
-                // '& + .MuiInput-underline:before': {
-                //     display: 'none',
-                // },
+                '& + .MuiInput-underline:before': {
+                    display: 'none',
+                },
             },
         },
         MuiInput: {
@@ -53,11 +62,19 @@ const theme = createMuiTheme({
                 '&.$Mui-disabled': {
                     color: textStyle,
                 },
+                '& .MuiIconButton-root': {
+                    color: anotherGrey,
+                },
             },
         },
         MuiInputBase: {
             root: {
                 color: textStyle,
+            },
+        },
+        MuiCheckbox: {
+            root: {
+                color: anotherGrey,
             },
         },
     },

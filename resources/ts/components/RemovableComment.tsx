@@ -12,7 +12,7 @@ const Comments = ({ fields }: WrappedFieldArrayProps<string>): JSX.Element => (
         {fields.map((comment, index) => (
             <Field component={TextField} multiline label="Дополнительно" fullWidth key={index} name={comment} />
         ))}
-        <Box display="flex" width="100%" justifyContent="flex-end" pt={1} style={{ color: 'grey' }}>
+        <Box display="flex" width="100%" justifyContent="flex-end" pt={1} style={{ color: '#98999b' }}>
             {fields.length < 1 && (
                 <IconButton
                     aria-label="добавить строку"
