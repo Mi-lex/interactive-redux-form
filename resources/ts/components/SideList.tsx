@@ -43,6 +43,12 @@ const SideList = (props: Props): JSX.Element => {
                     </ListItemIcon>
                     <ListItemText primary="Заказы" />
                 </ListItem>
+                <ListItem button component={Link} to="/login">
+                    <ListItemIcon>
+                        <TocIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Вход" />
+                </ListItem>
                 <Divider />
                 {['Статистика', 'Канбан доска', 'Активность', 'Последняя ссылка'].map((text, index) => (
                     <ListItem button key={text}>

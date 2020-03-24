@@ -10,6 +10,7 @@ import ruLocale from 'date-fns/locale/ru'
 import SideList from '../components/SideList'
 import Orders from '../pages/Orders'
 import Passport from '../pages/Passport'
+import Login from '../pages/Login'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../store/rootReducer'
 import { toggleDrawer } from '../store/modules/drawer/actions'
@@ -35,6 +36,9 @@ const App: React.FC = () => {
                         </Route>
                         <Route path="/passport/:id?" exact>
                             <Passport />
+                        </Route>
+                        <Route path="/login">
+                            <Login/>
                         </Route>
                     </MuiPickersUtilsProvider>
                 </Switch>
