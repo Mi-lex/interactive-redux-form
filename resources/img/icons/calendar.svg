@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-  <g id="calendar" transform="translate(-644.072 -88.188)">
-    <path id="Path_11" data-name="Path 11" d="M644.072,88.188h24v24h-24Z" fill="none"/>
-    <path id="Path_12" data-name="Path 12" d="M663.072,91.188h-1v-2h-2v2h-8v-2h-2v2h-1a1.991,1.991,0,0,0-1.99,2l-.01,14a2,2,0,0,0,2,2h14a2.006,2.006,0,0,0,2-2v-14A2.006,2.006,0,0,0,663.072,91.188Zm0,16h-14v-11h14Zm-12-9h5v5h-5Z"/>
-  </g>
-</svg>

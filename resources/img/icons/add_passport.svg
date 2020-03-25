@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
-  <g id="add_passport" transform="translate(-1095 -23)">
-    <path id="Path_3" data-name="Path 3" d="M1095,23h48V71h-48Z" fill="none"/>
-    <path id="Path_4" data-name="Path 4" d="M1103,35h-4V63a4,4,0,0,0,4,4h28V63h-28Zm32-8h-24a4,4,0,0,0-4,4V55a4,4,0,0,0,4,4h24a4,4,0,0,0,4-4V31A4,4,0,0,0,1135,27Zm-2,18h-8v8h-4V45h-8V41h8V33h4v8h8Z"/>
-  </g>
-</svg>

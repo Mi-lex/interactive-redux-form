@@ -1,0 +1,79 @@
+PATCH http://127.0.0.1:8000/api/passport/18
+Content-Type: application/json
+Accept: application/json
+Accept-Language: * 
+
+{
+    "name": "first",
+    "type": "another",
+    "important_info": "String for testing",
+    # "completion_date": null,
+    # "completion_time": null,
+    "is_cut": true,
+    "circulation": "1200x344x9454",
+    "similar_order_id": 1231,
+    "customer": {
+        "name": "new Pickle Rick"
+    },
+    "payment": {
+        "payed_by_cash": true
+        # "operation": {
+        #     "org_type": "st",
+        #     "account_number": 999,
+        #     "date": "Tue Mar 17 2020 22:53:15 GMT+0300 (Moscow Standard Time)"
+        # }
+    },
+    "package": {
+        "type": "box",
+        "label": true,
+        "sample": true
+    },
+    "delivery": {
+        "should_be_delivered": true,
+        "address": "Something wrong again"
+    },
+    "paper_joiner": {
+        "special": {
+            "description": "adsfdas kajdsklfalkdsfj"
+        }
+    },
+    "elements": [
+        {
+            "name":"first",
+            "stripes": "1234",
+            "material": "special",
+            "print_type": "digit",
+            "brightness": "очень ярко",
+            "color_interpretation": "idk what to type here"
+        },
+        {
+            "name":"first second",
+            "stripes": "1234",
+            "material": "special",
+            "print_type": "ofs",
+            "brightness": "не очень ярко",
+            "color_interpretation": "idk what to type here"
+        }
+    ],
+    "post_actions": {
+        "book_folding": {
+            "body": {
+                "type": "eu"
+            },
+            "elements": "I have no idea",
+            "additional": "but"
+        },
+        "creasing": {
+            "body": {
+                "parts": "12312"
+            },
+            "additional": "blalalbalba",
+            "elements": "I have no idea"
+        }
+    }
+}
+
+###
+
+GET http://127.0.0.1:8000/api/passport/1
+Accept: application/json
