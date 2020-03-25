@@ -1,7 +1,7 @@
 import React from 'react'
 
-import SnackbarContext from './FlashMessageContext'
+import FlashMessageContext from './FlashMessageContext'
 
-export default function useSnackbar() {
-    return React.useContext(SnackbarContext)
+export default function useFlashMessage() {
+    return React.useContext(FlashMessageContext)
 }

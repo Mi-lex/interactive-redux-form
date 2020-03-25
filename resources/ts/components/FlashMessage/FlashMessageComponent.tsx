@@ -13,8 +13,8 @@ type Props = FlashMessageProviderProps & MessageOptions & { open?: boolean; hand
 
 /**
  * Component for showing messages.
- * When used alone basically represents
- * Snackbar and MuiAlert material ui component
+ * When used by itself without FlashMessageProvider
+ * basically represents Snackbar and MuiAlert material ui component
  */
 const FlashMessageComponent: React.FC<Props> = (props: Props) => {
     const [open, setOpen] = useState(true)
@@ -56,7 +56,6 @@ const FlashMessageComponent: React.FC<Props> = (props: Props) => {
         >
             <Alert severity={type} onClose={handleClose}>
                 <span>{children || ''}</span>
-                {/* {children || ''} */}
             </Alert>
         </Snackbar>
     )

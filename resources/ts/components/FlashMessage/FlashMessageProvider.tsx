@@ -4,11 +4,11 @@ import FlashMessageComponent from './FlashMessageComponent'
 import FlashMessageContext, { FlashMessageProviderValue } from './FlashMessageContext'
 import { FlashMessageProviderProps, FlashMessageProviderState, MessageOptions } from './types'
 
-
 /**
- * Wrapping component with this wrapper allows to use
- * flash message inside. *useFlashMessage* hook returns object,
- * which can call **show** method
+ * Usage of this provider allows to show
+ * flash message inside components.
+ * *useFlashMessage* hook returns object,
+ * which have **show** method
  */
 export default class FlashMessageProvider extends PureComponent<FlashMessageProviderProps, FlashMessageProviderState> {
     contextValue: FlashMessageProviderValue
