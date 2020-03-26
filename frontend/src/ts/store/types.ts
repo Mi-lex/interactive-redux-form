@@ -6,7 +6,7 @@ export type IconName = keyof typeof icons
 
 export type ElementSize = 'sm' | 'md' | 'big'
 
-type PartialRecord<K extends keyof any, T> = {
+export type PartialRecord<K extends keyof any, T> = {
 	[P in K]?: T
 }
 
@@ -56,7 +56,7 @@ interface PaymentOperation {
 }
 
 interface Payment {
-	payed_by_cash: string
+	payed_by_cash: boolean
 	operation?: PaymentOperation
 }
 
@@ -150,12 +150,12 @@ interface StampCut {
 	name: string
 }
 
-// Причина в том , что у нас есть post action body в виде всяких ламинаций, лакировак , биговок и т.д
-// Когда данные приходят с сервера, то этот body находится внутри свойства body
-// В форме они хранятся в виде PostAction в перемешку
-
 interface PostAction {
-	type?: PostPrintActionName
+	type: PostPrintActionName
+}
+
+interface PostActionBase {
+	additional?: string[] | string
 	elements?: string
 }
 
@@ -168,14 +168,10 @@ type PostActionBody =
 	| StampCut
 	| {}
 
-export type FormPostAction = PostAction &
-	PostActionBody & {
-		additional?: string[] | string
-	}
+export type FormPostAction = PostAction & PostActionBase & PostActionBody
 
-export interface FetchedPostAction extends PostAction {
+export interface FetchedPostAction extends PostAction, PostActionBase {
 	body?: PostActionBody & { id: number }
-	additional?: string
 }
 
 interface OrderElement {
@@ -213,11 +209,11 @@ export interface Order {
 }
 
 export interface FormOrder extends Order {
-	paper_joiner?: PartialRecord<PaperJoinerName, PaperJoinerBody>
-	post_actions?: PartialRecord<PostPrintActionName, FormPostAction>
+	paper_joiner: PartialRecord<PaperJoinerName, PaperJoinerBody>
+	post_actions: PartialRecord<PostPrintActionName, FormPostAction>
 
-	paper_joiner_checks?: PartialRecord<PaperJoinerName, boolean>
-	post_actions_checks?: PartialRecord<PostPrintActionName, boolean>
+	paper_joiner_checks: PartialRecord<PaperJoinerName, boolean>
+	post_actions_checks: PartialRecord<PostPrintActionName, boolean>
 }
 
 export interface FetchedOrder extends Order {

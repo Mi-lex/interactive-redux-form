@@ -1,8 +1,11 @@
+import axios from 'axios'
 import format from 'date-fns/format'
 import parse from 'date-fns/parse'
-import { PostPrintActionName } from './../store/types'
-import axios from 'axios'
+
 import { FetchedOrder, FormOrder, PaperJoinerName } from '../store/types'
+import { FormPostAction, PostPrintActionName } from './../store/types'
+import { convertFormat } from './../utils'
+
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequested'
 
 let baseUrl: string
@@ -44,15 +47,22 @@ export const getMessageFromError = (error: AcceptedError): string => {
 		message = error.message
 	}
 
+	console.error(error)
 	return message
 }
 
+/**
+ * Get data from the server and prepare it for the form
+ * @param order fetched passport object
+ * @return acceptable object for redux-form state
+ */
 export const getFormData = (order: FetchedOrder): FormOrder => {
-	const formOrder: FormOrder = { ...order, paper_joiner: {}, post_actions: {} }
+	const formOrder = {} as FormOrder
 
 	if (order.paper_joiner) {
-		const joinerType: PaperJoinerName = order.paper_joiner.type
+		const joinerType = order.paper_joiner.type
 
+		// To check corresponding checkbox
 		formOrder.paper_joiner_checks = {
 			[joinerType]: true,
 		}
@@ -67,11 +77,11 @@ export const getFormData = (order: FetchedOrder): FormOrder => {
 		formOrder.post_actions_checks = {}
 
 		order.post_actions.forEach(({ type, body, additional, elements }) => {
-			formOrder!.post_actions_checks![type!] = true
+			formOrder.post_actions_checks[type] = true
 
 			formOrder.post_actions = {
 				...formOrder.post_actions,
-				[type!]: {
+				[type]: {
 					...body,
 					additional: [additional],
 					elements,
@@ -90,24 +100,42 @@ export const getFormData = (order: FetchedOrder): FormOrder => {
 	}
 
 	if (order.completion_time) {
-		const parsed = parse(order.completion_time, 'HH:mm:ss', new Date())
-		formOrder.completion_time = format(parsed, 'HH:mm')
-	}
-
-	if (formOrder.payment && formOrder.payment.operation) {
-		formOrder.payment.operation.date = format(
-			new Date(order!.payment!.operation!.date),
-			'dd.MM.yy',
+		formOrder.completion_time = convertFormat(
+			order.completion_time,
+			'HH:mm:ss',
+			'HH:mm',
 		)
 	}
 
-	return formOrder
+	if (order.payment) {
+		formOrder.payment = Object.assign(
+			order.payment,
+			// if order is not payed by cash &&
+			// there is also payment operation info
+			// parse date to acceptable format
+			order.payment.payed_by_cash !== true &&
+				order.payment.operation !== undefined
+				? {
+						operation: {
+							...order.payment.operation,
+							date: format(new Date(order.payment.operation.date), 'dd.MM.yy'),
+						},
+				  }
+				: {},
+		)
+	}
+
+	return Object.assign(order, formOrder)
 }
 
+/**
+ * Prepare form data for sending to the server
+ * @param order form data that stored in the state
+ * @return acceptable data for a server to update order info
+ */
 export const getRequestData = (order: FormOrder): FormOrder => {
 	const requestOrder: FormOrder = {
 		...order,
-		paper_joiner: {},
 		post_actions: {},
 	}
 
@@ -137,37 +165,32 @@ export const getRequestData = (order: FormOrder): FormOrder => {
 
 		selectedActions.forEach(([actionName, value]) => {
 			if (value) {
+				const formPostAction = order.post_actions[actionName] as FormPostAction
+
 				const {
-					// @ts-ignore
 					elements = null,
-					// @ts-ignore
-					additional = null,
+					additional = [],
 					...actionBody
-				} = order.post_actions ? order.post_actions[actionName] : {}
+				} = formPostAction
 
 				requestOrder.post_actions = {
 					...requestOrder.post_actions,
 					[actionName]: {
 						body: actionBody,
+						elements: elements,
+						additional: additional[0],
 					},
-				}
-
-				if (elements) {
-					// @ts-ignore
-					requestOrder!.post_actions![actionName!].elements = elements
-				}
-
-				if (additional && additional.length > 0) {
-					// @ts-ignore
-					requestOrder!.post_actions![actionName!].additional = additional[0]
 				}
 			}
 		})
 	}
 
 	if (order.completion_time) {
-		const parsed = parse(order.completion_time, 'HH:mm', new Date())
-		requestOrder.completion_time = format(parsed, 'HH:mm:ss')
+		requestOrder.completion_time = convertFormat(
+			order.completion_time,
+			'HH:mm',
+			'HH:mm:ss',
+		)
 	}
 
 	if (order.payment && order.payment.operation) {
