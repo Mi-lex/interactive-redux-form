@@ -7,14 +7,12 @@ const resolve = require('resolve')
 const PnpWebpackPlugin = require('pnp-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
-const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const safePostCssParser = require('postcss-safe-parser')
 const ManifestPlugin = require('webpack-manifest-plugin')
-const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin')
-const WorkboxWebpackPlugin = require('workbox-webpack-plugin')
+// const WorkboxWebpackPlugin = require('workbox-webpack-plugin')
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin')
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin')
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent')
@@ -29,11 +27,8 @@ const postcssNormalize = require('postcss-normalize')
 
 const appPackageJson = require(paths.appPackageJson)
 
-// Source maps are resource heavy and can cause out of memory issue for large source files.
-// const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 const shouldUseSourceMap = false
-// Some apps do not need the benefits of saving a web request, so not inlining the chunk
-// makes for a smoother build process.
+
 const shouldInlineRuntimeChunk = process.env.INLINE_RUNTIME_CHUNK !== 'false'
 
 const isExtendingEslintConfig = process.env.EXTEND_ESLINT === 'true'
@@ -326,6 +321,8 @@ module.exports = function(webpackEnv) {
 				// Disable require.ensure as it's not a standard language feature.
 				{ parser: { requireEnsure: false } },
 
+				// Disable linting, coz there is no need for it right now
+
 				// First, run the linter.
 				// It's important to do this before Babel processes the JS.
 				// {
@@ -518,36 +515,8 @@ module.exports = function(webpackEnv) {
 						inject: true,
 						template: paths.appHtml,
 					},
-					isEnvProduction
-						? {
-								minify: {
-									removeComments: true,
-									collapseWhitespace: true,
-									removeRedundantAttributes: true,
-									useShortDoctype: true,
-									removeEmptyAttributes: true,
-									removeStyleLinkTypeAttributes: true,
-									keepClosingSlash: true,
-									minifyJS: true,
-									minifyCSS: true,
-									minifyURLs: true,
-								},
-						  }
-						: undefined,
 				),
 			),
-			// Inlines the webpack runtime script. This script is too small to warrant
-			// a network request.
-			// https://github.com/facebook/create-react-app/issues/5358
-			isEnvProduction &&
-				shouldInlineRuntimeChunk &&
-				new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/runtime-.+[.]js/]),
-			// Makes some environment variables available in index.html.
-			// The public URL is available as %PUBLIC_URL% in index.html, e.g.:
-			// <link rel="icon" href="%PUBLIC_URL%/favicon.ico">
-			// It will be an empty string unless you specify "homepage"
-			// in `package.json`, in which case it will be the pathname of that URL.
-			new InterpolateHtmlPlugin(HtmlWebpackPlugin, env.raw),
 			// This gives some necessary context to module not found errors, such as
 			// the requesting resource.
 			new ModuleNotFoundPlugin(paths.appPath),
@@ -576,12 +545,7 @@ module.exports = function(webpackEnv) {
 					filename: 'css/[name].[contenthash:8].css',
 					chunkFilename: 'css/[name].[contenthash:8].chunk.css',
 				}),
-			// Generate an asset manifest file with the following content:
-			// - "files" key: Mapping of all asset filenames to their corresponding
-			//   output file so that tools can pick it up without having to parse
-			//   `index.html`
-			// - "entrypoints" key: Array of files which are included in `index.html`,
-			//   can be used to reconstruct the HTML if necessary
+			// Generate an asset manifest file
 			new ManifestPlugin({
 				fileName: 'mix-manifest.json',
 				publicPath: `/static${paths.publicUrlOrPath}`,
@@ -601,12 +565,6 @@ module.exports = function(webpackEnv) {
 					return manifestFiles
 				},
 			}),
-			// Moment.js is an extremely popular library that bundles large locale files
-			// by default due to how webpack interprets its code. This is a practical
-			// solution that requires the user to opt into importing specific locales.
-			// https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
-			// You can remove this if you don't use Moment.js:
-			new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
 			// Generate a service worker script that will precache, and keep up to date,
 			// the HTML & assets that are part of the webpack build.
 
