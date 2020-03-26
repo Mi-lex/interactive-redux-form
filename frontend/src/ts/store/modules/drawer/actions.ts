@@ -1,4 +1,4 @@
-export const TOGGLE_DRAWER = 'standard/orders/FETCH_ORDERS_REQUEST'
+export const TOGGLE_DRAWER = 'standard/drawer/TOGGLE'
 
 export const toggleDrawer = (willOpen?: boolean) => ({
 	type: TOGGLE_DRAWER,

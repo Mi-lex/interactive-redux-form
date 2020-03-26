@@ -2,7 +2,7 @@ import { Action } from './../../types'
 import { types } from './actions'
 
 type DrawerState = {
-	open: boolean | null
+	open: boolean | undefined
 }
 
 const initialState: DrawerState = {
@@ -14,7 +14,7 @@ const reducer = (state = initialState, action: Action): DrawerState => {
 		case types.TOGGLE_DRAWER:
 			return {
 				...state,
-				open: action.payload !== null ? action.payload : !state.open,
+				open: action.payload !== undefined ? action.payload : !state.open,
 			}
 		default:
 			return state
