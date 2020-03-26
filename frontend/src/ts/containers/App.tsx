@@ -16,35 +16,35 @@ import { RootState } from '../store/rootReducer'
 import { toggleDrawer } from '../store/modules/drawer/actions'
 
 const App: React.FC = () => {
-    const dispatch = useDispatch()
-    const isDrawerOpen = useSelector((state: RootState) => state.drawer.open)
+	const dispatch = useDispatch()
+	const isDrawerOpen = useSelector((state: RootState) => state.drawer.open)
 
-    const closeDrawer = () => {
-        dispatch(toggleDrawer(false))
-    }
+	const closeDrawer = () => {
+		dispatch(toggleDrawer(false))
+	}
 
-    return (
-        <Router>
-            <Drawer open={isDrawerOpen} onClose={closeDrawer}>
-                <SideList closeDrawer={closeDrawer} />
-            </Drawer>
-            <Container maxWidth="xl">
-                <Switch>
-                    <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ruLocale}>
-                        <Route path="/" exact>
-                            <Orders />
-                        </Route>
-                        <Route path="/passport/:id?" exact>
-                            <Passport />
-                        </Route>
-                        <Route path="/login">
-                            <Login/>
-                        </Route>
-                    </MuiPickersUtilsProvider>
-                </Switch>
-            </Container>
-        </Router>
-    )
+	return (
+		<Router>
+			<Drawer open={isDrawerOpen} onClose={closeDrawer}>
+				<SideList closeDrawer={closeDrawer} />
+			</Drawer>
+			<Container maxWidth="xl">
+				<Switch>
+					<MuiPickersUtilsProvider utils={DateFnsUtils} locale={ruLocale}>
+						<Route path="/" exact>
+							<Orders />
+						</Route>
+						<Route path="/passport/:id?" exact>
+							<Passport />
+						</Route>
+						<Route path="/login">
+							<Login />
+						</Route>
+					</MuiPickersUtilsProvider>
+				</Switch>
+			</Container>
+		</Router>
+	)
 }
 
 export default App
