@@ -30,6 +30,6 @@ convertFormat = (value, initialFormat, resultFormat, fallback = new Date()) => {
 	return format(parsed, resultFormat)
 }
 
-export const hasOwnProp = (object: Object, prop: string) => {
+export const hasOwnProp = (object: Object, prop: string): boolean => {
 	return Object.prototype.hasOwnProperty.call(object, prop)
 }

@@ -14,6 +14,19 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
 	baseUrl = 'http://127.0.0.1:8000/api'
 } else {
 	baseUrl = '/api'
+
+	const token = document.head.querySelector('meta[name="csrf-token"]')
+
+	if (token) {
+		axios.defaults.headers.common['X-CSRF-TOKEN'] = token.getAttribute(
+			'content',
+		)
+		console.log(token)
+	} else {
+		console.error(
+			'CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token',
+		)
+	}
 }
 
 interface ErrorsObj {

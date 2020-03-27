@@ -9,6 +9,7 @@
     <meta name="description" content="">
     <meta name"keywords" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
     <link href="{{ mix('main.css') }}" rel="stylesheet">
     <base href="/">
