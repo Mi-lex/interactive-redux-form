@@ -62,4 +62,12 @@ class AuthTest extends TestCase
             'expires_in'
         ]);
     }
+
+    /** @test */
+    public function an_authorized_user_cannot_access_protected_route()
+    {
+        $protected = 'api/orders';
+
+        $this->get($protected, ['accept' => 'application/json'])->assertStatus(401);
+    }
 }

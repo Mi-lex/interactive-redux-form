@@ -38,6 +38,7 @@ Route::group([
 
 Route::group([
     'prefix' => 'orders',
+    'middleware' => 'auth:api'
 ], function () {
     Route::get('/', 'OrderController@index');
 });
