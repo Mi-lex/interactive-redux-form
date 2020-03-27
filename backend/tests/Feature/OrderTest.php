@@ -9,16 +9,20 @@ use Tests\TestCase;
 use App\Models\Order;
 use App\Models\PaperJoiner;
 use App\Models\PostAction;
-use Carbon\Carbon;
+use App\Traits\InteractsWithAuthOverrides;
 
 class OrderTest extends TestCase
 {
-    use DatabaseMigrations, WithFaker;
+    use DatabaseMigrations, WithFaker, InteractsWithAuthOverrides;
+
+    // Assume that worker == authorized user
 
     /** @test */
-    public function a_user_can_create_an_order()
+    public function a_worker_can_create_an_order()
     {
         $this->withoutExceptionHandling();
+
+        $this->actingAs(factory('App\Models\User')->create());
 
         $content = $this->post('/api/passport')->decodeResponseJson();
         unset($content['created_at']);
@@ -27,9 +31,19 @@ class OrderTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_update_direct_order_attribute()
+    public function a_worker_can_fetch_order_list()
+    {
+        $this->actingAs(factory('App\Models\User')->create());
+
+        $this->get('api/orders', ['accept' => 'application/json'])->assertOk();
+    }
+
+    /** @test */
+    public function a_worker_can_update_direct_order_attribute()
     {
         $this->withoutExceptionHandling();
+
+        $this->actingAs(factory('App\Models\User')->create());
 
         $order = factory('App\Models\Order')->create();
 
@@ -44,9 +58,11 @@ class OrderTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_store_and_update_different_payment_type()
+    public function a_worker_can_store_and_update_different_payment_type()
     {
         $this->withoutExceptionHandling();
+
+        $this->actingAs(factory('App\Models\User')->create());
 
         $order = Order::create();
 
@@ -77,9 +93,11 @@ class OrderTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_store_and_update_package_info()
+    public function a_worker_can_store_and_update_package_info()
     {
         $this->withoutExceptionHandling();
+
+        $this->actingAs(factory('App\Models\User')->create());
 
         $order = Order::create();
 
@@ -97,9 +115,11 @@ class OrderTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_store_and_update_delivery_info()
+    public function a_worker_can_store_and_update_delivery_info()
     {
         $this->withoutExceptionHandling();
+
+        $this->actingAs(factory('App\Models\User')->create());
 
         $order = Order::create();
 
@@ -117,9 +137,11 @@ class OrderTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_store_and_update_paper_joiner_info()
+    public function a_worker_can_store_and_update_paper_joiner_info()
     {
         $this->withoutExceptionHandling();
+
+        $this->actingAs(factory('App\Models\User')->create());
 
         $order = Order::create();
 
@@ -144,9 +166,11 @@ class OrderTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_store_and_update_element()
+    public function a_worker_can_store_and_update_element()
     {
         $this->withoutExceptionHandling();
+
+        $this->actingAs(factory('App\Models\User')->create());
 
         $elementQuantities = [3, 1];
 
@@ -176,6 +200,8 @@ class OrderTest extends TestCase
     private function assertUpdatingPostActionSuccess(string $postActionType, bool $isTableEmpty = false): void
     {
         $this->withoutExceptionHandling();
+
+        $this->actingAs(factory('App\Models\User')->create());
 
         $order = Order::create();
 
@@ -207,65 +233,67 @@ class OrderTest extends TestCase
     // post actions:
 
     /** @test */
-    public function a_user_can_store_and_update_book_folding_info()
+    public function a_worker_can_store_and_update_book_folding_info()
     {
         $type = PostAction::BOOK_FOLDING;
         $this->assertUpdatingPostActionSuccess($type);
     }
 
     /** @test */
-    public function a_user_can_store_and_update_creasing_info()
+    public function a_worker_can_store_and_update_creasing_info()
     {
         $type = PostAction::CREASING;
         $this->assertUpdatingPostActionSuccess($type);
     }
 
     /** @test */
-    public function a_user_can_store_and_update_embossing_info()
+    public function a_worker_can_store_and_update_embossing_info()
     {
         $type = PostAction::EMBOSSING;
         $this->assertUpdatingPostActionSuccess($type);
     }
 
     /** @test */
-    public function a_user_can_store_and_update_hot_stamp_info()
+    public function a_worker_can_store_and_update_hot_stamp_info()
     {
         $type = PostAction::HOT_STAMP;
         $this->assertUpdatingPostActionSuccess($type, true);
     }
 
     /** @test */
-    public function a_user_can_store_and_update_lamination_info()
+    public function a_worker_can_store_and_update_lamination_info()
     {
         $type = PostAction::LAMINATION;
         $this->assertUpdatingPostActionSuccess($type);
     }
 
     /** @test */
-    public function a_user_can_store_and_update_perforation_info()
+    public function a_worker_can_store_and_update_perforation_info()
     {
         $type = PostAction::PERFORATION;
         $this->assertUpdatingPostActionSuccess($type, true);
     }
 
     /** @test */
-    public function a_user_can_store_and_update_revarnishing_info()
+    public function a_worker_can_store_and_update_revarnishing_info()
     {
         $type = PostAction::REVARNISHING;
         $this->assertUpdatingPostActionSuccess($type);
     }
 
     /** @test */
-    public function a_user_can_store_and_update_stamp_cut_info()
+    public function a_worker_can_store_and_update_stamp_cut_info()
     {
         $type = PostAction::STAMP_CUT;
         $this->assertUpdatingPostActionSuccess($type);
     }
 
     /** @test */
-    public function a_user_can_store_and_update_several_post_actions()
+    public function a_worker_can_store_and_update_several_post_actions()
     {
         $this->withoutExceptionHandling();
+
+        $this->actingAs(factory('App\Models\User')->create());
 
         $order = Order::create();
 
