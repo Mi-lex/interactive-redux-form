@@ -28,21 +28,21 @@ const App: React.FC = () => {
 			<Drawer open={isDrawerOpen} onClose={closeDrawer}>
 				<SideList closeDrawer={closeDrawer} />
 			</Drawer>
-			<Container maxWidth="xl">
-				<Switch>
-					<MuiPickersUtilsProvider utils={DateFnsUtils} locale={ruLocale}>
+			<Switch>
+				<MuiPickersUtilsProvider utils={DateFnsUtils} locale={ruLocale}>
+					<Container maxWidth="xl">
 						<Route path="/" exact>
 							<Orders />
 						</Route>
 						<Route path="/passport/:id?" exact>
 							<Passport />
 						</Route>
-						<Route path="/login">
-							<Login />
-						</Route>
-					</MuiPickersUtilsProvider>
-				</Switch>
-			</Container>
+					</Container>
+					<Route path="/login">
+						<Login />
+					</Route>
+				</MuiPickersUtilsProvider>
+			</Switch>
 		</Router>
 	)
 }
