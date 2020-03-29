@@ -2,6 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use Illuminate\Support\Str;
 use App\Models\OrderElement;
 use Faker\Generator as Faker;
 
@@ -13,7 +14,7 @@ $factory->define(OrderElement::class, function (Faker $faker) {
         'print_type' => function () use ($faker) {
             return \App\Models\PrintType::create([
                 'name' => $faker->name,
-                'alias' => $faker->word
+                'alias' => Str::random(5)
             ])->alias;
         },
         'brightness' => $faker->text(10),

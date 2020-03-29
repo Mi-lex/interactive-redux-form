@@ -2,8 +2,9 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\PaperJoiners\PaperClip;
+use Illuminate\Support\Str;
 use Faker\Generator as Faker;
+use App\Models\PaperJoiners\PaperClip;
 
 $factory->define(PaperClip::class, function (Faker $faker) {
     return [
@@ -13,7 +14,7 @@ $factory->define(PaperClip::class, function (Faker $faker) {
         'width' => $faker->randomDigit,
         'drift' => $faker->randomDigit,
         'type' => function () use ($faker) {
-            return \App\Models\PaperJoiners\PaperClipType::create(['name' => $faker->name, 'alias' => $faker->text(5)])->alias;
+            return \App\Models\PaperJoiners\PaperClipType::create(['name' => $faker->name, 'alias' => Str::random(5)])->alias;
         }
     ];
 });
