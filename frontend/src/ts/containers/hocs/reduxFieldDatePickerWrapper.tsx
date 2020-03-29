@@ -39,7 +39,8 @@ const reduxFieldDatePickerWrapper = <T extends {}>(
 			autoOk
 			{...input}
 			value={selectedDate}
-			helperText={touched && invalid && error}
+			helperText={touched && error}
+			error={touched && invalid}
 			invalidDateMessage="Неверный формат данных"
 			onChange={setValue}
 			format={format}

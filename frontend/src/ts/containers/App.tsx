@@ -11,6 +11,7 @@ import SideList from '../components/SideList'
 import Orders from '../pages/Orders'
 import Passport from '../pages/Passport'
 import Login from '../pages/Login'
+import Register from '../pages/Register'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../store/rootReducer'
 import { toggleDrawer } from '../store/modules/drawer/actions'
@@ -40,6 +41,9 @@ const App: React.FC = () => {
 					</Container>
 					<Route path="/login">
 						<Login />
+					</Route>
+					<Route path="/register">
+						<Register />
 					</Route>
 				</MuiPickersUtilsProvider>
 			</Switch>

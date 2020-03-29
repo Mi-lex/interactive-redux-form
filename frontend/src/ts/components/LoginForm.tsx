@@ -1,11 +1,11 @@
 import React from 'react'
-import { Link as RouterLink } from 'react-router-dom'
-import { Button, FormControlLabel, Grid, Link, TextField } from '@material-ui/core'
-import { makeStyles, Theme } from '@material-ui/core/styles'
 import { Field } from 'redux-form'
+import { Link as RouterLink } from 'react-router-dom'
+import { Button, FormControlLabel, Grid, Link } from '@material-ui/core'
+import { makeStyles, Theme } from '@material-ui/core/styles'
 
 import AuthFormWrapper from './AuthFormWrapper'
-import { Checkbox } from './MaterialReduxForm'
+import { Checkbox, TextField } from './MaterialReduxForm'
 import SideBackgroundWrapper from './SideBackgroundWrapper'
 
 const useStyles = makeStyles((theme: Theme) => ({
