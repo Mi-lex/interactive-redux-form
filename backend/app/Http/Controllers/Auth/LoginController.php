@@ -36,7 +36,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api')->except(['login']);
+        $this->middleware('jwt.auth')->except(['login']);
     }
 
     /**
@@ -55,7 +55,8 @@ class LoginController extends Controller
         return $this->respondWithToken($token);
     }
 
-    public function protected(){
+    public function protected()
+    {
         $itsProtected = true;
         return response()->json(['itsprotected' => $itsProtected]);
     }

@@ -26,7 +26,7 @@ Route::group([
 
 Route::group([
     'prefix' => 'passport',
-    'middleware' => 'auth:api'
+    'middleware' => 'jwt.auth'
 ], function () {
     Route::get('/{id}', 'OrderController@show');
     Route::post('/', 'OrderController@create');
@@ -35,7 +35,7 @@ Route::group([
 
 Route::group([
     'prefix' => 'orders',
-    'middleware' => 'auth:api'
+    'middleware' => 'jwt.auth'
 ], function () {
     Route::get('/', 'OrderController@index');
 });
