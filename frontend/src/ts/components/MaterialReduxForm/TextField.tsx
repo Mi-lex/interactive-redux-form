@@ -21,7 +21,7 @@ const TextInput: React.FC<Props> = <P extends {}>(props: Props) => {
 		<TextField
 			{...input}
 			label={label}
-			error={invalid}
+			error={touched && invalid}
 			InputProps={InputProps}
 			helperText={touched && error}
 			{...custom}
