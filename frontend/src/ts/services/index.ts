@@ -4,7 +4,7 @@ import parse from 'date-fns/parse'
 
 import { FetchedOrder, FormOrder, PaperJoinerName } from '../store/types'
 import { FormPostAction, PostPrintActionName } from './../store/types'
-import { convertFormat } from './../utils'
+import { convertFormat } from '../helpers/utils'
 
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequested'
 
