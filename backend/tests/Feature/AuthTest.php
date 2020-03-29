@@ -13,6 +13,14 @@ class AuthTest extends TestCase
 {
     use DatabaseMigrations, WithFaker;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->withHeaders([
+            'Accept' => 'application/json',
+            'X-Requested-With' => 'XMLHttpRequest'
+        ]);
+    }
     /** @test */
     public function a_user_can_register_using_form_credentials()
     {
@@ -55,7 +63,7 @@ class AuthTest extends TestCase
             'password' => $password
         ];
 
-        $this->post('/api/auth/login', $userCredentials)->assertStatus(200)->assertJsonStructure([
+        $this->post('/api/auth/login', $userCredentials)->assertOk()->assertJsonStructure([
             'access_token',
             'token_type',
             'expires_in'

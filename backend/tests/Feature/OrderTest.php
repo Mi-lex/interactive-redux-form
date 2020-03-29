@@ -16,15 +16,21 @@ class OrderTest extends TestCase
     use DatabaseMigrations, WithFaker, InteractsWithAuthOverrides;
 
     // Assume that worker == authorized user
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->withHeaders([
+            'Accept' => 'application/json',
+            'X-Requested-With' => 'XMLHttpRequest'
+        ]);
+
+        $this->actingAs(factory('App\Models\User')->create());
+    }
 
     /** @test */
     public function a_worker_can_create_an_order()
     {
-        $this->withoutExceptionHandling();
-
-        $this->actingAs(factory('App\Models\User')->create());
-
-        $content = $this->post('/api/passport')->decodeResponseJson();
+        $content = $this->post('/api/passport')->assertOk()->decodeResponseJson();
         unset($content['created_at']);
 
         $this->assertDatabaseHas('orders', $content);
@@ -33,21 +39,15 @@ class OrderTest extends TestCase
     /** @test */
     public function a_worker_can_fetch_order_list()
     {
-        $this->actingAs(factory('App\Models\User')->create());
-
-        $this->get('api/orders', ['accept' => 'application/json'])->assertOk();
+        $this->get('api/orders')->assertOk()->decodeResponseJson();
     }
 
     /** @test */
     public function a_worker_can_update_direct_order_attribute()
     {
-        $this->withoutExceptionHandling();
-
-        $this->actingAs(factory('App\Models\User')->create());
-
         $order = factory('App\Models\Order')->create();
 
-        $response = $this->patch("api/passport/$order->id", $order->toArray(), ["accept" => "application/json"]);
+        $response = $this->patch("api/passport/$order->id", $order->toArray());
 
         $response->assertSuccessful();
 
@@ -60,10 +60,6 @@ class OrderTest extends TestCase
     /** @test */
     public function a_worker_can_store_and_update_different_payment_type()
     {
-        $this->withoutExceptionHandling();
-
-        $this->actingAs(factory('App\Models\User')->create());
-
         $order = Order::create();
 
         $paymentAttributes = [
@@ -77,7 +73,7 @@ class OrderTest extends TestCase
         ];
 
         foreach ($paymentAttributes as $payment) {
-            $response = $this->patch("api/passport/$order->id", ["payment" => $payment], ["accept" => "application/json"]);
+            $response = $this->patch("api/passport/$order->id", ["payment" => $payment]);
             $response->assertSuccessful();
 
             $payment['order_id'] = $order->id;
@@ -95,16 +91,12 @@ class OrderTest extends TestCase
     /** @test */
     public function a_worker_can_store_and_update_package_info()
     {
-        $this->withoutExceptionHandling();
-
-        $this->actingAs(factory('App\Models\User')->create());
-
         $order = Order::create();
 
         $packageAttributes = factory('App\Models\Package', 2)->make()->toArray();
 
         foreach ($packageAttributes as $package) {
-            $response = $this->patch("api/passport/$order->id", ["package" => $package], ["accept" => "application/json"]);
+            $response = $this->patch("api/passport/$order->id", ["package" => $package]);
 
             $response->assertSuccessful();
 
@@ -117,16 +109,12 @@ class OrderTest extends TestCase
     /** @test */
     public function a_worker_can_store_and_update_delivery_info()
     {
-        $this->withoutExceptionHandling();
-
-        $this->actingAs(factory('App\Models\User')->create());
-
         $order = Order::create();
 
         $deliveryAttributes = factory('App\Models\Delivery', 3)->make()->toArray();
 
         foreach ($deliveryAttributes as $delivery) {
-            $response = $this->patch("api/passport/$order->id", ["delivery" => $delivery], ["accept" => "application/json"]);
+            $response = $this->patch("api/passport/$order->id", ["delivery" => $delivery]);
 
             $response->assertSuccessful();
 
@@ -139,10 +127,6 @@ class OrderTest extends TestCase
     /** @test */
     public function a_worker_can_store_and_update_paper_joiner_info()
     {
-        $this->withoutExceptionHandling();
-
-        $this->actingAs(factory('App\Models\User')->create());
-
         $order = Order::create();
 
         foreach (PaperJoiner::NAMES as $joinerType) {
@@ -155,7 +139,7 @@ class OrderTest extends TestCase
                 $joinerType => $rawBody
             ];
 
-            $response = $this->patch("api/passport/$order->id", ["paper_joiner" => $joinerRequestParams], ["accept" => "application/json"]);
+            $response = $this->patch("api/passport/$order->id", ["paper_joiner" => $joinerRequestParams]);
 
             $response->assertSuccessful();
 
@@ -168,17 +152,13 @@ class OrderTest extends TestCase
     /** @test */
     public function a_worker_can_store_and_update_element()
     {
-        $this->withoutExceptionHandling();
-
-        $this->actingAs(factory('App\Models\User')->create());
-
         $elementQuantities = [3, 1];
 
         $order = Order::create();
 
         foreach ($elementQuantities as $quantity) {
             $elements = factory('App\Models\OrderElement', $quantity)->raw();
-            $response = $this->patch("api/passport/$order->id", ["elements" => $elements], ["accept" => "application/json"]);
+            $response = $this->patch("api/passport/$order->id", ["elements" => $elements]);
 
             $response->assertSuccessful();
 
@@ -199,10 +179,6 @@ class OrderTest extends TestCase
      */
     private function assertUpdatingPostActionSuccess(string $postActionType, bool $isTableEmpty = false): void
     {
-        $this->withoutExceptionHandling();
-
-        $this->actingAs(factory('App\Models\User')->create());
-
         $order = Order::create();
 
         $bodyModelName = Relation::getMorphedModel($postActionType);
@@ -217,7 +193,7 @@ class OrderTest extends TestCase
             ]
         ];
 
-        $response = $this->patch("api/passport/$order->id", ["post_actions" => $postActionAttributes], ["accept" => "application/json"]);
+        $response = $this->patch("api/passport/$order->id", ["post_actions" => $postActionAttributes]);
 
         $response->assertSuccessful();
 
@@ -291,10 +267,6 @@ class OrderTest extends TestCase
     /** @test */
     public function a_worker_can_store_and_update_several_post_actions()
     {
-        $this->withoutExceptionHandling();
-
-        $this->actingAs(factory('App\Models\User')->create());
-
         $order = Order::create();
 
         for ($i = 0; $i < 2; $i++) {
@@ -315,7 +287,7 @@ class OrderTest extends TestCase
                 ]];
             })->toArray();
 
-            $response = $this->patch("api/passport/$order->id", ["post_actions" => $postActionsAttributes], ["accept" => "application/json"]);
+            $response = $this->patch("api/passport/$order->id", ["post_actions" => $postActionsAttributes]);
             $response->assertSuccessful();
 
             //  just assert that array lengths are equals 
