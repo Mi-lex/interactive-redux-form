@@ -2,7 +2,8 @@ import actionCreator, { types } from './actions'
 import api, { getMessageFromError } from '../../../services'
 import { call, put, takeLatest } from 'redux-saga/effects'
 import { Action } from '../../types'
-import { reset } from 'redux-form'
+import { reset, stopSubmit } from 'redux-form'
+import { status } from '../../consts'
 
 function* registerRequest(action: Action) {
 	try {
@@ -18,8 +19,14 @@ function* registerRequest(action: Action) {
 		yield put(reset('register'))
 		yield put(actionCreator.registerSuccess())
 	} catch (error) {
-		const message = getMessageFromError(error)
-		console.log(message)
+		if (
+			error.response &&
+			error.response.status === status.UNPROCESSABLE_ENTITY
+		) {
+			console.log(error.response.data)
+
+			yield put(stopSubmit('register', error.response.data.errors))
+		}
 
 		yield put(actionCreator.registerError())
 	}
