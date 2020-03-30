@@ -1,4 +1,4 @@
-import { Register } from './../../types'
+import { Register, Auth } from './../../types'
 const LOGIN_REQUEST = 'standard/auth/LOGIN_REQUEST'
 const LOGIN_SUCCESS = 'standard/auth/LOGIN_SUCCESS'
 const LOGIN_ERROR = 'standard/auth/LOGIN_ERROR'
@@ -25,6 +25,19 @@ export const registerReset = () => ({
 	type: REGISTER_RESET,
 })
 
+export const loginRequest = (loginFields: Auth) => ({
+	type: LOGIN_REQUEST,
+	payload: loginFields,
+})
+
+export const loginSuccess = (token: string) => ({
+	type: LOGIN_SUCCESS,
+	payload: token,
+})
+
+export const loginError = () => ({
+	type: LOGIN_ERROR,
+})
 
 export const types = {
 	LOGIN_REQUEST,
@@ -33,7 +46,16 @@ export const types = {
 	REGISTER_REQUEST,
 	REGISTER_SUCCESS,
 	REGISTER_ERROR,
-	REGISTER_RESET
+	REGISTER_RESET,
 }
 
-export default { registerRequest, registerSuccess, registerError, registerReset }
+export default {
+	registerRequest,
+	registerSuccess,
+	registerError,
+	registerReset,
+
+	loginRequest,
+	loginSuccess,
+	loginError,
+}
