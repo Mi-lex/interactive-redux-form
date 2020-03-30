@@ -1,11 +1,12 @@
 import React from 'react'
 import { Link as RouterLink } from 'react-router-dom'
-import { Button, Grid, Link, TextField } from '@material-ui/core'
+import { Button, Grid, Link } from '@material-ui/core'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import { Field } from 'redux-form'
 
 import AuthFormWrapper from './AuthFormWrapper'
 import SideBackgroundWrapper from './SideBackgroundWrapper'
+import { TextField } from './MaterialReduxForm'
 
 const useStyles = makeStyles((theme: Theme) => ({
 	form: {
@@ -22,7 +23,7 @@ const RegisterForm = () => {
 
 	return (
 		<SideBackgroundWrapper>
-			<AuthFormWrapper title="Регистрация">
+			<AuthFormWrapper title="Регистрация" marginY={1}>
 				<form className={classes.form}>
 					<Grid container spacing={2}>
 						<Grid item xs={12} sm={6}>
@@ -32,7 +33,7 @@ const RegisterForm = () => {
 								fullWidth
 								id="firstName"
 								label="Имя"
-								name="firstName"
+								name="first_name"
 								autoFocus
 							/>
 						</Grid>
@@ -41,9 +42,9 @@ const RegisterForm = () => {
 								component={TextField}
 								variant="outlined"
 								fullWidth
-								id="lastName"
+								id="secondName"
 								label="Фамилия"
-								name="lastName"
+								name="second_name"
 							/>
 						</Grid>
 						<Grid item xs={12}>
@@ -53,7 +54,7 @@ const RegisterForm = () => {
 								fullWidth
 								id="middleName"
 								label="Отчество"
-								name="middleName"
+								name="middle_name"
 							/>
 						</Grid>
 						<Grid item xs={12}>
@@ -76,6 +77,18 @@ const RegisterForm = () => {
 								label="Пароль"
 								type="password"
 								id="password"
+								autoComplete="current-password"
+							/>
+						</Grid>
+						<Grid item xs={12}>
+							<Field
+								component={TextField}
+								variant="outlined"
+								fullWidth
+								name="password_confirmation"
+								label="Подтверждение"
+								type="password"
+								id="password_confirmation"
 								autoComplete="current-password"
 							/>
 						</Grid>

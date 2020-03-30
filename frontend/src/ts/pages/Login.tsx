@@ -8,7 +8,7 @@ const Login: React.FC = () => {
 }
 
 const Decorated = reduxForm({
-	form: 'Login',
+	form: 'login',
 	validate: loginValidator,
 })(Login)
 

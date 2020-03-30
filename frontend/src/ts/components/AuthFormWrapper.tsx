@@ -6,26 +6,31 @@ import Copyright from './Copyright'
 
 const useStyles = makeStyles((theme: Theme) => ({
 	paper: {
-		margin: theme.spacing(8, 4),
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
 	},
 	avatar: {
-		margin: theme.spacing(1),
 		backgroundColor: theme.palette.secondary.main,
 	},
 }))
 
 type AuthWrapperProps = {
 	title?: 'Вход' | 'Регистрация'
+	marginY?: number
+	marginX?: number
 }
 
-const AuthFormWrapper: React.FC<AuthWrapperProps> = ({ title, children }) => {
+const AuthFormWrapper: React.FC<AuthWrapperProps> = ({
+	title,
+	children,
+	marginY = 8,
+	marginX = 4,
+}) => {
 	const classes = useStyles()
 
 	return (
-		<div className={classes.paper}>
+		<Box component="div" className={classes.paper} my={marginY} mx={marginX}>
 			<Avatar className={classes.avatar}>
 				<LockOutlinedIcon />
 			</Avatar>
@@ -38,7 +43,7 @@ const AuthFormWrapper: React.FC<AuthWrapperProps> = ({ title, children }) => {
 			<Box mt={5}>
 				<Copyright />
 			</Box>
-		</div>
+		</Box>
 	)
 }
 

@@ -1,5 +1,4 @@
-import { messages } from './../store/modules/passport/actions'
-import { Auth } from './../store/types'
+import { Auth, Register } from './../store/types'
 
 const email = {
 	rule: new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i),
@@ -21,6 +20,14 @@ const passwordRules = [
 	},
 ]
 
+const nonNumeralField = {
+	rule: new RegExp(/^[\u0401\u0451\u0410-\u044fA-z]{2,}$/i),
+	message: 'Поле не должно содержать цифры и знаки',
+}
+
+const minimumSymbolAmountMessage = (amount: string | number) =>
+	`Поле должно содержать минимум ${amount} символов`
+
 const requiredMessage = 'Поле обязательно'
 
 export const loginValidator = (values: Auth) => {
@@ -37,13 +44,41 @@ export const loginValidator = (values: Auth) => {
 	if (!values.password) {
 		errors.password = requiredMessage
 	} else if (values.password.length < MIN_PASS_LENGTH) {
-		errors.password = `Пароль должен содержать минимум ${MIN_PASS_LENGTH} символов`
+		errors.password = minimumSymbolAmountMessage(MIN_PASS_LENGTH)
 	} else {
 		passwordRules.forEach(({ rule, message }) => {
 			if (!rule.test(values.password)) {
 				errors.password = message
 			}
 		})
+	}
+
+	return errors
+}
+
+export const registerValidator = (values: Register) => {
+	// validate email and password
+	const errors = loginValidator(values) as Register
+
+	const SIMILAR_FIELDS = ['first_name', 'second_name', 'middle_name'] as const
+	const FIELD_MIN_LENGTH = 2
+
+	SIMILAR_FIELDS.forEach((field) => {
+		if (!values[field]) {
+			errors[field] = requiredMessage
+		} else if (values[field].length < FIELD_MIN_LENGTH) {
+			errors[
+				field
+			] = `Поле должно содержать минимум ${FIELD_MIN_LENGTH} символа`
+		} else if (!nonNumeralField.rule.test(values[field])) {
+			errors[field] = nonNumeralField.message
+		}
+	})
+
+	if (!values['password_confirmation']) {
+		errors['password_confirmation'] = requiredMessage
+	} else if (values['password_confirmation'] !== values.password) {
+		errors['password_confirmation'] = 'Поля не совпадают'
 	}
 
 	return errors

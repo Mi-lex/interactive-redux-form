@@ -10,6 +10,23 @@ export type PartialRecord<K extends keyof any, T> = {
 	[P in K]?: T
 }
 
+/**
+ * Remove from T the keys that are in common with K
+ */
+export type Optionalize<T extends K, K> = Omit<T, keyof K>
+
+export interface Auth {
+	email: string
+	password: string
+}
+
+export interface Register extends Auth {
+	first_name: string
+	second_name: string
+	middle_name: string
+	password_confirmation: string
+}
+
 interface Option {
 	label: string
 	value: string
