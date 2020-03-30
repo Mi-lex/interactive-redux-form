@@ -1,5 +1,5 @@
 import React from 'react'
-import { Field } from 'redux-form'
+import { Field, reduxForm } from 'redux-form'
 import { Link as RouterLink } from 'react-router-dom'
 import { Button, FormControlLabel, Grid, Link } from '@material-ui/core'
 import { makeStyles, Theme } from '@material-ui/core/styles'
@@ -7,6 +7,7 @@ import { makeStyles, Theme } from '@material-ui/core/styles'
 import AuthFormWrapper from './AuthFormWrapper'
 import { Checkbox, TextField } from './MaterialReduxForm'
 import SideBackgroundWrapper from './SideBackgroundWrapper'
+import { loginValidator } from '../helpers/validators'
 
 const useStyles = makeStyles((theme: Theme) => ({
 	form: {
@@ -18,18 +19,21 @@ const useStyles = makeStyles((theme: Theme) => ({
 	},
 }))
 
-const LoginForm = () => {
+type Props = {
+	handleSubmit: () => void
+}
+
+const LoginForm: React.FC<Props> = ({ handleSubmit }) => {
 	const classes = useStyles()
 
 	return (
 		<SideBackgroundWrapper>
 			<AuthFormWrapper title="Вход">
-				<form className={classes.form} noValidate>
+				<form className={classes.form} onSubmit={handleSubmit}>
 					<Field
 						component={TextField}
 						variant="outlined"
 						margin="normal"
-						required
 						fullWidth
 						id="email"
 						label="Email адрес"
@@ -40,16 +44,13 @@ const LoginForm = () => {
 					<Field
 						component={TextField}
 						variant="outlined"
-						margin="normal"
-						required
 						fullWidth
 						name="password"
-						label="пароль"
+						label="Пароль"
 						type="password"
 						id="password"
 						autoComplete="current-password"
 					/>
-
 					<FormControlLabel
 						control={
 							<Field component={Checkbox} color="primary" name="remember" />
@@ -83,4 +84,10 @@ const LoginForm = () => {
 	)
 }
 
-export default LoginForm
+const Decorated = reduxForm({
+	form: 'login',
+	validate: loginValidator,
+	// @ts-ignore
+})(LoginForm)
+
+export default Decorated

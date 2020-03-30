@@ -83,8 +83,6 @@ const loginReducer = (
 				localStorage.setItem('user', JSON.stringify(user))
 			}
 
-			setDefaultAuthHeader(user.accessToken)
-
 			return {
 				...state,
 				pending: false,
