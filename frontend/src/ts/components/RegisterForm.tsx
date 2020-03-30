@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { FormEventHandler, FormEvent } from 'react'
+import { Field, reduxForm, FormSubmitHandler } from 'redux-form'
 import { Link as RouterLink } from 'react-router-dom'
 import { Button, Grid, Link } from '@material-ui/core'
 import { makeStyles, Theme } from '@material-ui/core/styles'
-import { Field } from 'redux-form'
 
+import { registerValidator } from '../helpers/validators'
 import AuthFormWrapper from './AuthFormWrapper'
-import SideBackgroundWrapper from './SideBackgroundWrapper'
 import { TextField } from './MaterialReduxForm'
+import SideBackgroundWrapper from './SideBackgroundWrapper'
 
 const useStyles = makeStyles((theme: Theme) => ({
 	form: {
@@ -18,13 +19,17 @@ const useStyles = makeStyles((theme: Theme) => ({
 	},
 }))
 
-const RegisterForm = () => {
+type Props = {
+	handleSubmit: () => void
+}
+
+const RegisterForm: React.FC<Props> = ({ handleSubmit }) => {
 	const classes = useStyles()
 
 	return (
 		<SideBackgroundWrapper>
 			<AuthFormWrapper title="Регистрация" marginY={1}>
-				<form className={classes.form}>
+				<form className={classes.form} onSubmit={handleSubmit}>
 					<Grid container spacing={2}>
 						<Grid item xs={12} sm={6}>
 							<Field
@@ -114,5 +119,10 @@ const RegisterForm = () => {
 		</SideBackgroundWrapper>
 	)
 }
+const Decorated = reduxForm({
+	form: 'register',
+	validate: registerValidator,
+	// @ts-ignore
+})(RegisterForm)
 
-export default RegisterForm
+export default Decorated
