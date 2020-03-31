@@ -1,12 +1,10 @@
-import axios, { AxiosRequestConfig } from 'axios'
+import axios from 'axios'
 import format from 'date-fns/format'
 import parse from 'date-fns/parse'
-import { status } from '../store/consts'
 
 import { FetchedOrder, FormOrder, PaperJoinerName } from '../store/types'
 import { FormPostAction, PostPrintActionName } from './../store/types'
 import { convertFormat } from '../helpers/utils'
-import { call } from 'redux-saga/effects'
 
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequested'
 
@@ -23,7 +21,6 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
 		axios.defaults.headers.common['X-CSRF-TOKEN'] = token.getAttribute(
 			'content',
 		)
-		console.log(token)
 	} else {
 		console.error(
 			'CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token',
@@ -237,20 +234,6 @@ const api = axios.create({
 
 export const setDefaultAuthHeader = (token: string): void => {
 	api.defaults.headers.common['Authorization'] = `Bearer ${token}`
-}
-
-export function* protectedRouteRequest(requestOptions: AxiosRequestConfig) {
-	try {
-		// @ts-ignore
-		const response = yield call(api, requestOptions)
-		return response
-	} catch (error) {
-		const { response } = error
-		if (response && response.status === status.UNAUTHORIZED) {
-			if (response.message === 'Token is Expired') {
-			}
-		}
-	}
 }
 
 export default api

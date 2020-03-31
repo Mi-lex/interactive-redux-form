@@ -1,6 +1,6 @@
 import { PaperJoinerName, PostPrintActionName } from './types'
 
-export const status = { UNPROCESSABLE_ENTITY: 422 }
+export const status = { UNPROCESSABLE_ENTITY: 422, UNAUTHORIZED: 401 }
 
 export const paperJoinersNames: PaperJoinerName[] = [
 	'paper_clip',

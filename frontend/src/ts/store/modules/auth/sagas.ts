@@ -1,17 +1,15 @@
 import actionCreator, { types } from './actions'
-import api, {
-	getMessageFromError,
-	protectedRouteRequest,
-} from '../../../services'
-import { call, put, takeLatest } from 'redux-saga/effects'
+import api from '../../../services'
+import { call, put, takeLatest, select } from 'redux-saga/effects'
 import { Action } from '../../types'
 import { reset, stopSubmit } from 'redux-form'
 import { status } from '../../consts'
+import { AxiosRequestConfig } from 'axios'
+import { RootState } from '../../rootReducer'
 
 function* registerRequest(action: Action) {
 	try {
 		const data = JSON.stringify(action.payload)
-		console.log(data)
 
 		yield call(api.post, 'auth/register', data, {
 			headers: {
@@ -26,8 +24,6 @@ function* registerRequest(action: Action) {
 			error.response &&
 			error.response.status === status.UNPROCESSABLE_ENTITY
 		) {
-			console.log(error.response.data)
-
 			yield put(stopSubmit('register', error.response.data.errors))
 		}
 
@@ -49,8 +45,6 @@ function* loginRequest(action: Action) {
 
 		yield put(actionCreator.loginSuccess(response.data['access_token']))
 	} catch (error) {
-		console.log(error.response)
-
 		if (
 			error.response &&
 			error.response.status === status.UNPROCESSABLE_ENTITY
@@ -62,6 +56,59 @@ function* loginRequest(action: Action) {
 	}
 }
 
+function* refreshTokenRequest() {
+	try {
+		const response = yield* protectedRouteRequest({
+			method: 'post',
+			url: 'auth/refresh',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
+
+		yield put(actionCreator.loginSuccess(response.data['access_token']))
+	} catch (error) {
+		yield put(actionCreator.loginError())
+	}
+}
+
+/**
+ *	Make request to the protected route,
+ *	if token is expired, make refresh token request
+ *	and repeat intended request
+ * @param requestOptions - axios request params
+ */
+export function* protectedRouteRequest(requestOptions: AxiosRequestConfig) {
+	function* request() {
+		const authToken = yield select(
+			(state: RootState) => state.auth.login.user.accessToken,
+		)
+
+		requestOptions.headers['Authorization'] = `Bearer ${authToken}`
+
+		// @ts-ignore
+		return yield call(api, requestOptions)
+	}
+
+	try {
+		return yield* request()
+	} catch (error) {
+		const { response } = error
+
+		if (response && response.status === status.UNAUTHORIZED) {
+			if (response.message === 'Token is Expired') {
+				yield put(actionCreator.refreshTokenRequest())
+				return yield* request()
+			} else {
+				yield put(actionCreator.logout())
+				throw Error('Unauthorized')
+			}
+		} else {
+			throw Error(error)
+		}
+	}
+}
+
 function* watchLastRegisterRequest() {
 	yield takeLatest(types.REGISTER_REQUEST, registerRequest)
 }
@@ -70,4 +117,12 @@ function* watchLastLoginRequest() {
 	yield takeLatest(types.LOGIN_REQUEST, loginRequest)
 }
 
-export default [watchLastRegisterRequest, watchLastLoginRequest]
+function* watchLastRefreshTokenRequest() {
+	yield takeLatest(types.REFRESH_TOKEN_REQUEST, refreshTokenRequest)
+}
+
+export default [
+	watchLastRegisterRequest,
+	watchLastLoginRequest,
+	watchLastRefreshTokenRequest,
+]

@@ -1,4 +1,3 @@
-import { setDefaultAuthHeader } from './../../../services/index'
 import { Action } from './../../types'
 import { types } from './actions'
 import { combineReducers } from 'redux'
@@ -73,6 +72,12 @@ const loginReducer = (
 				remember: action.payload.remember,
 				pending: true,
 			}
+		case types.REFRESH_TOKEN_REQUEST:
+			return {
+				...state,
+				remember: false,
+				pending: true,
+			}
 		case types.LOGIN_SUCCESS:
 			const user = {
 				isLoggedIn: true,
@@ -96,6 +101,14 @@ const loginReducer = (
 				remember: false,
 				pending: false,
 				error: true,
+			}
+		case types.LOGOUT:
+			return {
+				...state,
+				user: {
+					isLoggedIn: false,
+					accessToken: '',
+				},
 			}
 		default:
 			return state
