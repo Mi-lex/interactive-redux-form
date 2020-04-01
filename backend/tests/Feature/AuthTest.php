@@ -10,7 +10,6 @@ use App\Traits\InteractsWithAuthOverrides;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use JWTAuth;
 
 class AuthTest extends TestCase
 {
@@ -45,16 +44,14 @@ class AuthTest extends TestCase
     }
 
     /** @test */
-    public function an_unauthorized_user_receives_error_logging_in()
+    public function wrong_login_credentials_return_failed_login_response()
     {
-        $this->withoutExceptionHandling();
-
         $userCredentials = [
             'email' => $this->faker->safeEmail,
             'password' => $this->faker->password
         ];
 
-        $this->post('/api/auth/login', $userCredentials)->assertStatus(401);
+        $this->post('/api/auth/login', $userCredentials)->assertStatus(422);
     }
 
     /** @test */
@@ -71,8 +68,7 @@ class AuthTest extends TestCase
             'password' => $password
         ];
 
-        $response = $this->post('/api/auth/login', $userCredentials)->assertOk();
-        $this->assertNotEmpty($response->headers->get('Authorization'));
+        $this->post('/api/auth/login', $userCredentials)->assertOk()->assertHeader('Authorization');
     }
 
     /** @test */
