@@ -6,10 +6,14 @@ import api, {
 	getRequestData,
 } from '../../../services'
 import { Action } from '../../types'
+import { protectedRouteRequest } from '../auth/sagas'
 
 function* createOrderRequest() {
 	try {
-		const response = yield call(api.post, 'passport')
+		const response = yield* protectedRouteRequest({
+			method: 'patch',
+			url: 'passport',
+		})
 
 		const formOrder = getFormData(response.data)
 		yield put(actionCreator.fetchOrderSuccess(formOrder))
@@ -26,16 +30,15 @@ function* updateOrderRequest() {
 		const formValues = yield select((state) => state.form.passport.values)
 		const requestData = getRequestData(formValues)
 
-		const response = yield call(
-			api.patch,
-			`/passport/${formValues.id}`,
-			JSON.stringify(requestData),
-			{
-				headers: {
-					'Content-Type': 'application/json',
-				},
+		const response = yield* protectedRouteRequest({
+			method: 'patch',
+			url: `/passport/${formValues.id}`,
+			data: requestData,
+			headers: {
+				'Content-Type': 'application/json',
 			},
-		)
+		})
+
 		const formOrder = getFormData(response.data)
 
 		yield put(actionCreator.updateOrderSuccess())
@@ -51,7 +54,14 @@ function* updateOrderRequest() {
 function* fetchOrderRequest(action: Action) {
 	try {
 		const { payload: orderId } = action
-		const response = yield call(api.get, `passport/${orderId}`)
+		const response = yield* protectedRouteRequest({
+			method: 'get',
+			url: `passport/${orderId}`,
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
+
 		const formOrder = getFormData(response.data)
 
 		yield put(actionCreator.fetchOrderSuccess(formOrder))
