@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -45,15 +45,15 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login()
+    public function login(Request $request)
     {
         $credentials = request(['email', 'password']);
 
         if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['message' => 'Unauthorized'], 401);
+            return $this->sendFailedLoginResponse($request);
         }
 
-        $response = response()->json(['message' => 'User is successfully logged in']);
+        $response = response()->json('User is successfully logged in');
 
         return $this->setAuthenticationHeader($response, $token);
     }
@@ -67,7 +67,7 @@ class LoginController extends Controller
     {
         auth()->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json('Successfully logged out');
     }
 
     /**
@@ -90,7 +90,7 @@ class LoginController extends Controller
     public function refresh()
     {
         // $newToken = auth()->refresh();
-        return response()->json(['message' => 'Token has been successfully refreshed']);
+        return response()->json('Token has been successfully refreshed');
     }
 
     /**

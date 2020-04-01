@@ -20,7 +20,6 @@ type Props = TextFieldProps & {
 
 const TextareaAutosizeField: React.FC<Props> = (props) => {
 	const { rowsMin, ...custom } = props
-	console.log(custom)
 
 	return (
 		<TextField
