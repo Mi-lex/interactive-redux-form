@@ -12,7 +12,6 @@ import {
 	Checkbox,
 	KeyboardDatePicker,
 	Select,
-	TextareaAutosize,
 	TextField,
 	TimePicker,
 } from '../components/MaterialReduxForm'
@@ -152,12 +151,12 @@ const InitialInfo: React.FC = () => {
 			</Grid>
 			<Grid item container xs={12} className={classes.root} direction="column">
 				<Field
-					component={TextareaAutosize}
+					component={TextField}
 					name="important_info"
 					label="Важно"
 					type="text"
 					fullWidth
-					rowsMin={2}
+					multiline
 					variant="outlined"
 				/>
 			</Grid>

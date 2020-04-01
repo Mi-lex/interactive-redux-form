@@ -4,7 +4,7 @@ import { Field, formValueSelector } from 'redux-form'
 import FormControl from '@material-ui/core/FormControl'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 
-import { Checkbox, TextareaAutosize } from '../components/MaterialReduxForm'
+import { Checkbox, TextField } from '../components/MaterialReduxForm'
 
 const selector: Function = formValueSelector('passport')
 
@@ -26,12 +26,12 @@ const DeliveryBlock = () => {
 			</FormControl>
 			{requiredDelivery && (
 				<Field
-					component={TextareaAutosize}
+					component={TextField}
 					name="delivery.address"
 					label="Адрес"
 					type="text"
 					fullWidth
-					rowsMin={6}
+					multiline
 					variant="outlined"
 				/>
 			)}
