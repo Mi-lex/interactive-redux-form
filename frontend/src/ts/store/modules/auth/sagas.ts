@@ -84,7 +84,10 @@ export function* protectedRouteRequest(requestOptions: AxiosRequestConfig) {
 			(state: RootState) => state.auth.login.user.accessToken,
 		)
 
-		requestOptions.headers['Authorization'] = authToken
+		requestOptions.headers = {
+			...requestOptions.headers,
+			Authorization: authToken,
+		}
 
 		// @ts-ignore
 		return yield call(api, requestOptions)
@@ -94,7 +97,6 @@ export function* protectedRouteRequest(requestOptions: AxiosRequestConfig) {
 		return yield* request()
 	} catch (error) {
 		const { response } = error
-		console.log(response)
 
 		if (response && response.status === status.UNAUTHORIZED) {
 			if (response.data.message === 'Token has expired') {

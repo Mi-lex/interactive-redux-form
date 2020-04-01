@@ -11,8 +11,11 @@ import { protectedRouteRequest } from '../auth/sagas'
 function* createOrderRequest() {
 	try {
 		const response = yield* protectedRouteRequest({
-			method: 'patch',
+			method: 'post',
 			url: 'passport',
+			headers: {
+				'Content-Type': 'application/json',
+			},
 		})
 
 		const formOrder = getFormData(response.data)
