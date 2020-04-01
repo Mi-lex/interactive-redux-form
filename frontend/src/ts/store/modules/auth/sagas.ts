@@ -66,7 +66,7 @@ function* refreshTokenRequest() {
 			},
 		})
 
-		yield put(actionCreator.loginSuccess(response.data['access_token']))
+		yield put(actionCreator.loginSuccess(response.headers.authorization))
 	} catch (error) {
 		yield put(actionCreator.loginError())
 	}
@@ -94,6 +94,7 @@ export function* protectedRouteRequest(requestOptions: AxiosRequestConfig) {
 		return yield* request()
 	} catch (error) {
 		const { response } = error
+		console.log(response)
 
 		if (response && response.status === status.UNAUTHORIZED) {
 			if (response.data.message === 'Token has expired') {
