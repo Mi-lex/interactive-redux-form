@@ -1,6 +1,6 @@
 import actionCreator, { types } from './actions'
 import api from '../../../services'
-import { call, put, takeLatest, select } from 'redux-saga/effects'
+import { call, put, takeLatest, select, takeEvery } from 'redux-saga/effects'
 import { Action } from '../../types'
 import { reset, stopSubmit } from 'redux-form'
 import { status } from '../../consts'
@@ -43,7 +43,7 @@ function* loginRequest(action: Action) {
 			},
 		})
 
-		yield put(actionCreator.loginSuccess(response.data['access_token']))
+		yield put(actionCreator.loginSuccess(response.headers.authorization))
 	} catch (error) {
 		if (
 			error.response &&
@@ -84,7 +84,7 @@ export function* protectedRouteRequest(requestOptions: AxiosRequestConfig) {
 			(state: RootState) => state.auth.login.user.accessToken,
 		)
 
-		requestOptions.headers['Authorization'] = `Bearer ${authToken}`
+		requestOptions.headers['Authorization'] = authToken
 
 		// @ts-ignore
 		return yield call(api, requestOptions)
@@ -96,10 +96,11 @@ export function* protectedRouteRequest(requestOptions: AxiosRequestConfig) {
 		const { response } = error
 
 		if (response && response.status === status.UNAUTHORIZED) {
-			if (response.message === 'Token is Expired') {
+			if (response.data.message === 'Token has expired') {
 				yield put(actionCreator.refreshTokenRequest())
 				return yield* request()
 			} else {
+				// If refresh time is expired, logout
 				yield put(actionCreator.logout())
 				throw Error('Unauthorized')
 			}
@@ -118,7 +119,7 @@ function* watchLastLoginRequest() {
 }
 
 function* watchLastRefreshTokenRequest() {
-	yield takeLatest(types.REFRESH_TOKEN_REQUEST, refreshTokenRequest)
+	yield takeEvery(types.REFRESH_TOKEN_REQUEST, refreshTokenRequest)
 }
 
 export default [
