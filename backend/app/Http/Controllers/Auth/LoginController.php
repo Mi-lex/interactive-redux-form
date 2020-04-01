@@ -36,7 +36,8 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('jwt.auth')->except(['login']);
+        $this->middleware('jwt.refresh')->only(['refresh']);
+        $this->middleware('jwt.auth')->except(['login', 'refresh']);
     }
 
     /**
@@ -49,16 +50,12 @@ class LoginController extends Controller
         $credentials = request(['email', 'password']);
 
         if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['message' => 'Unauthorized'], 401);
         }
 
-        return $this->respondWithToken($token);
-    }
+        $response = response()->json(['message' => 'User is successfully logged in']);
 
-    public function protected()
-    {
-        $itsProtected = true;
-        return response()->json(['itsprotected' => $itsProtected]);
+        return $this->setAuthenticationHeader($response, $token);
     }
 
     /**
@@ -85,27 +82,31 @@ class LoginController extends Controller
 
     /**
      * Refresh a token.
+     * This method is going after refresh middleware,
+     * which sets auth header
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function refresh()
     {
-        return $this->respondWithToken(auth()->refresh());
+        // $newToken = auth()->refresh();
+        return response()->json(['message' => 'Token has been successfully refreshed']);
     }
 
     /**
-     * Get the token array structure.
+     * Set the authentication header.
      *
-     * @param  string $token
+     * @param  \Illuminate\Http\Response|\Illuminate\Http\JsonResponse  $response
+     * @param  string|null  $token
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Response|\Illuminate\Http\JsonResponse
      */
-    protected function respondWithToken($token)
+
+    protected function setAuthenticationHeader($response, $token = null)
     {
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
-        ]);
+        $token = $token ?: $this->auth->refresh();
+        $response->headers->set('Authorization', 'Bearer ' . $token);
+
+        return $response;
     }
 }
