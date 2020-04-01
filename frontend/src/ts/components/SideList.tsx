@@ -10,7 +10,6 @@ import DescriptionIcon from '@material-ui/icons/Description'
 import MailIcon from '@material-ui/icons/Mail'
 import InboxIcon from '@material-ui/icons/MoveToInbox'
 import TocIcon from '@material-ui/icons/Toc'
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 
 const useStyles = makeStyles({
 	list: {
@@ -48,12 +47,6 @@ const SideList = (props: Props): JSX.Element => {
 						<TocIcon />
 					</ListItemIcon>
 					<ListItemText primary="Заказы" />
-				</ListItem>
-				<ListItem button component={Link} to="/login">
-					<ListItemIcon>
-						<LockOutlinedIcon />
-					</ListItemIcon>
-					<ListItemText primary="Вход" />
 				</ListItem>
 				<Divider />
 				{['Статистика', 'Канбан доска', 'Активность', 'Последняя ссылка'].map(

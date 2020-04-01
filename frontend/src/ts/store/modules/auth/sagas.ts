@@ -80,7 +80,7 @@ function* refreshTokenRequest() {
  */
 export function* protectedRouteRequest(requestOptions: AxiosRequestConfig) {
 	function* request() {
-		const authToken = yield select(
+		const authToken: string = yield select(
 			(state: RootState) => state.auth.login.user.accessToken,
 		)
 

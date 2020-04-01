@@ -13,6 +13,7 @@ import MailIcon from '@material-ui/icons/Mail'
 import MenuIcon from '@material-ui/icons/Menu'
 import MoreIcon from '@material-ui/icons/MoreVert'
 import NotificationsIcon from '@material-ui/icons/Notifications'
+import authActionCreator from '../store/modules/auth/actions'
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -49,6 +50,10 @@ const PageHeader: React.FC = (props) => {
 
 	const toggle = () => {
 		dispatch(toggleDrawer())
+	}
+
+	const logout = () => {
+		dispatch(authActionCreator.logout())
 	}
 
 	const classes = useStyles()
@@ -91,7 +96,7 @@ const PageHeader: React.FC = (props) => {
 			onClose={handleMenuClose}
 		>
 			<MenuItem onClick={handleMenuClose}>Мой профиль</MenuItem>
-			<MenuItem onClick={handleMenuClose}>Выйти</MenuItem>
+			<MenuItem onClick={logout}>Выйти</MenuItem>
 		</Menu>
 	)
 
