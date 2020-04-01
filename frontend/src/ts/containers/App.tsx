@@ -15,6 +15,7 @@ import Register from '../pages/Register'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../store/rootReducer'
 import { toggleDrawer } from '../store/modules/drawer/actions'
+import ProtectedRoute from '../components/ProtectedRoute'
 
 const App: React.FC = () => {
 	const dispatch = useDispatch()
@@ -32,12 +33,12 @@ const App: React.FC = () => {
 			<Switch>
 				<MuiPickersUtilsProvider utils={DateFnsUtils} locale={ruLocale}>
 					<Container maxWidth="xl">
-						<Route path="/" exact>
+						<ProtectedRoute path="/" exact>
 							<Orders />
-						</Route>
-						<Route path="/passport/:id?" exact>
+						</ProtectedRoute>
+						<ProtectedRoute path="/passport/:id?" exact>
 							<Passport />
-						</Route>
+						</ProtectedRoute>
 					</Container>
 					<Route path="/login">
 						<Login />
