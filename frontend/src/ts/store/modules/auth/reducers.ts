@@ -103,6 +103,7 @@ const loginReducer = (
 				error: true,
 			}
 		case types.LOGOUT:
+			localStorage.removeItem('user')
 			return {
 				...state,
 				user: {
