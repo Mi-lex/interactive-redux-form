@@ -39,25 +39,15 @@ export const loginValidator = (values: Auth) => {
 		errors.email = email.message
 	}
 
-	const MIN_PASS_LENGTH = 8
-
 	if (!values.password) {
 		errors.password = requiredMessage
-	} else if (values.password.length < MIN_PASS_LENGTH) {
-		errors.password = minimumSymbolAmountMessage(MIN_PASS_LENGTH)
-	} else {
-		passwordRules.forEach(({ rule, message }) => {
-			if (!rule.test(values.password)) {
-				errors.password = message
-			}
-		})
 	}
 
 	return errors
 }
 
 export const registerValidator = (values: Register) => {
-	// validate email and password
+	// validate email
 	const errors = loginValidator(values) as Register
 
 	const SIMILAR_FIELDS = ['first_name', 'second_name', 'middle_name'] as const
@@ -74,6 +64,20 @@ export const registerValidator = (values: Register) => {
 			errors[field] = nonNumeralField.message
 		}
 	})
+
+	const MIN_PASS_LENGTH = 8
+
+	if (!values.password) {
+		errors.password = requiredMessage
+	} else if (values.password.length < MIN_PASS_LENGTH) {
+		errors.password = minimumSymbolAmountMessage(MIN_PASS_LENGTH)
+	} else {
+		passwordRules.forEach(({ rule, message }) => {
+			if (!rule.test(values.password)) {
+				errors.password = message
+			}
+		})
+	}
 
 	if (!values['password_confirmation']) {
 		errors['password_confirmation'] = requiredMessage
