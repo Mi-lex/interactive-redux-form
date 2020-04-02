@@ -179,11 +179,8 @@ export const getRequestData = (order: FormOrder): FormOrder => {
 			if (value) {
 				const formPostAction = order.post_actions[actionName] as FormPostAction
 
-				const {
-					elements = null,
-					additional = [],
-					...actionBody
-				} = formPostAction
+				const { elements = null, additional = [null], ...actionBody } =
+					formPostAction || {}
 
 				requestOrder.post_actions = {
 					...requestOrder.post_actions,
