@@ -82,6 +82,7 @@ class OrderTable extends React.Component<Props, TableState> {
 						render: (rowData) => (
 							<Link to={`passport/${rowData.id}`}>{rowData.id}</Link>
 						),
+						defaultSort: 'desc'
 					},
 					{
 						title: 'Название',
