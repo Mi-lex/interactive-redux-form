@@ -6,6 +6,8 @@ const LOGIN_ERROR = 'standard/auth/LOGIN_ERROR'
 const LOGOUT = 'standard/auth/LOGOUT'
 
 const REFRESH_TOKEN_REQUEST = 'standard/auth/REFRESH_TOKEN_REQUEST'
+const REFRESH_TOKEN_SUCCESS = 'standard/auth/REFRESH_TOKEN_SUCCESS'
+const REFRESH_TOKEN_ERROR = 'standard/auth/REFRESH_TOKEN_ERROR'
 
 const REGISTER_REQUEST = 'standard/auth/REGISTER_REQUEST'
 const REGISTER_SUCCESS = 'standard/auth/REGISTER_SUCCESS'
@@ -51,6 +53,15 @@ export const refreshTokenRequest = () => ({
 	type: REFRESH_TOKEN_REQUEST,
 })
 
+export const refreshTokenSuccess = (token: string) => ({
+	type: REFRESH_TOKEN_SUCCESS,
+	payload: token,
+})
+
+export const refreshTokenError = () => ({
+	type: REFRESH_TOKEN_ERROR,
+})
+
 export const types = {
 	LOGIN_REQUEST,
 	LOGIN_SUCCESS,
@@ -58,6 +69,8 @@ export const types = {
 	LOGOUT,
 
 	REFRESH_TOKEN_REQUEST,
+	REFRESH_TOKEN_SUCCESS,
+	REFRESH_TOKEN_ERROR,
 
 	REGISTER_REQUEST,
 	REGISTER_SUCCESS,
@@ -72,6 +85,8 @@ export default {
 	logout,
 
 	refreshTokenRequest,
+	refreshTokenSuccess,
+	refreshTokenError,
 
 	registerRequest,
 	registerSuccess,

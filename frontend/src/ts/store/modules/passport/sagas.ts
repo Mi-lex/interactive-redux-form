@@ -1,6 +1,6 @@
 import actionCreator, { types } from './actions'
 import { call, put, takeLatest, select } from 'redux-saga/effects'
-import api, {
+import {
 	getMessageFromError,
 	getFormData,
 	getRequestData,
@@ -10,7 +10,7 @@ import { protectedRouteRequest } from '../auth/sagas'
 
 function* createOrderRequest() {
 	try {
-		const response = yield* protectedRouteRequest({
+		const response = yield call(protectedRouteRequest, {
 			method: 'post',
 			url: 'passport',
 			headers: {
@@ -22,6 +22,8 @@ function* createOrderRequest() {
 		yield put(actionCreator.fetchOrderSuccess(formOrder))
 		yield put(actionCreator.createOrderSuccess())
 	} catch (error) {
+		console.log(error)
+
 		const message = getMessageFromError(error)
 
 		yield put(actionCreator.createOrderError(message))
@@ -33,7 +35,7 @@ function* updateOrderRequest() {
 		const formValues = yield select((state) => state.form.passport.values)
 		const requestData = getRequestData(formValues)
 
-		const response = yield* protectedRouteRequest({
+		const response = yield call(protectedRouteRequest, {
 			method: 'patch',
 			url: `/passport/${formValues.id}`,
 			data: requestData,
@@ -57,7 +59,7 @@ function* updateOrderRequest() {
 function* fetchOrderRequest(action: Action) {
 	try {
 		const { payload: orderId } = action
-		const response = yield* protectedRouteRequest({
+		const response = yield call(protectedRouteRequest, {
 			method: 'get',
 			url: `passport/${orderId}`,
 			headers: {

@@ -48,7 +48,8 @@ interface LoginState extends AuthState {
 	}
 }
 
-const storedUser = localStorage.getItem('user')
+const storedUser =
+	localStorage.getItem('user') || sessionStorage.getItem('user')
 
 const LOGIN_INITIAL_STATE: LoginState = {
 	...INITIAL_STATE,
@@ -61,12 +62,20 @@ const LOGIN_INITIAL_STATE: LoginState = {
 		  },
 }
 
+const removeUserFromStorage = () => {
+	localStorage.removeItem('user')
+	sessionStorage.removeItem('user')
+}
+
 const loginReducer = (
 	state = LOGIN_INITIAL_STATE,
 	action: Action,
 ): LoginState => {
 	switch (action.type) {
 		case types.LOGIN_REQUEST:
+			// Cleanup storage. This makes working with storage more predictable
+			removeUserFromStorage()
+
 			return {
 				...state,
 				remember: action.payload.remember,
@@ -79,23 +88,34 @@ const loginReducer = (
 				pending: true,
 			}
 		case types.LOGIN_SUCCESS:
+		case types.REFRESH_TOKEN_SUCCESS:
 			const user = {
 				isLoggedIn: true,
 				accessToken: action.payload,
 			}
 
-			if (state.remember) {
-				localStorage.setItem('user', JSON.stringify(user))
-			}
+			const jsonUser = JSON.stringify(user)
+
+			// There could not be stored user in case of
+			// login success, because there is storage cleanup in login request.
+			// "The local storage" condition  is needed for refresh token case, because
+			// 'state.remember' value can be lost due to page reloading,
+			// and refresh action will choose storage
+			// relying on location of user data
+			const memoryAdapter =
+				state.remember || localStorage.getItem('user')
+					? localStorage
+					: sessionStorage
+			memoryAdapter.setItem('user', jsonUser)
 
 			return {
 				...state,
 				pending: false,
-				remember: false,
 				success: true,
 				user,
 			}
 		case types.LOGIN_ERROR:
+		case types.REFRESH_TOKEN_ERROR:
 			return {
 				...state,
 				remember: false,
@@ -103,7 +123,8 @@ const loginReducer = (
 				error: true,
 			}
 		case types.LOGOUT:
-			localStorage.removeItem('user')
+			removeUserFromStorage()
+
 			return {
 				...state,
 				user: {

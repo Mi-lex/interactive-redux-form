@@ -1,6 +1,6 @@
 import actionCreator, { types } from './actions'
 import api from '../../../services'
-import { call, put, takeLatest, select, takeEvery } from 'redux-saga/effects'
+import { call, put, select, takeLatest } from 'redux-saga/effects'
 import { Action } from '../../types'
 import { reset, stopSubmit } from 'redux-form'
 import { status } from '../../consts'
@@ -58,17 +58,16 @@ function* loginRequest(action: Action) {
 
 function* refreshTokenRequest() {
 	try {
-		const response = yield* protectedRouteRequest({
+		const response = yield call(protectedRouteRequest, {
 			method: 'post',
 			url: 'auth/refresh',
 			headers: {
 				'Content-Type': 'application/json',
 			},
 		})
-
-		yield put(actionCreator.loginSuccess(response.headers.authorization))
+		yield put(actionCreator.refreshTokenSuccess(response.headers.authorization))
 	} catch (error) {
-		yield put(actionCreator.loginError())
+		yield put(actionCreator.refreshTokenError())
 	}
 }
 
@@ -78,7 +77,9 @@ function* refreshTokenRequest() {
  *	and repeat intended request
  * @param requestOptions - axios request params
  */
-export function* protectedRouteRequest(requestOptions: AxiosRequestConfig) {
+export function* protectedRouteRequest(
+	requestOptions: AxiosRequestConfig,
+): any {
 	function* request() {
 		const authToken: string = yield select(
 			(state: RootState) => state.auth.login.user.accessToken,
@@ -94,14 +95,15 @@ export function* protectedRouteRequest(requestOptions: AxiosRequestConfig) {
 	}
 
 	try {
-		return yield* request()
+		return yield request()
 	} catch (error) {
 		const { response } = error
 
 		if (response && response.status === status.UNAUTHORIZED) {
 			if (response.data.message === 'Token has expired') {
-				yield put(actionCreator.refreshTokenRequest())
-				return yield* request()
+				yield call(refreshTokenRequest)
+
+				return yield call(request)
 			} else {
 				// If refresh time is expired, logout
 				yield put(actionCreator.logout())
@@ -121,12 +123,12 @@ function* watchLastLoginRequest() {
 	yield takeLatest(types.LOGIN_REQUEST, loginRequest)
 }
 
-function* watchLastRefreshTokenRequest() {
-	yield takeEvery(types.REFRESH_TOKEN_REQUEST, refreshTokenRequest)
+function* watchLatestRefreshTokenRequest() {
+	yield takeLatest(types.REFRESH_TOKEN_REQUEST, refreshTokenRequest)
 }
 
 export default [
 	watchLastRegisterRequest,
 	watchLastLoginRequest,
-	watchLastRefreshTokenRequest,
+	watchLatestRefreshTokenRequest,
 ]
