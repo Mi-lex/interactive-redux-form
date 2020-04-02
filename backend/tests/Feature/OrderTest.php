@@ -24,7 +24,8 @@ class OrderTest extends TestCase
             'X-Requested-With' => 'XMLHttpRequest'
         ]);
 
-        $this->actingAs(factory('App\Models\User')->create());
+        $this->worker = factory('App\Models\User')->create();
+        $this->actingAs($this->worker);
     }
 
     /** @test */
@@ -60,7 +61,7 @@ class OrderTest extends TestCase
     /** @test */
     public function a_worker_can_store_and_update_different_payment_type()
     {
-        $order = Order::create();
+        $order = $this->worker->order()->create();
 
         $paymentAttributes = [
             [
@@ -91,7 +92,7 @@ class OrderTest extends TestCase
     /** @test */
     public function a_worker_can_store_and_update_package_info()
     {
-        $order = Order::create();
+        $order = $this->worker->order()->create();
 
         $packageAttributes = factory('App\Models\Package', 2)->make()->toArray();
 
@@ -109,7 +110,7 @@ class OrderTest extends TestCase
     /** @test */
     public function a_worker_can_store_and_update_delivery_info()
     {
-        $order = Order::create();
+        $order = $this->worker->order()->create();
 
         $deliveryAttributes = factory('App\Models\Delivery', 3)->make()->toArray();
 
@@ -127,7 +128,7 @@ class OrderTest extends TestCase
     /** @test */
     public function a_worker_can_store_and_update_paper_joiner_info()
     {
-        $order = Order::create();
+        $order = $this->worker->order()->create();
 
         foreach (PaperJoiner::NAMES as $joinerType) {
             $body = factory(Relation::getMorphedModel($joinerType))->create();
@@ -152,9 +153,9 @@ class OrderTest extends TestCase
     /** @test */
     public function a_worker_can_store_and_update_element()
     {
-        $elementQuantities = [3, 1];
+        $order = $this->worker->order()->create();
 
-        $order = Order::create();
+        $elementQuantities = [3, 1];
 
         foreach ($elementQuantities as $quantity) {
             $elements = factory('App\Models\OrderElement', $quantity)->raw();
@@ -179,7 +180,7 @@ class OrderTest extends TestCase
      */
     private function assertUpdatingPostActionSuccess(string $postActionType, bool $isTableEmpty = false): void
     {
-        $order = Order::create();
+        $order = $this->worker->order()->create();
 
         $bodyModelName = Relation::getMorphedModel($postActionType);
         $body = factory($bodyModelName)->make();
@@ -267,7 +268,7 @@ class OrderTest extends TestCase
     /** @test */
     public function a_worker_can_store_and_update_several_post_actions()
     {
-        $order = Order::create();
+        $order = $this->worker->order()->create();
 
         for ($i = 0; $i < 2; $i++) {
             // get random quantity of different post actions

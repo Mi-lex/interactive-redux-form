@@ -47,7 +47,9 @@ class OrderController extends Controller
 
     public function create()
     {
-        $newOrder = Order::create();
+        $user = auth()->user();
+
+        $newOrder = $user->order()->create();
 
         return $newOrder->only(['id', 'created_at']);
     }

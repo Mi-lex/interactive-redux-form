@@ -20,7 +20,7 @@ $factory->define(OrderElement::class, function (Faker $faker) {
         'brightness' => $faker->text(10),
         'color_interpretation' => $faker->word,
         'order_id' => function () {
-            return \App\Models\Order::create()->id;
+            return factory(\App\Models\Order::class)->create()->id;
         }
     ];
 });

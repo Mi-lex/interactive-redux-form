@@ -30,7 +30,7 @@ class CreateOrdersTable extends Migration
             $table->string('is_cut')->nullable();
             $table->string('circulation')->nullable();
 
-            $table->unsignedBigInteger('manager_id')->nullable();
+            $table->unsignedBigInteger('manager_id');
             $table->unsignedBigInteger('customer_id')->nullable();
 
             $table->foreign('manager_id')->references('id')->on('users');
