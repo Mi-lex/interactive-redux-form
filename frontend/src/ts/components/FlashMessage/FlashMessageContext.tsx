@@ -6,7 +6,7 @@ export interface FlashMessageProviderValue {
 	show: (options: MessageOptions) => void
 }
 
-const FlashMessageContext: React.Context<Partial<
-	FlashMessageProviderValue
->> = createContext({})
+const FlashMessageContext: React.Context<FlashMessageProviderValue> = createContext(
+	{} as FlashMessageProviderValue,
+)
 export default FlashMessageContext

@@ -16,6 +16,8 @@ import Register from '../pages/Register'
 import { toggleDrawer } from '../store/modules/drawer/actions'
 import { RootState } from '../store/rootReducer'
 
+import { FlashMessageProvider } from '../components/FlashMessage'
+
 const App: React.FC = () => {
 	const dispatch = useDispatch()
 	const isDrawerOpen = useSelector((state: RootState) => state.drawer.open)
@@ -31,14 +33,16 @@ const App: React.FC = () => {
 			</Drawer>
 			<Switch>
 				<MuiPickersUtilsProvider utils={DateFnsUtils} locale={ruLocale}>
-					<Container maxWidth="xl">
-						<ProtectedRoute path="/" exact>
-							<Orders />
-						</ProtectedRoute>
-						<ProtectedRoute path="/passport/:id?" exact>
-							<Passport />
-						</ProtectedRoute>
-					</Container>
+					<FlashMessageProvider>
+						<Container maxWidth="xl">
+							<ProtectedRoute path="/" exact>
+								<Orders />
+							</ProtectedRoute>
+							<ProtectedRoute path="/passport/:id?" exact>
+								<Passport />
+							</ProtectedRoute>
+						</Container>
+					</FlashMessageProvider>
 					<Route path="/login">
 						<Login />
 					</Route>

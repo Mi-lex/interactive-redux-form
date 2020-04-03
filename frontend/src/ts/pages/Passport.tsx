@@ -6,7 +6,6 @@ import Container from '@material-ui/core/Container'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import Paper from '@material-ui/core/Paper'
 
-import { FlashMessageComponent } from '../components/FlashMessage'
 import PassportControl from '../components/PassportControl'
 import PassportForm from '../components/PassportForm'
 import actionCreator from '../store/modules/passport/actions'
@@ -14,6 +13,8 @@ import { RootState } from '../store/rootReducer'
 import { Order } from '../store/types'
 import PageHeader from '../components/PageHeader'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
+
+import { useFlashMessage } from '../components/FlashMessage'
 
 type FormProps = {
 	createOrderSuccess: boolean
@@ -82,26 +83,29 @@ const theme = createMuiTheme({
 
 type Injected = InjectedFormProps<FormProps>
 
-const Passport: React.FC<FormProps &
-	InjectedFormProps<FormProps, FormProps>> = (props: FormProps) => {
+const Passport: React.FC<FormProps & InjectedFormProps<{}, FormProps>> = (
+	props: FormProps,
+) => {
 	const {
 		initialValues,
 		createOrderSuccess,
 		createOrderError,
 		requestPending,
 		// updateOrderSuccess,
-		// updateOrderError,
-		// fetchOrderSuccess,
+		updateOrderError,
 		fetchOrderError,
 	} = props
 
 	const dispatch = useDispatch()
 	const { id } = useParams()
 
+	const flash = useFlashMessage()
+
 	useEffect(() => {
 		if (id) {
 			dispatch(actionCreator.fetchOrderRequest(id))
 		} else {
+			// this is also kind of cleanup
 			dispatch(actionCreator.fetchOrderSuccess({}))
 		}
 
@@ -109,6 +113,30 @@ const Passport: React.FC<FormProps &
 			dispatch(actionCreator.createCleanUp())
 		}
 	}, [id])
+
+	useEffect(() => {
+		if (createOrderError) {
+			flash.show({
+				message: createOrderError,
+				type: 'error',
+				onClose: onCloseErrorMessage,
+			})
+		}
+	}, [createOrderError])
+
+	useEffect(() => {
+		if (fetchOrderError || updateOrderError) {
+			const message = updateOrderError
+				? createOrderError
+				: 'Что-то пошло не так'
+
+			flash.show({
+				message,
+				type: 'error',
+				onClose: onCloseErrorMessage,
+			})
+		}
+	}, [fetchOrderError, updateOrderError])
 
 	const createNewPassport = (): void => {
 		dispatch(actionCreator.createOrderRequest())
@@ -136,12 +164,6 @@ const Passport: React.FC<FormProps &
 				{createOrderSuccess && !id && (
 					<Redirect to={`/passport/${initialValues.id}`} />
 				)}
-				{/* {successMessage && <FlashMessageComponent type="success">{successMessage}</FlashMessageComponent>} */}
-				{(createOrderError || fetchOrderError) && (
-					<FlashMessageComponent type="error" onClose={onCloseErrorMessage}>
-						{createOrderError || 'Что-то пошло не так'}
-					</FlashMessageComponent>
-				)}
 				<Container style={{ paddingTop: 10 }}>
 					<form action="POST" className="passportForm">
 						<PassportForm />
@@ -152,44 +174,29 @@ const Passport: React.FC<FormProps &
 	)
 }
 
-const Decorated = reduxForm<FormProps, FormProps>({
+const Decorated = reduxForm<{}, FormProps>({
 	form: 'passport',
 	enableReinitialize: true,
 })(Passport)
 
 const Connected = connect((state: RootState) => {
-	const {
-		success: createOrderSuccess,
-		error: createOrderError,
-		pending: createOrderPending,
-	} = state.passport.create
-	const {
-		success: updateOrderSuccess,
-		error: updateOrderError,
-		pending: updateOrderPending,
-	} = state.passport.update
-	const {
-		success: fetchOrderSuccess,
-		error: fetchOrderError,
-		pending: fetchOrderPending,
-		fetched,
-	} = state.passport.fetch
+	const create = state.passport.create
+	const update = state.passport.update
+	const fetch = state.passport.fetch
 
 	return {
-		initialValues: fetched || {
+		initialValues: fetch.fetched || {
 			payment: {
 				payed_by_cash: false,
 			},
 			elements: [{}, {}],
 		},
-		createOrderSuccess,
-		createOrderError,
-		updateOrderSuccess,
-		updateOrderError,
-		fetchOrderSuccess,
-		fetchOrderError,
-		requestPending:
-			createOrderPending || updateOrderPending || fetchOrderPending,
+		createOrderSuccess: create.success,
+		createOrderError: create.error,
+		updateOrderSuccess: update.success,
+		updateOrderError: update.error,
+		fetchOrderError: fetch.error,
+		requestPending: create.pending || update.pending || fetch.pending,
 	}
 	// @ts-ignore
 })(Decorated)
