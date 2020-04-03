@@ -22,8 +22,6 @@ function* createOrderRequest() {
 		yield put(actionCreator.fetchOrderSuccess(formOrder))
 		yield put(actionCreator.createOrderSuccess())
 	} catch (error) {
-		console.log(error)
-
 		const message = getMessageFromError(error)
 
 		yield put(actionCreator.createOrderError(message))
@@ -51,8 +49,7 @@ function* updateOrderRequest() {
 	} catch (error) {
 		const message = getMessageFromError(error)
 
-		yield put(actionCreator.updateOrderError())
-		yield put(actionCreator.createOrderError(message))
+		yield put(actionCreator.updateOrderError(message))
 	}
 }
 

@@ -15,15 +15,14 @@ import { RootState } from '../store/rootReducer'
 import passportTheme from '../themes/passportTheme'
 
 const Passport: React.FC = () => {
+	const dispatch = useDispatch()
 	const { create, update, fetch } = useSelector(
 		(state: RootState) => state.passport,
 	)
-	const requestPending = create.pending || update.pending || fetch.pending
-
 	const { id } = useParams()
-	const dispatch = useDispatch()
-
 	const flash = useFlashMessage()
+
+	const requestPending = create.pending || update.pending || fetch.pending
 
 	useEffect(() => {
 		if (id) {
@@ -34,29 +33,20 @@ const Passport: React.FC = () => {
 		}
 
 		return () => {
-			dispatch(actionCreator.createCleanUp())
+			dispatch(actionCreator.passportCleanUp())
 		}
 	}, [id])
 
 	useEffect(() => {
-		if (create.error) {
-			flash.show({
-				message: create.error,
-				type: 'error',
-				onClose: onCloseErrorMessage,
-			})
-		}
-	}, [create.error])
+		const occurredError = create.error || fetch.error || update.error
 
-	useEffect(() => {
-		if (fetch.error || update.error) {
+		if (occurredError) {
 			flash.show({
-				message: create.error || 'Что-то пошло не так',
+				message: occurredError,
 				type: 'error',
-				onClose: onCloseErrorMessage,
 			})
 		}
-	}, [fetch.error, update.error])
+	}, [fetch.error, update.error, create.error])
 
 	const createNewPassport = (): void => {
 		dispatch(actionCreator.createOrderRequest())
@@ -67,7 +57,7 @@ const Passport: React.FC = () => {
 	}
 
 	const onCloseErrorMessage = () => {
-		dispatch(actionCreator.createOrderError(''))
+		dispatch(actionCreator.createOrderError(null))
 	}
 
 	return (

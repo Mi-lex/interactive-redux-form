@@ -2,47 +2,31 @@ import { combineReducers } from 'redux'
 import { Action, Order } from '../../types'
 import { types } from './actions'
 
-interface InitialState {
+interface PassportState {
 	pending: boolean
 	success: boolean
-	error: string | boolean | null
-}
-
-interface CreateOrderState extends InitialState {
 	error: string | null
 }
 
-interface UpdateOrderState extends InitialState {
-	error: boolean
-}
-
-interface FetchOrderState extends UpdateOrderState {
+interface FetchOrderState extends PassportState {
 	fetched: Partial<Order>
 }
 
-const CREATE_INITIAL_STATE: CreateOrderState = {
+const INITIAL_STATE: PassportState = {
 	pending: false,
 	success: false,
 	error: null,
 }
 
-const UPDATE_INITIAL_STATE: UpdateOrderState = {
-	pending: false,
-	success: false,
-	error: false,
-}
-
 const FETCH_INITIAL_STATE: FetchOrderState = {
-	pending: false,
-	success: false,
-	error: false,
+	...INITIAL_STATE,
 	fetched: {},
 }
 
 const createReducer = (
-	state = CREATE_INITIAL_STATE,
+	state = INITIAL_STATE,
 	action: Action,
-): CreateOrderState => {
+): PassportState => {
 	switch (action.type) {
 		case types.CREATE_ORDER_REQUEST:
 			return { ...state, pending: true }
@@ -54,17 +38,17 @@ const createReducer = (
 			}
 		case types.CREATE_ORDER_ERROR:
 			return { ...state, error: action.payload, pending: false }
-		case types.CREATE_CLEAN_UP:
-			return CREATE_INITIAL_STATE
+		case types.PASSPORT_CLEAN_UP:
+			return INITIAL_STATE
 		default:
 			return state
 	}
 }
 
 const updateReducer = (
-	state = UPDATE_INITIAL_STATE,
+	state = INITIAL_STATE,
 	action: Action,
-): UpdateOrderState => {
+): PassportState => {
 	switch (action.type) {
 		case types.UPDATE_ORDER_REQUEST:
 			return { ...state, pending: true }
@@ -75,7 +59,9 @@ const updateReducer = (
 				pending: false,
 			}
 		case types.UPDATE_ORDER_ERROR:
-			return { ...state, error: true, pending: false }
+			return { ...state, error: action.payload, pending: false }
+		case types.PASSPORT_CLEAN_UP:
+			return INITIAL_STATE
 		default:
 			return state
 	}
@@ -96,7 +82,7 @@ const fetchReducer = (
 				fetched: action.payload,
 			}
 		case types.FETCH_ORDER_ERROR:
-			return { ...state, error: true, pending: false }
+			return { ...state, error: action.payload, pending: false }
 		default:
 			return state
 	}

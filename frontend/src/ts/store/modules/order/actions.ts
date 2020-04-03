@@ -5,23 +5,23 @@ const FETCH_ORDERS_SUCCESS = 'standard/orders/FETCH_ORDERS_SUCCESS'
 const FETCH_ORDERS_ERROR = 'standard/orders/FETCH_ORDERS_ERROR'
 
 export const fetchOrdersRequest = () => ({
-    type: FETCH_ORDERS_REQUEST
-});
-
-export const fetchOrdersSuccess = (orders: Order[]) => ({
-    type: FETCH_ORDERS_SUCCESS,
-    payload: orders,
+	type: FETCH_ORDERS_REQUEST,
 })
 
-export const fetchOrdersError = (errorMessage: string) => ({
-    type: FETCH_ORDERS_ERROR,
-    payload: errorMessage,
+export const fetchOrdersSuccess = (orders: Order[]) => ({
+	type: FETCH_ORDERS_SUCCESS,
+	payload: orders,
+})
+
+export const fetchOrdersError = (errorMessage: string | null) => ({
+	type: FETCH_ORDERS_ERROR,
+	payload: errorMessage,
 })
 
 export const types = {
-    FETCH_ORDERS_REQUEST,
-    FETCH_ORDERS_SUCCESS,
-    FETCH_ORDERS_ERROR,
-} 
+	FETCH_ORDERS_REQUEST,
+	FETCH_ORDERS_SUCCESS,
+	FETCH_ORDERS_ERROR,
+}
 
 export default { fetchOrdersRequest, fetchOrdersSuccess, fetchOrdersError }
