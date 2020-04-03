@@ -58,7 +58,6 @@ const FlashMessageComponent: React.FC<Props> = (props: Props) => {
 			autoHideDuration={5000}
 			{...SnackProps}
 			open={open}
-			TransitionProps={{ appear: false }}
 			action={
 				actionName != null && (
 					<Button
