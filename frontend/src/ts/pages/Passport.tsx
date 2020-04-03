@@ -1,103 +1,27 @@
 import React, { useEffect } from 'react'
-import { connect, useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Redirect, useParams } from 'react-router-dom'
-import { InjectedFormProps, reduxForm } from 'redux-form'
 import Container from '@material-ui/core/Container'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import Paper from '@material-ui/core/Paper'
+import { ThemeProvider } from '@material-ui/core/styles'
 
+import { useFlashMessage } from '../components/FlashMessage'
+import PageHeader from '../components/PageHeader'
 import PassportControl from '../components/PassportControl'
 import PassportForm from '../components/PassportForm'
 import actionCreator from '../store/modules/passport/actions'
 import { RootState } from '../store/rootReducer'
-import { Order } from '../store/types'
-import PageHeader from '../components/PageHeader'
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
+import passportTheme from '../themes/passportTheme'
 
-import { useFlashMessage } from '../components/FlashMessage'
+const Passport: React.FC = () => {
+	const { create, update, fetch } = useSelector(
+		(state: RootState) => state.passport,
+	)
+	const requestPending = create.pending || update.pending || fetch.pending
 
-type FormProps = {
-	createOrderSuccess: boolean
-	createOrderError: string
-	updateOrderSuccess: boolean
-	updateOrderError: boolean
-	fetchOrderSuccess: boolean
-	fetchOrderError: boolean
-	requestPending: boolean
-	initialValues: Order
-}
-
-const textStyle = '#5d80b6'
-const greyLabels = '#caccce'
-const anotherGrey = '#98999b'
-
-const theme = createMuiTheme({
-	overrides: {
-		MuiFormControlLabel: {
-			root: {
-				textTransform: 'lowercase',
-				color: anotherGrey,
-			},
-		},
-		MuiFormLabel: {
-			root: {
-				textTransform: 'lowercase',
-				color: anotherGrey,
-				'&.$Mui-disabled': {
-					color: anotherGrey,
-				},
-				'& + .MuiInput-underline:before': {
-					borderBottomStyle: 'dotted',
-				},
-			},
-			filled: {
-				color: greyLabels,
-				'& + .MuiInput-underline:before': {
-					display: 'none',
-				},
-			},
-		},
-		MuiInput: {
-			root: {
-				color: textStyle,
-				'&.$Mui-disabled': {
-					color: textStyle,
-				},
-				'& .MuiIconButton-root': {
-					color: anotherGrey,
-				},
-			},
-		},
-		MuiInputBase: {
-			root: {
-				color: textStyle,
-			},
-		},
-		MuiCheckbox: {
-			root: {
-				color: anotherGrey,
-			},
-		},
-	},
-})
-
-type Injected = InjectedFormProps<FormProps>
-
-const Passport: React.FC<FormProps & InjectedFormProps<{}, FormProps>> = (
-	props: FormProps,
-) => {
-	const {
-		initialValues,
-		createOrderSuccess,
-		createOrderError,
-		requestPending,
-		// updateOrderSuccess,
-		updateOrderError,
-		fetchOrderError,
-	} = props
-
-	const dispatch = useDispatch()
 	const { id } = useParams()
+	const dispatch = useDispatch()
 
 	const flash = useFlashMessage()
 
@@ -115,28 +39,24 @@ const Passport: React.FC<FormProps & InjectedFormProps<{}, FormProps>> = (
 	}, [id])
 
 	useEffect(() => {
-		if (createOrderError) {
+		if (create.error) {
 			flash.show({
-				message: createOrderError,
+				message: create.error,
 				type: 'error',
 				onClose: onCloseErrorMessage,
 			})
 		}
-	}, [createOrderError])
+	}, [create.error])
 
 	useEffect(() => {
-		if (fetchOrderError || updateOrderError) {
-			const message = updateOrderError
-				? createOrderError
-				: 'Что-то пошло не так'
-
+		if (fetch.error || update.error) {
 			flash.show({
-				message,
+				message: create.error || 'Что-то пошло не так',
 				type: 'error',
 				onClose: onCloseErrorMessage,
 			})
 		}
-	}, [fetchOrderError, updateOrderError])
+	}, [fetch.error, update.error])
 
 	const createNewPassport = (): void => {
 		dispatch(actionCreator.createOrderRequest())
@@ -151,7 +71,7 @@ const Passport: React.FC<FormProps & InjectedFormProps<{}, FormProps>> = (
 	}
 
 	return (
-		<ThemeProvider theme={theme}>
+		<ThemeProvider theme={passportTheme}>
 			<PageHeader>
 				<PassportControl
 					editMode={Boolean(id)}
@@ -161,44 +81,15 @@ const Passport: React.FC<FormProps & InjectedFormProps<{}, FormProps>> = (
 			</PageHeader>
 			{requestPending && <LinearProgress color="secondary" />}
 			<Paper elevation={0}>
-				{createOrderSuccess && !id && (
-					<Redirect to={`/passport/${initialValues.id}`} />
+				{create.success && !id && (
+					<Redirect to={`/passport/${fetch.fetched.id}`} />
 				)}
 				<Container style={{ paddingTop: 10 }}>
-					<form action="POST" className="passportForm">
-						<PassportForm />
-					</form>
+					<PassportForm />
 				</Container>
 			</Paper>
 		</ThemeProvider>
 	)
 }
 
-const Decorated = reduxForm<{}, FormProps>({
-	form: 'passport',
-	enableReinitialize: true,
-})(Passport)
-
-const Connected = connect((state: RootState) => {
-	const create = state.passport.create
-	const update = state.passport.update
-	const fetch = state.passport.fetch
-
-	return {
-		initialValues: fetch.fetched || {
-			payment: {
-				payed_by_cash: false,
-			},
-			elements: [{}, {}],
-		},
-		createOrderSuccess: create.success,
-		createOrderError: create.error,
-		updateOrderSuccess: update.success,
-		updateOrderError: update.error,
-		fetchOrderError: fetch.error,
-		requestPending: create.pending || update.pending || fetch.pending,
-	}
-	// @ts-ignore
-})(Decorated)
-
-export default Connected
+export default Passport
