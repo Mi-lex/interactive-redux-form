@@ -3,7 +3,7 @@ import api from '../../../services'
 import { call, put, select, takeLatest } from 'redux-saga/effects'
 import { Action } from '../../types'
 import { reset, stopSubmit } from 'redux-form'
-import { status } from '../../consts'
+import { status } from '../../constants'
 import { AxiosRequestConfig } from 'axios'
 import { RootState } from '../../rootReducer'
 

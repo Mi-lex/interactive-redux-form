@@ -18,7 +18,7 @@ import {
 	TextField,
 	TimePicker,
 } from '../components/MaterialReduxForm'
-import { packageOptions } from '../store/consts'
+import { packageOptions } from '../store/constants'
 import DeliveryBlock from './DeliveryBlock'
 import Details from './Details'
 

@@ -16,7 +16,7 @@ import {
 import RemoveRow from '@material-ui/icons/DeleteForever'
 import AddRow from '@material-ui/icons/PlaylistAdd'
 
-import { printOptions } from '../store/consts'
+import { printOptions } from '../store/constants'
 import Select from './MaterialReduxForm/Select'
 import TextField from './MaterialReduxForm/TextField'
 

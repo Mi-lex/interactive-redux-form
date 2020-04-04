@@ -13,7 +13,7 @@ import {
 	laminationOptions,
 	postPrintActionNames,
 	varnishOptions,
-} from '../store/consts'
+} from '../store/constants'
 import { PostPrintActions } from '../store/enums'
 import { PostPrintActionName } from '../store/types'
 import ConnectedHiddenBlock from './ConnectedHiddenBLock'

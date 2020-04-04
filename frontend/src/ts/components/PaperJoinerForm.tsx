@@ -16,7 +16,7 @@ import {
 	paperClipTypeOptions,
 	paperJoinersNames,
 	positionOptions,
-} from '../store/consts'
+} from '../store/constants'
 import { PaperJoiners } from '../store/enums'
 import { PaperJoinerName } from '../store/types'
 import ConnectedHiddenBlock from './ConnectedHiddenBLock'
