@@ -10,9 +10,7 @@ import { FetchedOrder } from '../store/types/order'
 import { Paper } from '@material-ui/core'
 
 const Orders = () => {
-	const orders: FetchedOrder[] = useSelector(
-		(state: RootState) => state.order.list,
-	)
+	const orders = useSelector((state: RootState) => state.order.list)
 	const pending = useSelector((state: RootState) => state.order.requestPending)
 	const errorMessage = useSelector(
 		(state: RootState) => state.order.errorMessage,

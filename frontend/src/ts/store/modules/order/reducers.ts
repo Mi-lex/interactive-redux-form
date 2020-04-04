@@ -1,11 +1,11 @@
 import { Reducer } from 'redux'
-import { Order } from '../../types/order'
+import { FetchedOrder } from '../../types/order'
 import { types } from './actions'
 
 interface PassportState {
 	requestPending: boolean
 	errorMessage?: string
-	list: Order[]
+	list: FetchedOrder[]
 }
 
 const INITIAL_STATE: PassportState = {
