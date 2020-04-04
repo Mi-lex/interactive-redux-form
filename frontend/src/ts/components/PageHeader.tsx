@@ -143,7 +143,7 @@ const PageHeader: React.FC = (props) => {
 
 	return (
 		<div className={classes.grow}>
-			<AppBar position="static" elevation={0}>
+			<AppBar position="static">
 				<Toolbar>
 					<IconButton
 						onClick={toggle}

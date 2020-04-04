@@ -27,7 +27,7 @@ const PassportForm: React.FC = () => {
 
 	return (
 		<form action="POST" className="passportForm">
-			<Grid container spacing={2}>
+			<Grid container spacing={2} style={{ padding: 16 }}>
 				{/* Sidebar */}
 				<PassportSidebar />
 				{/* Initial */}

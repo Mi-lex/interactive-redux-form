@@ -82,7 +82,7 @@ class OrderTable extends React.Component<Props, TableState> {
 						render: (rowData) => (
 							<Link to={`passport/${rowData.id}`}>{rowData.id}</Link>
 						),
-						defaultSort: 'desc'
+						defaultSort: 'desc',
 					},
 					{
 						title: 'Название',
@@ -99,37 +99,19 @@ class OrderTable extends React.Component<Props, TableState> {
 						title: 'Оформлен',
 						field: 'createdAt',
 						type: 'date',
-						cellStyle: {
-							width: '30px',
-							maxWidth: 30,
-						},
-						headerStyle: {
-							maxWidth: 30,
-						},
 					},
 					{
 						title: 'Завершен',
 						field: 'completionDate',
 						type: 'date',
-						cellStyle: {
-							width: '30px',
-							maxWidth: 30,
-						},
-						headerStyle: {
-							maxWidth: 30,
-						},
 					},
 				]}
 				data={this.props.data}
 				options={{
-					headerStyle: {
-						borderBottom: 'none',
-						color: '#caccce',
-					},
 					filtering: true,
 					paging: this.state.paging,
-					pageSize: 30,
-					pageSizeOptions: [30, 60, 120],
+					pageSize: 5,
+					pageSizeOptions: [5, 10, 30],
 					searchFieldStyle: {
 						color: 'white',
 					},

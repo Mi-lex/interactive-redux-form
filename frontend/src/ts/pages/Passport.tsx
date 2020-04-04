@@ -4,7 +4,6 @@ import { Redirect, useParams } from 'react-router-dom'
 import Container from '@material-ui/core/Container'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import Paper from '@material-ui/core/Paper'
-import { ThemeProvider } from '@material-ui/core/styles'
 
 import { useFlashMessage } from '../components/FlashMessage'
 import PageHeader from '../components/PageHeader'
@@ -12,7 +11,6 @@ import PassportControl from '../components/PassportControl'
 import PassportForm from '../components/PassportForm'
 import actionCreator from '../store/modules/passport/actions'
 import { RootState } from '../store/rootReducer'
-import passportTheme from '../themes/passportTheme'
 
 const Passport: React.FC = () => {
 	const dispatch = useDispatch()
@@ -56,12 +54,8 @@ const Passport: React.FC = () => {
 		dispatch(actionCreator.updateOrderRequest())
 	}
 
-	const onCloseErrorMessage = () => {
-		dispatch(actionCreator.createOrderError(null))
-	}
-
 	return (
-		<ThemeProvider theme={passportTheme}>
+		<>
 			<PageHeader>
 				<PassportControl
 					editMode={Boolean(id)}
@@ -70,15 +64,13 @@ const Passport: React.FC = () => {
 				/>
 			</PageHeader>
 			{requestPending && <LinearProgress color="secondary" />}
-			<Paper elevation={0}>
+			<Paper>
 				{create.success && !id && (
 					<Redirect to={`/passport/${fetch.fetched.id}`} />
 				)}
-				<Container style={{ paddingTop: 10 }}>
-					<PassportForm />
-				</Container>
+				<PassportForm />
 			</Paper>
-		</ThemeProvider>
+		</>
 	)
 }
 
