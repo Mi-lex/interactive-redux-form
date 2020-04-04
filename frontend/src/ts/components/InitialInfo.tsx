@@ -1,10 +1,13 @@
 import React from 'react'
 import { Field, FormSection } from 'redux-form'
-import FormControl from '@material-ui/core/FormControl'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import FormGroup from '@material-ui/core/FormGroup'
-import Grid from '@material-ui/core/Grid'
-import InputLabel from '@material-ui/core/InputLabel'
+import {
+	FormControl,
+	FormControlLabel,
+	FormGroup,
+	Grid,
+	InputLabel,
+	Divider,
+} from '@material-ui/core'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import AccessAlarm from '@material-ui/icons/AccessAlarm'
 
@@ -18,7 +21,6 @@ import {
 import { packageOptions } from '../store/consts'
 import DeliveryBlock from './DeliveryBlock'
 import Details from './Details'
-import { Divider } from '@material-ui/core'
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -33,9 +35,6 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		formControl: {
 			minWidth: '100%',
-		},
-		halfWidth: {
-			width: '45%',
 		},
 	}),
 )

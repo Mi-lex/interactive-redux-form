@@ -23,12 +23,6 @@ const useStyles = makeStyles((theme: Theme) =>
 		menuButton: {
 			marginRight: theme.spacing(2),
 		},
-		title: {
-			display: 'none',
-			[theme.breakpoints.up('sm')]: {
-				display: 'block',
-			},
-		},
 		sectionDesktop: {
 			display: 'none',
 			[theme.breakpoints.up('md')]: {

@@ -1,8 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Field, formValueSelector } from 'redux-form'
-import FormControl from '@material-ui/core/FormControl'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
+import { FormControl, FormControlLabel } from '@material-ui/core'
 
 import { Checkbox, TextField } from '../components/MaterialReduxForm'
 

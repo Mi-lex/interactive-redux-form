@@ -1,7 +1,6 @@
 import React from 'react'
 import { Field } from 'redux-form'
-import Divider from '@material-ui/core/Divider'
-import Grid from '@material-ui/core/Grid'
+import { Divider, Grid } from '@material-ui/core'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 
 import { TextField } from './MaterialReduxForm'

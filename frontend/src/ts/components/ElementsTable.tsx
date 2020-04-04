@@ -5,18 +5,20 @@ import {
 	FormSection,
 	WrappedFieldArrayProps,
 } from 'redux-form'
-import Box from '@material-ui/core/Box'
-import FormControl from '@material-ui/core/FormControl'
-import Grid from '@material-ui/core/Grid'
-import IconButton from '@material-ui/core/IconButton'
-import InputLabel from '@material-ui/core/InputLabel'
+import {
+	Box,
+	FormControl,
+	Grid,
+	IconButton,
+	InputLabel,
+	Typography,
+} from '@material-ui/core'
 import RemoveRow from '@material-ui/icons/DeleteForever'
 import AddRow from '@material-ui/icons/PlaylistAdd'
 
 import { printOptions } from '../store/consts'
 import Select from './MaterialReduxForm/Select'
 import TextField from './MaterialReduxForm/TextField'
-import { Typography } from '@material-ui/core'
 
 type ElementsFieldPropType = {
 	name: string

@@ -2,13 +2,15 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Field, FormSection, formValueSelector, clearFields } from 'redux-form'
 
-import Box from '@material-ui/core/Box'
-import FormControl from '@material-ui/core/FormControl'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import FormGroup from '@material-ui/core/FormGroup'
-import Grid from '@material-ui/core/Grid'
-import InputLabel from '@material-ui/core/InputLabel'
-import MenuItem from '@material-ui/core/MenuItem'
+import {
+	Box,
+	FormControl,
+	FormControlLabel,
+	FormGroup,
+	Grid,
+	InputLabel,
+	MenuItem,
+} from '@material-ui/core'
 
 import {
 	paperClipTypeOptions,

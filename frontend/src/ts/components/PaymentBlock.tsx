@@ -7,9 +7,7 @@ import {
 	Select,
 	Checkbox,
 } from '../components/MaterialReduxForm'
-import InputLabel from '@material-ui/core/InputLabel'
-import FormControl from '@material-ui/core/FormControl'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
+import { InputLabel, FormControl, FormControlLabel } from '@material-ui/core'
 import { paymentOrgOptions } from '../store/consts'
 
 const selector: Function = formValueSelector('passport')
