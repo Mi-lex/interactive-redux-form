@@ -1,4 +1,4 @@
-import { PaperJoinerName, PostPrintActionName } from './types'
+import { PaperJoinerName, PostPrintActionName } from './types/order'
 
 export const status = { UNPROCESSABLE_ENTITY: 422, UNAUTHORIZED: 401 }
 

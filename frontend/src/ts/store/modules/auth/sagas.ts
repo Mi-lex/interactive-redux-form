@@ -1,11 +1,12 @@
-import actionCreator, { types } from './actions'
-import api from '../../../services'
-import { call, put, select, takeLatest } from 'redux-saga/effects'
-import { Action } from '../../types'
-import { reset, stopSubmit } from 'redux-form'
-import { status } from '../../constants'
 import { AxiosRequestConfig } from 'axios'
+import { reset, stopSubmit } from 'redux-form'
+import { call, put, select, takeLatest } from 'redux-saga/effects'
+
+import api from '../../../services'
+import { status } from '../../constants'
 import { RootState } from '../../rootReducer'
+import { Action } from '../../types/common'
+import actionCreator, { types } from './actions'
 
 function* registerRequest(action: Action) {
 	try {

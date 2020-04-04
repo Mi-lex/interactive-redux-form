@@ -1,4 +1,4 @@
-import { Auth, Register } from './../store/types'
+import { Auth, Register } from '../store/types/auth'
 
 const email = {
 	rule: new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,16}$/i),

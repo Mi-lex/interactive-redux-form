@@ -14,8 +14,8 @@ import {
 	postPrintActionNames,
 	varnishOptions,
 } from '../store/constants'
-import { PostPrintActions } from '../store/enums'
-import { PostPrintActionName } from '../store/types'
+import { PostPrintActions } from '../store/types/enums'
+import { PostPrintActionName } from '../store/types/order'
 import ConnectedHiddenBlock from './ConnectedHiddenBLock'
 import { Checkbox, Select, TextField } from './MaterialReduxForm'
 import RemovableComment from './RemovableComment'

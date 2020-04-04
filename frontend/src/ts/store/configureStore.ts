@@ -5,13 +5,16 @@ import rootSaga from './rootSaga'
 import { rootReducer } from './rootReducer'
 
 const configureStore = () => {
-    const sagaMiddleWare = createSagaMiddleWare()
+	const sagaMiddleWare = createSagaMiddleWare()
 
-    const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleWare)))
+	const store = createStore(
+		rootReducer,
+		composeWithDevTools(applyMiddleware(sagaMiddleWare)),
+	)
 
-    sagaMiddleWare.run(rootSaga)
+	sagaMiddleWare.run(rootSaga)
 
-    return store
+	return store
 }
 
 export default configureStore

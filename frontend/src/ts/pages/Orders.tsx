@@ -6,7 +6,7 @@ import { FlashMessageComponent } from '../components/FlashMessage'
 import OrderTable from '../components/OrderTable/OrderTable'
 import actionCreator from '../store/modules/order/actions'
 import { RootState } from '../store/rootReducer'
-import { FetchedOrder } from '../store/types'
+import { FetchedOrder } from '../store/types/order'
 import { Paper } from '@material-ui/core'
 
 const Orders = () => {

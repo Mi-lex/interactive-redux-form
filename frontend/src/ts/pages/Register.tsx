@@ -7,7 +7,7 @@ import { LinearProgress } from '@material-ui/core'
 import RegisterForm from '../components/RegisterForm'
 import actionCreator from '../store/modules/auth/actions'
 import { RootState } from '../store/rootReducer'
-import { Register as IRegister } from '../store/types'
+import { Register as IRegister } from '../store/types/auth'
 
 const Register: React.FC = () => {
 	const dispatch = useDispatch()

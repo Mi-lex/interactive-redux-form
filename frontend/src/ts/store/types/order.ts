@@ -1,65 +1,9 @@
 import { PaperJoiners, PostPrintActions } from './enums'
-import { ForkEffect } from 'redux-saga/effects'
-import icons from '../assets/icons'
-
-export type IconName = keyof typeof icons
-
-export type ElementSize = 'sm' | 'md' | 'big'
-
-export type PartialRecord<K extends keyof any, T> = {
-	[P in K]?: T
-}
-
-export type IntendedLocationState = {
-	intendedPath: string
-}
-
-/**
- * Remove from T the keys that are in common with K
- */
-export type Optionalize<T extends K, K> = Omit<T, keyof K>
-
-export interface Auth {
-	email: string
-	password: string
-}
-
-export interface Register extends Auth {
-	first_name: string
-	second_name: string
-	middle_name: string
-	password_confirmation: string
-}
-
-interface Option {
-	label: string
-	value: string
-}
-
-type Options = Option[]
-
-export type InputOptions = {
-	[key: string]: Options
-}
+import { User } from './auth'
+import { PartialRecord } from './common'
 
 export type PaperJoinerName = keyof typeof PaperJoiners
 export type PostPrintActionName = keyof typeof PostPrintActions
-
-interface User {
-	id: string
-	first_name: string
-	second_name: string
-	middle_name: string
-	email: string
-}
-
-export interface Employee extends User {
-	role: string
-}
-
-export interface Manager extends Employee {
-	role: 'manager'
-}
 
 interface Contact extends User {
 	phone?: string
@@ -219,7 +163,7 @@ export interface Order {
 	circulation?: string
 	is_similar_order?: boolean
 	similar_order_id?: string
-	manager?: Manager
+	manager?: User
 	customer?: Customer
 	payment?: Payment
 
@@ -242,10 +186,3 @@ export interface FetchedOrder extends Order {
 	paper_joiner?: PaperJoiner
 	post_actions?: FetchedPostAction[]
 }
-
-export type Action = {
-	type: string
-	payload?: any
-}
-
-export type SagaType = () => Generator<ForkEffect<never>, void, unknown>

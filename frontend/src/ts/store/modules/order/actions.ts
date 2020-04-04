@@ -1,4 +1,4 @@
-import { Order } from '../../types'
+import { Order } from '../../types/order'
 
 const FETCH_ORDERS_REQUEST = 'standard/orders/FETCH_ORDERS_REQUEST'
 const FETCH_ORDERS_SUCCESS = 'standard/orders/FETCH_ORDERS_SUCCESS'

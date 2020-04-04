@@ -1,6 +1,6 @@
-import { Action } from './../../types'
 import { types } from './actions'
-import { combineReducers } from 'redux'
+import { combineReducers, Reducer } from 'redux'
+import { Action } from '../../types/common'
 
 interface AuthState {
 	pending: boolean
@@ -14,7 +14,10 @@ const INITIAL_STATE: AuthState = {
 	error: false,
 }
 
-const registerReducer = (state = INITIAL_STATE, action: Action): AuthState => {
+const registerReducer: Reducer<AuthState> = (
+	state = INITIAL_STATE,
+	action: Action,
+) => {
 	switch (action.type) {
 		case types.REGISTER_REQUEST:
 			return {
@@ -67,10 +70,10 @@ const removeUserFromStorage = () => {
 	sessionStorage.removeItem('user')
 }
 
-const loginReducer = (
+const loginReducer: Reducer<LoginState> = (
 	state = LOGIN_INITIAL_STATE,
 	action: Action,
-): LoginState => {
+) => {
 	switch (action.type) {
 		case types.LOGIN_REQUEST:
 			// Cleanup storage. This makes working with storage more predictable

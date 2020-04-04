@@ -1,4 +1,4 @@
-import { Register, Auth } from './../../types'
+import { Register, Auth } from './../../types/auth'
 
 const LOGIN_REQUEST = 'standard/auth/LOGIN_REQUEST'
 const LOGIN_SUCCESS = 'standard/auth/LOGIN_SUCCESS'

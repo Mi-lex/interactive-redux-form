@@ -1,5 +1,6 @@
-import { Action } from './../../types'
+import { Action } from './../../types/common'
 import { types } from './actions'
+import { Reducer } from 'redux'
 
 type DrawerState = {
 	open: boolean | undefined
@@ -9,7 +10,10 @@ const initialState: DrawerState = {
 	open: false,
 }
 
-const reducer = (state = initialState, action: Action): DrawerState => {
+const reducer: Reducer<DrawerState> = (
+	state = initialState,
+	action: Action,
+) => {
 	switch (action.type) {
 		case types.TOGGLE_DRAWER:
 			return {

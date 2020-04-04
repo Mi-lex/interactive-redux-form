@@ -4,7 +4,7 @@ import { FormSection, formValueSelector } from 'redux-form'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
-import { PaperJoinerName, PostPrintActionName } from '../store/types'
+import { PaperJoinerName, PostPrintActionName } from '../store/types/order'
 
 const selector: Function = formValueSelector('passport')
 

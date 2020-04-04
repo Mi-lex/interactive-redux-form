@@ -17,8 +17,8 @@ import {
 	paperJoinersNames,
 	positionOptions,
 } from '../store/constants'
-import { PaperJoiners } from '../store/enums'
-import { PaperJoinerName } from '../store/types'
+import { PaperJoiners } from '../store/types/enums'
+import { PaperJoinerName } from '../store/types/order'
 import ConnectedHiddenBlock from './ConnectedHiddenBLock'
 import { Checkbox, Select, TextField } from './MaterialReduxForm'
 

@@ -1,4 +1,4 @@
-import { Order } from '../../types'
+import { Order } from '../../types/order'
 
 const CREATE_ORDER_REQUEST = 'standard/passport/CREATE_ORDER_REQUEST'
 const CREATE_ORDER_SUCCESS = 'standard/passport/CREATE_ORDER_SUCCESS'

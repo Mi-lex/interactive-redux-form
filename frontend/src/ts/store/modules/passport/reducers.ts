@@ -1,5 +1,6 @@
-import { combineReducers } from 'redux'
-import { Action, Order } from '../../types'
+import { combineReducers, Reducer } from 'redux'
+import { Order } from '../../types/order'
+import { Action } from '../../types/common'
 import { types } from './actions'
 
 interface PassportState {
@@ -23,10 +24,10 @@ const FETCH_INITIAL_STATE: FetchOrderState = {
 	fetched: {},
 }
 
-const createReducer = (
+const createReducer: Reducer<PassportState> = (
 	state = INITIAL_STATE,
 	action: Action,
-): PassportState => {
+) => {
 	switch (action.type) {
 		case types.CREATE_ORDER_REQUEST:
 			return { ...state, pending: true }
@@ -45,10 +46,10 @@ const createReducer = (
 	}
 }
 
-const updateReducer = (
+const updateReducer: Reducer<PassportState> = (
 	state = INITIAL_STATE,
 	action: Action,
-): PassportState => {
+) => {
 	switch (action.type) {
 		case types.UPDATE_ORDER_REQUEST:
 			return { ...state, pending: true }
@@ -67,10 +68,10 @@ const updateReducer = (
 	}
 }
 
-const fetchReducer = (
+const fetchReducer: Reducer<FetchOrderState> = (
 	state = FETCH_INITIAL_STATE,
 	action: Action,
-): FetchOrderState => {
+) => {
 	switch (action.type) {
 		case types.FETCH_ORDER_REQUEST:
 			return { ...state, pending: true }

@@ -6,11 +6,11 @@ import drawerReducer from './modules/drawer/reducers'
 import authReducer from './modules/auth/reducers'
 
 export const rootReducer = combineReducers({
-    form: formReducer,
-    passport: passportReducer,
-    order: orderReducer,
-    drawer: drawerReducer,
-    auth: authReducer
+	form: formReducer,
+	passport: passportReducer,
+	order: orderReducer,
+	drawer: drawerReducer,
+	auth: authReducer,
 })
 
 export type RootState = ReturnType<typeof rootReducer>

@@ -7,7 +7,8 @@ import { LinearProgress } from '@material-ui/core'
 import LoginForm from '../components/LoginForm'
 import actionCreator from '../store/modules/auth/actions'
 import { RootState } from '../store/rootReducer'
-import { Auth, IntendedLocationState } from '../store/types'
+import { Auth } from '../store/types/auth'
+import { IntendedLocationState } from '../store/types/common'
 
 const Login: React.FC = () => {
 	const dispatch = useDispatch()

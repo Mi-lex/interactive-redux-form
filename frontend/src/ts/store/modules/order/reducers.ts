@@ -1,4 +1,5 @@
-import { Order, Action } from '../../types'
+import { Reducer } from 'redux'
+import { Order } from '../../types/order'
 import { types } from './actions'
 
 interface PassportState {
@@ -13,7 +14,7 @@ const INITIAL_STATE: PassportState = {
 	list: [],
 }
 
-const reducer = (state = INITIAL_STATE, action: Action) => {
+const reducer: Reducer<PassportState> = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case types.FETCH_ORDERS_REQUEST:
 			return {

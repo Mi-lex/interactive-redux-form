@@ -1,7 +1,8 @@
-import actionCreator, { types } from './actions'
-import { put, takeLatest, call, takeEvery } from 'redux-saga/effects'
+import { call, put, takeEvery } from 'redux-saga/effects'
+
 import { getMessageFromError } from '../../../services'
 import { protectedRouteRequest } from '../auth/sagas'
+import actionCreator, { types } from './actions'
 
 function* fetchOrdersRequest() {
 	try {
