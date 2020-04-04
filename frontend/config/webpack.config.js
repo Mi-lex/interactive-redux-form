@@ -7,12 +7,14 @@ const resolve = require('resolve')
 const PnpWebpackPlugin = require('pnp-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
+const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const safePostCssParser = require('postcss-safe-parser')
+const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
-// const WorkboxWebpackPlugin = require('workbox-webpack-plugin')
+const WorkboxWebpackPlugin = require('workbox-webpack-plugin')
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin')
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin')
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent')
@@ -515,8 +517,36 @@ module.exports = function(webpackEnv) {
 						inject: true,
 						template: paths.appHtml,
 					},
+					isEnvProduction
+						? {
+								minify: {
+									removeComments: true,
+									collapseWhitespace: true,
+									removeRedundantAttributes: true,
+									useShortDoctype: true,
+									removeEmptyAttributes: true,
+									removeStyleLinkTypeAttributes: true,
+									keepClosingSlash: true,
+									minifyJS: true,
+									minifyCSS: true,
+									minifyURLs: true,
+								},
+						  }
+						: undefined,
 				),
 			),
+			// Inlines the webpack runtime script. This script is too small to warrant
+			// a network request.
+			// https://github.com/facebook/create-react-app/issues/5358
+			isEnvProduction &&
+				shouldInlineRuntimeChunk &&
+				new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/runtime-.+[.]js/]),
+			// Makes some environment variables available in index.html.
+			// The public URL is available as %PUBLIC_URL% in index.html, e.g.:
+			// <link rel="icon" href="%PUBLIC_URL%/favicon.ico">
+			// It will be an empty string unless you specify "homepage"
+			// in `package.json`, in which case it will be the pathname of that URL.
+			new InterpolateHtmlPlugin(HtmlWebpackPlugin, env.raw),
 			// This gives some necessary context to module not found errors, such as
 			// the requesting resource.
 			new ModuleNotFoundPlugin(paths.appPath),
@@ -547,43 +577,40 @@ module.exports = function(webpackEnv) {
 				}),
 			// Generate an asset manifest file
 			new ManifestPlugin({
-				fileName: 'mix-manifest.json',
-				publicPath: `/static${paths.publicUrlOrPath}`,
-				basePath: '/',
-				generate: (seed, files) => {
+				fileName: 'asset-manifest.json',
+				publicPath: paths.publicUrlOrPath,
+				generate: (seed, files, entrypoints) => {
 					const manifestFiles = files.reduce((manifest, file) => {
-						if (file.isChunk && file.chunk.chunkReason) {
-							const fileExt = file.name.split('.').pop()
-							manifest[`/vendor.${fileExt}`] = file.path
-						} else {
-							manifest[file.name] = file.path
-						}
-
+						manifest[file.name] = file.path
 						return manifest
 					}, seed)
+					const entrypointFiles = entrypoints.main.filter(
+						(fileName) => !fileName.endsWith('.map'),
+					)
 
-					return manifestFiles
+					return {
+						files: manifestFiles,
+						entrypoints: entrypointFiles,
+					}
 				},
 			}),
 			// Generate a service worker script that will precache, and keep up to date,
 			// the HTML & assets that are part of the webpack build.
-
-			// isEnvProduction &&
-			// 	new WorkboxWebpackPlugin.GenerateSW({
-			// 		clientsClaim: true,
-			// 		exclude: [/\.map$/, /asset-manifest\.json$/],
-			// 		importWorkboxFrom: 'cdn',
-			// 		navigateFallback: paths.publicUrlOrPath + 'index.html',
-			// 		navigateFallbackBlacklist: [
-			// 			// Exclude URLs starting with /_, as they're likely an API call
-			// 			new RegExp('^/_'),
-			// 			// Exclude any URLs whose last part seems to be a file extension
-			// 			// as they're likely a resource and not a SPA route.
-			// 			// URLs containing a "?" character won't be blacklisted as they're likely
-			// 			// a route with query params (e.g. auth callbacks).
-			// 			new RegExp('/[^/?]+\\.[^/]+$'),
-			// 		],
-			// 	}),
+			new WorkboxWebpackPlugin.GenerateSW({
+				clientsClaim: true,
+				exclude: [/\.map$/, /asset-manifest\.json$/],
+				importWorkboxFrom: 'cdn',
+				navigateFallback: paths.publicUrlOrPath + 'index.html',
+				navigateFallbackBlacklist: [
+					// Exclude URLs starting with /_, as they're likely an API call
+					new RegExp('^/_'),
+					// Exclude any URLs whose last part seems to be a file extension
+					// as they're likely a resource and not a SPA route.
+					// URLs containing a "?" character won't be blacklisted as they're likely
+					// a route with query params (e.g. auth callbacks).
+					new RegExp('/[^/?]+\\.[^/]+$'),
+				],
+			}),
 
 			// TypeScript type checking
 			useTypeScript &&
