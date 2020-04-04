@@ -1,27 +1,22 @@
-import React, { useEffect } from 'react'
-import actionCreator from '../store/modules/auth/actions'
-import RegisterForm from '../components/RegisterForm'
-import { FormSubmitHandler, reset } from 'redux-form'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../store/rootReducer'
 import { Redirect } from 'react-router'
-import { Register as IRegister } from '../store/types'
+import { FormSubmitHandler } from 'redux-form'
 import { LinearProgress } from '@material-ui/core'
+
+import RegisterForm from '../components/RegisterForm'
+import actionCreator from '../store/modules/auth/actions'
+import { RootState } from '../store/rootReducer'
+import { Register as IRegister } from '../store/types'
 
 const Register: React.FC = () => {
 	const dispatch = useDispatch()
-	const { pending, success, error } = useSelector(
+	const { pending, success } = useSelector(
 		(state: RootState) => state.auth.register,
 	)
 	const onSubmit: FormSubmitHandler = (values) => {
 		dispatch(actionCreator.registerRequest(values as IRegister))
 	}
-
-	useEffect(() => {
-		return () => {
-			dispatch(actionCreator.registerReset())
-		}
-	}, [])
 
 	return (
 		<>
