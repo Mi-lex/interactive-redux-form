@@ -38,7 +38,7 @@ const PassportForm: React.FC = () => {
 			</Grid>
 			<Grid spacing={3} container className={classes.mainColumns}>
 				<Grid item md={3} />
-				<Grid item xs={12} md={9} container>
+				<Grid item xs={12} md={9} spacing={2} container>
 					<ElementsTable />
 					<PaperJoinerForm />
 					<PostPrintForm />

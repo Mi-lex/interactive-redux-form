@@ -83,7 +83,7 @@ const PaperJoinerForm = (): JSX.Element => {
 				</FormSection>
 			</Grid>
 			{/* Блоки, появляющиеся в зависимости от выделенного чекбокса */}
-			<Grid item xs={6}>
+			<Grid item xs={6} md={7}>
 				<FormSection name={blockUpperSectionName}>
 					{/* Скрепка */}
 					<ConnectedHiddenBlock

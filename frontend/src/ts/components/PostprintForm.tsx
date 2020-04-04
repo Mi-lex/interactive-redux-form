@@ -25,7 +25,7 @@ const PostprintForm: React.FC = () => {
 	const blockUpperSectionName = 'post_actions'
 
 	return (
-		<Grid container item xs={12} md={6} spacing={2}>
+		<Grid container item xs={12} md={6} spacing={1}>
 			<Grid item xs={6}>
 				<FormSection name={checkboxesGroupName}>
 					<FormGroup>
