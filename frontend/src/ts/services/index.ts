@@ -151,6 +151,10 @@ export const getRequestData = (order: FormOrder): FormOrder => {
 		post_actions: {},
 	}
 
+	if (order['similar_order_id']) {
+		requestOrder['is_similar_order'] = true
+	}
+
 	if (order.paper_joiner_checks) {
 		const selectedJoiner = (Object.entries(order.paper_joiner_checks) as Array<
 			[PaperJoinerName, boolean]

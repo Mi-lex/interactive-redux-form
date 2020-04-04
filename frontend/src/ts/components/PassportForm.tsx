@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme: Theme) =>
 				marginBottom: theme.spacing(1),
 			},
 		},
+		mainColumns: {
+			padding: theme.spacing(2),
+		},
 	}),
 )
 
@@ -27,26 +30,16 @@ const PassportForm: React.FC = () => {
 
 	return (
 		<form action="POST" className="passportForm">
-			<Grid container spacing={2} style={{ padding: 16 }}>
+			<Grid container spacing={3} className={classes.mainColumns}>
 				{/* Sidebar */}
 				<PassportSidebar />
-				{/* Initial */}
-				<Grid
-					item
-					container
-					xs={12}
-					sm={6}
-					md={10}
-					justify="space-between"
-					className={classes.root}
-				>
-					{/* Initial info packaging */}
-					<InitialInfo />
-					{/* Details */}
-					<Details />
-					{/* Elements */}
+				{/* Initial info packaging */}
+				<InitialInfo />
+			</Grid>
+			<Grid spacing={3} container className={classes.mainColumns}>
+				<Grid item md={3} />
+				<Grid item xs={12} md={9} container>
 					<ElementsTable />
-					{/* FinalForm (Lower one) */}
 					<PaperJoinerForm />
 					<PostPrintForm />
 				</Grid>

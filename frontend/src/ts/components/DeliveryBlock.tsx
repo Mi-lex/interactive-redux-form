@@ -15,7 +15,7 @@ const DeliveryBlock = () => {
 
 	return (
 		<>
-			<FormControl fullWidth style={{ marginBottom: 2 }}>
+			<FormControl fullWidth style={{ marginBottom: 6 }}>
 				<FormControlLabel
 					className="coloredLabel"
 					control={
@@ -24,17 +24,17 @@ const DeliveryBlock = () => {
 					label="Доставить"
 				/>
 			</FormControl>
-			{requiredDelivery && (
-				<Field
-					component={TextField}
-					name="delivery.address"
-					label="Адрес"
-					type="text"
-					fullWidth
-					multiline
-					variant="outlined"
-				/>
-			)}
+			<Field
+				component={TextField}
+				disabled={!requiredDelivery}
+				name="delivery.address"
+				label="Адрес"
+				type="text"
+				fullWidth
+				rows={6}
+				multiline
+				variant="outlined"
+			/>
 		</>
 	)
 }

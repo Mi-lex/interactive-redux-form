@@ -29,7 +29,7 @@ const PassportSidebar: React.FC = () => {
 	const variant = 'standard'
 
 	return (
-		<Grid item xs={12} sm={6} md={2} className={classes.root}>
+		<Grid item xs={12} sm={6} md={3} className={classes.root}>
 			<Field
 				component={TextField}
 				name="customer.name"

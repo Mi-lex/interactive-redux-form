@@ -16,6 +16,7 @@ import AddRow from '@material-ui/icons/PlaylistAdd'
 import { printOptions } from '../store/consts'
 import Select from './MaterialReduxForm/Select'
 import TextField from './MaterialReduxForm/TextField'
+import { Typography } from '@material-ui/core'
 
 type ElementsFieldPropType = {
 	name: string
@@ -97,29 +98,34 @@ const ElementsTable = ({
 		<Box
 			display="flex"
 			width="100%"
-			justifyContent="flex-end"
+			justifyContent="space-between"
+			alignItems="center"
 			pt={1}
-			pr={2}
 			style={{ color: 'grey' }}
 		>
-			<IconButton
-				aria-label="добавить строку"
-				onClick={(): void => {
-					fields.push('')
-				}}
-				color="inherit"
-			>
-				<AddRow fontSize="small" />
-			</IconButton>
-			<IconButton
-				aria-label="удалить строку"
-				onClick={(): void => {
-					fields.pop()
-				}}
-				color="inherit"
-			>
-				<RemoveRow fontSize="small" />
-			</IconButton>
+			<Typography variant="body1" style={{ marginLeft: 5 }}>
+				{!fields.length && 'Добавить элементы заказа'}
+			</Typography>
+			<div>
+				<IconButton
+					aria-label="добавить строку"
+					onClick={(): void => {
+						fields.push('')
+					}}
+					color="inherit"
+				>
+					<AddRow fontSize="small" />
+				</IconButton>
+				<IconButton
+					aria-label="удалить строку"
+					onClick={(): void => {
+						fields.pop()
+					}}
+					color="inherit"
+				>
+					<RemoveRow fontSize="small" />
+				</IconButton>
+			</div>
 		</Box>
 	</>
 )
@@ -131,6 +137,7 @@ const ElementsForm: React.FC = () => (
 		width="100%"
 		borderBottom="1px solid rgba(0, 0, 0, 0.12)"
 		borderRadius={4}
+		mb={2}
 	>
 		<FieldArray name="elements" component={ElementsTable} />
 	</Box>
