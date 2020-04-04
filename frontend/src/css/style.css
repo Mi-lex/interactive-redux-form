@@ -2,110 +2,110 @@
 @import './globals/fonts.css';
 
 :root {
-    --page-font-color: black;
-    --page-font: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-    --page-font-size: 16px;
-    --page-line-height: normal;
+	--page-font-color: black;
+	--page-font: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+	--page-font-size: 16px;
+	--page-line-height: normal;
 }
 
 *,
 *::before,
 *::after {
-    box-sizing: inherit;
+	box-sizing: inherit;
 }
 
 html,
 body {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 html {
-    font-size: var(--page-font-size);
+	font-size: var(--page-font-size);
 }
 
 body {
-    position: relative;
-    margin: 0;
-    color: var(--page-font-color);
+	position: relative;
+	margin: 0;
+	color: var(--page-font-color);
 
-    font-family: var(--page-font);
-    font-size: var(--page-font-size);
-    font-weight: normal;
-    line-height: var(--page-line-height);
-    background-color: white;
+	font-family: var(--page-font);
+	font-size: var(--page-font-size);
+	font-weight: normal;
+	line-height: var(--page-line-height);
+	background-color: white;
 }
 
 img {
-    max-width: 100%;
-    height: auto;
+	max-width: 100%;
+	height: auto;
 }
 
 .visually-hidden:not(:focus):not(:active) {
-    position: absolute;
-    overflow: hidden;
+	position: absolute;
+	overflow: hidden;
 
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    border: 0;
-    margin: -1px;
-    clip: rect(0 0 0 0);
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	border: 0;
+	margin: -1px;
+	clip: rect(0 0 0 0);
 
-    clip-path: inset(100%);
+	clip-path: inset(100%);
 
-    white-space: nowrap;
+	white-space: nowrap;
 }
 
 input[type='time']::-ms-clear {
-    display: none;
+	display: none;
 }
 
 input[type='time']::-webkit-clear-button {
-    display: none;
+	display: none;
 }
 
 ::-webkit-search-cancel-button {
-    -webkit-appearance: none;
+	-webkit-appearance: none;
 }
 
 /* Hide the magnifying glass */
 ::-webkit-search-results-button {
-    -webkit-appearance: none;
+	-webkit-appearance: none;
 }
 
 /* Remove the rounded corners */
 input[type='search'] {
-    -webkit-appearance: none;
+	-webkit-appearance: none;
 }
 
 input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+	-webkit-appearance: none;
+	margin: 0;
 }
 
 .container-fluid {
-    max-width: 1350px;
+	max-width: 1350px;
 }
 
 .w-100 {
-    width: 100%;
+	width: 100%;
 }
 
 .w-75 {
-    width: 75%;
+	width: 75%;
 }
 
 .w-50 {
-    width: 50%;
+	width: 50%;
 }
 
 .w-25 {
-    width: 25%;
+	width: 25%;
 }
 
 .h-75 {
-    height: 75%;
+	height: 75%;
 }
 
 /* 
@@ -115,38 +115,13 @@ input[type='number']::-webkit-outer-spin-button {
 */
 
 .MuiTableCell-head:first-of-type {
-    width: calc((100% - 0px) / 16) !important;
-}
-
-/* Last two columns */
-.MuiTableCell-head:nth-last-of-type(2) {
-    width: calc((100% - 0px) / 13) !important;
-}
-
-.MuiTableCell-head:nth-last-of-type(1) {
-    width: calc((100% - 0px) / 13) !important;
-}
-
-.MuiTableCell-root {
-    padding: 10px !important;
-}
-
-.MuiTableCell-head {
-    padding-bottom: 0 !important;
-}
-
-.MuiTableBody-root .MuiTableRow-root:first-child .MuiTableCell-root {
-    padding-top: 0 !important;
+	width: calc((100% - 0px) / 13) !important;
 }
 
 .MuiToolbar-regular .MuiInput-underline:before {
-    border-bottom-color: white;
+	border-bottom-color: white;
 }
 
 .MuiToolbar-regular .MuiInput-underline:hover:not(.Mui-disabled):before {
-    border-bottom: 2px solid white;
-}
-
-.coloredLabel .Mui-checked + .MuiFormControlLabel-label {
-    color: #5d80b6;
+	border-bottom: 2px solid white;
 }
