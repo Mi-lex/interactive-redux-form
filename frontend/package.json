@@ -6,7 +6,6 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "build-for-backend": "node scripts/build.js && cp -r build/* ../backend/public",
     "test": "node scripts/test.js"
   },
   "dependencies": {

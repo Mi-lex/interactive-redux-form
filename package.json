@@ -1,0 +1,17 @@
+{
+  "name": "standard",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Mi-lex/interactive-redux-form.git",
+  "author": "Mi-lex <mishin-lex@mail.ru>",
+  "license": "MIT",
+  "scripts": {
+    "start": "concurrently \"cd backend & php artisan serve\" \"cd frontend & yarn start\"",
+    "deploy": "concurrently \"cd frontend & yarn build & cp -r build/* ../backend/public\"",
+    "deploy-heroku": "git subtree push --prefix backend heroku master"
+  },
+  "devDependencies": {
+    "concurrently": "^5.1.0",
+    "renamer": "^1.1.4"
+  }
+}
