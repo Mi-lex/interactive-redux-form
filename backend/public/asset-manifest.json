@@ -3,7 +3,7 @@
     "js/0.fe5ea987.chunk.js": "/js/0.fe5ea987.chunk.js",
     "js/1.ee9cd54e.chunk.js": "/js/1.ee9cd54e.chunk.js",
     "main.css": "/css/main.5aaf8564.chunk.css",
-    "main.js": "/js/main.2f6eb870.chunk.js",
+    "main.js": "/js/main.24e89c5c.chunk.js",
     "runtime-main.js": "/js/runtime-main.53ab9ac7.js",
     "js/4.37088ab1.chunk.js": "/js/4.37088ab1.chunk.js",
     "js/5.02a86181.chunk.js": "/js/5.02a86181.chunk.js",
@@ -16,13 +16,13 @@
     "js/4.37088ab1.chunk.js.LICENSE.txt": "/js/4.37088ab1.chunk.js.LICENSE.txt",
     "js/5.02a86181.chunk.js.LICENSE.txt": "/js/5.02a86181.chunk.js.LICENSE.txt",
     "media/style.css": "/media/roboto-v20-cyrillic_latin-regular.9af3b948.woff2",
-    "precache-manifest.9111093f79a76dfbed7391bfa0f2e92c.js": "/precache-manifest.9111093f79a76dfbed7391bfa0f2e92c.js",
+    "precache-manifest.d6d654fbc1ca3b5dc2fba601295c2281.js": "/precache-manifest.d6d654fbc1ca3b5dc2fba601295c2281.js",
     "service-worker.js": "/service-worker.js"
   },
   "entrypoints": [
     "js/runtime-main.53ab9ac7.js",
     "js/4.37088ab1.chunk.js",
     "css/main.5aaf8564.chunk.css",
-    "js/main.2f6eb870.chunk.js"
+    "js/main.24e89c5c.chunk.js"
   ]
 }
