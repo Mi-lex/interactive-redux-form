@@ -3,13 +3,9 @@ import { AcceptedError } from '../store/types/common'
 
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequested'
 
-let baseUrl: string
+const baseUrl = '/api'
 
-if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-	baseUrl = 'http://127.0.0.1:8000/api'
-} else {
-	baseUrl = '/api'
-
+if (process.env.NODE_ENV === 'production') {
 	const token = document.head.querySelector('meta[name="csrf-token"]')
 
 	if (token) {
@@ -21,6 +17,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
 			'CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token',
 		)
 	}
+} else {
 }
 
 export const getMessageFromError = (error: AcceptedError): string => {
@@ -44,9 +41,5 @@ export const getMessageFromError = (error: AcceptedError): string => {
 const api = axios.create({
 	baseURL: baseUrl,
 })
-
-export const setDefaultAuthHeader = (token: string): void => {
-	api.defaults.headers.common['Authorization'] = `Bearer ${token}`
-}
 
 export default api
