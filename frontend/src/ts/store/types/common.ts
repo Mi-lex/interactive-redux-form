@@ -4,30 +4,19 @@ export type PartialRecord<K extends keyof any, T> = {
 	[P in K]?: T
 }
 
-export type IntendedLocationState = {
+export type IntendedLocationState = Readonly<{
 	intendedPath: string
-}
+}>
 
 /**
  * Remove from T the keys that are in common with K
  */
 export type Optionalize<T extends K, K> = Omit<T, keyof K>
 
-export type Action = {
+export type Action = Readonly<{
 	type: string
 	payload?: any
-}
-
-interface Option {
-	label: string
-	value: string
-}
-
-export type InputOptions = {
-	[key: string]: Options
-}
-
-type Options = Option[]
+}>
 
 export type SagaType = () => Generator<ForkEffect<never>, void, unknown>
 

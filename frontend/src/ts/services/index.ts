@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === 'production') {
 } else {
 }
 
-export const getMessageFromError = (error: AcceptedError): string => {
+export const getMessageFromError = (error: Readonly<AcceptedError>): string => {
 	let message = 'Something went wrong'
 	if (error.response) {
 		if (error.response.data.errors) {

@@ -4,8 +4,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import DateFnsUtils from '@date-io/date-fns'
 import Container from '@material-ui/core/Container'
 import Drawer from '@material-ui/core/Drawer'
-import Backdrop from '@material-ui/core/Backdrop'
-import CircularProgress from '@material-ui/core/CircularProgress'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import ruLocale from 'date-fns/locale/ru'
 

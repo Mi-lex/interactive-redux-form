@@ -13,7 +13,7 @@ import { convertFormat } from '../helpers/utils'
  * @param order fetched passport object
  * @return acceptable object for redux-form state
  */
-export const getFormData = (order: FetchedOrder): FormOrder => {
+export const getFormData = (order: Readonly<FetchedOrder>): FormOrder => {
 	const formOrder = {} as FormOrder
 
 	if (order.paper_joiner) {
@@ -90,7 +90,7 @@ export const getFormData = (order: FetchedOrder): FormOrder => {
  * @param order form data that stored in the state
  * @return acceptable data for a server to update order info
  */
-export const getRequestData = (order: FormOrder): FormOrder => {
+export const getRequestData = (order: Readonly<FormOrder>): FormOrder => {
 	const requestOrder: FormOrder = {
 		...order,
 		post_actions: {},
