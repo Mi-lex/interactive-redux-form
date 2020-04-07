@@ -21,7 +21,7 @@ type Props = FlashMessageProviderProps &
  * basically represents Snackbar and MuiAlert material ui component
  */
 const FlashMessageComponent: React.FC<Props> = (props: Props) => {
-	const [open, setOpen] = useState(true)
+	const [open, setOpen] = useState<boolean>(true)
 	const defaultActions = () => {}
 	const {
 		SnackProps,

@@ -22,7 +22,7 @@ const reduxFieldDatePickerWrapper = <T extends {}>(
 		? (dateValue: string) => parse(dateValue, format, new Date())
 		: (dateValue: string) => new Date(dateValue)
 
-	const [selectedDate, setValue] = useState(() => {
+	const [selectedDate, setValue] = useState<Date | null>(() => {
 		return input.value ? parser(input.value) : null
 	})
 
