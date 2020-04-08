@@ -1,3 +1,8 @@
+/**
+ * The HOC wraps material date/time pickers
+ * so they can be used with redux-form Field
+ * component altogether
+ */
 import React, { useEffect, useState } from 'react'
 import { WrappedFieldProps } from 'redux-form'
 import parse from 'date-fns/parse'
