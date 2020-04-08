@@ -8,13 +8,13 @@ interface AuthState {
 	error: string | boolean | null
 }
 
-const INITIAL_STATE: AuthState = {
+export const INITIAL_STATE: AuthState = {
 	pending: false,
 	success: false,
 	error: false,
 }
 
-const registerReducer: Reducer<AuthState> = (
+export const registerReducer: Reducer<AuthState> = (
 	state = INITIAL_STATE,
 	action: Action,
 ) => {
@@ -54,7 +54,7 @@ interface LoginState extends AuthState {
 const storedUser =
 	localStorage.getItem('user') || sessionStorage.getItem('user')
 
-const LOGIN_INITIAL_STATE: LoginState = {
+export const LOGIN_INITIAL_STATE: LoginState = {
 	...INITIAL_STATE,
 	remember: false,
 	user: storedUser
@@ -70,7 +70,7 @@ const removeUserFromStorage = () => {
 	sessionStorage.removeItem('user')
 }
 
-const loginReducer: Reducer<LoginState> = (
+export const loginReducer: Reducer<LoginState> = (
 	state = LOGIN_INITIAL_STATE,
 	action: Action,
 ) => {
@@ -87,7 +87,6 @@ const loginReducer: Reducer<LoginState> = (
 		case types.REFRESH_TOKEN_REQUEST:
 			return {
 				...state,
-				remember: false,
 				pending: true,
 			}
 		case types.LOGIN_SUCCESS:
@@ -121,7 +120,6 @@ const loginReducer: Reducer<LoginState> = (
 		case types.REFRESH_TOKEN_ERROR:
 			return {
 				...state,
-				remember: false,
 				pending: false,
 				error: true,
 			}

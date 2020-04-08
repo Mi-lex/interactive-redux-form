@@ -3,14 +3,14 @@ import { FetchedOrder } from '../../types/order'
 import { types } from './actions'
 
 interface PassportState {
-	requestPending: boolean
-	errorMessage?: string
+	pending: boolean
+	error: string | null
 	list: FetchedOrder[]
 }
 
-const INITIAL_STATE: PassportState = {
-	requestPending: false,
-	errorMessage: '',
+export const INITIAL_STATE: PassportState = {
+	pending: false,
+	error: null,
 	list: [],
 }
 
@@ -19,19 +19,19 @@ const reducer: Reducer<PassportState> = (state = INITIAL_STATE, action) => {
 		case types.FETCH_ORDERS_REQUEST:
 			return {
 				...state,
-				requestPending: true,
+				pending: true,
 			}
 		case types.FETCH_ORDERS_SUCCESS:
 			return {
 				...state,
-				requestPending: false,
+				pending: false,
 				list: action.payload,
 			}
 		case types.FETCH_ORDERS_ERROR:
 			return {
 				...state,
-				requestPending: false,
-				errorMessage: action.payload,
+				pending: false,
+				error: action.payload,
 			}
 		default:
 			return state

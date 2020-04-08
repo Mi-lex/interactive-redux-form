@@ -13,18 +13,18 @@ interface FetchOrderState extends PassportState {
 	fetched: Partial<Order>
 }
 
-const INITIAL_STATE: PassportState = {
+export const INITIAL_STATE: PassportState = {
 	pending: false,
 	success: false,
 	error: null,
 }
 
-const FETCH_INITIAL_STATE: FetchOrderState = {
+export const FETCH_INITIAL_STATE: FetchOrderState = {
 	...INITIAL_STATE,
 	fetched: {},
 }
 
-const createReducer: Reducer<PassportState> = (
+export const createReducer: Reducer<PassportState> = (
 	state = INITIAL_STATE,
 	action: Action,
 ) => {
@@ -46,7 +46,7 @@ const createReducer: Reducer<PassportState> = (
 	}
 }
 
-const updateReducer: Reducer<PassportState> = (
+export const updateReducer: Reducer<PassportState> = (
 	state = INITIAL_STATE,
 	action: Action,
 ) => {
@@ -68,7 +68,7 @@ const updateReducer: Reducer<PassportState> = (
 	}
 }
 
-const fetchReducer: Reducer<FetchOrderState> = (
+export const fetchReducer: Reducer<FetchOrderState> = (
 	state = FETCH_INITIAL_STATE,
 	action: Action,
 ) => {

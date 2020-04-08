@@ -6,7 +6,7 @@ type DrawerState = {
 	open: boolean | undefined
 }
 
-const initialState: DrawerState = {
+export const initialState: DrawerState = {
 	open: false,
 }
 
