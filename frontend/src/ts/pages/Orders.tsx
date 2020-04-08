@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import format from 'date-fns/format'
 
-import { FlashMessageComponent } from '../components/FlashMessage'
+import { useFlashMessage } from '../components/FlashMessage'
 import OrderTable from '../components/OrderTable/OrderTable'
 import actionCreator from '../store/modules/order/actions'
 import { RootState } from '../store/rootReducer'
@@ -14,6 +14,7 @@ const Orders = () => {
 	const errorMessage = useSelector((state: RootState) => state.order.error)
 
 	const dispatch = useDispatch()
+	const flash = useFlashMessage()
 
 	const data = orders.map((order) => {
 		const { id, name = '', type = '', manager, customer } = order
@@ -43,17 +44,19 @@ const Orders = () => {
 		}
 	}, [])
 
+	useEffect(() => {
+		if (errorMessage) {
+			flash.show({
+				message: errorMessage,
+				type: 'error',
+			})
+		}
+	}, [errorMessage])
+
 	return (
-		<>
-			{errorMessage && (
-				<FlashMessageComponent type="error">
-					{errorMessage}
-				</FlashMessageComponent>
-			)}
-			<Paper>
-				<OrderTable data={data} pending={pending} />
-			</Paper>
-		</>
+		<Paper>
+			<OrderTable data={data} pending={pending} />
+		</Paper>
 	)
 }
 
