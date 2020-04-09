@@ -1,6 +1,6 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Field, FormSection, formValueSelector, clearFields } from 'redux-form'
+import { useSelector } from 'react-redux'
+import { Field, FormSection, formValueSelector } from 'redux-form'
 
 import {
 	Box,
@@ -32,28 +32,8 @@ const PaperJoinerForm = (): JSX.Element => {
 		([_, value]) => value,
 	)
 
-	const dispatch = useDispatch()
 	const checkboxesGroupName = 'paper_joiner_checks'
 	const blockUpperSectionName = 'paper_joiner'
-
-	const clearChecksAndSections = () => {
-		/**
-		 * Uncheck active checkbox before checking new one
-		 * this is basically radiobtn behavior but with
-		 * opportunity to uncheck all inputs
-		 */
-		if (activeChecks.length > 0) {
-			const activeChecksNames = activeChecks.map(
-				([name, _]) => `${checkboxesGroupName}.${name}`,
-			)
-			const correspondingBlocks = activeChecks.map(
-				([name, _]) => `${blockUpperSectionName}.${name}`,
-			)
-
-			dispatch(clearFields('passport', false, false, ...activeChecksNames))
-			dispatch(clearFields('passport', false, false, ...correspondingBlocks))
-		}
-	}
 
 	return (
 		<Grid item xs={12} md={6} container spacing={2}>
@@ -70,13 +50,7 @@ const PaperJoinerForm = (): JSX.Element => {
 									<FormControlLabel
 										key={joinerName}
 										className="coloredLabel"
-										control={
-											<Field
-												component={Checkbox}
-												changeAction={clearChecksAndSections}
-												name={joinerName}
-											/>
-										}
+										control={<Field component={Checkbox} name={joinerName} />}
 										label={PaperJoiners[joinerName]}
 									/>
 								),
