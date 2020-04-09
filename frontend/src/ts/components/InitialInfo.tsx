@@ -93,6 +93,7 @@ const InitialInfo: React.FC = () => {
 					fullWidth
 					props={{
 						format: 'HH:mm',
+						ampm: false,
 						keyboardIcon: <AccessAlarm />,
 					}}
 					label="к"
