@@ -16,9 +16,9 @@ import {
 import RemoveRow from '@material-ui/icons/DeleteForever'
 import AddRow from '@material-ui/icons/PlaylistAdd'
 
-import { printOptions } from '../store/constants'
-import Select from './MaterialReduxForm/Select'
-import TextField from './MaterialReduxForm/TextField'
+import { printOptions } from '../../store/constants'
+import Select from '../MaterialReduxForm/Select'
+import TextField from '../MaterialReduxForm/TextField'
 
 type ElementsFieldPropType = {
 	name: string
@@ -29,6 +29,7 @@ const ElementsRow: React.FC<ElementsFieldPropType> = ({ name }) => (
 		<Grid
 			container
 			item
+			role="row"
 			xs={12}
 			style={{ marginLeft: 0, marginRight: 0 }}
 			spacing={2}
@@ -110,7 +111,8 @@ const ElementsTable = ({
 			</Typography>
 			<div>
 				<IconButton
-					aria-label="добавить строку"
+					aria-label="добавить елемент"
+					id="element"
 					onClick={(): void => {
 						fields.push('')
 					}}
@@ -119,7 +121,7 @@ const ElementsTable = ({
 					<AddRow fontSize="small" />
 				</IconButton>
 				<IconButton
-					aria-label="удалить строку"
+					aria-label="удалить елемент"
 					onClick={(): void => {
 						fields.pop()
 					}}
