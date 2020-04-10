@@ -4,7 +4,7 @@ import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox'
 
 type Props = WrappedFieldProps &
 	CheckboxProps & {
-		changeAction: (checked: boolean) => void
+		changeAction?: (checked: boolean) => void
 		checkedClassName?: string
 	}
 

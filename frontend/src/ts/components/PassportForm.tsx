@@ -5,7 +5,6 @@ import Grid from '@material-ui/core/Grid'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 
 import { RootState } from '../store/rootReducer'
-import Details from './Details'
 import ElementsTable from './ElementsTable'
 import InitialInfo from './InitialInfo'
 import PaperJoinerForm from './PaperJoinerForm'
