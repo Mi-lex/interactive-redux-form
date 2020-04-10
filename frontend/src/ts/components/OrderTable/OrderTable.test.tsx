@@ -1,6 +1,6 @@
 import { Data } from './data'
 import React from 'react'
-import { mount } from 'enzyme'
+import { render } from '@testing-library/react'
 import OrderTable from './OrderTable'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
@@ -28,7 +28,7 @@ describe('order table', () => {
 		// redux store values
 		const headerStore = mockStore()
 
-		const WrappedOrderTable = mount(
+		const { asFragment } = render(
 			<Provider store={headerStore}>
 				<BrowserRouter>
 					<OrderTable data={mockedData} pending={false} />,
@@ -36,6 +36,6 @@ describe('order table', () => {
 			</Provider>,
 		)
 
-		expect(WrappedOrderTable).toMatchSnapshot()
+		expect(asFragment()).toMatchSnapshot()
 	})
 })
