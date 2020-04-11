@@ -28,7 +28,6 @@ exports[`order table renders order table correctly 1`] = `
                 aria-hidden="true"
                 class="MuiSvgIcon-root"
                 focusable="false"
-                role="presentation"
                 viewBox="0 0 24 24"
               >
                 <path
@@ -73,7 +72,6 @@ exports[`order table renders order table correctly 1`] = `
                       aria-hidden="true"
                       class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
                       focusable="false"
-                      role="presentation"
                       title="Поиск"
                       viewBox="0 0 24 24"
                     >
@@ -105,7 +103,6 @@ exports[`order table renders order table correctly 1`] = `
                           aria-hidden="true"
                           class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
                           focusable="false"
-                          role="presentation"
                           viewBox="0 0 24 24"
                         >
                           <path
@@ -147,7 +144,6 @@ exports[`order table renders order table correctly 1`] = `
                     aria-hidden="true"
                     class="MuiSvgIcon-root"
                     focusable="false"
-                    role="presentation"
                     viewBox="0 0 24 24"
                   >
                     <path
@@ -181,7 +177,6 @@ exports[`order table renders order table correctly 1`] = `
                     aria-hidden="true"
                     class="MuiSvgIcon-root"
                     focusable="false"
-                    role="presentation"
                     viewBox="0 0 24 24"
                   >
                     <path
@@ -214,7 +209,6 @@ exports[`order table renders order table correctly 1`] = `
                   aria-hidden="true"
                   class="MuiSvgIcon-root"
                   focusable="false"
-                  role="presentation"
                   viewBox="0 0 24 24"
                 >
                   <path
@@ -245,7 +239,6 @@ exports[`order table renders order table correctly 1`] = `
                   aria-hidden="true"
                   class="MuiSvgIcon-root"
                   focusable="false"
-                  role="presentation"
                   viewBox="0 0 24 24"
                 >
                   <path
@@ -312,7 +305,6 @@ exports[`order table renders order table correctly 1`] = `
                             aria-hidden="true"
                             class="MuiSvgIcon-root MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionDesc"
                             focusable="false"
-                            role="presentation"
                             style="margin: 0px;"
                             viewBox="0 0 24 24"
                           >
@@ -359,7 +351,6 @@ exports[`order table renders order table correctly 1`] = `
                             aria-hidden="true"
                             class="MuiSvgIcon-root MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionDesc"
                             focusable="false"
-                            role="presentation"
                             style="margin: 0px;"
                             viewBox="0 0 24 24"
                           >
@@ -406,7 +397,6 @@ exports[`order table renders order table correctly 1`] = `
                             aria-hidden="true"
                             class="MuiSvgIcon-root MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionDesc"
                             focusable="false"
-                            role="presentation"
                             style="margin: 0px;"
                             viewBox="0 0 24 24"
                           >
@@ -453,7 +443,6 @@ exports[`order table renders order table correctly 1`] = `
                             aria-hidden="true"
                             class="MuiSvgIcon-root MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionDesc"
                             focusable="false"
-                            role="presentation"
                             style="margin: 0px;"
                             viewBox="0 0 24 24"
                           >
@@ -500,7 +489,6 @@ exports[`order table renders order table correctly 1`] = `
                             aria-hidden="true"
                             class="MuiSvgIcon-root MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionDesc"
                             focusable="false"
-                            role="presentation"
                             style="margin: 0px;"
                             viewBox="0 0 24 24"
                           >
@@ -547,7 +535,6 @@ exports[`order table renders order table correctly 1`] = `
                             aria-hidden="true"
                             class="MuiSvgIcon-root MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionDesc"
                             focusable="false"
-                            role="presentation"
                             style="margin: 0px;"
                             viewBox="0 0 24 24"
                           >
@@ -594,7 +581,6 @@ exports[`order table renders order table correctly 1`] = `
                             aria-hidden="true"
                             class="MuiSvgIcon-root MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionDesc"
                             focusable="false"
-                            role="presentation"
                             style="margin: 0px;"
                             viewBox="0 0 24 24"
                           >
@@ -641,7 +627,6 @@ exports[`order table renders order table correctly 1`] = `
                             aria-hidden="true"
                             class="MuiSvgIcon-root MuiTableSortLabel-icon MuiTableSortLabel-iconDirectionDesc"
                             focusable="false"
-                            role="presentation"
                             style="margin: 0px;"
                             viewBox="0 0 24 24"
                           >
@@ -682,7 +667,6 @@ exports[`order table renders order table correctly 1`] = `
                             aria-hidden="true"
                             class="MuiSvgIcon-root"
                             focusable="false"
-                            role="presentation"
                             style="display: none;"
                             title="Фильтровать"
                             viewBox="0 0 24 24"
@@ -718,7 +702,6 @@ exports[`order table renders order table correctly 1`] = `
                             aria-hidden="true"
                             class="MuiSvgIcon-root"
                             focusable="false"
-                            role="presentation"
                             style="display: none;"
                             title="Фильтровать"
                             viewBox="0 0 24 24"
@@ -754,7 +737,6 @@ exports[`order table renders order table correctly 1`] = `
                             aria-hidden="true"
                             class="MuiSvgIcon-root"
                             focusable="false"
-                            role="presentation"
                             style="display: none;"
                             title="Фильтровать"
                             viewBox="0 0 24 24"
@@ -790,7 +772,6 @@ exports[`order table renders order table correctly 1`] = `
                             aria-hidden="true"
                             class="MuiSvgIcon-root"
                             focusable="false"
-                            role="presentation"
                             style="display: none;"
                             title="Фильтровать"
                             viewBox="0 0 24 24"
@@ -826,7 +807,6 @@ exports[`order table renders order table correctly 1`] = `
                             aria-hidden="true"
                             class="MuiSvgIcon-root"
                             focusable="false"
-                            role="presentation"
                             style="display: none;"
                             title="Фильтровать"
                             viewBox="0 0 24 24"
@@ -862,7 +842,6 @@ exports[`order table renders order table correctly 1`] = `
                             aria-hidden="true"
                             class="MuiSvgIcon-root"
                             focusable="false"
-                            role="presentation"
                             style="display: none;"
                             title="Фильтровать"
                             viewBox="0 0 24 24"
@@ -1049,7 +1028,7 @@ exports[`order table renders order table correctly 1`] = `
               >
                 <div
                   aria-haspopup="listbox"
-                  aria-labelledby=" "
+                  aria-label="Строк на странице"
                   class="MuiSelect-root MuiSelect-select MuiTablePagination-select MuiSelect-selectMenu MuiInputBase-input"
                   role="button"
                   tabindex="0"
@@ -1068,7 +1047,6 @@ exports[`order table renders order table correctly 1`] = `
                   aria-hidden="true"
                   class="MuiSvgIcon-root MuiSelect-icon MuiTablePagination-selectIcon"
                   focusable="false"
-                  role="presentation"
                   viewBox="0 0 24 24"
                 >
                   <path
@@ -1102,7 +1080,6 @@ exports[`order table renders order table correctly 1`] = `
                         aria-hidden="true"
                         class="MuiSvgIcon-root"
                         focusable="false"
-                        role="presentation"
                         viewBox="0 0 24 24"
                       >
                         <path
@@ -1130,7 +1107,6 @@ exports[`order table renders order table correctly 1`] = `
                         aria-hidden="true"
                         class="MuiSvgIcon-root"
                         focusable="false"
-                        role="presentation"
                         viewBox="0 0 24 24"
                       >
                         <path
@@ -1164,7 +1140,6 @@ exports[`order table renders order table correctly 1`] = `
                         aria-hidden="true"
                         class="MuiSvgIcon-root"
                         focusable="false"
-                        role="presentation"
                         viewBox="0 0 24 24"
                       >
                         <path
@@ -1192,7 +1167,6 @@ exports[`order table renders order table correctly 1`] = `
                         aria-hidden="true"
                         class="MuiSvgIcon-root"
                         focusable="false"
-                        role="presentation"
                         viewBox="0 0 24 24"
                       >
                         <path
